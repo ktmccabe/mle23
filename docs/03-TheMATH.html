@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>MLE 2023 - 3&nbsp; The Math</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./04-ReviewofOLS.html" rel="next">
+<link href="./02-ROverview.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-TheMATH.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Math</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">MLE 2023</a> 
+        <div class="sidebar-tools-main">
+    <a href="./MLE-2023.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Maxmimum Likelihood Fall 2023</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-ROverview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R Overview</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-TheMATH.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Math</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-ReviewofOLS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Review of OLS</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Section Contents</h2>
+   
+  <ul>
+  <li><a href="#mathematical-operations" id="toc-mathematical-operations" class="nav-link active" data-scroll-target="#mathematical-operations"><span class="header-section-number">3.1</span> Mathematical Operations</a>
+  <ul>
+  <li><a href="#order-of-operations" id="toc-order-of-operations" class="nav-link" data-scroll-target="#order-of-operations"><span class="header-section-number">3.1.1</span> <strong>Order of Operations</strong></a></li>
+  <li><a href="#exponents" id="toc-exponents" class="nav-link" data-scroll-target="#exponents"><span class="header-section-number">3.1.2</span> <strong>Exponents</strong></a></li>
+  <li><a href="#summations-and-products" id="toc-summations-and-products" class="nav-link" data-scroll-target="#summations-and-products"><span class="header-section-number">3.1.3</span> <strong>Summations and Products</strong></a></li>
+  <li><a href="#logarithms" id="toc-logarithms" class="nav-link" data-scroll-target="#logarithms"><span class="header-section-number">3.1.4</span> <strong>Logarithms</strong></a></li>
+  </ul></li>
+  <li><a href="#mathematical-operations-in-r" id="toc-mathematical-operations-in-r" class="nav-link" data-scroll-target="#mathematical-operations-in-r"><span class="header-section-number">3.2</span> Mathematical Operations in R</a>
+  <ul>
+  <li><a href="#pemdas" id="toc-pemdas" class="nav-link" data-scroll-target="#pemdas"><span class="header-section-number">3.2.1</span> PEMDAS</a></li>
+  <li><a href="#exponents-1" id="toc-exponents-1" class="nav-link" data-scroll-target="#exponents-1"><span class="header-section-number">3.2.2</span> Exponents</a></li>
+  <li><a href="#summations" id="toc-summations" class="nav-link" data-scroll-target="#summations"><span class="header-section-number">3.2.3</span> Summations</a></li>
+  <li><a href="#logarithms-1" id="toc-logarithms-1" class="nav-link" data-scroll-target="#logarithms-1"><span class="header-section-number">3.2.4</span> Logarithms</a></li>
+  </ul></li>
+  <li><a href="#derivatives" id="toc-derivatives" class="nav-link" data-scroll-target="#derivatives"><span class="header-section-number">3.3</span> Derivatives</a>
+  <ul>
+  <li><a href="#derivatives-1" id="toc-derivatives-1" class="nav-link" data-scroll-target="#derivatives-1"><span class="header-section-number">3.3.1</span> <strong>Derivatives</strong></a></li>
+  <li><a href="#critical-points-for-minima-or-maxima" id="toc-critical-points-for-minima-or-maxima" class="nav-link" data-scroll-target="#critical-points-for-minima-or-maxima"><span class="header-section-number">3.3.2</span> <strong>Critical Points for Minima or Maxima</strong></a></li>
+  <li><a href="#common-derivative-rules" id="toc-common-derivative-rules" class="nav-link" data-scroll-target="#common-derivative-rules"><span class="header-section-number">3.3.3</span> <strong>Common Derivative Rules</strong></a></li>
+  </ul></li>
+  <li><a href="#vectors-and-matrices" id="toc-vectors-and-matrices" class="nav-link" data-scroll-target="#vectors-and-matrices"><span class="header-section-number">3.4</span> Vectors and Matrices</a>
+  <ul>
+  <li><a href="#matrix-basics" id="toc-matrix-basics" class="nav-link" data-scroll-target="#matrix-basics"><span class="header-section-number">3.4.1</span> <strong>Matrix Basics</strong></a></li>
+  <li><a href="#matrix-operations" id="toc-matrix-operations" class="nav-link" data-scroll-target="#matrix-operations"><span class="header-section-number">3.4.2</span> Matrix Operations</a></li>
+  </ul></li>
+  <li><a href="#additional-matrix-tidbits-that-will-come-up" id="toc-additional-matrix-tidbits-that-will-come-up" class="nav-link" data-scroll-target="#additional-matrix-tidbits-that-will-come-up"><span class="header-section-number">3.5</span> Additional Matrix Tidbits that Will Come Up</a>
+  <ul>
+  <li><a href="#transpose" id="toc-transpose" class="nav-link" data-scroll-target="#transpose"><span class="header-section-number">3.5.1</span> <strong>Transpose</strong></a></li>
+  <li><a href="#additional-matrix-properties-and-rules" id="toc-additional-matrix-properties-and-rules" class="nav-link" data-scroll-target="#additional-matrix-properties-and-rules"><span class="header-section-number">3.5.2</span> <strong>Additional Matrix Properties and Rules</strong></a></li>
+  <li><a href="#matrix-rules" id="toc-matrix-rules" class="nav-link" data-scroll-target="#matrix-rules"><span class="header-section-number">3.5.3</span> <strong>Matrix Rules</strong></a></li>
+  <li><a href="#derivatives-with-matrices-and-vectors" id="toc-derivatives-with-matrices-and-vectors" class="nav-link" data-scroll-target="#derivatives-with-matrices-and-vectors"><span class="header-section-number">3.5.4</span> <strong>Derivatives with Matrices and Vectors</strong></a></li>
+  </ul></li>
+  <li><a href="#practice-problems" id="toc-practice-problems" class="nav-link" data-scroll-target="#practice-problems"><span class="header-section-number">3.6</span> Practice Problems</a>
+  <ul>
+  <li><a href="#practice-problem-solutions" id="toc-practice-problem-solutions" class="nav-link" data-scroll-target="#practice-problem-solutions"><span class="header-section-number">3.6.1</span> Practice Problem Solutions</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Math</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>This section will provide an overview of a selection of mathematical skills that will be useful in the course. It will not go into everything, but at least provides a start.</p>
+<p>MLE will include a range of concepts and skills from linear algebra, calculus, and probability and statistics. You do not need to be an expert in these to succeed in the course, but there are some fundamentals that will make your life easier.</p>
+<p>Again, the end goal here is not the math. The end goal is to help your become great social scientists. Some popular methods in social science rely on these concepts. The more you can build an intuition for how, when, where, and why these methods work, the more tools you will have to carry out your research and the more credibility and command you will have over the research you conduct.</p>
+<p>Think about restaurants you have visited. There is a difference between a server who says, “Well we have a chicken” and a server who can tell you exactly how the chicken was cooked, what ingredients were used in the sauce, and maybe even how the chicken was <a href="https://www.youtube.com/watch?v=G__PVLB8Nm4&amp;ab_channel=IFC">raised</a>. Both dishes may be delicious, but you may gain more trust and understanding from the second.</p>
+<p>This will not happen overnight nor by the end of the course, but the goal is to continue to progress in understanding. If you pursue a career in academia, this is only the start of years of continued learning and practice. It is a marathon, not a sprint.</p>
+<p><strong>Extra Resources</strong></p>
+<p>These are some additional resources that may help supplement the sections to follow. These provide far more detail than you will need in the course, but because of that, are much more comprehensive than the notes that will be outlined:</p>
+<ul>
+<li>A linear algebra web series. The notes on vector and matrices here will be brief, so this playlist 3Blue1Brown goes into more detail on specific. <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab">topics</a></li>
+<li>An alternative way of thinking about vectors and matrices is <a href="http://www.coranac.com/documents/geomatrix/">here</a> which gives a more geometric interpretation, which some people find helpful.</li>
+<li>Will Moore and David Siegel. <em>A Mathematics Course for Political and Social Research.</em> You can get the book or visit the <a href="http://people.duke.edu/~das76/moosiebook.html">website</a>, which includes some problem sets and solutions, as well as a video syllabus.</li>
+</ul>
+<section id="mathematical-operations" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="mathematical-operations"><span class="header-section-number">3.1</span> Mathematical Operations</h2>
+<p>In this first section, we will review mathematical operations that you have probably encountered before. In many cases, this will be a refresher on the rules and how to read notation.</p>
+<section id="order-of-operations" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="order-of-operations"><span class="header-section-number">3.1.1</span> <strong>Order of Operations</strong></h3>
+<p>Many of you may have learned the phrase, “Please Excuse My Dear Aunt Sally” which stands for Parentheses (and other grouping symbols), followed by Exponents, followed by Multiplication and Division from left to right, followed by Addition and Subtraction from left to right.</p>
+<p>There will be many equations in our future, and we must remember these rules.</p>
+<ul>
+<li>Example: <span class="math inline">\(((1+2)^3)^2 = (3^3)^2 = 27^2 = 729\)</span></li>
+</ul>
+<p>To get the answer, we focused on respecting the parentheses first, identifying the inner-most expression <span class="math inline">\(1 + 2 = 3\)</span>, we then moved out and conducted the exponents to get to <span class="math inline">\((3^3)^2 = 27^2\)</span>.</p>
+<p>Note how this is different from the answer to <span class="math inline">\(1 + (2^3)^2 = 1 + 8^2 = 65\)</span>, where the addition is no longer part of the parentheses.</p>
+</section>
+<section id="exponents" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="exponents"><span class="header-section-number">3.1.2</span> <strong>Exponents</strong></h3>
+<p>Here is a cheat sheet of some basic rules for exponents. These can be hard to remember if you haven’t used them in a long time. Think of <span class="math inline">\(a\)</span> in this case as a number, e.g., 4, and <span class="math inline">\(b\)</span>, <span class="math inline">\(k\)</span>, and <span class="math inline">\(l\)</span>, as other numbers.</p>
+<ul>
+<li><span class="math inline">\(a^0 = 1\)</span></li>
+<li><span class="math inline">\(a^1 = a\)</span></li>
+<li><span class="math inline">\(a^k * a^l = a^{k + l}\)</span></li>
+<li><span class="math inline">\((a^k)^l = a^{kl}\)</span></li>
+<li><span class="math inline">\((\frac{a}{b})^k = (\frac{a^k}{b^k})\)</span></li>
+</ul>
+<p>These last two rules can be somewhat tricky. Note that a negative exponent can be re-written as a fraction. Likewise an exponent that is a fraction, the most common of which we will encounter is <span class="math inline">\(\frac{1}{2}\)</span> can be re-written as a root, in this case the square root (e.g., <span class="math inline">\(\sqrt{a}\)</span>).</p>
+<ul>
+<li><span class="math inline">\(a^{-k} = \frac{1}{a^k}\)</span></li>
+<li><span class="math inline">\(a^{1/2} = \sqrt{a}\)</span></li>
+</ul>
+</section>
+<section id="summations-and-products" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="summations-and-products"><span class="header-section-number">3.1.3</span> <strong>Summations and Products</strong></h3>
+<p>The symbol <span class="math inline">\(\sum\)</span> can be read “take the sum of” whatever is to the right of the symbol. This is used to make the written computation of a sum much shorter than it might be otherwise. For example, instead of writing the addition operations separately in the example below, we can simplify it with the <span class="math inline">\(\sum\)</span> symbol. This is especially helpful if you would need to add together 100 or 1000 or more things. We will see these appear a lot in the course, for better or worse, so getting comfortable with the notation will be useful.</p>
+<p>Usually, there is notation just below and just above the symbol (e.g., <span class="math inline">\(\sum_{i=1}^3\)</span>). This can be read as “take the sum of the following from <span class="math inline">\(i=1\)</span> to <span class="math inline">\(i=3\)</span>. We perform the operation in the expression, each time changing <span class="math inline">\(i\)</span> to a different number, from 1 to 2 to 3. We then add each expression’s output together.</p>
+<ul>
+<li>Example: <span class="math inline">\(\sum_{i=1}^3 (i + 1)^2 = (1 + 1)^2 + (2 + 1)^2 + (3+1)^2 = 29\)</span></li>
+</ul>
+<p>We will also encounter the product symbol in this course: <span class="math inline">\(\prod\)</span>. This is similar to the summation symbol, but this time we are multiplying instead of adding.</p>
+<ul>
+<li>Example: <span class="math inline">\(\prod_{k = 1}^3 k^2 = 1^2 \times 2^2 \times 3^2 = 36\)</span></li>
+</ul>
+</section>
+<section id="logarithms" class="level3" data-number="3.1.4">
+<h3 data-number="3.1.4" class="anchored" data-anchor-id="logarithms"><span class="header-section-number">3.1.4</span> <strong>Logarithms</strong></h3>
+<p>In this class, we will generally assume that <span class="math inline">\(\log\)</span> takes the natural base <span class="math inline">\(e\)</span>, which is a mathematical constant equal to 2.718…. In other books, the base might be 10 by default.</p>
+<ul>
+<li>If we have, <span class="math inline">\(\log_{10} x = 2\)</span>, this is like saying 10^2 = 100.</li>
+<li>With base <span class="math inline">\(e\)</span>, we have <span class="math inline">\(\log_e x =2\)</span>, which is <span class="math inline">\(e^2 = 7.389\)</span>.</li>
+<li>We are just going to write <span class="math inline">\(\log_e\)</span> as <span class="math inline">\(\log\)</span> but know that the <span class="math inline">\(e\)</span> is there.</li>
+</ul>
+<p>A key part of maximum likelihood estimation is writing down the <em>log</em> of the likelihood equation, so this is a must-have for later in the course.</p>
+<p>Here is a cheat sheet of common rules for working with logarithms.</p>
+<ul>
+<li><span class="math inline">\(\log x = 8 \rightarrow e^8 = x\)</span></li>
+<li><span class="math inline">\(e^\pi = y \rightarrow \log y = \pi\)</span></li>
+<li><span class="math inline">\(\log (a \times b) = \log a + \log b\)</span></li>
+<li><span class="math inline">\(\log a^n = n \log a\)</span></li>
+<li><span class="math inline">\(\log \frac{a}{b} = \log a - \log b\)</span></li>
+</ul>
+<p>Why logarithms? There are many different reasons why social scientists use logs.</p>
+<ul>
+<li>Some social phenomena grow exponentially, and logs make it is easier to visualize exponential growth, as is the case in visualizing the growth in COVID cases. See this <a href="https://www.weforum.org/agenda/2020/04/covid-19-spread-logarithmic-graph/">example</a>.</li>
+<li>Relatedly, taking the log of a distribution that is skewed, will make it look more normal or symmetrical, which has some nice properties.</li>
+<li>Sometimes the rules of logarithms are more convenient than non-logarithms. In MLE, we will take particular advantage of this rule: <span class="math inline">\(\log (a \times b) = \log a + \log b\)</span>, which turns a multiplication problem into an addition problem.</li>
+</ul>
+</section>
+</section>
+<section id="mathematical-operations-in-r" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="mathematical-operations-in-r"><span class="header-section-number">3.2</span> Mathematical Operations in R</h2>
+<p>We will use R for this course, and these operations are all available with R code, allowing R to become a calculator for you. Here are some examples applying the tools above.</p>
+<section id="pemdas" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="pemdas"><span class="header-section-number">3.2.1</span> PEMDAS</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>((<span class="dv">1</span><span class="sc">+</span><span class="dv">2</span>)<span class="sc">^</span><span class="dv">3</span>)<span class="sc">^</span><span class="dv">2</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 729</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> (<span class="dv">2</span><span class="sc">^</span><span class="dv">3</span>)<span class="sc">^</span><span class="dv">2</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 65</code></pre>
+</div>
+</div>
+</section>
+<section id="exponents-1" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="exponents-1"><span class="header-section-number">3.2.2</span> Exponents</h3>
+<p>You can compare the computation below to match with the rules above. Note how the caret ^ symbol is used for exponents, and the asterisk * is used for multiplication. We also have a function <code>sqrt()</code> for taking the square root.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Let's say a = 4 for our purposes</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="do">## And let's say k= 3 and l=5, b=2</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><span class="math inline">\(a^0 = 1\)</span></li>
+<li><span class="math inline">\(a^1 = a\)</span></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>a<span class="sc">^</span><span class="dv">0</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>a<span class="sc">^</span><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1
+[1] 4</code></pre>
+</div>
+</div>
+<p>Note how we use parentheses in R to make it clear that the exponent includes not just <code>k</code> but <code>(k + l)</code></p>
+<ul>
+<li><span class="math inline">\(a^k * a^l = a^{k + l}\)</span></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>a<span class="sc">^</span>k <span class="sc">*</span> a<span class="sc">^</span>l </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>a<span class="sc">^</span>(k <span class="sc">+</span> l)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 65536
+[1] 65536</code></pre>
+</div>
+</div>
+<p>Note how we use the asterisk to make it clear we want to multiply <code>k*l</code></p>
+<ul>
+<li><span class="math inline">\((a^k)^l = a^{kl}\)</span></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(a<span class="sc">^</span>k)<span class="sc">^</span>l</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>a<span class="sc">^</span>(k<span class="sc">*</span>l)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1073741824
+[1] 1073741824</code></pre>
+</div>
+</div>
+<ul>
+<li><span class="math inline">\((\frac{a}{b})^k = (\frac{a^k}{b^k})\)</span></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>(a <span class="sc">/</span> b)<span class="sc">^</span>k</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>(a <span class="sc">^</span>k)<span class="sc">/</span>(b<span class="sc">^</span>k)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8
+[1] 8</code></pre>
+</div>
+</div>
+<ul>
+<li><span class="math inline">\(a^{-k} = \frac{1}{a^k}\)</span></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>a<span class="sc">^</span>(<span class="sc">-</span>k) </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">/</span> (a<span class="sc">^</span>k)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.015625
+[1] 0.015625</code></pre>
+</div>
+</div>
+<ul>
+<li><span class="math inline">\(a^{1/2} = \sqrt{a}\)</span></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>a<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2
+[1] 2</code></pre>
+</div>
+</div>
+</section>
+<section id="summations" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="summations"><span class="header-section-number">3.2.3</span> Summations</h3>
+<p>Summations and products are a little more nuanced in R, depending on what you want to accomplish. But here is one example.</p>
+<p>Let’s take a vector (think a list of numbers) that goes from 1 to 4. We will call it <code>ourlist</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ourlist <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>ourlist</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="do">## An alternative is to write this: ourlist &lt;- 1:4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3 4</code></pre>
+</div>
+</div>
+<p>Now let’s do <span class="math inline">\(\sum_{i = 1}^4 (i + 1)^2 = (1 +1)^2 + (1+2)^2 + (1 + 3)^2 + (1 + 4)^2 = 54\)</span></p>
+<p>In R, when you add a number to a vector, it will add that number to each entry in the vector. Example</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>ourlist <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2 3 4 5</code></pre>
+</div>
+</div>
+<p>We can use that now to do the inside part of the summation. Note: the exponent works the same way, squaring each element of the inside expression.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>(ourlist <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  4  9 16 25</code></pre>
+</div>
+</div>
+<p>Now, we will embed this expression inside a function in R called <code>sum</code> standing for summation. It will add together each of the inside components.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((ourlist <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 54</code></pre>
+</div>
+</div>
+<p>If instead we wanted the product, multiplying each element of the inside together, we could use <code>prod()</code>. We won’t use that function very much in this course.</p>
+</section>
+<section id="logarithms-1" class="level3" data-number="3.2.4">
+<h3 data-number="3.2.4" class="anchored" data-anchor-id="logarithms-1"><span class="header-section-number">3.2.4</span> Logarithms</h3>
+<p>R also has functions related to logarithms, called <code>log()</code> and <code>exp()</code> for the for the natural base <span class="math inline">\(e\)</span>. By default, the natural exponential is the base in the <code>log()</code> R function.</p>
+<ul>
+<li><span class="math inline">\(\log x = 8 \rightarrow e^8 = x\)</span></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2980.958</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="fl">2980.958</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
+</div>
+</div>
+<p>Note that R also has a number of built-in constants, like <code>pi</code>.</p>
+<ul>
+<li><span class="math inline">\(e^\pi = y \rightarrow \log y = \pi\)</span></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(pi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 23.14069</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="fl">23.14069</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.141593</code></pre>
+</div>
+</div>
+<ul>
+<li><span class="math inline">\(\log (a \times b) = \log a + \log b\)</span></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(a <span class="sc">*</span> b)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(a) <span class="sc">+</span> <span class="fu">log</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.079442
+[1] 2.079442</code></pre>
+</div>
+</div>
+<p>Let’s treat <span class="math inline">\(n=3\)</span> in this example and enter 3 directly where we see <span class="math inline">\(n\)</span> below. Alternatively you could store 3 as n, as we did with the other letters above.</p>
+<ul>
+<li><span class="math inline">\(\log a^n = n \log a\)</span></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(a <span class="sc">^</span> <span class="dv">3</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">*</span> <span class="fu">log</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.158883
+[1] 4.158883</code></pre>
+</div>
+</div>
+<ul>
+<li><span class="math inline">\(\log \frac{a}{b} = \log a - \log b\)</span></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(a<span class="sc">/</span>b)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(a) <span class="sc">-</span> <span class="fu">log</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6931472
+[1] 0.6931472</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="derivatives" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="derivatives"><span class="header-section-number">3.3</span> Derivatives</h2>
+<p>We will need to take some derivatives in the course. The reason is because a derivative gets us closer to understanding how to minimize and maximize certain functions, where a function is a relationship that maps elements of a set of inputs into a set of outputs, where each input is related to one output.</p>
+<p>This is useful in social science, with methods such as linear regression and maximum likelihood estimation because it helps us estimate the values that we think will best describe the relationship between our independent variables and a dependent variable.</p>
+<p>For example, in ordinary least squares (linear regression), we choose coefficients, which describe the relationship between the independent and dependent variables (<em>for every 1 unit change in x, we estimate</em> <span class="math inline">\(\hat \beta\)</span> amount of change in y), based on a method that tries to <em>minimize</em> the squared error between our estimated outcomes and the actual outcomes. In MLE, we will have a different quantity, which we will try to maximize.</p>
+<p>To understand derivatives, we will briefly define limits.</p>
+<p><strong>Limits</strong></p>
+<p>A limit describes how a function behaves as it approaches (gets very close to) a certain value</p>
+<ul>
+<li><span class="math inline">\(\lim_{x \rightarrow a} f(x) = L\)</span></li>
+</ul>
+<p>Example: <span class="math inline">\(\lim_{x \rightarrow 3} x^2 = 9\)</span> The limit of this function as <span class="math inline">\(x\)</span> approaches three, is 9. Limits will appear in the expression for calculating derivatives.</p>
+<section id="derivatives-1" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="derivatives-1"><span class="header-section-number">3.3.1</span> <strong>Derivatives</strong></h3>
+<p>For intuition on a derivative, watch this <a href="https://www.youtube.com/watch?v=i48KWnuAi4Q">video</a> from The Math Sorcerer.</p>
+<p>A derivative is the instantaneous rate at which the function is changing at x: <em>the slope of a function at a particular point.</em></p>
+<p>There are different notations for indicating something is a derivative. Below, we use <span class="math inline">\(f'(x)\)</span> because we write our functions as <span class="math inline">\(f(x) = x\)</span>. Many times you might see a function equation like <span class="math inline">\(y = 3x\)</span> There, it will be common for the derivative to be written like <span class="math inline">\(\frac{dy}{dx}\)</span>.</p>
+<p>Let’s break down the definition of a derivative by looking at its similarity to the simple definition of a slope, as the rise over the run:</p>
+<ul>
+<li>Slope (on average): rise over run: change in <span class="math inline">\(f(x)\)</span> over an interval (<span class="math inline">\([c, b]\)</span> where <span class="math inline">\(b-c =h\)</span>): <span class="math inline">\(\frac{f(b) - f(c)}{b-c}\)</span></li>
+</ul>
+<p>For slope at a specific point <span class="math inline">\(x\)</span> (the derivative of f(x) at x), we just make the interval <span class="math inline">\(h\)</span> very small:</p>
+<ul>
+<li><span class="math inline">\(f'(x)= \lim_{h \rightarrow 0}\frac{f(a + h) - f(a)}{h}\)</span></li>
+</ul>
+<p>Example <span class="math inline">\(f(x) = 2x + 3\)</span>.</p>
+<ul>
+<li><span class="math inline">\(f'(x) = \lim_{h \rightarrow 0}\frac{2(x + h) + 3 - (2x + 3)}{h} = \lim_{h \rightarrow 0}\frac{2x + 2h - 2x}{h} = \lim_{h \rightarrow 0}2 = 2\)</span></li>
+</ul>
+<p>This <a href="https://twitter.com/allison_horst/status/1307538146121244674">twitter thread</a> by the brilliant teacher and statistician Allison Horst, provides a nice cartoon-based example of the derivative. (Note that sometimes the interval <span class="math inline">\(h\)</span> is written as <span class="math inline">\(\Delta x\)</span>, the change in <span class="math inline">\(x\)</span>).</p>
+</section>
+<section id="critical-points-for-minima-or-maxima" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="critical-points-for-minima-or-maxima"><span class="header-section-number">3.3.2</span> <strong>Critical Points for Minima or Maxima</strong></h3>
+<p>In both OLS and MLE, we reach points where take what are called “first order conditions.” This means we take the derivative with respect to a parameter of interest and then set the derivative = 0 and solve for the parameter to get an expression for our estimator. (E.g., In OLS, we take the derivative of the sum of squared residuals, set it equal to zero, and solve to get an expression for <span class="math inline">\(\hat \beta\)</span>).</p>
+<p>The reason we are interested in when the derivative is zero, is because this is when the instanaeous rate of change is zero, i.e., the slope at a particular point is zero. When does this happen? At a critical point- maximum or minimum. Think about it– at the top of a mountain, there is no more rise (and no decline). You are completing level on the mountaintop. The slope at that point is zero.</p>
+<p>Let’s take an example. The function <span class="math inline">\(f(x) = x^2 + 1\)</span> has the derivative <span class="math inline">\(f'(x) = 2x\)</span>. This is zero when <span class="math inline">\(x = 0\)</span>.</p>
+<p>The question remains: How do we know if it is a maximum or minimum?</p>
+<p>We need to figure out if our function is concave or convex around this critical value. Convex is a “U” shape, meaning we are at a minimum, while concavity is an upside-down-U, which means we are at a maximum. We do so by taking the second derivative. This just means we take the derivative of the expression we already have for our first derivative. In our case, <span class="math inline">\(f''(x) = 2\)</span>. So what? Well the key thing we are looking for is if this result is positive or negative. Here, it is positive, which means our function is convex at this critical value, and therefore, we are at a minimum.</p>
+<p>Just look at the function in R if we plot it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Let's define an arbitrary set of values for x</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">3</span><span class="sc">:</span><span class="dv">3</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Now let's map the elements of x into y using our function</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>fx <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Let's plot the results</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> x, <span class="at">y=</span>fx, </span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"x"</span>, <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"f(x) = x^2 + 1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="03-TheMATH_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Notice that when x=0, we are indeed at a minimum, just as the positive value of the second derivative would suggest.</p>
+<p>A different example: <span class="math inline">\(f(x) = -2x^2 +1\)</span>. <span class="math inline">\(f'(x) = -4x\)</span> When we set this equal to 0 we find a critical value at <span class="math inline">\(x = 0\)</span>. <span class="math inline">\(f''(x) = -4\)</span>. Here, the value is negative, and we know it is concave. Sure enough, let’s plot it, and notice how we can draw a horiztonal line at the maximum, representing that zero slope at the critical point:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">3</span><span class="sc">:</span><span class="dv">3</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>fx <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> x, <span class="at">y =</span> fx,</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">"f(x)"</span>,</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"x"</span>, <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"f(x) = -2x^2 + 1"</span>)</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">1</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="03-TheMATH_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="common-derivative-rules" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="common-derivative-rules"><span class="header-section-number">3.3.3</span> <strong>Common Derivative Rules</strong></h3>
+<p>Below is a cheat sheet of rules for quickly identifying the derivatives of functions.</p>
+<p>The derivative of a constant is 0.</p>
+<ul>
+<li><span class="math inline">\(f(x) = a; f'(x) = 0\)</span>
+<ul>
+<li>Example: The derivative of 5 is 0.</li>
+</ul></li>
+</ul>
+<p>Here is the power rule.</p>
+<ul>
+<li><span class="math inline">\(f(x) = ax^n; f'(x) = n\times a \times x^{n-1}\)</span>
+<ul>
+<li>Example: The derivative of <span class="math inline">\(x^3 = 3x^{(3-1)} = 3x^2\)</span></li>
+</ul></li>
+</ul>
+<p>We saw logs in the last section, and, yes, we see logs again here.</p>
+<ul>
+<li><span class="math inline">\(f(x) = e^{ax}; f'(x) = ae^{ax}\)</span></li>
+<li><span class="math inline">\(f(x) = \log(x); f'(x) = \frac{1}{x}\)</span></li>
+</ul>
+<p>A very convenient rule is that a derivative of a sum = sum of the derivatives.</p>
+<ul>
+<li><span class="math inline">\(f(x) = g(x) + h(x); f'(x) = g'(x) + h'(x)\)</span></li>
+</ul>
+<p>Products can be more of a headache. In this course, we will turn some product expressions into summation expressions to avoid the difficulties of taking derivatives with products.</p>
+<ul>
+<li>Product Rule: <span class="math inline">\(f(x) = g(x)h(x); f'(x) = g'(x)h(x) + h'(x)g(x)\)</span></li>
+</ul>
+<p>The chain rule below looks a bit tricky, but it can be very helpful for simplifying the way you take a derivative. See this <a href="https://www.youtube.com/watch?v=H-ybCx8gt-8&amp;ab_channel=NancyPi">video</a> from NancyPi for a helpful explainer, as well as a follow-up for more complex applications <a href="https://www.youtube.com/watch?v=U_qp0isxQYU&amp;ab_channel=NancyPi">here</a>.</p>
+<ul>
+<li>Chain Rule: <span class="math inline">\(f(x) = g(h(x)); f'(x) = g'(h(x))h'(x)\)</span></li>
+</ul>
+<p>Example: What is the derivative of <span class="math inline">\(f(x) = \log 5x\)</span>?</p>
+<ul>
+<li>First, we will apply the rule which tells us the derivative of a <span class="math inline">\(\log x\)</span> is <span class="math inline">\(\frac{1}{x}\)</span>.</li>
+<li>However, here, we do not just have <span class="math inline">\(x\)</span>, we have <span class="math inline">\(5x\)</span>. We are in chain rule territory.</li>
+<li>After we apply the derivative to the log, which is <span class="math inline">\(\frac{1}{5x}\)</span>, we then have to take the derivative of <span class="math inline">\(5x\)</span> and multiply the two expressions together.</li>
+<li>The derivative of <span class="math inline">\(5x\)</span> is <span class="math inline">\(5\)</span>.</li>
+<li>So, putting this together, our full derivative is f′(x) = 5 ∗ <span class="math inline">\(\frac{1}{5x}\)</span> = <span class="math inline">\(\frac{1}{x}\)</span>.</li>
+</ul>
+</section>
+</section>
+<section id="vectors-and-matrices" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="vectors-and-matrices"><span class="header-section-number">3.4</span> Vectors and Matrices</h2>
+<p><strong>Vectors</strong></p>
+<p>For our purposes, a vector is a list or “array” of numbers. For example, this might be a variable in our data– a list of the ages of all politicians in a country.</p>
+<p><em>Addition</em></p>
+<ul>
+<li>If we have two vectors <span class="math inline">\(\mathbf{u}\)</span> and <span class="math inline">\(\mathbf{v}\)</span>, where
+<ul>
+<li><span class="math inline">\(\mathbf{u} \ = \ (u_1, u_2, \dots u_n)\)</span> and</li>
+<li><span class="math inline">\(\mathbf{v} \ = \ (v_1, v_2, \dots v_n)\)</span>,</li>
+<li><span class="math inline">\(\mathbf{u} + \mathbf{v} = (u_1 + v_1, u_2 + v_2, \dots u_n + v_n)\)</span></li>
+</ul></li>
+<li>Note: <span class="math inline">\(\mathbf{u}\)</span> and <span class="math inline">\(\mathbf{v}\)</span> must be of the same dimensionality - number of elements in each must be the same - for addition.</li>
+</ul>
+<p><em>Scalar multiplication</em></p>
+<ul>
+<li>If we have a scalar (i.e., a single number) <span class="math inline">\(\lambda\)</span> and a vector <span class="math inline">\(\mathbf{u}\)</span></li>
+<li><span class="math inline">\(\lambda \mathbf{u} = (\lambda u_1, \lambda u_2, \dots \lambda u_n)\)</span></li>
+</ul>
+<p>We can implement vector addition and scalar multiplication in R.</p>
+<p>Let’s create a vector <span class="math inline">\(\mathbf{u}\)</span>, a vector <span class="math inline">\(\mathbf{v}\)</span>, and a number lambda.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">33</span>, <span class="dv">44</span>, <span class="dv">22</span>, <span class="dv">11</span>)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">2</span>)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>When you add two vectors in R, it adds each component together.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>u <span class="sc">+</span> v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 39 51 30 13</code></pre>
+</div>
+</div>
+<p>We can multiply each element of a vector, <code>u</code> by <code>lambda</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>lambda <span class="sc">*</span> u</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  99 132  66  33</code></pre>
+</div>
+</div>
+<p><em>Element-wise Multiplication</em></p>
+<p>Note: When you multiply two vectors together in R, it will take each element of one vector and multiply it by each element of the other vector.</p>
+<ul>
+<li><code>u * v</code> <span class="math inline">\(= (u_1 * v_1, u_2 * v_2, \dots u_n * v_n)\)</span></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>u <span class="sc">*</span> v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 198 308 176  22</code></pre>
+</div>
+</div>
+<section id="matrix-basics" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="matrix-basics"><span class="header-section-number">3.4.1</span> <strong>Matrix Basics</strong></h3>
+<p>A matrix represents arrays of numbers in a rectangle, with rows and columns.</p>
+<ul>
+<li>A matrix with <span class="math inline">\(m\)</span> rows and <span class="math inline">\(n\)</span> columns is defined as (<span class="math inline">\(m\)</span> x <span class="math inline">\(n\)</span>). What is the dimensionality of the matrix <strong>A</strong> below?</li>
+</ul>
+<p><span class="math inline">\(A = \begin{pmatrix} a_{11} &amp; a_{12} &amp; a_{13}\\ a_{21} &amp; a_{22} &amp; a_{23} \\ a_{31} &amp; a_{32} &amp; a_{33} \\ a_{41} &amp; a_{42} &amp; a_{43} \end{pmatrix}\)</span></p>
+<p>In R, we can think of a matrix as a set of vectors. For example, we could combine the vectors <code>u</code> and <code>v</code> we created above into a matrix defined as W.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="do">## cbind() binds together vectors as columns</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>Wcol <span class="ot">&lt;-</span> <span class="fu">cbind</span>(u, v)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>Wcol</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      u v
+[1,] 33 6
+[2,] 44 7
+[3,] 22 8
+[4,] 11 2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="do">## rbind() binds together vectors as rows</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>Wrow <span class="ot">&lt;-</span> <span class="fu">rbind</span>(u, v)</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>Wrow</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [,1] [,2] [,3] [,4]
+u   33   44   22   11
+v    6    7    8    2</code></pre>
+</div>
+</div>
+<p>There are other ways to create matrices in R, but using <code>cbind</code> and <code>rbind()</code> are common.</p>
+<p>We can find the dimensions of our matrices using <code>dim()</code> or <code>nrow()</code> and <code>ncol()</code> together. For example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(Wcol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4 2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(Wcol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(Wcol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+</div>
+<p>Note how the dimensions are different from the version created with <code>rbind()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(Wrow)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(Wrow)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(Wrow)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+<p><em>Extracting specific components</em></p>
+<p>The element <span class="math inline">\(a_{ij}\)</span> signifies the element is in the <span class="math inline">\(i\)</span>th row and <span class="math inline">\(j\)</span>th column of matrix A. For example, <span class="math inline">\(a_{12}\)</span> is in the first row and second column.</p>
+<ul>
+<li>Square matrices have the same number of rows and columns</li>
+<li>Vectors have just one row or one column (e.g., <span class="math inline">\(x_1\)</span> element of <span class="math inline">\(\mathbf{x}\)</span> vector)</li>
+</ul>
+<p>In R, we can use brackets to extract a specific <span class="math inline">\(ij\)</span> element of a matrix or vector.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>Wcol</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      u v
+[1,] 33 6
+[2,] 44 7
+[3,] 22 8
+[4,] 11 2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>Wcol[<span class="dv">2</span>,<span class="dv">1</span>] <span class="co"># element in the second row, first column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> u 
+44 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>Wcol[<span class="dv">2</span>,] <span class="co"># all elements in the second row</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> u  v 
+44  7 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>Wcol[, <span class="dv">1</span>] <span class="co"># all elements in the first column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 33 44 22 11</code></pre>
+</div>
+</div>
+<p>For matrices, to extract a particular entry in R, you have a comma between entries because there are both rows and columns. For vectors, you only have one entry, so no comma is needed.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>u</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 33 44 22 11</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>u[<span class="dv">2</span>] <span class="co"># second element in the u vector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 44</code></pre>
+</div>
+</div>
+</section>
+<section id="matrix-operations" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="matrix-operations"><span class="header-section-number">3.4.2</span> Matrix Operations</h3>
+<p><em>Matrix Addition</em></p>
+<ul>
+<li>To be able to add matrix <strong>A</strong> and matrix <strong>B</strong>, they must have the same dimensions.</li>
+<li>Like vector addition, to add matrices, you add each of the components together.</li>
+</ul>
+<p><span class="math inline">\(A = \begin{pmatrix} a_{11} &amp; a_{12} &amp; a_{13}\\ a_{21} &amp; a_{22} &amp; a_{23} \\ a_{31} &amp; a_{32} &amp; a_{33} \end{pmatrix}\)</span> and <span class="math inline">\(B = \begin{pmatrix} b_{11} &amp; b_{12} &amp; b_{13}\\ b_{21} &amp; b_{22} &amp; b_{23} \\ b_{31} &amp; b_{32} &amp; b_{33} \end{pmatrix}\)</span></p>
+<p><span class="math inline">\(A + B = \begin{pmatrix} a_{11} + b_{11} &amp; a_{12} + b_{12} &amp; a_{13} + b_{13}\\ a_{21} + b_{21} &amp; a_{22} + b_{22} &amp; a_{23} + b_{23} \\ a_{31} + b_{31} &amp; a_{32} + b_{32} &amp; a_{33} + b_{33} \end{pmatrix}\)</span></p>
+<p><span class="math inline">\(Q = \begin{pmatrix} 2 &amp; 4 &amp; 1\\ 6 &amp; 1 &amp; 5 \end{pmatrix}\)</span> <span class="math inline">\(+\)</span> <span class="math inline">\(R = \begin{pmatrix} 9 &amp; 4 &amp; 2\\ 11 &amp; 8 &amp; 7 \end{pmatrix} = Q + R = \begin{pmatrix} 11 &amp; 8 &amp; 3\\ 17 &amp; 9 &amp; 12 \end{pmatrix}\)</span></p>
+<p><em>Scalar Multiplication</em></p>
+<p>Take a scalar <span class="math inline">\(\nu\)</span>. Just like vectors, we multiply each component of a matrix by the scalar.</p>
+<p><span class="math inline">\(\nu Q = \begin{pmatrix} \nu q_{11} &amp; \nu q_{12} &amp; \dots &amp; \nu q_{1n}\\ \nu q_{21} &amp; \nu q_{22} &amp; \dots &amp; \nu q_{2n} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ \nu q_{m1} &amp; \nu q_{m2} &amp; \dots &amp; \nu q_{mn} \end{pmatrix}\)</span></p>
+<p>Example: Take <span class="math inline">\(c = 2\)</span> and a matrix A.</p>
+<p><span class="math inline">\(cA = c *\begin{pmatrix} 4 &amp; 6 &amp; 1\\ 3 &amp; 2 &amp; 8 \end{pmatrix}\)</span> = <span class="math inline">\(\begin{pmatrix} 8 &amp; 12 &amp; 2\\ 6 &amp; 4 &amp; 16 \end{pmatrix}\)</span></p>
+<p>Note the Commutativity/Associativity: For scalar <span class="math inline">\(c\)</span>: <span class="math inline">\(c(AB) = (cA)B = A(cB) = (AB)c\)</span>.</p>
+<p><em>Matrix Multiplication</em></p>
+<p>A matrix A and B must be conformable to multiply AB.</p>
+<ul>
+<li>To be comformable, for <span class="math inline">\(m_A\)</span> x <span class="math inline">\(n_A\)</span> matrix A and <span class="math inline">\(m_B\)</span> x <span class="math inline">\(n_B\)</span> matrix B, the “inside” dimensions must be equal: <span class="math inline">\(n_A = m_B\)</span>.</li>
+<li>The resulting AB has the “outside” dimensions: <span class="math inline">\(m_A\)</span> x <span class="math inline">\(n_B\)</span>.</li>
+</ul>
+<p>For each <span class="math inline">\(c_{ij}\)</span> component of <span class="math inline">\(C = AB\)</span>, we take the inner product of the <span class="math inline">\(i^{th}\)</span> row of matrix A and the <span class="math inline">\(j^{th}\)</span> column of matrix B.</p>
+<ul>
+<li>Their product C = AB is the <span class="math inline">\(m\)</span> x <span class="math inline">\(n\)</span> matrix where:</li>
+<li><span class="math inline">\(c_{ij} =a_{i1}b_{1j} + a_{i2}b_{2j} + \dots + a_{ik}b_{kj}\)</span></li>
+</ul>
+<p><em>Example:</em> This <span class="math inline">\(2 \times 3\)</span> matrix is multiplied by a <span class="math inline">\(3 \times 2\)</span> matrix, resulting in the <span class="math inline">\(2 \times 2\)</span> matrix.</p>
+<p><span class="math inline">\(\begin{pmatrix} 4 &amp; 6 &amp; 1\\ 3 &amp; 2 &amp; 8 \end{pmatrix}\)</span> <span class="math inline">\(\times\)</span> <span class="math inline">\(\begin{pmatrix} 8 &amp; 12 \\ 6 &amp; 4 \\ 7 &amp; 10 \end{pmatrix}\)</span> = <span class="math inline">\(\begin{pmatrix} (4*8 + 6*6 + 1*7) &amp; (4*12 + 6*4 + 1*10) \\ (3*8 + 2*6 + 8*7) &amp; (3*12 + 2*4 + 8*10) \end{pmatrix}\)</span></p>
+<p>For example, the entry in the first row and second column of the new matrix <span class="math inline">\(c_{12} = (a_{11} = 4* b_{11} = 12) + (a_{12} = 6*b_{21} = 4) + (a_{13} = 1*b_{31} = 10)\)</span></p>
+<p>We can also do matrix multiplication in R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Create a 3 x 2 matrix A</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">6</span>), <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">8</span>))</span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]    3    5
+[2,]    4    6
+[3,]    6    8</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Create a 2 x 4 matrix B</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">8</span>), <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">9</span>), <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">6</span>), <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">11</span>))</span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>B</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4]
+[1,]    6    7    3    1
+[2,]    8    9    6   11</code></pre>
+</div>
+</div>
+<p>Note that the multiplication AB is conformable because the number of columns in A matches the number of rows in B:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(A)</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(B)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2
+[1] 2</code></pre>
+</div>
+</div>
+<p>To multiply matrices together in R, we need to add symbols around the standard asterisk for multiplication:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>A <span class="sc">%*%</span> B</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4]
+[1,]   58   66   39   58
+[2,]   72   82   48   70
+[3,]  100  114   66   94</code></pre>
+</div>
+</div>
+<p>That is necessary for multiplying matrices together. It is not necessary for scalar multiplication, where we take a single number (e.g., c = 3) and multiply it with a matrix:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>c<span class="sc">*</span>A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]    9   15
+[2,]   12   18
+[3,]   18   24</code></pre>
+</div>
+</div>
+<p>Note the equivalence of the below expressions, which combine scalar and matrix multiplication:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>c<span class="sc">*</span> (A <span class="sc">%*%</span> B)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4]
+[1,]  174  198  117  174
+[2,]  216  246  144  210
+[3,]  300  342  198  282</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>(c<span class="sc">*</span> A) <span class="sc">%*%</span> B</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4]
+[1,]  174  198  117  174
+[2,]  216  246  144  210
+[3,]  300  342  198  282</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>A <span class="sc">%*%</span> (c <span class="sc">*</span> B)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4]
+[1,]  174  198  117  174
+[2,]  216  246  144  210
+[3,]  300  342  198  282</code></pre>
+</div>
+</div>
+<p>In social science, one matrix of interest is often a rectangular dataset that includes column vectors representing independent variables, as well as another vector that includes your dependent variable. These might have 1000 or more rows and a handful of columns you care about.</p>
+</section>
+</section>
+<section id="additional-matrix-tidbits-that-will-come-up" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="additional-matrix-tidbits-that-will-come-up"><span class="header-section-number">3.5</span> Additional Matrix Tidbits that Will Come Up</h2>
+<p><strong>Inverse</strong></p>
+<p>An <span class="math inline">\(n\)</span> x <span class="math inline">\(n\)</span> matrix A is invertible if there exists an <span class="math inline">\(n\)</span> x <span class="math inline">\(n\)</span> inverse matrix <span class="math inline">\(A^{-1}\)</span> such that:</p>
+<ul>
+<li><span class="math inline">\(AA^{-1} = A^{-1}A = I_n\)</span></li>
+<li>where <span class="math inline">\(I_n\)</span> is the identity matrix (<span class="math inline">\(n\)</span> x <span class="math inline">\(n\)</span>), that takes diagonal elements of 1 and off-diagonal elements of 0. Example:</li>
+</ul>
+<p><span class="math inline">\(I_n = \begin{pmatrix} 1_{11} &amp; 0 &amp; \dots &amp; 0\\ 0&amp; 1_{22} &amp; \dots &amp; 0 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; \dots &amp; 1_{nn} \end{pmatrix}\)</span></p>
+<ul>
+<li>Multiplying a matrix by the identity matrix returns in the matrix itself: <span class="math inline">\(AI_n = A\)</span>
+<ul>
+<li>It’s like the matrix version of multiplying a number by one.</li>
+</ul></li>
+</ul>
+<p>Note: A matrix must be square <span class="math inline">\(n\)</span> x <span class="math inline">\(n\)</span> to be invertible. (But not all square matrices are invertible.) A matrix is invertible if and only if its columns are linearly independent. This is important for understanding why you cannot have two perfectly colinear variables in a regression model.</p>
+<p>We will not do much solving for inverses in this course. However, the inverse will be useful in solving for and simplifying expressions.</p>
+<section id="transpose" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="transpose"><span class="header-section-number">3.5.1</span> <strong>Transpose</strong></h3>
+<p>When we transpose a matrix, we flip the <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> components.</p>
+<ul>
+<li>Example: Take a 4 X 3 matrix A and find the 3 X 4 matrix <span class="math inline">\(A^{T}\)</span>.</li>
+<li>A transpose is usually denoted with as <span class="math inline">\(A^{T}\)</span> or <span class="math inline">\(A'\)</span></li>
+</ul>
+<p><span class="math inline">\(A = \begin{pmatrix} a_{11} &amp; a_{12} &amp; a_{13}\\ a_{21} &amp; a_{22} &amp; a_{23} \\ a_{31} &amp; a_{32} &amp; a_{33} \\ a_{41} &amp; a_{42} &amp; a_{43} \end{pmatrix}\)</span> then <span class="math inline">\(A^T = \begin{pmatrix} a'_{11} &amp; a'_{12} &amp; a'_{13} &amp; a'_{14}\\ a'_{21} &amp; a'_{22} &amp; a'_{23} &amp; a'_{24} \\ a'_{31} &amp; a'_{32} &amp; a'_{33} &amp; a'_{34} \end{pmatrix}\)</span></p>
+<p>If <span class="math inline">\(A = \begin{pmatrix} 1 &amp; 4 &amp; 2 \\ 3 &amp; 1 &amp; 11 \\ 5 &amp; 9 &amp; 4 \\ 2 &amp; 11&amp; 4 \end{pmatrix}\)</span> then <span class="math inline">\(A^T = \begin{pmatrix} 1 &amp; 3 &amp; 5 &amp; 2\\ 4 &amp; 1 &amp; 9 &amp; 11 \\ 2&amp; 11 &amp; 4 &amp; 4 \end{pmatrix}\)</span></p>
+<p>Check for yourself: What was in the first row (<span class="math inline">\(i=1\)</span>), second column (<span class="math inline">\(j=2\)</span>) is now in the second row (<span class="math inline">\(i=2\)</span>), first column (<span class="math inline">\(j=1\)</span>). That is <span class="math inline">\(a_{12} =4 = a'_{21}\)</span>.</p>
+<p>We can transpose matrices in R using <code>t()</code>. For example, take our matrix <code>A</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]    3    5
+[2,]    4    6
+[3,]    6    8</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    3    4    6
+[2,]    5    6    8</code></pre>
+</div>
+</div>
+<p>In R, you can find the inverse of a square matrix with <code>solve()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in solve.default(A): 'a' (3 x 2) must be square</code></pre>
+</div>
+</div>
+<p>Note, while <code>A</code> is not square A’A is square:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>AtA <span class="ot">&lt;-</span> <span class="fu">t</span>(A) <span class="sc">%*%</span> A</span>
+<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(AtA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          [,1]      [,2]
+[1,]  2.232143 -1.553571
+[2,] -1.553571  1.089286</code></pre>
+</div>
+</div>
+</section>
+<section id="additional-matrix-properties-and-rules" class="level3" data-number="3.5.2">
+<h3 data-number="3.5.2" class="anchored" data-anchor-id="additional-matrix-properties-and-rules"><span class="header-section-number">3.5.2</span> <strong>Additional Matrix Properties and Rules</strong></h3>
+<p>These are a few additional properties and rules that will be useful to us at various points in the course:</p>
+<ul>
+<li>Symmetric: Matrix A is symmetric if <span class="math inline">\(A = A^T\)</span></li>
+<li>Idempotent: Matrix A is idempotent if <span class="math inline">\(A^2 = A\)</span></li>
+<li>Trace: The trace of a matrix is the sum of its diagonal components <span class="math inline">\(Tr(A) = a_{11} + a_{22} + \dots + a_{mn}\)</span></li>
+</ul>
+<p>Example of symmetric matrix:</p>
+<p><span class="math inline">\(D = \begin{pmatrix} 1 &amp; 6 &amp; 22 \\ 6 &amp; 4 &amp; 7 \\ 22 &amp; 7 &amp; 11 \end{pmatrix}\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Look at the equivalence</span></span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="dv">22</span>), <span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">4</span>,<span class="dv">7</span>), <span class="fu">c</span>(<span class="dv">22</span>,<span class="dv">7</span>,<span class="dv">11</span>))</span>
+<span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a>D</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    6   22
+[2,]    6    4    7
+[3,]   22    7   11</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(D)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    6   22
+[2,]    6    4    7
+[3,]   22    7   11</code></pre>
+</div>
+</div>
+<p>What is the trace of this matrix?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="do">## diag() pulls out the diagonal of a matrix</span></span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(D))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16</code></pre>
+</div>
+</div>
+</section>
+<section id="matrix-rules" class="level3" data-number="3.5.3">
+<h3 data-number="3.5.3" class="anchored" data-anchor-id="matrix-rules"><span class="header-section-number">3.5.3</span> <strong>Matrix Rules</strong></h3>
+<p>Due to conformability and other considerations, matrix operations are somewhat more restrictive, particularly when it comes to commutativity.</p>
+<ul>
+<li>Associative <span class="math inline">\((A + B) + C = A + (B + C)\)</span> and <span class="math inline">\((AB) C = A(BC)\)</span></li>
+<li>Commutative <span class="math inline">\(A + B = B + A\)</span></li>
+<li>Distributive <span class="math inline">\(A(B + C) = AB + AC\)</span> and <span class="math inline">\((A + B) C = AC + BC\)</span></li>
+<li>Commutative law for multiplication does not hold– the order of multiplication matters: $ AB BA$</li>
+</ul>
+<p><em>Rules for Inverses and Transposes</em></p>
+<p>These rules will be helpful for simplifying expressions. Treat <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, and <span class="math inline">\(C\)</span> as matrices below, and <span class="math inline">\(s\)</span> as a scalar.</p>
+<ul>
+<li><span class="math inline">\((A + B)^T = A^T + B^T\)</span></li>
+<li><span class="math inline">\((s A)^T\)</span> <span class="math inline">\(= s A^T\)</span></li>
+<li><span class="math inline">\((AB)^T = B^T A^T\)</span></li>
+<li><span class="math inline">\((A^T)^T = A\)</span> and <span class="math inline">\(( A^{-1})^{-1} = A\)</span></li>
+<li><span class="math inline">\((A^T)^{-1} = (A^{-1})^T\)</span></li>
+<li><span class="math inline">\((AB)^{-1} = B^{-1} A^{-1}\)</span></li>
+<li><span class="math inline">\((ABCD)^{-1} = D^{-1} C^{-1} B^{-1} A^{-1}\)</span></li>
+</ul>
+</section>
+<section id="derivatives-with-matrices-and-vectors" class="level3" data-number="3.5.4">
+<h3 data-number="3.5.4" class="anchored" data-anchor-id="derivatives-with-matrices-and-vectors"><span class="header-section-number">3.5.4</span> <strong>Derivatives with Matrices and Vectors</strong></h3>
+<p>Let’s say we have a <span class="math inline">\(p \times 1\)</span> “column” vector <span class="math inline">\(\mathbf{x}\)</span> and another <span class="math inline">\(p \times 1\)</span> vector <span class="math inline">\(\mathbf{a}\)</span>.</p>
+<p>Taking the derivative with respect to vector <span class="math inline">\(\mathbf{x}\)</span>.</p>
+<p>Let’s say we have <span class="math inline">\(y = \mathbf{x}'\mathbf{a}\)</span>. This process is explained <a href="https://www.youtube.com/watch?v=iWxY7VdcSH8&amp;ab_channel=BenLambert">here</a>. Taking the derivative of this is called the gradient.</p>
+<ul>
+<li><p><span class="math inline">\(\frac{\delta y}{\delta x} = \begin{pmatrix}\frac{\delta y}{\delta x_1} \\ \frac{\delta y}{\delta x_2} \\ \vdots \\ \frac{dy}{dx_p} \end{pmatrix}\)</span></p></li>
+<li><p><span class="math inline">\(y\)</span> will have dimensions <span class="math inline">\(1 \times 1\)</span>. <span class="math inline">\(y\)</span> is a scalar.</p>
+<ul>
+<li>Note: <span class="math inline">\(y = a_1x_1 + a_2x_2 + ... + a_px_p\)</span>. From this expression, we can take a set of “partial derivatives”:</li>
+<li><span class="math inline">\(\frac{\delta y}{\delta x_1} = a_1\)</span></li>
+<li><span class="math inline">\(\frac{\delta y}{\delta x_2} = a_2\)</span>, and so on</li>
+<li><span class="math inline">\(\frac{\delta y}{\delta x} = \begin{pmatrix}\frac{\delta y}{\delta x_1} \\ \frac{\delta y}{\delta x_2} \\ \vdots \\ \frac{\delta y}{\delta x_p} \end{pmatrix} = \begin{pmatrix} a_1 \\ a_2 \\ \vdots \\ a_p \end{pmatrix}\)</span></li>
+</ul></li>
+<li><p>Well, this is just vector <span class="math inline">\(\mathbf{a}\)</span></p></li>
+</ul>
+<p>Answer: <span class="math inline">\(\frac{\delta }{\delta x} \mathbf{x}^T\mathbf{a} = \mathbf{a}\)</span>. We can apply this general rule in other situations.</p>
+<p><em>Example 2</em></p>
+<p>Let’s say we want to differentiate the following where vector <span class="math inline">\(\mathbf{y}\)</span> is <span class="math inline">\(n \times 1\)</span>, <span class="math inline">\(X\)</span> is <span class="math inline">\(n \times k\)</span>, and <span class="math inline">\(\mathbf{b}\)</span> is <span class="math inline">\(k \times 1\)</span>. Take the derivative with respect to <span class="math inline">\(b\)</span>.</p>
+<ul>
+<li><span class="math inline">\(\mathbf{y}'\mathbf{y} - 2\mathbf{b}'X'\mathbf{y}\)</span></li>
+<li>Note that the dimensions of the output are <span class="math inline">\(1 \times 1\)</span>, a scalar quantity.</li>
+</ul>
+<p>Remember the derivative of a sum is the sum of derivatives. This allows us to focus on particular terms.</p>
+<ul>
+<li>The first term has no <span class="math inline">\(\mathbf{b}\)</span> in it, so this will contribute 0.</li>
+<li>The second term is <span class="math inline">\(2\mathbf{b}'X'\mathbf{y}\)</span>. We can think about this like the previous example
+<ul>
+<li><span class="math inline">\(\frac{\delta }{\delta b} 2\mathbf{b}'X'\mathbf{y} = \begin{pmatrix} \frac{\delta }{\delta b_1}\\ \frac{\delta }{\delta b_2} \\ \vdots \\ \frac{\delta }{\delta b_k} \end{pmatrix}\)</span></li>
+<li>The output is needs to be <span class="math inline">\(k \times 1\)</span> like <span class="math inline">\(\mathbf{b}\)</span>, which is what <span class="math inline">\(2 * X'\mathbf{y}\)</span> is.</li>
+</ul></li>
+<li>The derivative is <span class="math inline">\(-2X'\mathbf{y}\)</span></li>
+</ul>
+<p><em>Example 3</em></p>
+<p>Another useful rule when a matrix <span class="math inline">\(A\)</span> is symmetric: <span class="math inline">\(\frac{\delta}{\delta \mathbf{x}} \mathbf{x}^TA\mathbf{x} = (A + A^T)\mathbf{x} = 2A\mathbf{x}\)</span>.</p>
+<p><strong>Details on getting to this result.</strong> We are treating the vector <span class="math inline">\(\mathbf{x}\)</span> as <span class="math inline">\(n \times 1\)</span> and the matrix <span class="math inline">\(A\)</span> as symmetric.</p>
+<p>When we take <span class="math inline">\(\frac{\delta}{\delta \mathbf{x}}\)</span> (the derivative with respect to <span class="math inline">\(\mathbf{x}\)</span>), we will be looking for a result with the same dimensions <span class="math inline">\(\mathbf{x}\)</span>.</p>
+<p><span class="math inline">\(\frac{\delta }{\delta \mathbf{x}} = \begin{pmatrix}\frac{\delta }{\delta x_1} \\ \frac{\delta }{\delta x_2} \\ \vdots \\ \frac{d}{dx_n} \end{pmatrix}\)</span></p>
+<p>Let’s inspect the dimensions of <span class="math inline">\(\mathbf{x}^TA\mathbf{x}\)</span>. They are <span class="math inline">\(1 \times 1\)</span>. If we perform this matrix multiplication, we would be multiplying:</p>
+<p><span class="math inline">\(\begin{pmatrix} x_1 &amp; x_2 &amp; \ldots &amp; x_i \end{pmatrix} \times \begin{pmatrix} a_{11} &amp; a_{12} &amp; \ldots &amp; a_{1j} \\ a_{21} &amp; a_{22} &amp; \ldots &amp; a_{2j} \\ \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\ a_{i1} &amp; a_{i2} &amp; \ldots &amp; a_{ij} \end{pmatrix} \times \begin{pmatrix}x_1 \\ x_2 \\ \vdots \\ x_j \end{pmatrix}\)</span></p>
+<p>To simplify things, let’s say we have the following matrices, where <span class="math inline">\(A\)</span> is symmetric:</p>
+<p><span class="math inline">\(\begin{pmatrix} x_1 &amp; x_2 \end{pmatrix} \times \begin{pmatrix} a_{11} &amp; a_{12} \\ a_{21} &amp; a_{22} \end{pmatrix} \times \begin{pmatrix} x_1 \\ x_2 \end{pmatrix}\)</span></p>
+<p>We can perform the matrix multiplication for the first two quantities, which will result in a <span class="math inline">\(1 \times 2\)</span> vector. Recall in matrix multiplication we take the sum of the element-wise multiplication of the <span class="math inline">\(ith\)</span> row of the first object by the <span class="math inline">\(jth\)</span> column of the second object. This means multiply the first row of <span class="math inline">\(\mathbf{x}\)</span> by the first column of <span class="math inline">\(A\)</span> for the entry in cell <span class="math inline">\(i=1; j=1\)</span>, and so on.</p>
+<p><span class="math inline">\(\begin{pmatrix} (x_1a_{11} + x_2a_{21}) &amp; (x_1a_{12} + x_2a_{22}) \end{pmatrix}\)</span></p>
+<p>We can then multiply this quantity by the last quantity</p>
+<p><span class="math inline">\(\begin{pmatrix} (x_1a_{11} + x_2a_{21}) &amp; (x_1a_{12} + x_2a_{22}) \end{pmatrix} \times \begin{pmatrix}x_1 \\ x_2 \end{pmatrix}\)</span></p>
+<p>This will results in the <span class="math inline">\(1 \times 1\)</span> quantity: <span class="math inline">\((x_1a_{11} + x_2a_{21})x_1 + (x_1a_{12} + x_2a_{22})x_2 = x_1^2a_{11} + x_2a_{21}x_1 + x_1a_{12}x_2 + x_2^2a_{22}\)</span></p>
+<p>We can now take the derivatives with respect to <span class="math inline">\(\mathbf{x}\)</span>. Because <span class="math inline">\(\mathbf{x}\)</span> is <span class="math inline">\(2 \times 1\)</span>, our derivative will be a vector of the same dimensions with components:</p>
+<p><span class="math inline">\(\frac{\delta }{\delta \mathbf{x}} = \begin{pmatrix}\frac{\delta }{\delta x_1} \\ \frac{\delta }{\delta x_2} \end{pmatrix}\)</span></p>
+<p>These represent the partial derivatives of each component within <span class="math inline">\(\mathbf{x}\)</span></p>
+<p>Let’s focus on the first: <span class="math inline">\(\frac{\delta }{\delta x_1}\)</span>.</p>
+<span class="math display">\[\begin{align*}
+\frac{\delta }{\delta x_1} x_1^2a_{11} + x_2a_{21}x_1 +   x_1a_{12}x_2 + x_2^2a_{22} &amp;=\\
+&amp;= 2x_1a_{11} + x_2a_{21} + a_{12}x_2\\
+\end{align*}\]</span>
+<p>We can repeat this for <span class="math inline">\(\frac{\delta }{\delta x_2}\)</span></p>
+<span class="math display">\[\begin{align*}
+\frac{\delta }{\delta x_2} x_1^2a_{11} + x_2a_{21}x_1 +   x_1a_{12}x_2 + x_2^2a_{22} &amp;=\\
+&amp;= a_{21}x_1  + x_1a_{12} + 2x_2a_{22}\\
+\end{align*}\]</span>
+<p>Now we can put the result back into our vector format:</p>
+<p><span class="math inline">\(\begin{pmatrix}\frac{\delta }{\delta x_1} = 2x_1a_{11} + x_2a_{21} + a_{12}x_2\\ \frac{\delta }{\delta x_2} = a_{21}x_1 + x_1a_{12} + 2x_2a_{22}\end{pmatrix}\)</span></p>
+<p>Now it’s just about simplifying to show that we have indeed come back to the rule.</p>
+<p>Recall that for a symmetric matrix, the elements in rows and columns <span class="math inline">\(ij\)</span> = the elements in <span class="math inline">\(ji\)</span>. This allows us to read <span class="math inline">\(a_{21} = a_{12}\)</span> and combine those terms (e.g., <span class="math inline">\(x_2a_{21} + a_{12}x_2 =2a_{12}x_2\)</span>) :</p>
+<p><span class="math inline">\(\begin{pmatrix}\frac{\delta }{\delta x_1} = 2x_1a_{11} + 2a_{12}x_2\\ \frac{\delta }{\delta x_2} = 2a_{21}x_1 + 2x_2a_{22}\end{pmatrix}\)</span></p>
+<p>Second, we can now bring the 2 out front.</p>
+<p><span class="math inline">\(\begin{pmatrix}\frac{\delta }{\delta x_1} \\ \frac{\delta }{\delta x_2} \end{pmatrix} = 2 * \begin{pmatrix} x_1a_{11} + a_{12}x_2\\ a_{21}x_1 + x_2a_{22}\end{pmatrix}\)</span></p>
+<p>Finally, let’s inspect this and show it is equivalent to this multiplication where we have a <span class="math inline">\(2 \times 2\)</span> <span class="math inline">\(A\)</span> matrix multiplied by a <span class="math inline">\(2 \times 1\)</span> <span class="math inline">\(\mathbf x\)</span> vector. <em>Minor note: Because any individual element of a vector is just a single quantity, we can change the order (e.g.,</em> <span class="math inline">\(a_{11}*x_1\)</span> vs.&nbsp;<span class="math inline">\(x_1*a_{11}\)</span>). <em>We just can’t do that for full vectors or matrices</em></p>
+<p><span class="math inline">\(2A\mathbf{x} = 2* \begin{pmatrix} a_{11} &amp; a_{12} \\ a_{21} &amp; a_{22} \end{pmatrix} \times \begin{pmatrix}x_1 \\ x_2 \end{pmatrix} = 2 * \begin{pmatrix} a_{11}x_1 + a_{12}x_2 \\ a_{21}x_1 + a_{22}x_2 \end{pmatrix}\)</span></p>
+<p>The last quantity is the same as the previous step. That’s the rule!</p>
+<p><strong>Applying the rules</strong></p>
+<ul>
+<li>This has a nice analogue to the derivative we’ve seen before <span class="math inline">\(q^2 = 2*q\)</span>.</li>
+<li>Let’s say we want to take the derivative of <span class="math inline">\(\mathbf{b}'X'X\mathbf{b}\)</span> with respect to <span class="math inline">\(\mathbf{b}\)</span>.</li>
+<li>We can think of <span class="math inline">\(X'X\)</span> as if it is <span class="math inline">\(A\)</span>.
+<ul>
+<li>This gives us <span class="math inline">\(2X'X\mathbf{b}\)</span> as the result.</li>
+</ul></li>
+</ul>
+<p>Why on earth would we care about this? For one, it helps us understand how we get to our estimates for <span class="math inline">\(\hat \beta\)</span> in linear regression. When we have multiple variables, we don’t just want the best estimate for one coefficient, but a vector of coefficients. See more <a href="https://www.youtube.com/watch?v=qeezdYISDlU&amp;ab_channel=BenLambert">here</a>.</p>
+<p>In MLE, we will find the gradient of the log likelihood function. We will further go into the second derivatives to arrive at what is called the Hessian. More on that later.</p>
+</section>
+</section>
+<section id="practice-problems" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="practice-problems"><span class="header-section-number">3.6</span> Practice Problems</h2>
+<ol type="1">
+<li>What is <span class="math inline">\(24/3 + 5^2 - (8 -4)\)</span>?</li>
+<li>What is <span class="math inline">\(\sum_{i = 1}^5 (i*3)\)</span>?</li>
+<li>Take the derivative of <span class="math inline">\(f(x) =v(4x^2 + 6)^2\)</span> with respect to <span class="math inline">\(x\)</span>.</li>
+<li>Take the derivative of <span class="math inline">\(f(x) = e^{2x + 3}\)</span> with respect to <span class="math inline">\(x\)</span>.</li>
+<li>Take the derivative of <span class="math inline">\(f(x) = log (x + 3)^2\)</span> with respect to <span class="math inline">\(x\)</span>.</li>
+</ol>
+<p>Given <span class="math inline">\(X\)</span> is an <span class="math inline">\(n\)</span> x <span class="math inline">\(k\)</span> matrix,</p>
+<ol start="6" type="1">
+<li><span class="math inline">\((X^{T}X)^{-1}X^{T}X\)</span> can be simplified to?</li>
+<li><span class="math inline">\(((X^{T}X)^{-1}X^{T})^{T} =\)</span> ?</li>
+<li>If <span class="math inline">\(\nu\)</span> is a constant, how does <span class="math inline">\((X^{T}X)^{-1}X^{T} \nu X(X^{T}X)^{-1}\)</span> simplify?</li>
+<li>If a matrix <span class="math inline">\(P\)</span> is idempotent, <span class="math inline">\(PP =\)</span> ?</li>
+</ol>
+<section id="practice-problem-solutions" class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="practice-problem-solutions"><span class="header-section-number">3.6.1</span> Practice Problem Solutions</h3>
+<ol type="1">
+<li>What is <span class="math inline">\(24/3 + 5^2 - (8 -4)\)</span>?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="dv">24</span><span class="sc">/</span><span class="dv">3</span> <span class="sc">+</span> <span class="dv">5</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> (<span class="dv">8</span> <span class="sc">-</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 29</code></pre>
+</div>
+</div>
+<ol start="2" type="1">
+<li>What is <span class="math inline">\(\sum_{i = 1}^5 (i*3)\)</span>?
+<ul>
+<li>By hand: <span class="math inline">\(1 \times 3 + 2 \times 3 + 3 \times 3 + 4 \times 3 + 5 \times 3\)</span></li>
+</ul></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="do">## sol 1</span></span>
+<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">*</span><span class="dv">3</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span><span class="dv">3</span> <span class="sc">+</span> <span class="dv">3</span><span class="sc">*</span><span class="dv">3</span> <span class="sc">+</span> <span class="dv">4</span><span class="sc">*</span><span class="dv">3</span> <span class="sc">+</span> <span class="dv">5</span><span class="sc">*</span><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 45</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="do">## sol 2</span></span>
+<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb111-3"><a href="#cb111-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(i<span class="sc">*</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 45</code></pre>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Take the derivative of <span class="math inline">\(f(x) =v(4x^2 + 6)^2\)</span> with respect to <span class="math inline">\(x\)</span>.
+<ul>
+<li>We can treat <span class="math inline">\(v\)</span> as a number.</li>
+</ul></li>
+</ol>
+<span class="math display">\[\begin{align*}
+f'(x) &amp;= 2* v(4x^2 + 6) * 8x\\
+&amp;= 16vx(4x^2 + 6)
+\end{align*}\]</span>
+<ol start="4" type="1">
+<li>Take the derivative of <span class="math inline">\(f(x) = e^{2x + 3}\)</span> with respect to <span class="math inline">\(x\)</span>.</li>
+</ol>
+<span class="math display">\[\begin{align*}
+f'(x) &amp;= 2* e^{2x + 3}\\
+&amp;= 2e^{2x + 3}
+\end{align*}\]</span>
+<ol start="5" type="1">
+<li>Take the derivative of <span class="math inline">\(f(x) = log (x + 3)^2\)</span> with respect to <span class="math inline">\(x\)</span>.
+<ul>
+<li>Note we can re-write this as <span class="math inline">\(2 * log (x + 3)\)</span>.</li>
+</ul></li>
+</ol>
+<p><span class="math display">\[\begin{align*}
+f'(x) &amp;= 2 * \frac{1}{(x + 3)} * 1\\
+&amp;= \frac{2}{(x + 3)}
+\end{align*}\]</span> If we didn’t take that simplifying step, we can still solve:</p>
+<span class="math display">\[\begin{align*}
+      f'(x) &amp;= \frac{1}{(x + 3)^2} * 2 * (x + 3) *1\\
+      &amp;= \frac{2}{(x + 3)}
+      \end{align*}\]</span>
+<p>Given <span class="math inline">\(X\)</span> is an <span class="math inline">\(n\)</span> x <span class="math inline">\(k\)</span> matrix,</p>
+<ol start="6" type="1">
+<li><span class="math inline">\((X^{T}X)^{-1}X^{T}X\)</span> can be simplified to?
+<ul>
+<li><span class="math inline">\(I_k\)</span> the identity matrix</li>
+</ul></li>
+<li><span class="math inline">\(((X^{T}X)^{-1}X^{T})^{T} =\)</span> ?
+<ul>
+<li>Recall our rule <span class="math inline">\((AB)^T = B^TA^T\)</span></li>
+<li><span class="math inline">\(X(X^TX)^{-1}\)</span></li>
+</ul></li>
+<li>If <span class="math inline">\(\nu\)</span> is a constant, how does <span class="math inline">\((X^{T}X)^{-1}X^{T} \nu X(X^{T}X)^{-1}\)</span> simplify?
+<ul>
+<li>We can pull it out front.</li>
+</ul></li>
+</ol>
+<span class="math display">\[\begin{align*}
+    &amp;= \nu(X^{T}X)^{-1}X^{T}X(X^{T}X)^{-1} \\
+    &amp;= \nu (X^{T}X)^{-1}
+    \end{align*}\]</span>
+<ol start="9" type="1">
+<li>If a matrix <span class="math inline">\(P\)</span> is idempotent, <span class="math inline">\(PP =\)</span> ?
+<ul>
+<li><span class="math inline">\(P\)</span> from section 3.5.2</li>
+</ul></li>
+</ol>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./02-ROverview.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R Overview</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./04-ReviewofOLS.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Review of OLS</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

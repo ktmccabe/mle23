@@ -1,0 +1,38 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "MLE 2023"
+  date: "September 2023"
+  chapters:
+    - index.qmd
+    - 02-ROverview.qmd
+    - 03-TheMATH.qmd
+    - 04-ReviewofOLS.qmd
+  page-navigation: true
+  downloads: pdf
+  sidebar:
+    style: docked
+    background: light
+    foreground: darkred
+
+format:
+  html:
+    theme: yeti
+    toc-title: Section Contents
+    toc: true
+    toc-location: left
+    toc-depth: 4
+    linkcolor: red
+  pdf:
+    toc-title: Section Contents
+    toc: true
+    toc-location: left
+    toc-depth: 4
+    linkcolor: red
+    prefer-html: true
+  
+
+
+editor: visual

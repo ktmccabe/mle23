@@ -1,0 +1,31 @@
+{
+    "id": "B27A719A",
+    "path": "~/Dropbox/GitHub2/mle23/02-ROverview.qmd",
+    "project_path": "02-ROverview.qmd",
+    "type": "quarto_markdown",
+    "hash": "3139150929",
+    "contents": "",
+    "dirty": false,
+    "created": 1693330657569.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "rmdVisualMode": "false",
+        "rmdVisualWrapConfigured": "true",
+        "source_window_id": "",
+        "Source": "Source",
+        "rmdVisualCollapsedChunks": "",
+        "rmdVisualModeLocation": "29:0",
+        "docOutlineVisible": "1",
+        "cursorPosition": "779,0",
+        "scrollLine": "762"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1693332189,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1693332189966,
+    "read_only": false,
+    "read_only_alternatives": []
+}

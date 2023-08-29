@@ -1,0 +1,32 @@
+{
+    "id": "93F87BB6",
+    "path": "~/Dropbox/GitHub2/mle23/03-TheMATH.qmd",
+    "project_path": "03-TheMATH.qmd",
+    "type": "quarto_markdown",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1693330927798.0,
+    "source_on_save": false,
+    "relative_order": 5,
+    "properties": {
+        "rmdVisualMode": "false",
+        "rmdVisualWrapConfigured": "true",
+        "source_window_id": "",
+        "Source": "Source",
+        "docOutlineVisible": "1",
+        "rmdVisualCollapsedChunks": "",
+        "cursorPosition": "12,27",
+        "scrollLine": "9",
+        "rmdVisualModeLocation": "731:272.22222900390625",
+        "quartoPreviewFormat": "pdf"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1693333107,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1693333107860,
+    "read_only": false,
+    "read_only_alternatives": []
+}
