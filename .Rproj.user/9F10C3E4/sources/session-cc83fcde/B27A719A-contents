@@ -38,7 +38,7 @@ This is a lot of information to digest all at once. Don't worry. No one remember
 
 ## First Time with R and RStudio
 
-This next section provides a few notes on using R and RStudio now that you have installed it. This is mostly repetitive of the other resources. This includes only the bare essential information for opening an R script and digging into using R as a calculator, which we will do in chapter 3. In this section, we cover the following materials:
+This next section provides a few notes on using R and RStudio now that you have installed it. This is mostly repetitive of the other resources. This includes only the bare essential information for opening an R script and digging into using R as a calculator. In this section, we cover the following materials:
 
 -   Using R as a calculator and assigning objects using `<-`
 -   Setting your working directory and the `setwd()` function.
@@ -46,13 +46,21 @@ This next section provides a few notes on using R and RStudio now that you have 
 
 ### **Open RStudio**
 
-RStudio is an open-source and free program that greatly facilitates the use of R, especially for users new to programming. Once you have downloaded and installed R and RStudio, to work in R, all you need to do now is open RStudio (it will open R). It should look like this, though your version number may be different: (*Image from Kosuke Imai's Quantitative Social Science Figure 1.1*)
+![](images/rconsole1.png)
 
-![](images/imai11.png)
+**Note:** The first time you open RStudio, you likely only have the three windows above. We will want to create a fourth window by **opening an R script** to create the fourth window.
 
-**Note:** If you only have three windows (e.g., no upper-left window), you may need to **open an R script.**
+-   To do this, in RStudio, click on File -\> New -\> R script in your computer's toolbar. This will open a blank document for text editing in the upper left of the RStudio window. We will return to this window in a moment.
+    -   You can alternatively click on the green + sign indicator in the top-left corner of the RStudio window, which should give you the option to create a new R script document.
 
--   To do this, in RStudio, click on File, New, and then R script. This will open a blank document for text editing in the upper left of the RStudio window. We will return to this window in a moment.
+Now you should have something that looks like this, similar to Figure 1.1. in QSS:
+
+![](images/rconsole2.png)
+
+-   The upper-left window has our .R script document that will contain code.
+-   The lower-left window is the console. This will show the output of the code we run. We will also be able to type directly in the console.
+-   The upper-right window shows the environment (and other tabs, such as the history of commands). When we load and store data in RStudio, we will see a summary of that in the environment.
+-   The lower-right window will enable us to view plots and search help files, among other things.
 
 ### **Using R as a Calculator**
 
@@ -119,7 +127,7 @@ Now that we have saved our R script, let's work inside of it. Remember, we are i
 -   Then you can start answering problems in the rest of the script.
 -   Think of the R script as where you write the final draft of your paper. In the Console (the bottom-left window), you can mess around and try different things, like you might when you are taking notes or outlining an essay. Then, write the final programming steps that lead you to your answer in the R script. For example, if I wanted to add 5 + 3, I might try different ways of typing it in the Console, and then when I found out `5 + 3` is the right approach, I would type that into my script.
 
-### **Executing Commands in your R script**
+### **Running Commands in your R script**
 
 The last thing we will note in this initial handout is how to execute commands in your R script.
 
@@ -572,7 +580,71 @@ This [site](https://rpubs.com/brandonkopp/RMarkdown) includes an introduction to
 
 -   See also [here](https://rmarkdown.rstudio.com/articles_intro.html) and [here](https://monashbioinformaticsplatform.github.io/2017-11-16-open-science-training/topics/rmarkdown.html)
 
-R Markdown has its own syntax, which includes functionality for writing mathematical equations. The pdf output option in R Markdown requires LaTex, described in the next section.
+R Markdown has its own syntax, which includes functionality for writing mathematical equations. The pdf output option in R Markdown requires LaTex, described in the next section. Below we work with just the html output.
+
+R Markdown documents can be "compiled" into html, pdf, or docx documents by clicking the `Knit` button on top of the upper-left window. Below is an example of what a compiled html file looks like.
+
+-   Note that the image has both written text and a gray chunk, within which there is some R code, as well as the output of the R code (e.g., the number 8 and the image of the histogram plot. ![](images/rmarkdownscreenshot.png){width="60%"}
+
+We say this is a "compiled" RMarkdown document because it differs from the raw version of the file, which is a .Rmd file format. Below is an example of what the raw .Rmd version looks like, compared to the compiled html version.
+
+![](images/rmarkdownraw.png){width="45%"} ![](images/rmarkdownscreenshot.png){width="40%"}
+
+***Getting started with RMarkdown***
+
+Just like with a regular R script, to work in R Markdown, you will open up RStudio.
+
+-   For additional support beyond the notes below, you can also follow the materials provided by RStudio for getting started with R Markdown https://rmarkdown.rstudio.com/lesson-1.html.
+
+The **first time** you will be working in R Markdown, you will want to install two packages: `rmarkdown` and `knitr`. You can do this in the Console window in RStudio (remember the lower-left window!).
+
+Type the following into the Console window and hit enter/return.
+
+```{r, eval=F}
+install.packages("rmarkdown")
+install.packages("knitr")
+```
+
+Once you have those installed, now, each time you want to create an R Markdown document, you will open up a .Rmd R Markdown file and get to work.
+
+1.  Go to File -\> New File -\> R Markdown in RStudio
+    -   Alternatively, you can click the green + symbol at the top left of your RStudio window
+2.  This should open up a window with several options, similar to the image below
+    -   Create an informative title and change the author name to match your own
+    -   For now, we will keep the file type as html. In the future, you can create pdf or .doc documents. However, these require additional programs installed on your computer, which we will not cover in the course.
+
+![](images/rmarkdownnewfile.png)
+
+3.  After you hit "OK" a new .Rmd script file will open in your top-left window with some template language and code chunks, similar to the image below. Alternatively, you can start from scratch by clicking "Create Empty Document" or open a template .Rmd file of your own saved on your computer.
+
+![](images/rmarkdowntemplate.png)
+
+4.  ***Save as .Rmd file.*** Save the file by going to "File -\> Save as" in RStudio
+
+-   Give the file an informative name like your LastnamePractice1.Rmd
+
+5.  ***Key Components.*** Now you are ready to work within the Rmd script file. We will point to four basic components of this file, and you can build your knowledge of RMarkdown from there.
+
+    1.  The top part bracketed by `---` on top and bottom is the YAML component. This tells RStudio the pertinent information about how to "compile" the Rmd file.
+        -   Most of the time you can leave this alone, but you can always edit the title, author, or date as you wish.
+    2.  The next component are the global options for the document. It is conveniently labeled "setup." By default what this is saying is that the compiled version will "echo" (i.e., display all code chunks and output) unless you specifically specify otherwise. For example, note that it says `include = FALSE` for the setup chunk. That setting means that this code chunk will "run" but it will not appear in the nicely compiled .html file.
+        -   Most of the time you will not need to edit those settings.
+    3.  The third component I want to bring attention to is the body text. The \# symbol in RMarkdown is used to indicate that you have a new section of the document. For example, in the compiled images at the beginning, this resulted in the text being larger and bolded when it said "Problem 2." In addition to just using a single #, using \## or \### can indicate subsections or subsubsections. Other than that symbol, you can generally write text just as you would in any word processing program, with some exceptions, such as how to make text bold or italicized.
+    4.  The final component I want to call attention to are the other main body code chunks. These are specific parts of the document where you want to create a mini R script. To create these, you can simply click the + C symbol toward the top of the top left window of RStudio and indicate you want an R chunk.
+
+    <center>![](images/rmarkdownnewchunk.png){width="20%"}</center>
+
+6.  ***Writing R Code.*** Within a code chunk, you can type R code just like you would in any R script, as explained in the previous section. However, in RMarkdown, you also have the option of running an entire code chunk at once by hitting the green triangle at the top-right of a given code chunk.
+
+![](images/codechunkexample.png){width="70%"}
+
+7.  ***Knitting the document.*** Once you have added a code chunk and/or some text, you are ready to compile or "Knit" the document. This is what generates the .html document.
+    -   To do so, click on the Knit button toward the top of the top-left window of Rstudio. After a few moments, this should open up a preview window displaying the compiled html file.
+    -   It will also save an actual .html file in your working directory (the same location on your computer where you have saved the .Rmd file)
+    -   Try to locate this compiled .html file on your computer and open it. For most computers, .html files will open in your default web browser, such as Google Chrome or Safari.
+    -   This step is a common place where errors are detected and generated. Sometimes the compiling process fails due to errors in the R code in your code chunks or an error in the Markdown syntax. If your document fails to knit, the next step is to try to troubleshoot the error messages the compiling process generates. The best way to reduce and more easily detect errors is to "knit as you go." Try to knit your document after each chunk of code you create.
+
+
 
 ### LaTex
 
