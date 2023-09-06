@@ -124,9 +124,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">MLE 2023</a> 
-        <div class="sidebar-tools-main">
-    <a href="./MLE-2023.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
-</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -179,19 +176,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#ols-practice-problems" id="toc-ols-practice-problems" class="nav-link" data-scroll-target="#ols-practice-problems"><span class="header-section-number">4.3.4</span> OLS Practice Problems</a></li>
   <li><a href="#code-for-solutions" id="toc-code-for-solutions" class="nav-link" data-scroll-target="#code-for-solutions"><span class="header-section-number">4.3.5</span> Code for solutions</a></li>
   </ul></li>
-  <li><a href="#uncertainty-and-regression" id="toc-uncertainty-and-regression" class="nav-link" data-scroll-target="#uncertainty-and-regression"><span class="header-section-number">4.4</span> Uncertainty and Regression</a>
+  <li><a href="#extra-practice-building-and-breaking-regression" id="toc-extra-practice-building-and-breaking-regression" class="nav-link" data-scroll-target="#extra-practice-building-and-breaking-regression"><span class="header-section-number">4.4</span> Extra practice building and breaking regression</a>
   <ul>
-  <li><a href="#variance-of-the-coefficients" id="toc-variance-of-the-coefficients" class="nav-link" data-scroll-target="#variance-of-the-coefficients"><span class="header-section-number">4.4.1</span> Variance of the Coefficients</a></li>
-  <li><a href="#hypothesis-testing" id="toc-hypothesis-testing" class="nav-link" data-scroll-target="#hypothesis-testing"><span class="header-section-number">4.4.2</span> Hypothesis Testing</a></li>
-  <li><a href="#goodness-of-fit" id="toc-goodness-of-fit" class="nav-link" data-scroll-target="#goodness-of-fit"><span class="header-section-number">4.4.3</span> Goodness of Fit</a></li>
+  <li><a href="#categorical-variables" id="toc-categorical-variables" class="nav-link" data-scroll-target="#categorical-variables"><span class="header-section-number">4.4.1</span> Categorical variables</a></li>
+  <li><a href="#formalizing-linear-dependence" id="toc-formalizing-linear-dependence" class="nav-link" data-scroll-target="#formalizing-linear-dependence"><span class="header-section-number">4.4.2</span> Formalizing Linear Dependence</a></li>
   </ul></li>
-  <li><a href="#generating-predictions-from-regression-models" id="toc-generating-predictions-from-regression-models" class="nav-link" data-scroll-target="#generating-predictions-from-regression-models"><span class="header-section-number">4.5</span> Generating predictions from regression models</a></li>
-  <li><a href="#wrapping-up-ols" id="toc-wrapping-up-ols" class="nav-link" data-scroll-target="#wrapping-up-ols"><span class="header-section-number">4.6</span> Wrapping up OLS</a>
+  <li><a href="#other-examples-of-breaking-the-no-perfect-collinearity-rule" id="toc-other-examples-of-breaking-the-no-perfect-collinearity-rule" class="nav-link" data-scroll-target="#other-examples-of-breaking-the-no-perfect-collinearity-rule"><span class="header-section-number">4.5</span> Other examples of breaking the no perfect collinearity rule</a></li>
+  <li><a href="#uncertainty-and-regression" id="toc-uncertainty-and-regression" class="nav-link" data-scroll-target="#uncertainty-and-regression"><span class="header-section-number">4.6</span> Uncertainty and Regression</a>
   <ul>
-  <li><a href="#practice-problems" id="toc-practice-problems" class="nav-link" data-scroll-target="#practice-problems"><span class="header-section-number">4.6.1</span> Practice Problems</a></li>
-  <li><a href="#practice-problem-code-for-solutions" id="toc-practice-problem-code-for-solutions" class="nav-link" data-scroll-target="#practice-problem-code-for-solutions"><span class="header-section-number">4.6.2</span> Practice Problem Code for Solutions</a></li>
+  <li><a href="#variance-of-the-coefficients" id="toc-variance-of-the-coefficients" class="nav-link" data-scroll-target="#variance-of-the-coefficients"><span class="header-section-number">4.6.1</span> Variance of the Coefficients</a></li>
+  <li><a href="#hypothesis-testing" id="toc-hypothesis-testing" class="nav-link" data-scroll-target="#hypothesis-testing"><span class="header-section-number">4.6.2</span> Hypothesis Testing</a></li>
+  <li><a href="#goodness-of-fit" id="toc-goodness-of-fit" class="nav-link" data-scroll-target="#goodness-of-fit"><span class="header-section-number">4.6.3</span> Goodness of Fit</a></li>
   </ul></li>
-  <li><a href="#week-2-example" id="toc-week-2-example" class="nav-link" data-scroll-target="#week-2-example"><span class="header-section-number">4.7</span> Week 2 Example</a></li>
+  <li><a href="#generating-predictions-from-regression-models" id="toc-generating-predictions-from-regression-models" class="nav-link" data-scroll-target="#generating-predictions-from-regression-models"><span class="header-section-number">4.7</span> Generating predictions from regression models</a></li>
+  <li><a href="#wrapping-up-ols" id="toc-wrapping-up-ols" class="nav-link" data-scroll-target="#wrapping-up-ols"><span class="header-section-number">4.8</span> Wrapping up OLS</a>
+  <ul>
+  <li><a href="#practice-problems" id="toc-practice-problems" class="nav-link" data-scroll-target="#practice-problems"><span class="header-section-number">4.8.1</span> Practice Problems</a></li>
+  <li><a href="#practice-problem-code-for-solutions" id="toc-practice-problem-code-for-solutions" class="nav-link" data-scroll-target="#practice-problem-code-for-solutions"><span class="header-section-number">4.8.2</span> Practice Problem Code for Solutions</a></li>
+  </ul></li>
+  <li><a href="#week-2-example" id="toc-week-2-example" class="nav-link" data-scroll-target="#week-2-example"><span class="header-section-number">4.9</span> Week 2 Example</a></li>
   </ul>
 </nav>
 </nav>
@@ -633,18 +636,236 @@ F-statistic: 34.61 on 2 and 64 DF,  p-value: 6.477e-11</code></pre>
 </div>
 </section>
 </section>
-<section id="uncertainty-and-regression" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="uncertainty-and-regression"><span class="header-section-number">4.4</span> Uncertainty and Regression</h2>
+<section id="extra-practice-building-and-breaking-regression" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="extra-practice-building-and-breaking-regression"><span class="header-section-number">4.4</span> Extra practice building and breaking regression</h2>
+<p>Below is additional practice with regression and R, showing how to work with different variables and diagnosing errors.</p>
+<p><strong><em>What is the association between race and income?</em></strong></p>
+<p>Let’s say we want to explore the relationship between race and income, where the people in our sample take on the values white, Black, Asian, and Hispanic for race. We can write this as:</p>
+<p><span class="math inline">\(Income_i = \alpha + \beta*race_i + \epsilon\)</span></p>
+<p>However, race is not a numeric variable. This complicates our regression equation because what exactly is a 1-unit change in race? Sure, we could assign numeric values to each racial category in our data (e.g., white = 1, Black = 2, Hispanic = 3, Asian = 4), but we would have no reason to assume that the change in income would be linear as you change in race by units. Why should the difference in income between white and Black individuals be estimated as the same difference between Black and Hispanic individuals?</p>
+<p>In a linear regression, when you have categorical independent variables, what should you typically do?</p>
+<section id="categorical-variables" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="categorical-variables"><span class="header-section-number">4.4.1</span> Categorical variables</h3>
+<p>Let’s build some data</p>
+<p><em>Build a matrix with dummy variables for each race</em></p>
+<p>Run the code below and see what is in X.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Dummy variable example</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>resprace <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"white"</span>, <span class="st">"white"</span>, <span class="st">"asian"</span>, <span class="st">"black"</span>, <span class="st">"hispanic"</span>,</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>              <span class="st">"hispanic"</span>, <span class="st">"hispanic"</span>, <span class="st">"asian"</span>, <span class="st">"white"</span>, <span class="st">"black"</span>, </span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>              <span class="st">"black"</span>, <span class="st">"black"</span>, <span class="st">"asian"</span>, <span class="st">"asian"</span>, <span class="st">"white"</span>, <span class="st">"white"</span>)</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="do">## "Dummy variables"</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>white <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(resprace))</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>white[resprace <span class="sc">==</span> <span class="st">"white"</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>asian <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(resprace))</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>asian[resprace <span class="sc">==</span> <span class="st">"asian"</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>black <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(resprace))</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>black[resprace <span class="sc">==</span> <span class="st">"black"</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>hispanic <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(resprace))</span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>hispanic[resprace <span class="sc">==</span> <span class="st">"hispanic"</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Matrix</span></span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(white, asian, black, hispanic)</span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a>X</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      white asian black hispanic
+ [1,]     1     0     0        0
+ [2,]     1     0     0        0
+ [3,]     0     1     0        0
+ [4,]     0     0     1        0
+ [5,]     0     0     0        1
+ [6,]     0     0     0        1
+ [7,]     0     0     0        1
+ [8,]     0     1     0        0
+ [9,]     1     0     0        0
+[10,]     0     0     1        0
+[11,]     0     0     1        0
+[12,]     0     0     1        0
+[13,]     0     1     0        0
+[14,]     0     1     0        0
+[15,]     1     0     0        0
+[16,]     1     0     0        0</code></pre>
+</div>
+</div>
+<p><em>Let’s build toward a regression model</em></p>
+<p>Let’s create a <code>Y</code> variable representing our outcome for income. Let’s also add an intercept to our <code>X</code> matrix. Take a look into our new X.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Dependent variable</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">9</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">13</span>, <span class="dv">12</span>, <span class="dv">11</span>, <span class="dv">8</span>, <span class="dv">7</span>, <span class="dv">4</span>, <span class="dv">13</span>, <span class="dv">8</span>, <span class="dv">7</span>))</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><em>Let’s now apply the formula <span class="math inline">\((X'X)^{-1}X'Y\)</span> to estimate our coefficients.</em></p>
+<p>Assign the output to an object called <code>betahat</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>betahat <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> X) <span class="sc">%*%</span> <span class="fu">t</span>(X) <span class="sc">%*%</span> Y</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>betahat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="formalizing-linear-dependence" class="level3" data-number="4.4.2">
+<h3 data-number="4.4.2" class="anchored" data-anchor-id="formalizing-linear-dependence"><span class="header-section-number">4.4.2</span> Formalizing Linear Dependence</h3>
+<p>Why were our dummy variables linear dependent?</p>
+<p>If we inspect <code>X</code> we can see that taking each column <span class="math inline">\(\mathbf{x_1} - \mathbf{x_2} - \mathbf{x_3}-\mathbf{x_4}=0\)</span>. There is a linear relationship between the variables.</p>
+<p>Formally, a set of vectors (e.g.,<span class="math inline">\(\mathbf{x_1}, \mathbf{x_2}, ...\mathbf{x_k}\)</span>) is linearly independent if the equation <span class="math inline">\(\mathbf{x_1}*a_1 + \mathbf{x_2}*a_2 +... + \mathbf{x_k}*a_k= 0\)</span> only in the trivial case where <span class="math inline">\(a_1\)</span> and <span class="math inline">\(a_2\)</span> through <span class="math inline">\(a_k\)</span> are 0. A set of vectors has a linearly dependent relation if there is a solution <span class="math inline">\(\mathbf{x_1}*a_1 + \mathbf{x_2}*a_2 +... + \mathbf{x_k}*a_k = 0\)</span> where not all <span class="math inline">\(a_1, a_2\)</span> through <span class="math inline">\(a_k\)</span> are 0.</p>
+<p>For OLS, we must assume no perfect collinearity.</p>
+<ul>
+<li>No independent variable is constant</li>
+<li>No exactly linear relationships among the independent variables</li>
+<li>The rank of X is <span class="math inline">\(k\)</span> where the rank of a matrix is the maximum number of linearly independent columns.</li>
+</ul>
+<p>As discussed in the course notes, a square matrix is only invertible if its columns are linearly independent. In OLS, in order to estimate unique solutions for <span class="math inline">\(\hat \beta\)</span>, we need to invert <span class="math inline">\((X'X)^{-1}\)</span>. When we have perfect collinearity, we cannot do this.</p>
+<p><em>Note the linear dependence in X</em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Matrix</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>X[, <span class="dv">1</span>] <span class="sc">-</span> X[, <span class="dv">2</span>] <span class="sc">-</span> X[, <span class="dv">3</span>] <span class="sc">-</span> X[, <span class="dv">4</span>] <span class="sc">-</span> X[,<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</code></pre>
+</div>
+</div>
+<p><em>Try to take <span class="math inline">\((X'X)^{-1}\)</span></em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>How do we correct this?</p>
+<p>To address this, we are going to drop one of the categorical variables when we run the regression. Consequently, our coefficients will now be interpreted as differences between this reference category (the category left out, e.g., white) and the particular group (e.g., white vs.&nbsp;Asian or white vs.&nbsp;Black or white vs.&nbsp;Hispanic).</p>
+<p><em>Redefine <code>X</code> removing the white column, and calculate <span class="math inline">\((X'X)^{-1}X'Y\)</span></em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, asian, black, hispanic)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>betahat <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> X) <span class="sc">%*%</span> <span class="fu">t</span>(X) <span class="sc">%*%</span> Y</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>betahat </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              [,1]
+          9.600000
+asian     0.150000
+black    -1.100000
+hispanic -1.933333</code></pre>
+</div>
+</div>
+<p><em>Check this with the <code>lm()</code> function</em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(Y <span class="sc">~</span> asian <span class="sc">+</span> black <span class="sc">+</span> hispanic))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ asian + black + hispanic)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-5.7500 -0.9375 -0.5000  1.6500  3.2500 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)    9.600      1.181   8.132 3.18e-06 ***
+asian          0.150      1.771   0.085    0.934    
+black         -1.100      1.771  -0.621    0.546    
+hispanic      -1.933      1.928  -1.003    0.336    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.64 on 12 degrees of freedom
+Multiple R-squared:  0.1105,    Adjusted R-squared:  -0.1119 
+F-statistic: 0.4967 on 3 and 12 DF,  p-value: 0.6914</code></pre>
+</div>
+</div>
+<p>In R and many other statistical softwares, the regression function will forcibly drop one of your variables if it encounters this type of linear dependence. See below when we include all four race dummies in the model.</p>
+<p><em>Check what happens with the <code>lm()</code> function</em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(Y <span class="sc">~</span> white <span class="sc">+</span> asian <span class="sc">+</span> black <span class="sc">+</span> hispanic))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ white + asian + black + hispanic)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-5.7500 -0.9375 -0.5000  1.6500  3.2500 
+
+Coefficients: (1 not defined because of singularities)
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   7.6667     1.5240   5.031 0.000294 ***
+white         1.9333     1.9278   1.003 0.335711    
+asian         2.0833     2.0161   1.033 0.321820    
+black         0.8333     2.0161   0.413 0.686650    
+hispanic          NA         NA      NA       NA    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.64 on 12 degrees of freedom
+Multiple R-squared:  0.1105,    Adjusted R-squared:  -0.1119 
+F-statistic: 0.4967 on 3 and 12 DF,  p-value: 0.6914</code></pre>
+</div>
+</div>
+<p>An alternative way to enter categorical variables in a regression is to let the function create the dummy variables for you using <code>factor(var, levels = )</code> to make sure R knows it is a factor variables.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>resprace <span class="ot">&lt;-</span> <span class="fu">factor</span>(resprace, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"white"</span>, <span class="st">"asian"</span>, <span class="st">"black"</span>, <span class="st">"hispanic"</span>))</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(Y <span class="sc">~</span> resprace))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ resprace)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-5.7500 -0.9375 -0.5000  1.6500  3.2500 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)         9.600      1.181   8.132 3.18e-06 ***
+respraceasian       0.150      1.771   0.085    0.934    
+respraceblack      -1.100      1.771  -0.621    0.546    
+respracehispanic   -1.933      1.928  -1.003    0.336    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.64 on 12 degrees of freedom
+Multiple R-squared:  0.1105,    Adjusted R-squared:  -0.1119 
+F-statistic: 0.4967 on 3 and 12 DF,  p-value: 0.6914</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="other-examples-of-breaking-the-no-perfect-collinearity-rule" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="other-examples-of-breaking-the-no-perfect-collinearity-rule"><span class="header-section-number">4.5</span> Other examples of breaking the no perfect collinearity rule</h2>
+<p>Recall, for OLS, we must assume no perfect collinearity.</p>
+<ul>
+<li>No independent variable is constant</li>
+<li>No exactly linear relationships among the independent variables</li>
+<li>The rank of X is <span class="math inline">\(k\)</span> where the rank of a matrix is the maximum number of linearly independent columns.</li>
+</ul>
+<p>Let’s say we wanted to control for age, but all of our sample was 18 years old. Let’s try to add this to the <code>X</code> matrix.</p>
+<p><em>Redefine <code>X</code> adding age column, and calculate <span class="math inline">\((X'X)^{-1}X'Y\)</span></em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">18</span>, <span class="fu">length</span>(resprace))</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, asian, black, hispanic, age)</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>betahat <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> X) <span class="sc">%*%</span> <span class="fu">t</span>(X) <span class="sc">%*%</span> Y</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>betahat </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s visit the Florida example. Let’s say we had two <code>Perot96</code> variables– one the raw votes and one where votes were multiplied by 1000 to adjust the order of magnitude.</p>
+<p><em>Regress Buchanan’s votes on Perot and Perot adjusted values</em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>florida <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/ktmccabe/teachingdata/main/florida.csv"</span>)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>florida<span class="sc">$</span>perotadjusted <span class="ot">&lt;-</span> florida<span class="sc">$</span>Perot96 <span class="sc">*</span> <span class="dv">1000</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> florida<span class="sc">$</span>Buchanan00</span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, florida<span class="sc">$</span>Perot96, florida<span class="sc">$</span>perotadjusted)</span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>betahat <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> X) <span class="sc">%*%</span> <span class="fu">t</span>(X) <span class="sc">%*%</span> Y</span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>betahat </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="uncertainty-and-regression" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="uncertainty-and-regression"><span class="header-section-number">4.6</span> Uncertainty and Regression</h2>
 <p>We have now gone through the process of minimizing the sum of squared errors (<span class="math inline">\(\mathbf{e'e}\)</span>) and deriving estimates for the OLS coefficients <span class="math inline">\(\hat \beta = (X'X)^{-1}X'Y\)</span>. In this section, we will discuss how to generate estimates of the uncertainty around these estimates.</p>
 <p>Where we are going:</p>
 <ul>
 <li>In the last section, we visited an example related to the 2000 election in Florida. We regressed county returns for Buchanan in 2000 (Y) on county returns for Perot in 1996 (X).</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Load Data</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>florida <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/ktmccabe/teachingdata/main/florida.csv"</span>)</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>fit<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(Buchanan00 <span class="sc">~</span> Perot96, <span class="at">data =</span> florida)</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit<span class="fl">.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Load Data</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>florida <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/ktmccabe/teachingdata/main/florida.csv"</span>)</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>fit<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(Buchanan00 <span class="sc">~</span> Perot96, <span class="at">data =</span> florida)</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit<span class="fl">.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -667,8 +888,8 @@ F-statistic: 68.48 on 1 and 65 DF,  p-value: 9.474e-12</code></pre>
 </div>
 </div>
 <p>The summary output of the model shows many different quantities in addition to the coefficient estimates. In particular, in the second column of the summary, we see the standard errors of the coefficients. Like many statistical software programs, the <code>lm()</code> function neatly places these right next to the coefficients. We will now discuss how we get to these values.</p>
-<section id="variance-of-the-coefficients" class="level3" data-number="4.4.1">
-<h3 data-number="4.4.1" class="anchored" data-anchor-id="variance-of-the-coefficients"><span class="header-section-number">4.4.1</span> Variance of the Coefficients</h3>
+<section id="variance-of-the-coefficients" class="level3" data-number="4.6.1">
+<h3 data-number="4.6.1" class="anchored" data-anchor-id="variance-of-the-coefficients"><span class="header-section-number">4.6.1</span> Variance of the Coefficients</h3>
 <p>The standard error is the square root of the variance, representing the typical deviation we would expect to see between our estimates <span class="math inline">\(\hat \beta\)</span> of the parameter <span class="math inline">\(\beta\)</span> across repeated samples. So to get to the standard error, we just need to get to an estimate of the variance.</p>
 <p>Let’s take the journey. First the math. As should start becoming familiar, we have our initial regression equation, which describes the relationship between the independent variables and dependent variables.</p>
 <ul>
@@ -720,7 +941,7 @@ F-statistic: 68.48 on 1 and 65 DF,  p-value: 9.474e-12</code></pre>
 <p>That means our <strong>estimate</strong> of the variance of the coefficients is found within: <span class="math inline">\(\hat \sigma^2(X^T X)^{-1}\)</span></p>
 <p>Again, this is a <span class="math inline">\(k \times k\)</span> matrix and is often called the variance covariance matrix. We can extract this quantity from our linear models in R using <code>vcov()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vcov</span>(fit<span class="fl">.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vcov</span>(fit<span class="fl">.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             (Intercept)       Perot96
 (Intercept) 2475.9885768 -1.360074e-01
@@ -729,13 +950,13 @@ Perot96       -0.1360074  1.883619e-05</code></pre>
 </div>
 <p>This is the same that we would get if manually we took the residuals and multiplied it by our <span class="math inline">\(X\)</span> matrix according to the formula above:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, florida<span class="sc">$</span>Perot96)</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">residuals</span>(fit<span class="fl">.1</span>))</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>sigmahat <span class="ot">&lt;-</span> ((<span class="fu">t</span>(e) <span class="sc">%*%</span> e) <span class="sc">/</span> (<span class="fu">nrow</span>(florida) <span class="sc">-</span><span class="dv">2</span>)) </span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="do">## tell r to stop treating sigmahat as a matrix</span></span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>sigmahat <span class="ot">&lt;-</span><span class="fu">as.numeric</span>(sigmahat)</span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>XtX <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span>X)</span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>sigmahat <span class="sc">*</span> XtX</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, florida<span class="sc">$</span>Perot96)</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">residuals</span>(fit<span class="fl">.1</span>))</span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>sigmahat <span class="ot">&lt;-</span> ((<span class="fu">t</span>(e) <span class="sc">%*%</span> e) <span class="sc">/</span> (<span class="fu">nrow</span>(florida) <span class="sc">-</span><span class="dv">2</span>)) </span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="do">## tell r to stop treating sigmahat as a matrix</span></span>
+<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a>sigmahat <span class="ot">&lt;-</span><span class="fu">as.numeric</span>(sigmahat)</span>
+<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a>XtX <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span>X)</span>
+<span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a>sigmahat <span class="sc">*</span> XtX</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             [,1]          [,2]
 [1,] 2475.9885768 -1.360074e-01
@@ -745,12 +966,12 @@ Perot96       -0.1360074  1.883619e-05</code></pre>
 <p>The terms on the diagonal represent the variance of a particular coefficient in the model.The standard error of a particular coefficient <span class="math inline">\(k\)</span> is: s.e.(<span class="math inline">\(\hat{\beta_k}) = \sqrt{\widehat{\sigma}^2 (X'X)^{-1}}_{kk}\)</span>. The off-diagonal components represent the covariances between the coefficients.</p>
 <p>Recall that the standard error is just the square root of the variance. So, to get the nice standard errors we saw in the summary output, we can take the square root of the quantities on the diagonal of this matrix.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">diag</span>(<span class="fu">vcov</span>(fit<span class="fl">.1</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">diag</span>(<span class="fu">vcov</span>(fit<span class="fl">.1</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> (Intercept)      Perot96 
 49.759306434  0.004340068 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit<span class="fl">.1</span>)<span class="sc">$</span>coefficients[,<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit<span class="fl">.1</span>)<span class="sc">$</span>coefficients[,<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> (Intercept)      Perot96 
 49.759306434  0.004340068 </code></pre>
@@ -778,8 +999,8 @@ Perot96       -0.1360074  1.883619e-05</code></pre>
 \end{align*}\]</span>
 <p>Note: Along the way, in writing <span class="math inline">\(\mathbb{E}(\hat \beta) = \beta\)</span>, we have implicitly assumed that <span class="math inline">\(\hat \beta\)</span> is an “unbiased” estimator of <span class="math inline">\(\beta\)</span>. This is not free. It depends on an assumption that the error term in the regression <span class="math inline">\(\epsilon\)</span> is independent of our independent variables. This can be violated in some situations, such as when we have omitted variable bias, which is discussed at the end of our OLS section.</p>
 </section>
-<section id="hypothesis-testing" class="level3" data-number="4.4.2">
-<h3 data-number="4.4.2" class="anchored" data-anchor-id="hypothesis-testing"><span class="header-section-number">4.4.2</span> Hypothesis Testing</h3>
+<section id="hypothesis-testing" class="level3" data-number="4.6.2">
+<h3 data-number="4.6.2" class="anchored" data-anchor-id="hypothesis-testing"><span class="header-section-number">4.6.2</span> Hypothesis Testing</h3>
 <p>Most of the time in social science, we run a regression because we have some hypothesis about how a change in our independent variable affects the change in our outcome variable.</p>
 <p>In OLS, we can perform a hypothesis test for each independent variable in our data. The structure of the hypothesis test is:</p>
 <ul>
@@ -801,26 +1022,26 @@ t_{\hat \beta_k} &amp;= \frac{\hat \beta_k}{s.e.(\hat \beta_k)}
 <p>However, to get a specific quantity, we need to calculate the p-value, which depends on the t-statistic and the degrees of freedom in the model. The degrees of freedom in a regression model are <span class="math inline">\(N-k\)</span>, the number of observations in the model minus the number of independent variables plus the intercept.</p>
 <p>In R, we can calculate p-values using the <code>pt()</code> function. By default, most people use two-sided hypothesis tests for regression. So to do that, we are going to find the area on each side of the t values, or alternatively, multiply the area to the right of our positive t-value by 2.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Let's say t was 2.05 and </span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="do">## And there were 32 observations and 3 variables in the regression plus an intercept</span></span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fl">2.05</span></span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>df.t <span class="ot">&lt;-</span> <span class="dv">32</span> <span class="sc">-</span><span class="dv">4</span></span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>p.value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="fu">pt</span>(<span class="fu">abs</span>(t), <span class="at">df=</span>df.t, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>))</span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Let's say t was 2.05 and </span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="do">## And there were 32 observations and 3 variables in the regression plus an intercept</span></span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fl">2.05</span></span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>df.t <span class="ot">&lt;-</span> <span class="dv">32</span> <span class="sc">-</span><span class="dv">4</span></span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>p.value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="fu">pt</span>(<span class="fu">abs</span>(t), <span class="at">df=</span>df.t, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.04983394</code></pre>
 </div>
 </div>
 <p>Let’s do this for the florida example. First, we can find t by dividing our coefficients by the standard errors.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit<span class="fl">.1</span>) <span class="sc">/</span> (<span class="fu">sqrt</span>(<span class="fu">diag</span>(<span class="fu">vcov</span>(fit<span class="fl">.1</span>))))</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>t </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit<span class="fl">.1</span>) <span class="sc">/</span> (<span class="fu">sqrt</span>(<span class="fu">diag</span>(<span class="fu">vcov</span>(fit<span class="fl">.1</span>))))</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>t </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept)     Perot96 
  0.02704523  8.27522567 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Compare with output</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit<span class="fl">.1</span>)<span class="sc">$</span>coefficients[, <span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Compare with output</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit<span class="fl">.1</span>)<span class="sc">$</span>coefficients[, <span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept)     Perot96 
  0.02704523  8.27522567 </code></pre>
@@ -828,15 +1049,15 @@ t_{\hat \beta_k} &amp;= \frac{\hat \beta_k}{s.e.(\hat \beta_k)}
 </div>
 <p>We can then find the p-values.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit<span class="fl">.1</span>) <span class="sc">/</span> (<span class="fu">sqrt</span>(<span class="fu">diag</span>(<span class="fu">vcov</span>(fit<span class="fl">.1</span>))))</span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>df.t <span class="ot">&lt;-</span> fit<span class="fl">.1</span><span class="sc">$</span>df.residual</span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>p.value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="fu">pt</span>(<span class="fu">abs</span>(t), <span class="at">df=</span>df.t, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>))</span>
-<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit<span class="fl">.1</span>) <span class="sc">/</span> (<span class="fu">sqrt</span>(<span class="fu">diag</span>(<span class="fu">vcov</span>(fit<span class="fl">.1</span>))))</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>df.t <span class="ot">&lt;-</span> fit<span class="fl">.1</span><span class="sc">$</span>df.residual</span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>p.value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="fu">pt</span>(<span class="fu">abs</span>(t), <span class="at">df=</span>df.t, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> (Intercept)      Perot96 
 9.785065e-01 9.473505e-12 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit<span class="fl">.1</span>)<span class="sc">$</span>coefficients[, <span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit<span class="fl">.1</span>)<span class="sc">$</span>coefficients[, <span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> (Intercept)      Perot96 
 9.785065e-01 9.473505e-12 </code></pre>
@@ -849,32 +1070,32 @@ t_{\hat \beta_k} &amp;= \frac{\hat \beta_k}{s.e.(\hat \beta_k)}
 <p><span class="math inline">\(\widehat{\beta}_k\)</span> Confidence intervals: <span class="math inline">\(\widehat{\beta}_k - t_{crit.value} \times s.e._{\widehat{\beta}_k}, \widehat{\beta}_k + t_{crit.value} \times s.e_{\widehat{\beta}_k}\)</span></p>
 <p>In R, we can use <code>qt()</code> to get the specific critical value associated with a 95% confidence interval. This will be around 2, but fluctuates depending on the degrees of freedom in your model (which are function of your sample size and how many variables you have in the model.) R also has a shortcut <code>confint()</code> function to extract the coefficients from the model. Below we do this for the <code>Perot96</code> coefficient.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Critical values from t distribution at .95 level</span></span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(.<span class="dv">975</span>, <span class="at">df =</span> fit<span class="fl">.1</span><span class="sc">$</span>df.residual) <span class="co"># n- k degrees of freedom</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Critical values from t distribution at .95 level</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(.<span class="dv">975</span>, <span class="at">df =</span> fit<span class="fl">.1</span><span class="sc">$</span>df.residual) <span class="co"># n- k degrees of freedom</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.997138</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Shortcut</span></span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(fit<span class="fl">.1</span>)[<span class="dv">2</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Shortcut</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(fit<span class="fl">.1</span>)[<span class="dv">2</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     2.5 %     97.5 % 
 0.02724733 0.04458275 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="do">## By hand</span></span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit<span class="fl">.1</span>)[<span class="dv">2</span>] <span class="sc">-</span> <span class="fu">qt</span>(.<span class="dv">975</span>, <span class="at">df =</span> fit<span class="fl">.1</span><span class="sc">$</span>df.residual)<span class="sc">*</span><span class="fu">sqrt</span>(<span class="fu">diag</span>(<span class="fu">vcov</span>(fit<span class="fl">.1</span>)))[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="do">## By hand</span></span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit<span class="fl">.1</span>)[<span class="dv">2</span>] <span class="sc">-</span> <span class="fu">qt</span>(.<span class="dv">975</span>, <span class="at">df =</span> fit<span class="fl">.1</span><span class="sc">$</span>df.residual)<span class="sc">*</span><span class="fu">sqrt</span>(<span class="fu">diag</span>(<span class="fu">vcov</span>(fit<span class="fl">.1</span>)))[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Perot96 
 0.02724733 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit<span class="fl">.1</span>)[<span class="dv">2</span>] <span class="sc">+</span> <span class="fu">qt</span>(.<span class="dv">975</span>, <span class="at">df =</span> fit<span class="fl">.1</span><span class="sc">$</span>df.residual)<span class="sc">*</span><span class="fu">sqrt</span>(<span class="fu">diag</span>(<span class="fu">vcov</span>(fit<span class="fl">.1</span>)))[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit<span class="fl">.1</span>)[<span class="dv">2</span>] <span class="sc">+</span> <span class="fu">qt</span>(.<span class="dv">975</span>, <span class="at">df =</span> fit<span class="fl">.1</span><span class="sc">$</span>df.residual)<span class="sc">*</span><span class="fu">sqrt</span>(<span class="fu">diag</span>(<span class="fu">vcov</span>(fit<span class="fl">.1</span>)))[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Perot96 
 0.04458275 </code></pre>
 </div>
 </div>
 </section>
-<section id="goodness-of-fit" class="level3" data-number="4.4.3">
-<h3 data-number="4.4.3" class="anchored" data-anchor-id="goodness-of-fit"><span class="header-section-number">4.4.3</span> Goodness of Fit</h3>
+<section id="goodness-of-fit" class="level3" data-number="4.6.3">
+<h3 data-number="4.6.3" class="anchored" data-anchor-id="goodness-of-fit"><span class="header-section-number">4.6.3</span> Goodness of Fit</h3>
 <p>A last noteworthy component to the standard regression output is the goodness of fit statistics. For this class, we can put less attention on these, though there will be some analogues when we get into likelihood.</p>
 <p>These are measures of how much of the total variation in our outcome measure can be explained by our model, as well as how far off are our estimates from the truth.</p>
 <p>For the first two measures R-squared and Adjusted R-squared, we draw on three quantities:</p>
@@ -920,8 +1141,8 @@ t_{\hat \beta_k} &amp;= \frac{\hat \beta_k}{s.e.(\hat \beta_k)}
 <p>Note: This test is different from our separate hypothesis tests that a <span class="math inline">\(k\)</span> regression slope is 0. For that, we use the t-tests discussed above.</p>
 </section>
 </section>
-<section id="generating-predictions-from-regression-models" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="generating-predictions-from-regression-models"><span class="header-section-number">4.5</span> Generating predictions from regression models</h2>
+<section id="generating-predictions-from-regression-models" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="generating-predictions-from-regression-models"><span class="header-section-number">4.7</span> Generating predictions from regression models</h2>
 <p>The regression coefficients tell us how much <span class="math inline">\(Y\)</span> is expected to change for a one-unit change in <span class="math inline">\(x_k\)</span>. It does not immediately tell us the values we estimate our outcome (<span class="math inline">\(\hat Y\)</span>) to take conditional on particular values of <span class="math inline">\(x_k\)</span>. While often knowing our independent variables have a significant effect on the outcome and the size of the coefficient is sufficient for testing our hypotheses, it can be helpful for interpretation’s sake, to see the estimated values for the outcome. This is going to be particularly important once we get into models like logistic regression, where the coefficients won’t be immediately interpretable.</p>
 <p>Recall that our equation for estimating values of our outcomes is:</p>
 <ul>
@@ -930,8 +1151,8 @@ t_{\hat \beta_k} &amp;= \frac{\hat \beta_k}{s.e.(\hat \beta_k)}
 </ul>
 <p>The estimated values of our regression <span class="math inline">\(\hat Y\)</span> are often called the “fitted values.” In R, you can identify the estimated values for each observation using the <code>fitted()</code> command.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Y hat for the first observation in the data</span></span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fitted</span>(fit<span class="fl">.1</span>)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Y hat for the first observation in the data</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fitted</span>(fit<span class="fl">.1</span>)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      1 
 291.252 </code></pre>
@@ -939,8 +1160,8 @@ t_{\hat \beta_k} &amp;= \frac{\hat \beta_k}{s.e.(\hat \beta_k)}
 </div>
 <p>Again, this is just the multiplication of the matrix <span class="math inline">\(X\)</span> and <span class="math inline">\(\hat \beta\)</span>. If we have already run a regression model in R, one shortcut for getting the <span class="math inline">\(X\)</span> matrix, is to use the <code>model.matrix</code> command. We can get <span class="math inline">\(\hat \beta\)</span> using the <code>coef()</code> command.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(fit<span class="fl">.1</span>)</span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(X) <span class="co"># head() shows about the first six values of an object</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(fit<span class="fl">.1</span>)</span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(X) <span class="co"># head() shows about the first six values of an object</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  (Intercept) Perot96
 1           1    8072
@@ -950,12 +1171,12 @@ t_{\hat \beta_k} &amp;= \frac{\hat \beta_k}{s.e.(\hat \beta_k)}
 5           1   25249
 6           1   38964</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>betahat <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit<span class="fl">.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>betahat <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit<span class="fl">.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Our fitted values are then just</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>yhat <span class="ot">&lt;-</span> X <span class="sc">%*%</span> betahat</span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(yhat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>yhat <span class="ot">&lt;-</span> X <span class="sc">%*%</span> betahat</span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(yhat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        [,1]
 1  291.25196
@@ -968,15 +1189,15 @@ t_{\hat \beta_k} &amp;= \frac{\hat \beta_k}{s.e.(\hat \beta_k)}
 </div>
 <p>If I want to generate an estimate for any particular observation, I could also just extract its specific value for <code>Perot96</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>florida<span class="sc">$</span>Perot96[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>florida<span class="sc">$</span>Perot96[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8072</code></pre>
 </div>
 </div>
 <p>Let’s estimate the Buchanan 2000 votes for the first county in the data with Perot 96 votes of 8072. We can write it out as <span class="math inline">\(\hat Buchanan00_1 =\hat \alpha + \hat \beta*Perot96_1\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>buch00hat <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit<span class="fl">.1</span>)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(fit<span class="fl">.1</span>)[<span class="dv">2</span>]<span class="sc">*</span>florida<span class="sc">$</span>Perot96[<span class="dv">1</span>]</span>
-<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>buch00hat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>buch00hat <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit<span class="fl">.1</span>)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(fit<span class="fl">.1</span>)[<span class="dv">2</span>]<span class="sc">*</span>florida<span class="sc">$</span>Perot96[<span class="dv">1</span>]</span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>buch00hat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept) 
     291.252 </code></pre>
@@ -986,7 +1207,7 @@ t_{\hat \beta_k} &amp;= \frac{\hat \beta_k}{s.e.(\hat \beta_k)}
 <p>One function that is useful for this (as a shortcut) is the <code>predict(fit, newdata=newdataframe)</code> function in R. It allows you to enter in “newdata”– meaning values of the <span class="math inline">\(X\)</span> variables for which you want to generate estimates of <span class="math inline">\(Y\)</span> based on the coefficient estimates of your regression model.</p>
 <p>For example, let’s repeat the calculation from above for <code>Perot96 = 8072</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fit<span class="fl">.1</span>, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">Perot96 =</span> <span class="dv">8072</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fit<span class="fl">.1</span>, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">Perot96 =</span> <span class="dv">8072</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      1 
 291.252 </code></pre>
@@ -994,7 +1215,7 @@ t_{\hat \beta_k} &amp;= \frac{\hat \beta_k}{s.e.(\hat \beta_k)}
 </div>
 <p>We can also generate confidence intervals around these estimates by adding <code>interval = "confidence"</code> in the command.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fit<span class="fl">.1</span>, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">Perot96 =</span> <span class="dv">8072</span>), <span class="at">interval=</span><span class="st">"confidence"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fit<span class="fl">.1</span>, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">Perot96 =</span> <span class="dv">8072</span>), <span class="at">interval=</span><span class="st">"confidence"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      fit      lwr      upr
 1 291.252 213.7075 368.7964</code></pre>
@@ -1002,7 +1223,7 @@ t_{\hat \beta_k} &amp;= \frac{\hat \beta_k}{s.e.(\hat \beta_k)}
 </div>
 <p>We can also simultaneously generate multiple predictions by supplying a vector of values in the <code>predict()</code> command. For example, let’s see the estimated Buchanan votes for when the Perot 1996 votes took values of 1000 to 10,000 by intervals of 1,000.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fit<span class="fl">.1</span>, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">Perot96 =</span> <span class="fu">c</span>(<span class="dv">1000</span>, <span class="dv">2000</span>, <span class="dv">3000</span>, <span class="dv">4000</span>, <span class="dv">5000</span>, <span class="dv">6000</span>, <span class="dv">7000</span>, <span class="dv">8000</span>, <span class="dv">9000</span>, <span class="dv">10000</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fit<span class="fl">.1</span>, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">Perot96 =</span> <span class="fu">c</span>(<span class="dv">1000</span>, <span class="dv">2000</span>, <span class="dv">3000</span>, <span class="dv">4000</span>, <span class="dv">5000</span>, <span class="dv">6000</span>, <span class="dv">7000</span>, <span class="dv">8000</span>, <span class="dv">9000</span>, <span class="dv">10000</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        1         2         3         4         5         6         7         8 
  37.26079  73.17583 109.09087 145.00591 180.92095 216.83599 252.75104 288.66608 
@@ -1012,13 +1233,13 @@ t_{\hat \beta_k} &amp;= \frac{\hat \beta_k}{s.e.(\hat \beta_k)}
 </div>
 <p>The important thing to note about the <code>predict()</code> command is that if you have multiple independent variables, you have to specify the values you want each of them to take when generating the estimated values of y.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>fit<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(Buchanan00 <span class="sc">~</span> Perot96 <span class="sc">+</span> Clinton96, <span class="at">data =</span> florida)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>fit<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(Buchanan00 <span class="sc">~</span> Perot96 <span class="sc">+</span> Clinton96, <span class="at">data =</span> florida)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>For example, let’s build a second model with <code>Clinton96</code> as an additional predictor. In order to generate the same prediction for different values of Perot 1996 votes, we need to tell R at what values we should “hold constant” <code>Clinton96.</code> I.e., we want to see how hypothetical changes in <code>Perot96</code> votes influence changes in Buchanan 2000 votes while also leaving the Clinton votes identical. This is that lightswitch metaphor– flipping one switch, while keeping the rest untouched.</p>
 <p>There are two common approaches to doing this. 1) We can hold constant <code>Clinton96</code> votes at its mean value in the data 2) We can keep <code>Clinton96</code> at its observed values in the data. In linear regression, it’s not going to matter which approach you take. In other models we will talk about later, this distinction may matter more substantially because of how our quantities of interest change across different values of <span class="math inline">\(X\hat \beta\)</span>.</p>
 <p>The first approach is easily implemented in predict.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fit<span class="fl">.2</span>, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">Perot96 =</span> <span class="dv">8072</span>, <span class="at">Clinton96 =</span> <span class="fu">mean</span>(florida<span class="sc">$</span>Clinton96)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fit<span class="fl">.2</span>, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">Perot96 =</span> <span class="dv">8072</span>, <span class="at">Clinton96 =</span> <span class="fu">mean</span>(florida<span class="sc">$</span>Clinton96)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      1 
 283.997 </code></pre>
@@ -1026,11 +1247,11 @@ t_{\hat \beta_k} &amp;= \frac{\hat \beta_k}{s.e.(\hat \beta_k)}
 </div>
 <p>For the second approach, what we will do is generate an estimate for Buchanan’s votes in 2000 when Perot96 takes 8072 votes, and we keep Clinton96’s votes at whatever value it currently is in the data. That is, we will generate <span class="math inline">\(n\)</span> estimates for Buchanan’s votes when Perot takes 8072. Then, we will take the mean of this as our “average estimate” of Buchanan’s votes in 2000 based on Perot’s votes at a level of 8072. We can do this in one of two ways:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Manipulating the X matrix</span></span>
-<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(fit<span class="fl">.2</span>)</span>
-<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Replace Perot96 column with all 8072 values</span></span>
-<span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a>X[, <span class="st">"Perot96"</span>] <span class="ot">&lt;-</span> <span class="dv">8072</span></span>
-<span id="cb88-5"><a href="#cb88-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(X) <span class="co">#take a peek</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Manipulating the X matrix</span></span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(fit<span class="fl">.2</span>)</span>
+<span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Replace Perot96 column with all 8072 values</span></span>
+<span id="cb105-4"><a href="#cb105-4" aria-hidden="true" tabindex="-1"></a>X[, <span class="st">"Perot96"</span>] <span class="ot">&lt;-</span> <span class="dv">8072</span></span>
+<span id="cb105-5"><a href="#cb105-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(X) <span class="co">#take a peek</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  (Intercept) Perot96 Clinton96
 1           1    8072     40144
@@ -1040,19 +1261,19 @@ t_{\hat \beta_k} &amp;= \frac{\hat \beta_k}{s.e.(\hat \beta_k)}
 5           1    8072     80416
 6           1    8072    320736</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Generate yhat</span></span>
-<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>yhats <span class="ot">&lt;-</span>X <span class="sc">%*%</span> <span class="fu">coef</span>(fit<span class="fl">.2</span>)</span>
-<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a><span class="do">## take the mean</span></span>
-<span id="cb90-5"><a href="#cb90-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(yhats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Generate yhat</span></span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a>yhats <span class="ot">&lt;-</span>X <span class="sc">%*%</span> <span class="fu">coef</span>(fit<span class="fl">.2</span>)</span>
+<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-4"><a href="#cb107-4" aria-hidden="true" tabindex="-1"></a><span class="do">## take the mean</span></span>
+<span id="cb107-5"><a href="#cb107-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(yhats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 283.997</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Use predict</span></span>
-<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>yhats <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit<span class="fl">.2</span>, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">Perot96=</span><span class="dv">8072</span>, <span class="at">Clinton96=</span>florida<span class="sc">$</span>Clinton96))</span>
-<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(yhats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Use predict</span></span>
+<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a>yhats <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit<span class="fl">.2</span>, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">Perot96=</span><span class="dv">8072</span>, <span class="at">Clinton96=</span>florida<span class="sc">$</span>Clinton96))</span>
+<span id="cb109-3"><a href="#cb109-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(yhats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 283.997</code></pre>
 </div>
@@ -1062,8 +1283,8 @@ t_{\hat \beta_k} &amp;= \frac{\hat \beta_k}{s.e.(\hat \beta_k)}
 <li>The <code>predict()</code> function is also very relevant when we move to logistic, probit, etc. regressions. This is just the start of a <a href="https://www.youtube.com/watch?v=DDybg9CNXcM&amp;ab_channel=mylifeinmovies">beautiful friendship</a> between you and <code>predict()</code> and associated functions.</li>
 </ul>
 </section>
-<section id="wrapping-up-ols" class="level2" data-number="4.6">
-<h2 data-number="4.6" class="anchored" data-anchor-id="wrapping-up-ols"><span class="header-section-number">4.6</span> Wrapping up OLS</h2>
+<section id="wrapping-up-ols" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="wrapping-up-ols"><span class="header-section-number">4.8</span> Wrapping up OLS</h2>
 <p>Linear regression is a great way to explain the relationship between one or more independent variables and an outcome variables. However, there is no free lunch. We have already mentioned a couple of assumptions along the way. Below we will summarize these and other assumptions. These are things you should be mindful of when you use linear regression in your own work. Some conditions that generate violations of these assumptions can also motivate why we will seek out alternative methods, such as those that rely on maximum likelihood estimation.</p>
 <p>This is a good place to review Gelman section 3.6.</p>
 <ul>
@@ -1095,8 +1316,8 @@ t_{\hat \beta_k} &amp;= \frac{\hat \beta_k}{s.e.(\hat \beta_k)}
 <p>Why we like OLS. When we meet our assumptions, OLS produces the best linear unbiased estimates (BLUE). A discussion of this <a href="https://www.youtube.com/watch?v=NjTpHS5xLP8&amp;ab_channel=BenLambert">here</a>. We have linearity in our parameters (e.g., <span class="math inline">\(\beta\)</span> and not <span class="math inline">\(\beta^2\)</span> for example). The unbiasedness means that the expected value (aka the average over repeated samples) of our estimates <span class="math inline">\(\mathbb{E}(\hat \beta)= \beta\)</span> is the true value. Our estimates are also efficient, which has to do with the variance, not only are our estimates true in expectation, but we also have lower variance than an alternative linear unbiased estimator could get us. If our assumptions fail, then we might no longer have BLUE. OLS estimates are also consistent, meaning that as the sample gets larger and larger, the estimates start converging to the truth.</p>
 <p>Now, a final hidden assumption in all of this is that the sample of our data is representative of the population we are trying to make inferences about. If that is not the case, then we may no longer be making unbiased observations to that population level. Further adjustments may be required (e.g., analyses of survey data sometimes use weights to adjust estimates to be more representative).</p>
 <p>When we violate these assumptions, OLS may no longer be best, and we may opt for other approaches. More soon!</p>
-<section id="practice-problems" class="level3" data-number="4.6.1">
-<h3 data-number="4.6.1" class="anchored" data-anchor-id="practice-problems"><span class="header-section-number">4.6.1</span> Practice Problems</h3>
+<section id="practice-problems" class="level3" data-number="4.8.1">
+<h3 data-number="4.8.1" class="anchored" data-anchor-id="practice-problems"><span class="header-section-number">4.8.1</span> Practice Problems</h3>
 <ol type="1">
 <li>Let’s use the <code>florida</code> data. Run a regression according to the following formula:
 <ul>
@@ -1107,38 +1328,38 @@ t_{\hat \beta_k} &amp;= \frac{\hat \beta_k}{s.e.(\hat \beta_k)}
 <li>When Perot 1996 vote is 5500, what is the expected 2000 Buchanan vote?</li>
 </ol>
 </section>
-<section id="practice-problem-code-for-solutions" class="level3" data-number="4.6.2">
-<h3 data-number="4.6.2" class="anchored" data-anchor-id="practice-problem-code-for-solutions"><span class="header-section-number">4.6.2</span> Practice Problem Code for Solutions</h3>
+<section id="practice-problem-code-for-solutions" class="level3" data-number="4.8.2">
+<h3 data-number="4.8.2" class="anchored" data-anchor-id="practice-problem-code-for-solutions"><span class="header-section-number">4.8.2</span> Practice Problem Code for Solutions</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>fit.practice <span class="ot">&lt;-</span> <span class="fu">lm</span>(Buchanan00 <span class="sc">~</span> Perot96 <span class="sc">+</span> Dole96 <span class="sc">+</span> Gore00, <span class="at">data =</span> florida)</span>
-<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit.practice)[<span class="st">"Perot96"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a>fit.practice <span class="ot">&lt;-</span> <span class="fu">lm</span>(Buchanan00 <span class="sc">~</span> Perot96 <span class="sc">+</span> Dole96 <span class="sc">+</span> Gore00, <span class="at">data =</span> florida)</span>
+<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-3"><a href="#cb111-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit.practice)[<span class="st">"Perot96"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Perot96 
 0.02878927 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(fit.practice)[<span class="st">"Perot96"</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(fit.practice)[<span class="st">"Perot96"</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      2.5 %      97.5 % 
 0.004316382 0.053262150 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>expbuch <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(fit.practice)</span>
-<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>expbuch[,<span class="st">"Perot96"</span>] <span class="ot">&lt;-</span> <span class="dv">5500</span></span>
-<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(expbuch <span class="sc">%*%</span> <span class="fu">as.matrix</span>(<span class="fu">coef</span>(fit.practice)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a>expbuch <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(fit.practice)</span>
+<span id="cb115-2"><a href="#cb115-2" aria-hidden="true" tabindex="-1"></a>expbuch[,<span class="st">"Perot96"</span>] <span class="ot">&lt;-</span> <span class="dv">5500</span></span>
+<span id="cb115-3"><a href="#cb115-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(expbuch <span class="sc">%*%</span> <span class="fu">as.matrix</span>(<span class="fu">coef</span>(fit.practice)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 211.1386</code></pre>
 </div>
 </div>
 </section>
 </section>
-<section id="week-2-example" class="level2" data-number="4.7">
-<h2 data-number="4.7" class="anchored" data-anchor-id="week-2-example"><span class="header-section-number">4.7</span> Week 2 Example</h2>
+<section id="week-2-example" class="level2" data-number="4.9">
+<h2 data-number="4.9" class="anchored" data-anchor-id="week-2-example"><span class="header-section-number">4.9</span> Week 2 Example</h2>
 <p>This example is based on Dancygier, Rafaela; Egami, Naoki; Jamal, Amaney; Rischke, Ramona, 2020, “Hate Crimes and Gender Imbalances: Fears over Mate Competition and Violence against Refugees”, published in the <em>American Journal of Political Science</em>. Replication data is available <a href="https://doi.org/10.7910/DVN/QXJDJ5">here</a>. We will draw on the survey portion of the article and replicate Table 1 in the paper. The pre-print is available <a href="https://naokiegami.com/paper/hatecrime.pdf">here</a>.</p>
 <p>The abstract is: <em>As the number of refugees rises across the world, anti-refugee violence has become a pressing concern. What explains the incidence and support of such hate crime? We argue that fears among native men that refugees pose a threat in the competition for female partners is a critical but understudied factor driving hate crime. Employing a comprehensive dataset on the incidence of hate crime across Germany, we first demonstrate that hate crime rises where men face disadvantages in local mating markets. Next, we complement this ecological evidence with original survey measures and confirm that individual-level support for hate crime increases when men fear that the inflow of refugees makes it more difficult to find female partners. Mate competition concerns remain a robust predictor even when controlling for antirefugee views, perceived job competition, general frustration, and aggressiveness. We conclude that a more complete understanding of hate crime and immigrant conflict must incorporate marriage markets and mate competition.</em></p>
 <p>The authors summarize their hypotheses as, “the notion that male refugees are engaged in romantic relationships with German women has received considerable media attention from a variety of sources, with coverage ranging from the curious to the outright hostile. We argue that the prospect of refugee-native mate competition can trigger or compound resentment against refugees, including support for hate crime” <a href="https://naokiegami.com/paper/hatecrime.pdf">pg. 14</a></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(foreign)</span>
-<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>dat_use <span class="ot">&lt;-</span> <span class="fu">read.dta</span>(<span class="st">"https://github.com/ktmccabe/teachingdata/blob/main/dat_use.dta?raw=true"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(foreign)</span>
+<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a>dat_use <span class="ot">&lt;-</span> <span class="fu">read.dta</span>(<span class="st">"https://github.com/ktmccabe/teachingdata/blob/main/dat_use.dta?raw=true"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The data include wave 4 of an online survey fielded in Germany through Respondi from September 2016 to December 2017). Each wave was designed to be nationally representative on age (starting at 18), gender, and state (Bundesland) with a sample of about 3,000 respondents in each wave.</p>
 <p>Key variables include</p>
@@ -1163,9 +1384,9 @@ t_{\hat \beta_k} &amp;= \frac{\hat \beta_k}{s.e.(\hat \beta_k)}
 Try to code these on your own, then click for the solution
 </summary>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(hate_violence_means <span class="sc">~</span> MateComp_cont, <span class="at">data=</span>dat_use)</span>
-<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a>lm2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(hate_violence_means <span class="sc">~</span> MateComp_cont <span class="sc">+</span> JobComp_cont <span class="sc">+</span> LifeSatis_cont, <span class="at">data=</span>dat_use)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(hate_violence_means <span class="sc">~</span> MateComp_cont, <span class="at">data=</span>dat_use)</span>
+<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-3"><a href="#cb118-3" aria-hidden="true" tabindex="-1"></a>lm2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(hate_violence_means <span class="sc">~</span> MateComp_cont <span class="sc">+</span> JobComp_cont <span class="sc">+</span> LifeSatis_cont, <span class="at">data=</span>dat_use)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </details>
 <p><strong>Now, let’s compare the summary output of each output.</strong></p>
@@ -1174,7 +1395,7 @@ Try to code these on your own, then click for the solution
 Try on your own, then click for the solution
 </summary>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1195,7 +1416,7 @@ Residual standard error: 0.7993 on 3017 degrees of freedom
 Multiple R-squared:  0.1915,    Adjusted R-squared:  0.1912 
 F-statistic: 714.6 on 1 and 3017 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1236,75 +1457,75 @@ F-statistic: 317.9 on 3 and 3015 DF,  p-value: &lt; 2.2e-16</code></pre>
 Click to reveal regression code below.
 </summary>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>lm3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(hate_violence_means <span class="sc">~</span> MateComp_cont <span class="sc">+</span> JobComp_cont <span class="sc">+</span> LifeSatis_cont <span class="sc">+</span> </span>
-<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(age_group) <span class="sc">+</span>     <span class="co"># age group</span></span>
-<span id="cb106-3"><a href="#cb106-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(gender) <span class="sc">+</span>     <span class="co"># gender </span></span>
-<span id="cb106-4"><a href="#cb106-4" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(state) <span class="sc">+</span>     <span class="co"># state  </span></span>
-<span id="cb106-5"><a href="#cb106-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(citizenship) <span class="sc">+</span>    <span class="co"># german citizen</span></span>
-<span id="cb106-6"><a href="#cb106-6" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(marital) <span class="sc">+</span>    <span class="co"># marital status</span></span>
-<span id="cb106-7"><a href="#cb106-7" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(religion) <span class="sc">+</span>    <span class="co"># religious affiliation</span></span>
-<span id="cb106-8"><a href="#cb106-8" aria-hidden="true" tabindex="-1"></a>            eduyrs <span class="sc">+</span>    <span class="co"># education</span></span>
-<span id="cb106-9"><a href="#cb106-9" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(occupation) <span class="sc">+</span>    <span class="co"># main activity</span></span>
-<span id="cb106-10"><a href="#cb106-10" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(income) <span class="sc">+</span>   <span class="co"># income</span></span>
-<span id="cb106-11"><a href="#cb106-11" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(household_size) <span class="sc">+</span>   <span class="co"># household size</span></span>
-<span id="cb106-12"><a href="#cb106-12" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(self_econ),    <span class="co"># subjective social status</span></span>
-<span id="cb106-13"><a href="#cb106-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">data=</span>dat_use)</span>
-<span id="cb106-14"><a href="#cb106-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb106-15"><a href="#cb106-15" aria-hidden="true" tabindex="-1"></a>lm4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(hate_violence_means <span class="sc">~</span> MateComp_cont <span class="sc">+</span> JobComp_cont <span class="sc">+</span> LifeSatis_cont <span class="sc">+</span> </span>
-<span id="cb106-16"><a href="#cb106-16" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(age_group) <span class="sc">+</span>   <span class="co"># age group</span></span>
-<span id="cb106-17"><a href="#cb106-17" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(gender) <span class="sc">+</span>   <span class="co"># gender </span></span>
-<span id="cb106-18"><a href="#cb106-18" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(state) <span class="sc">+</span>   <span class="co"># state  </span></span>
-<span id="cb106-19"><a href="#cb106-19" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(citizenship) <span class="sc">+</span>  <span class="co"># german citizen</span></span>
-<span id="cb106-20"><a href="#cb106-20" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(marital) <span class="sc">+</span>  <span class="co"># marital status</span></span>
-<span id="cb106-21"><a href="#cb106-21" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(religion) <span class="sc">+</span>  <span class="co"># religious affiliation</span></span>
-<span id="cb106-22"><a href="#cb106-22" aria-hidden="true" tabindex="-1"></a>            eduyrs <span class="sc">+</span>  <span class="co"># education</span></span>
-<span id="cb106-23"><a href="#cb106-23" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(occupation) <span class="sc">+</span>  <span class="co"># main activity</span></span>
-<span id="cb106-24"><a href="#cb106-24" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(income) <span class="sc">+</span> <span class="co"># income</span></span>
-<span id="cb106-25"><a href="#cb106-25" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(household_size) <span class="sc">+</span> <span class="co"># household size</span></span>
-<span id="cb106-26"><a href="#cb106-26" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(self_econ) <span class="sc">+</span> <span class="co"># subjective social status</span></span>
-<span id="cb106-27"><a href="#cb106-27" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(ref_integrating) <span class="sc">+</span> <span class="co"># Refugee Index (National-level; Q73) 8 in total</span></span>
-<span id="cb106-28"><a href="#cb106-28" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(ref_citizenship) <span class="sc">+</span> <span class="fu">factor</span>(ref_reduce) <span class="sc">+</span> <span class="fu">factor</span>(ref_moredone) <span class="sc">+</span> <span class="fu">factor</span>(ref_cultgiveup) <span class="sc">+</span> </span>
-<span id="cb106-29"><a href="#cb106-29" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(ref_economy) <span class="sc">+</span> <span class="fu">factor</span>(ref_crime) <span class="sc">+</span> <span class="fu">factor</span>(ref_terror),</span>
-<span id="cb106-30"><a href="#cb106-30" aria-hidden="true" tabindex="-1"></a>          <span class="at">data=</span>dat_use)</span>
-<span id="cb106-31"><a href="#cb106-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb106-32"><a href="#cb106-32" aria-hidden="true" tabindex="-1"></a>lm5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(hate_violence_means <span class="sc">~</span> MateComp_cont <span class="sc">+</span> JobComp_cont <span class="sc">+</span> LifeSatis_cont <span class="sc">+</span> </span>
-<span id="cb106-33"><a href="#cb106-33" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(age_group) <span class="sc">+</span>      <span class="co"># age group</span></span>
-<span id="cb106-34"><a href="#cb106-34" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(gender) <span class="sc">+</span>      <span class="co"># gender </span></span>
-<span id="cb106-35"><a href="#cb106-35" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(state) <span class="sc">+</span>      <span class="co"># state  </span></span>
-<span id="cb106-36"><a href="#cb106-36" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(citizenship) <span class="sc">+</span>     <span class="co"># german citizen</span></span>
-<span id="cb106-37"><a href="#cb106-37" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(marital) <span class="sc">+</span>     <span class="co"># marital status</span></span>
-<span id="cb106-38"><a href="#cb106-38" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(religion) <span class="sc">+</span>     <span class="co"># religious affiliation</span></span>
-<span id="cb106-39"><a href="#cb106-39" aria-hidden="true" tabindex="-1"></a>            eduyrs <span class="sc">+</span> <span class="co"># education</span></span>
-<span id="cb106-40"><a href="#cb106-40" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(occupation) <span class="sc">+</span>     <span class="co"># main activity</span></span>
-<span id="cb106-41"><a href="#cb106-41" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(income) <span class="sc">+</span>    <span class="co"># income</span></span>
-<span id="cb106-42"><a href="#cb106-42" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(household_size) <span class="sc">+</span>    <span class="co"># household size</span></span>
-<span id="cb106-43"><a href="#cb106-43" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(self_econ) <span class="sc">+</span>    <span class="co"># subjective social status</span></span>
-<span id="cb106-44"><a href="#cb106-44" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(ref_integrating) <span class="sc">+</span> <span class="co"># Refugee Index (National-level; Q73) 8 in total</span></span>
-<span id="cb106-45"><a href="#cb106-45" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(ref_citizenship) <span class="sc">+</span> <span class="fu">factor</span>(ref_reduce) <span class="sc">+</span> <span class="fu">factor</span>(ref_moredone) <span class="sc">+</span> <span class="fu">factor</span>(ref_cultgiveup) <span class="sc">+</span> </span>
-<span id="cb106-46"><a href="#cb106-46" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(ref_economy) <span class="sc">+</span> <span class="fu">factor</span>(ref_crime) <span class="sc">+</span> <span class="fu">factor</span>(ref_terror) <span class="sc">+</span> </span>
-<span id="cb106-47"><a href="#cb106-47" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(ref_loc_services) <span class="sc">+</span>    <span class="co"># Refugee Index (Local, Q75)</span></span>
-<span id="cb106-48"><a href="#cb106-48" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(ref_loc_economy) <span class="sc">+</span> <span class="fu">factor</span>(ref_loc_crime) <span class="sc">+</span> <span class="fu">factor</span>(ref_loc_culture) <span class="sc">+</span> <span class="fu">factor</span>(ref_loc_islam) <span class="sc">+</span> </span>
-<span id="cb106-49"><a href="#cb106-49" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(ref_loc_schools) <span class="sc">+</span> <span class="fu">factor</span>(ref_loc_housing) <span class="sc">+</span> <span class="fu">factor</span>(ref_loc_wayoflife), <span class="do">## end</span></span>
-<span id="cb106-50"><a href="#cb106-50" aria-hidden="true" tabindex="-1"></a>          <span class="at">data=</span>dat_use)</span>
-<span id="cb106-51"><a href="#cb106-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb106-52"><a href="#cb106-52" aria-hidden="true" tabindex="-1"></a>formula<span class="fl">.5</span> <span class="ot">&lt;-</span> </span>
-<span id="cb106-53"><a href="#cb106-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.character</span>(<span class="st">"hate_violence_means ~ MateComp_cont + JobComp_cont + </span></span>
-<span id="cb106-54"><a href="#cb106-54" aria-hidden="true" tabindex="-1"></a><span class="st">               LifeSatis_cont +  factor(age_group) + factor(gender) + </span></span>
-<span id="cb106-55"><a href="#cb106-55" aria-hidden="true" tabindex="-1"></a><span class="st">               factor(state) + factor(citizenship) + factor(marital) + </span></span>
-<span id="cb106-56"><a href="#cb106-56" aria-hidden="true" tabindex="-1"></a><span class="st">               factor(religion) + eduyrs + factor(occupation) + </span></span>
-<span id="cb106-57"><a href="#cb106-57" aria-hidden="true" tabindex="-1"></a><span class="st">               factor(income) + factor(household_size) + factor(self_econ) + </span></span>
-<span id="cb106-58"><a href="#cb106-58" aria-hidden="true" tabindex="-1"></a><span class="st">               factor(ref_integrating) + factor(ref_citizenship) + factor(ref_reduce) + </span></span>
-<span id="cb106-59"><a href="#cb106-59" aria-hidden="true" tabindex="-1"></a><span class="st">               factor(ref_moredone) + factor(ref_cultgiveup) + </span></span>
-<span id="cb106-60"><a href="#cb106-60" aria-hidden="true" tabindex="-1"></a><span class="st">               factor(ref_economy) + factor(ref_crime) + factor(ref_terror)  + </span></span>
-<span id="cb106-61"><a href="#cb106-61" aria-hidden="true" tabindex="-1"></a><span class="st">               factor(ref_loc_services) +  factor(ref_loc_economy) + factor(ref_loc_crime) + </span></span>
-<span id="cb106-62"><a href="#cb106-62" aria-hidden="true" tabindex="-1"></a><span class="st">               factor(ref_loc_culture) + factor(ref_loc_islam) + </span></span>
-<span id="cb106-63"><a href="#cb106-63" aria-hidden="true" tabindex="-1"></a><span class="st">               factor(ref_loc_schools) + factor(ref_loc_housing) + factor(ref_loc_wayoflife)"</span>)</span>
-<span id="cb106-64"><a href="#cb106-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb106-65"><a href="#cb106-65" aria-hidden="true" tabindex="-1"></a>formula<span class="fl">.6</span> <span class="ot">&lt;-</span> <span class="fu">paste</span>(formula<span class="fl">.5</span>, <span class="st">"factor(distance_ref) + factor(settle_ref)"</span>, </span>
-<span id="cb106-66"><a href="#cb106-66" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"lrscale + afd + muslim_ind + afd_ind + contact_ind"</span>, </span>
-<span id="cb106-67"><a href="#cb106-67" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sep=</span><span class="st">"+"</span>, <span class="at">collapse=</span><span class="st">"+"</span>) </span>
-<span id="cb106-68"><a href="#cb106-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb106-69"><a href="#cb106-69" aria-hidden="true" tabindex="-1"></a>lm6 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">as.formula</span>(formula<span class="fl">.6</span>), <span class="at">data=</span>dat_use)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a>lm3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(hate_violence_means <span class="sc">~</span> MateComp_cont <span class="sc">+</span> JobComp_cont <span class="sc">+</span> LifeSatis_cont <span class="sc">+</span> </span>
+<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(age_group) <span class="sc">+</span>     <span class="co"># age group</span></span>
+<span id="cb123-3"><a href="#cb123-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(gender) <span class="sc">+</span>     <span class="co"># gender </span></span>
+<span id="cb123-4"><a href="#cb123-4" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(state) <span class="sc">+</span>     <span class="co"># state  </span></span>
+<span id="cb123-5"><a href="#cb123-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(citizenship) <span class="sc">+</span>    <span class="co"># german citizen</span></span>
+<span id="cb123-6"><a href="#cb123-6" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(marital) <span class="sc">+</span>    <span class="co"># marital status</span></span>
+<span id="cb123-7"><a href="#cb123-7" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(religion) <span class="sc">+</span>    <span class="co"># religious affiliation</span></span>
+<span id="cb123-8"><a href="#cb123-8" aria-hidden="true" tabindex="-1"></a>            eduyrs <span class="sc">+</span>    <span class="co"># education</span></span>
+<span id="cb123-9"><a href="#cb123-9" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(occupation) <span class="sc">+</span>    <span class="co"># main activity</span></span>
+<span id="cb123-10"><a href="#cb123-10" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(income) <span class="sc">+</span>   <span class="co"># income</span></span>
+<span id="cb123-11"><a href="#cb123-11" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(household_size) <span class="sc">+</span>   <span class="co"># household size</span></span>
+<span id="cb123-12"><a href="#cb123-12" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(self_econ),    <span class="co"># subjective social status</span></span>
+<span id="cb123-13"><a href="#cb123-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">data=</span>dat_use)</span>
+<span id="cb123-14"><a href="#cb123-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb123-15"><a href="#cb123-15" aria-hidden="true" tabindex="-1"></a>lm4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(hate_violence_means <span class="sc">~</span> MateComp_cont <span class="sc">+</span> JobComp_cont <span class="sc">+</span> LifeSatis_cont <span class="sc">+</span> </span>
+<span id="cb123-16"><a href="#cb123-16" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(age_group) <span class="sc">+</span>   <span class="co"># age group</span></span>
+<span id="cb123-17"><a href="#cb123-17" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(gender) <span class="sc">+</span>   <span class="co"># gender </span></span>
+<span id="cb123-18"><a href="#cb123-18" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(state) <span class="sc">+</span>   <span class="co"># state  </span></span>
+<span id="cb123-19"><a href="#cb123-19" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(citizenship) <span class="sc">+</span>  <span class="co"># german citizen</span></span>
+<span id="cb123-20"><a href="#cb123-20" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(marital) <span class="sc">+</span>  <span class="co"># marital status</span></span>
+<span id="cb123-21"><a href="#cb123-21" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(religion) <span class="sc">+</span>  <span class="co"># religious affiliation</span></span>
+<span id="cb123-22"><a href="#cb123-22" aria-hidden="true" tabindex="-1"></a>            eduyrs <span class="sc">+</span>  <span class="co"># education</span></span>
+<span id="cb123-23"><a href="#cb123-23" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(occupation) <span class="sc">+</span>  <span class="co"># main activity</span></span>
+<span id="cb123-24"><a href="#cb123-24" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(income) <span class="sc">+</span> <span class="co"># income</span></span>
+<span id="cb123-25"><a href="#cb123-25" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(household_size) <span class="sc">+</span> <span class="co"># household size</span></span>
+<span id="cb123-26"><a href="#cb123-26" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(self_econ) <span class="sc">+</span> <span class="co"># subjective social status</span></span>
+<span id="cb123-27"><a href="#cb123-27" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(ref_integrating) <span class="sc">+</span> <span class="co"># Refugee Index (National-level; Q73) 8 in total</span></span>
+<span id="cb123-28"><a href="#cb123-28" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(ref_citizenship) <span class="sc">+</span> <span class="fu">factor</span>(ref_reduce) <span class="sc">+</span> <span class="fu">factor</span>(ref_moredone) <span class="sc">+</span> <span class="fu">factor</span>(ref_cultgiveup) <span class="sc">+</span> </span>
+<span id="cb123-29"><a href="#cb123-29" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(ref_economy) <span class="sc">+</span> <span class="fu">factor</span>(ref_crime) <span class="sc">+</span> <span class="fu">factor</span>(ref_terror),</span>
+<span id="cb123-30"><a href="#cb123-30" aria-hidden="true" tabindex="-1"></a>          <span class="at">data=</span>dat_use)</span>
+<span id="cb123-31"><a href="#cb123-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb123-32"><a href="#cb123-32" aria-hidden="true" tabindex="-1"></a>lm5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(hate_violence_means <span class="sc">~</span> MateComp_cont <span class="sc">+</span> JobComp_cont <span class="sc">+</span> LifeSatis_cont <span class="sc">+</span> </span>
+<span id="cb123-33"><a href="#cb123-33" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(age_group) <span class="sc">+</span>      <span class="co"># age group</span></span>
+<span id="cb123-34"><a href="#cb123-34" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(gender) <span class="sc">+</span>      <span class="co"># gender </span></span>
+<span id="cb123-35"><a href="#cb123-35" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(state) <span class="sc">+</span>      <span class="co"># state  </span></span>
+<span id="cb123-36"><a href="#cb123-36" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(citizenship) <span class="sc">+</span>     <span class="co"># german citizen</span></span>
+<span id="cb123-37"><a href="#cb123-37" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(marital) <span class="sc">+</span>     <span class="co"># marital status</span></span>
+<span id="cb123-38"><a href="#cb123-38" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(religion) <span class="sc">+</span>     <span class="co"># religious affiliation</span></span>
+<span id="cb123-39"><a href="#cb123-39" aria-hidden="true" tabindex="-1"></a>            eduyrs <span class="sc">+</span> <span class="co"># education</span></span>
+<span id="cb123-40"><a href="#cb123-40" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(occupation) <span class="sc">+</span>     <span class="co"># main activity</span></span>
+<span id="cb123-41"><a href="#cb123-41" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(income) <span class="sc">+</span>    <span class="co"># income</span></span>
+<span id="cb123-42"><a href="#cb123-42" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(household_size) <span class="sc">+</span>    <span class="co"># household size</span></span>
+<span id="cb123-43"><a href="#cb123-43" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(self_econ) <span class="sc">+</span>    <span class="co"># subjective social status</span></span>
+<span id="cb123-44"><a href="#cb123-44" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(ref_integrating) <span class="sc">+</span> <span class="co"># Refugee Index (National-level; Q73) 8 in total</span></span>
+<span id="cb123-45"><a href="#cb123-45" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(ref_citizenship) <span class="sc">+</span> <span class="fu">factor</span>(ref_reduce) <span class="sc">+</span> <span class="fu">factor</span>(ref_moredone) <span class="sc">+</span> <span class="fu">factor</span>(ref_cultgiveup) <span class="sc">+</span> </span>
+<span id="cb123-46"><a href="#cb123-46" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(ref_economy) <span class="sc">+</span> <span class="fu">factor</span>(ref_crime) <span class="sc">+</span> <span class="fu">factor</span>(ref_terror) <span class="sc">+</span> </span>
+<span id="cb123-47"><a href="#cb123-47" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(ref_loc_services) <span class="sc">+</span>    <span class="co"># Refugee Index (Local, Q75)</span></span>
+<span id="cb123-48"><a href="#cb123-48" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(ref_loc_economy) <span class="sc">+</span> <span class="fu">factor</span>(ref_loc_crime) <span class="sc">+</span> <span class="fu">factor</span>(ref_loc_culture) <span class="sc">+</span> <span class="fu">factor</span>(ref_loc_islam) <span class="sc">+</span> </span>
+<span id="cb123-49"><a href="#cb123-49" aria-hidden="true" tabindex="-1"></a>            <span class="fu">factor</span>(ref_loc_schools) <span class="sc">+</span> <span class="fu">factor</span>(ref_loc_housing) <span class="sc">+</span> <span class="fu">factor</span>(ref_loc_wayoflife), <span class="do">## end</span></span>
+<span id="cb123-50"><a href="#cb123-50" aria-hidden="true" tabindex="-1"></a>          <span class="at">data=</span>dat_use)</span>
+<span id="cb123-51"><a href="#cb123-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb123-52"><a href="#cb123-52" aria-hidden="true" tabindex="-1"></a>formula<span class="fl">.5</span> <span class="ot">&lt;-</span> </span>
+<span id="cb123-53"><a href="#cb123-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.character</span>(<span class="st">"hate_violence_means ~ MateComp_cont + JobComp_cont + </span></span>
+<span id="cb123-54"><a href="#cb123-54" aria-hidden="true" tabindex="-1"></a><span class="st">               LifeSatis_cont +  factor(age_group) + factor(gender) + </span></span>
+<span id="cb123-55"><a href="#cb123-55" aria-hidden="true" tabindex="-1"></a><span class="st">               factor(state) + factor(citizenship) + factor(marital) + </span></span>
+<span id="cb123-56"><a href="#cb123-56" aria-hidden="true" tabindex="-1"></a><span class="st">               factor(religion) + eduyrs + factor(occupation) + </span></span>
+<span id="cb123-57"><a href="#cb123-57" aria-hidden="true" tabindex="-1"></a><span class="st">               factor(income) + factor(household_size) + factor(self_econ) + </span></span>
+<span id="cb123-58"><a href="#cb123-58" aria-hidden="true" tabindex="-1"></a><span class="st">               factor(ref_integrating) + factor(ref_citizenship) + factor(ref_reduce) + </span></span>
+<span id="cb123-59"><a href="#cb123-59" aria-hidden="true" tabindex="-1"></a><span class="st">               factor(ref_moredone) + factor(ref_cultgiveup) + </span></span>
+<span id="cb123-60"><a href="#cb123-60" aria-hidden="true" tabindex="-1"></a><span class="st">               factor(ref_economy) + factor(ref_crime) + factor(ref_terror)  + </span></span>
+<span id="cb123-61"><a href="#cb123-61" aria-hidden="true" tabindex="-1"></a><span class="st">               factor(ref_loc_services) +  factor(ref_loc_economy) + factor(ref_loc_crime) + </span></span>
+<span id="cb123-62"><a href="#cb123-62" aria-hidden="true" tabindex="-1"></a><span class="st">               factor(ref_loc_culture) + factor(ref_loc_islam) + </span></span>
+<span id="cb123-63"><a href="#cb123-63" aria-hidden="true" tabindex="-1"></a><span class="st">               factor(ref_loc_schools) + factor(ref_loc_housing) + factor(ref_loc_wayoflife)"</span>)</span>
+<span id="cb123-64"><a href="#cb123-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb123-65"><a href="#cb123-65" aria-hidden="true" tabindex="-1"></a>formula<span class="fl">.6</span> <span class="ot">&lt;-</span> <span class="fu">paste</span>(formula<span class="fl">.5</span>, <span class="st">"factor(distance_ref) + factor(settle_ref)"</span>, </span>
+<span id="cb123-66"><a href="#cb123-66" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"lrscale + afd + muslim_ind + afd_ind + contact_ind"</span>, </span>
+<span id="cb123-67"><a href="#cb123-67" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sep=</span><span class="st">"+"</span>, <span class="at">collapse=</span><span class="st">"+"</span>) </span>
+<span id="cb123-68"><a href="#cb123-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb123-69"><a href="#cb123-69" aria-hidden="true" tabindex="-1"></a>lm6 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">as.formula</span>(formula<span class="fl">.6</span>), <span class="at">data=</span>dat_use)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 <table class="texreg" style="margin: 10px auto;border-collapse: collapse;border-spacing: 0px;caption-side: bottom;color: #000000;border-top: 2px solid #000000;">

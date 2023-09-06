@@ -789,6 +789,13 @@ Given $X$ is an $n$ x $k$ matrix,
 
 ### Practice Problem Solutions
 
+Below are the solutions for the above problems. Remember, try on your own first, then 
+
+<details>
+
+<summary>Click for the solution</summary>
+
+
 1.  What is $24/3 + 5^2 - (8 -4)$?
 
 ```{r}
@@ -856,3 +863,6 @@ Given $X$ is an $n$ x $k$ matrix,
 ```
 9.  If a matrix $P$ is idempotent, $PP =$ ?
     -   $P$ from section 3.5.2
+
+</details>
+

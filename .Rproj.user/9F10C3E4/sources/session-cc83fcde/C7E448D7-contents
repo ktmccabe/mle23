@@ -11,7 +11,6 @@ book:
     - 03-TheMATH.qmd
     - 04-ReviewofOLS.qmd
   page-navigation: true
-  downloads: pdf
   sidebar:
     style: docked
     background: light
@@ -25,13 +24,7 @@ format:
     toc-location: left
     toc-depth: 4
     linkcolor: red
-  pdf:
-    toc-title: Section Contents
-    toc: true
-    toc-location: left
-    toc-depth: 4
-    linkcolor: red
-    prefer-html: true
+
   
 
 

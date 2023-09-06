@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.8.28)  29 AUG 2023 14:55
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.8.28)  6 SEP 2023 10:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1243,12 +1243,12 @@ Missing character: There is no ≠ (U+2260) in font [lmroman10-regular]:mapping=
 [69] [70] [71] [72] [73] [74] [75]
 chapter 4.
 
-Underfull \hbox (badness 2591) in paragraph at lines 4351--4356
+Underfull \hbox (badness 2591) in paragraph at lines 4356--4361
 []\TU/lmr/m/n/10.95 Lenz, G., & Sahn, A. (2020). “Achieving Statistical Significance with
  []
 
 
-Underfull \hbox (badness 3312) in paragraph at lines 4351--4356
+Underfull \hbox (badness 3312) in paragraph at lines 4356--4361
 \TU/lmr/m/n/10.95 Control Variables and Without Transparency.” \TU/lmr/m/it/10.95 Political Analysis\TU/lmr/m/n/10.95 , 1-14.
  []
 
@@ -1256,23 +1256,23 @@ Underfull \hbox (badness 3312) in paragraph at lines 4351--4356
 
 ]
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 9.0pt on input line 4381.
+(Font)              scaled to size 9.0pt on input line 4386.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 4381.
+(Font)              scaled to size 6.0pt on input line 4386.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 4381.
+(Font)              scaled to size 5.0pt on input line 4386.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 9.00082pt on input line 4381.
+(Font)              scaled to size 9.00082pt on input line 4386.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.00055pt on input line 4381.
+(Font)              scaled to size 6.00055pt on input line 4386.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 5.00046pt on input line 4381.
+(Font)              scaled to size 5.00046pt on input line 4386.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 8.99904pt on input line 4381.
+(Font)              scaled to size 8.99904pt on input line 4386.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 5.99936pt on input line 4381.
+(Font)              scaled to size 5.99936pt on input line 4386.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 4.99947pt on input line 4381.
+(Font)              scaled to size 4.99947pt on input line 4386.
 File: images/lightswitch.jpeg Graphic file (type bmp)
 <images/lightswitch.jpeg>
 [77]
@@ -1283,4 +1283,4 @@ File: 04-ReviewofOLS_files/figure-pdf/unnamed-chunk-5-1.pdf Graphic file (type p
 <use 04-ReviewofOLS_files/figure-pdf/unnamed-chunk-5-1.pdf>
 [84]
 File: 04-ReviewofOLS_files/figure-pdf/unnamed-chunk-6-1.pdf Graphic file (type pdf)
-<u
+<us
