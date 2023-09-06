@@ -3,7 +3,7 @@
     "path": "~/Dropbox/GitHub2/mle23/04-ReviewofOLS.qmd",
     "project_path": "04-ReviewofOLS.qmd",
     "type": "quarto_markdown",
-    "hash": "1648309440",
+    "hash": "3838387576",
     "contents": "",
     "dirty": false,
     "created": 1693331123811.0,
@@ -17,15 +17,15 @@
         "rmdVisualCollapsedChunks": "",
         "rmdVisualModeLocation": "275:0",
         "docOutlineVisible": "1",
-        "cursorPosition": "532,0",
-        "scrollLine": "528"
+        "cursorPosition": "491,3",
+        "scrollLine": "489"
     },
     "folds": "",
-    "lastKnownWriteTime": 1694012365,
+    "lastKnownWriteTime": 1694013246,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1694012365595,
+    "last_content_update": 1694013246490,
     "read_only": false,
     "read_only_alternatives": []
 }

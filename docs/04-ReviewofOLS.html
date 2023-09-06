@@ -180,21 +180,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#categorical-variables" id="toc-categorical-variables" class="nav-link" data-scroll-target="#categorical-variables"><span class="header-section-number">4.4.1</span> Categorical variables</a></li>
   <li><a href="#formalizing-linear-dependence" id="toc-formalizing-linear-dependence" class="nav-link" data-scroll-target="#formalizing-linear-dependence"><span class="header-section-number">4.4.2</span> Formalizing Linear Dependence</a></li>
+  <li><a href="#other-examples-of-breaking-the-no-perfect-collinearity-rule" id="toc-other-examples-of-breaking-the-no-perfect-collinearity-rule" class="nav-link" data-scroll-target="#other-examples-of-breaking-the-no-perfect-collinearity-rule"><span class="header-section-number">4.4.3</span> Other examples of breaking the no perfect collinearity rule</a></li>
   </ul></li>
-  <li><a href="#other-examples-of-breaking-the-no-perfect-collinearity-rule" id="toc-other-examples-of-breaking-the-no-perfect-collinearity-rule" class="nav-link" data-scroll-target="#other-examples-of-breaking-the-no-perfect-collinearity-rule"><span class="header-section-number">4.5</span> Other examples of breaking the no perfect collinearity rule</a></li>
-  <li><a href="#uncertainty-and-regression" id="toc-uncertainty-and-regression" class="nav-link" data-scroll-target="#uncertainty-and-regression"><span class="header-section-number">4.6</span> Uncertainty and Regression</a>
+  <li><a href="#uncertainty-and-regression" id="toc-uncertainty-and-regression" class="nav-link" data-scroll-target="#uncertainty-and-regression"><span class="header-section-number">4.5</span> Uncertainty and Regression</a>
   <ul>
-  <li><a href="#variance-of-the-coefficients" id="toc-variance-of-the-coefficients" class="nav-link" data-scroll-target="#variance-of-the-coefficients"><span class="header-section-number">4.6.1</span> Variance of the Coefficients</a></li>
-  <li><a href="#hypothesis-testing" id="toc-hypothesis-testing" class="nav-link" data-scroll-target="#hypothesis-testing"><span class="header-section-number">4.6.2</span> Hypothesis Testing</a></li>
-  <li><a href="#goodness-of-fit" id="toc-goodness-of-fit" class="nav-link" data-scroll-target="#goodness-of-fit"><span class="header-section-number">4.6.3</span> Goodness of Fit</a></li>
+  <li><a href="#variance-of-the-coefficients" id="toc-variance-of-the-coefficients" class="nav-link" data-scroll-target="#variance-of-the-coefficients"><span class="header-section-number">4.5.1</span> Variance of the Coefficients</a></li>
+  <li><a href="#hypothesis-testing" id="toc-hypothesis-testing" class="nav-link" data-scroll-target="#hypothesis-testing"><span class="header-section-number">4.5.2</span> Hypothesis Testing</a></li>
+  <li><a href="#goodness-of-fit" id="toc-goodness-of-fit" class="nav-link" data-scroll-target="#goodness-of-fit"><span class="header-section-number">4.5.3</span> Goodness of Fit</a></li>
   </ul></li>
-  <li><a href="#generating-predictions-from-regression-models" id="toc-generating-predictions-from-regression-models" class="nav-link" data-scroll-target="#generating-predictions-from-regression-models"><span class="header-section-number">4.7</span> Generating predictions from regression models</a></li>
-  <li><a href="#wrapping-up-ols" id="toc-wrapping-up-ols" class="nav-link" data-scroll-target="#wrapping-up-ols"><span class="header-section-number">4.8</span> Wrapping up OLS</a>
+  <li><a href="#generating-predictions-from-regression-models" id="toc-generating-predictions-from-regression-models" class="nav-link" data-scroll-target="#generating-predictions-from-regression-models"><span class="header-section-number">4.6</span> Generating predictions from regression models</a></li>
+  <li><a href="#wrapping-up-ols" id="toc-wrapping-up-ols" class="nav-link" data-scroll-target="#wrapping-up-ols"><span class="header-section-number">4.7</span> Wrapping up OLS</a>
   <ul>
-  <li><a href="#practice-problems" id="toc-practice-problems" class="nav-link" data-scroll-target="#practice-problems"><span class="header-section-number">4.8.1</span> Practice Problems</a></li>
-  <li><a href="#practice-problem-code-for-solutions" id="toc-practice-problem-code-for-solutions" class="nav-link" data-scroll-target="#practice-problem-code-for-solutions"><span class="header-section-number">4.8.2</span> Practice Problem Code for Solutions</a></li>
+  <li><a href="#practice-problems" id="toc-practice-problems" class="nav-link" data-scroll-target="#practice-problems"><span class="header-section-number">4.7.1</span> Practice Problems</a></li>
+  <li><a href="#practice-problem-code-for-solutions" id="toc-practice-problem-code-for-solutions" class="nav-link" data-scroll-target="#practice-problem-code-for-solutions"><span class="header-section-number">4.7.2</span> Practice Problem Code for Solutions</a></li>
   </ul></li>
-  <li><a href="#week-2-example" id="toc-week-2-example" class="nav-link" data-scroll-target="#week-2-example"><span class="header-section-number">4.9</span> Week 2 Example</a></li>
+  <li><a href="#week-2-example" id="toc-week-2-example" class="nav-link" data-scroll-target="#week-2-example"><span class="header-section-number">4.8</span> Week 2 Example</a></li>
   </ul>
 </nav>
 </nav>
@@ -824,9 +824,8 @@ F-statistic: 0.4967 on 3 and 12 DF,  p-value: 0.6914</code></pre>
 </div>
 </div>
 </section>
-</section>
-<section id="other-examples-of-breaking-the-no-perfect-collinearity-rule" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="other-examples-of-breaking-the-no-perfect-collinearity-rule"><span class="header-section-number">4.5</span> Other examples of breaking the no perfect collinearity rule</h2>
+<section id="other-examples-of-breaking-the-no-perfect-collinearity-rule" class="level3" data-number="4.4.3">
+<h3 data-number="4.4.3" class="anchored" data-anchor-id="other-examples-of-breaking-the-no-perfect-collinearity-rule"><span class="header-section-number">4.4.3</span> Other examples of breaking the no perfect collinearity rule</h3>
 <p>Recall, for OLS, we must assume no perfect collinearity.</p>
 <ul>
 <li>No independent variable is constant</li>
@@ -854,8 +853,9 @@ F-statistic: 0.4967 on 3 and 12 DF,  p-value: 0.6914</code></pre>
 <span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>betahat </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="uncertainty-and-regression" class="level2" data-number="4.6">
-<h2 data-number="4.6" class="anchored" data-anchor-id="uncertainty-and-regression"><span class="header-section-number">4.6</span> Uncertainty and Regression</h2>
+</section>
+<section id="uncertainty-and-regression" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="uncertainty-and-regression"><span class="header-section-number">4.5</span> Uncertainty and Regression</h2>
 <p>We have now gone through the process of minimizing the sum of squared errors (<span class="math inline">\(\mathbf{e'e}\)</span>) and deriving estimates for the OLS coefficients <span class="math inline">\(\hat \beta = (X'X)^{-1}X'Y\)</span>. In this section, we will discuss how to generate estimates of the uncertainty around these estimates.</p>
 <p>Where we are going:</p>
 <ul>
@@ -888,8 +888,8 @@ F-statistic: 68.48 on 1 and 65 DF,  p-value: 9.474e-12</code></pre>
 </div>
 </div>
 <p>The summary output of the model shows many different quantities in addition to the coefficient estimates. In particular, in the second column of the summary, we see the standard errors of the coefficients. Like many statistical software programs, the <code>lm()</code> function neatly places these right next to the coefficients. We will now discuss how we get to these values.</p>
-<section id="variance-of-the-coefficients" class="level3" data-number="4.6.1">
-<h3 data-number="4.6.1" class="anchored" data-anchor-id="variance-of-the-coefficients"><span class="header-section-number">4.6.1</span> Variance of the Coefficients</h3>
+<section id="variance-of-the-coefficients" class="level3" data-number="4.5.1">
+<h3 data-number="4.5.1" class="anchored" data-anchor-id="variance-of-the-coefficients"><span class="header-section-number">4.5.1</span> Variance of the Coefficients</h3>
 <p>The standard error is the square root of the variance, representing the typical deviation we would expect to see between our estimates <span class="math inline">\(\hat \beta\)</span> of the parameter <span class="math inline">\(\beta\)</span> across repeated samples. So to get to the standard error, we just need to get to an estimate of the variance.</p>
 <p>Let’s take the journey. First the math. As should start becoming familiar, we have our initial regression equation, which describes the relationship between the independent variables and dependent variables.</p>
 <ul>
@@ -999,8 +999,8 @@ Perot96       -0.1360074  1.883619e-05</code></pre>
 \end{align*}\]</span>
 <p>Note: Along the way, in writing <span class="math inline">\(\mathbb{E}(\hat \beta) = \beta\)</span>, we have implicitly assumed that <span class="math inline">\(\hat \beta\)</span> is an “unbiased” estimator of <span class="math inline">\(\beta\)</span>. This is not free. It depends on an assumption that the error term in the regression <span class="math inline">\(\epsilon\)</span> is independent of our independent variables. This can be violated in some situations, such as when we have omitted variable bias, which is discussed at the end of our OLS section.</p>
 </section>
-<section id="hypothesis-testing" class="level3" data-number="4.6.2">
-<h3 data-number="4.6.2" class="anchored" data-anchor-id="hypothesis-testing"><span class="header-section-number">4.6.2</span> Hypothesis Testing</h3>
+<section id="hypothesis-testing" class="level3" data-number="4.5.2">
+<h3 data-number="4.5.2" class="anchored" data-anchor-id="hypothesis-testing"><span class="header-section-number">4.5.2</span> Hypothesis Testing</h3>
 <p>Most of the time in social science, we run a regression because we have some hypothesis about how a change in our independent variable affects the change in our outcome variable.</p>
 <p>In OLS, we can perform a hypothesis test for each independent variable in our data. The structure of the hypothesis test is:</p>
 <ul>
@@ -1094,8 +1094,8 @@ t_{\hat \beta_k} &amp;= \frac{\hat \beta_k}{s.e.(\hat \beta_k)}
 </div>
 </div>
 </section>
-<section id="goodness-of-fit" class="level3" data-number="4.6.3">
-<h3 data-number="4.6.3" class="anchored" data-anchor-id="goodness-of-fit"><span class="header-section-number">4.6.3</span> Goodness of Fit</h3>
+<section id="goodness-of-fit" class="level3" data-number="4.5.3">
+<h3 data-number="4.5.3" class="anchored" data-anchor-id="goodness-of-fit"><span class="header-section-number">4.5.3</span> Goodness of Fit</h3>
 <p>A last noteworthy component to the standard regression output is the goodness of fit statistics. For this class, we can put less attention on these, though there will be some analogues when we get into likelihood.</p>
 <p>These are measures of how much of the total variation in our outcome measure can be explained by our model, as well as how far off are our estimates from the truth.</p>
 <p>For the first two measures R-squared and Adjusted R-squared, we draw on three quantities:</p>
@@ -1141,8 +1141,8 @@ t_{\hat \beta_k} &amp;= \frac{\hat \beta_k}{s.e.(\hat \beta_k)}
 <p>Note: This test is different from our separate hypothesis tests that a <span class="math inline">\(k\)</span> regression slope is 0. For that, we use the t-tests discussed above.</p>
 </section>
 </section>
-<section id="generating-predictions-from-regression-models" class="level2" data-number="4.7">
-<h2 data-number="4.7" class="anchored" data-anchor-id="generating-predictions-from-regression-models"><span class="header-section-number">4.7</span> Generating predictions from regression models</h2>
+<section id="generating-predictions-from-regression-models" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="generating-predictions-from-regression-models"><span class="header-section-number">4.6</span> Generating predictions from regression models</h2>
 <p>The regression coefficients tell us how much <span class="math inline">\(Y\)</span> is expected to change for a one-unit change in <span class="math inline">\(x_k\)</span>. It does not immediately tell us the values we estimate our outcome (<span class="math inline">\(\hat Y\)</span>) to take conditional on particular values of <span class="math inline">\(x_k\)</span>. While often knowing our independent variables have a significant effect on the outcome and the size of the coefficient is sufficient for testing our hypotheses, it can be helpful for interpretation’s sake, to see the estimated values for the outcome. This is going to be particularly important once we get into models like logistic regression, where the coefficients won’t be immediately interpretable.</p>
 <p>Recall that our equation for estimating values of our outcomes is:</p>
 <ul>
@@ -1283,8 +1283,8 @@ t_{\hat \beta_k} &amp;= \frac{\hat \beta_k}{s.e.(\hat \beta_k)}
 <li>The <code>predict()</code> function is also very relevant when we move to logistic, probit, etc. regressions. This is just the start of a <a href="https://www.youtube.com/watch?v=DDybg9CNXcM&amp;ab_channel=mylifeinmovies">beautiful friendship</a> between you and <code>predict()</code> and associated functions.</li>
 </ul>
 </section>
-<section id="wrapping-up-ols" class="level2" data-number="4.8">
-<h2 data-number="4.8" class="anchored" data-anchor-id="wrapping-up-ols"><span class="header-section-number">4.8</span> Wrapping up OLS</h2>
+<section id="wrapping-up-ols" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="wrapping-up-ols"><span class="header-section-number">4.7</span> Wrapping up OLS</h2>
 <p>Linear regression is a great way to explain the relationship between one or more independent variables and an outcome variables. However, there is no free lunch. We have already mentioned a couple of assumptions along the way. Below we will summarize these and other assumptions. These are things you should be mindful of when you use linear regression in your own work. Some conditions that generate violations of these assumptions can also motivate why we will seek out alternative methods, such as those that rely on maximum likelihood estimation.</p>
 <p>This is a good place to review Gelman section 3.6.</p>
 <ul>
@@ -1316,8 +1316,8 @@ t_{\hat \beta_k} &amp;= \frac{\hat \beta_k}{s.e.(\hat \beta_k)}
 <p>Why we like OLS. When we meet our assumptions, OLS produces the best linear unbiased estimates (BLUE). A discussion of this <a href="https://www.youtube.com/watch?v=NjTpHS5xLP8&amp;ab_channel=BenLambert">here</a>. We have linearity in our parameters (e.g., <span class="math inline">\(\beta\)</span> and not <span class="math inline">\(\beta^2\)</span> for example). The unbiasedness means that the expected value (aka the average over repeated samples) of our estimates <span class="math inline">\(\mathbb{E}(\hat \beta)= \beta\)</span> is the true value. Our estimates are also efficient, which has to do with the variance, not only are our estimates true in expectation, but we also have lower variance than an alternative linear unbiased estimator could get us. If our assumptions fail, then we might no longer have BLUE. OLS estimates are also consistent, meaning that as the sample gets larger and larger, the estimates start converging to the truth.</p>
 <p>Now, a final hidden assumption in all of this is that the sample of our data is representative of the population we are trying to make inferences about. If that is not the case, then we may no longer be making unbiased observations to that population level. Further adjustments may be required (e.g., analyses of survey data sometimes use weights to adjust estimates to be more representative).</p>
 <p>When we violate these assumptions, OLS may no longer be best, and we may opt for other approaches. More soon!</p>
-<section id="practice-problems" class="level3" data-number="4.8.1">
-<h3 data-number="4.8.1" class="anchored" data-anchor-id="practice-problems"><span class="header-section-number">4.8.1</span> Practice Problems</h3>
+<section id="practice-problems" class="level3" data-number="4.7.1">
+<h3 data-number="4.7.1" class="anchored" data-anchor-id="practice-problems"><span class="header-section-number">4.7.1</span> Practice Problems</h3>
 <ol type="1">
 <li>Let’s use the <code>florida</code> data. Run a regression according to the following formula:
 <ul>
@@ -1328,8 +1328,8 @@ t_{\hat \beta_k} &amp;= \frac{\hat \beta_k}{s.e.(\hat \beta_k)}
 <li>When Perot 1996 vote is 5500, what is the expected 2000 Buchanan vote?</li>
 </ol>
 </section>
-<section id="practice-problem-code-for-solutions" class="level3" data-number="4.8.2">
-<h3 data-number="4.8.2" class="anchored" data-anchor-id="practice-problem-code-for-solutions"><span class="header-section-number">4.8.2</span> Practice Problem Code for Solutions</h3>
+<section id="practice-problem-code-for-solutions" class="level3" data-number="4.7.2">
+<h3 data-number="4.7.2" class="anchored" data-anchor-id="practice-problem-code-for-solutions"><span class="header-section-number">4.7.2</span> Practice Problem Code for Solutions</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a>fit.practice <span class="ot">&lt;-</span> <span class="fu">lm</span>(Buchanan00 <span class="sc">~</span> Perot96 <span class="sc">+</span> Dole96 <span class="sc">+</span> Gore00, <span class="at">data =</span> florida)</span>
 <span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1352,8 +1352,8 @@ t_{\hat \beta_k} &amp;= \frac{\hat \beta_k}{s.e.(\hat \beta_k)}
 </div>
 </section>
 </section>
-<section id="week-2-example" class="level2" data-number="4.9">
-<h2 data-number="4.9" class="anchored" data-anchor-id="week-2-example"><span class="header-section-number">4.9</span> Week 2 Example</h2>
+<section id="week-2-example" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="week-2-example"><span class="header-section-number">4.8</span> Week 2 Example</h2>
 <p>This example is based on Dancygier, Rafaela; Egami, Naoki; Jamal, Amaney; Rischke, Ramona, 2020, “Hate Crimes and Gender Imbalances: Fears over Mate Competition and Violence against Refugees”, published in the <em>American Journal of Political Science</em>. Replication data is available <a href="https://doi.org/10.7910/DVN/QXJDJ5">here</a>. We will draw on the survey portion of the article and replicate Table 1 in the paper. The pre-print is available <a href="https://naokiegami.com/paper/hatecrime.pdf">here</a>.</p>
 <p>The abstract is: <em>As the number of refugees rises across the world, anti-refugee violence has become a pressing concern. What explains the incidence and support of such hate crime? We argue that fears among native men that refugees pose a threat in the competition for female partners is a critical but understudied factor driving hate crime. Employing a comprehensive dataset on the incidence of hate crime across Germany, we first demonstrate that hate crime rises where men face disadvantages in local mating markets. Next, we complement this ecological evidence with original survey measures and confirm that individual-level support for hate crime increases when men fear that the inflow of refugees makes it more difficult to find female partners. Mate competition concerns remain a robust predictor even when controlling for antirefugee views, perceived job competition, general frustration, and aggressiveness. We conclude that a more complete understanding of hate crime and immigrant conflict must incorporate marriage markets and mate competition.</em></p>
 <p>The authors summarize their hypotheses as, “the notion that male refugees are engaged in romantic relationships with German women has received considerable media attention from a variety of sources, with coverage ranging from the curious to the outright hostile. We argue that the prospect of refugee-native mate competition can trigger or compound resentment against refugees, including support for hate crime” <a href="https://naokiegami.com/paper/hatecrime.pdf">pg. 14</a></p>

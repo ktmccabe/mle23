@@ -489,7 +489,7 @@ summary(lm(Y ~ resprace))
 ```
 
 
-## Other examples of breaking the no perfect collinearity rule
+### Other examples of breaking the no perfect collinearity rule
 
 Recall, for OLS, we must assume no perfect collinearity. 
 
