@@ -2,11 +2,11 @@
 title: "Review of OLS"
 ---
 
+```{=tex}
 \newcommand\bE{\mathbf{E}}
 \newcommand\E{\mathbb{E}}
 \newcommand\V{\mathbb{V}}
-
-
+```
 This section will provide a review of OLS.
 
 OLS is the workhorse of empirical political science. We will learn a lot beyond OLS, but OLS is often "good enough" and sometimes preferable for explaining the relationship between variables. That is to say, MLE will expand your toolkit, but OLS should remain a big part of your toolkit.
@@ -83,9 +83,7 @@ This is a good place to review Gelman and Hill 3.4 on different notations for re
 
 Models generally start with some goal. In OLS, our goal is to minimize the sum of squared "residuals." Here is a video I created to explain why we can represent this as $\mathbf{e'}\mathbf{e}$.
 
-
 {{< video src="https://www.youtube.com/watch?v=IFX_n16YTm0" >}}
-
 
 *Note: at the end of the video it should read* $X\hat\beta$, not $\hat X \beta$
 
@@ -349,11 +347,9 @@ ggplot(data = florida.pb, # which data frame
 
 ```
 
-
 ## Extra practice building and breaking regression
 
 Below is additional practice with regression and R, showing how to work with different variables and diagnosing errors.
-
 
 ***What is the association between race and income?***
 
@@ -361,11 +357,9 @@ Let's say we want to explore the relationship between race and income, where the
 
 $Income_i = \alpha + \beta*race_i + \epsilon$
 
-However, race is not a numeric variable. This complicates our regression equation because what exactly is a 1-unit change in race? Sure, we could assign numeric values to each racial category in our data (e.g., white = 1, Black = 2,  Hispanic = 3, Asian = 4), but we would have no reason to assume that the change in income would be linear as you change in race by units. Why should the difference in income between white and Black individuals be estimated as the same difference between Black and Hispanic individuals?
-
+However, race is not a numeric variable. This complicates our regression equation because what exactly is a 1-unit change in race? Sure, we could assign numeric values to each racial category in our data (e.g., white = 1, Black = 2, Hispanic = 3, Asian = 4), but we would have no reason to assume that the change in income would be linear as you change in race by units. Why should the difference in income between white and Black individuals be estimated as the same difference between Black and Hispanic individuals?
 
 In a linear regression, when you have categorical independent variables, what should you typically do?
-
 
 ### Categorical variables
 
@@ -374,6 +368,7 @@ Let's build some data
 *Build a matrix with dummy variables for each race*
 
 Run the code below and see what is in X.
+
 ```{r }
 ## Dummy variable example
 resprace <- c("white", "white", "asian", "black", "hispanic",
@@ -395,13 +390,9 @@ X <- cbind(white, asian, black, hispanic)
 X
 ```
 
-
-
 *Let's build toward a regression model*
 
 Let's create a `Y` variable representing our outcome for income. Let's also add an intercept to our `X` matrix. Take a look into our new X.
-
-
 
 ```{r}
 ## Dependent variable
@@ -410,8 +401,7 @@ Y <- cbind(c(10, 11, 9, 8, 9, 7, 7, 13, 12, 11, 8, 7, 4, 13, 8, 7))
 X <- cbind(1, X)
 ```
 
-
-*Let's now apply the formula $(X'X)^{-1}X'Y$ to estimate our coefficients.*
+*Let's now apply the formula* $(X'X)^{-1}X'Y$ to estimate our coefficients.
 
 Assign the output to an object called `betahat`
 
@@ -419,7 +409,6 @@ Assign the output to an object called `betahat`
 betahat <- solve(t(X) %*% X) %*% t(X) %*% Y
 betahat
 ```
-
 
 ### Formalizing Linear Dependence
 
@@ -429,37 +418,32 @@ If we inspect `X` we can see that taking each column $\mathbf{x_1} - \mathbf{x_2
 
 Formally, a set of vectors (e.g.,$\mathbf{x_1}, \mathbf{x_2}, ...\mathbf{x_k}$) is linearly independent if the equation $\mathbf{x_1}*a_1 + \mathbf{x_2}*a_2 +... + \mathbf{x_k}*a_k= 0$ only in the trivial case where $a_1$ and $a_2$ through $a_k$ are 0. A set of vectors has a linearly dependent relation if there is a solution $\mathbf{x_1}*a_1 + \mathbf{x_2}*a_2 +... + \mathbf{x_k}*a_k = 0$ where not all $a_1, a_2$ through $a_k$ are 0.
 
+For OLS, we must assume no perfect collinearity.
 
-For OLS, we must assume no perfect collinearity. 
+-   No independent variable is constant
+-   No exactly linear relationships among the independent variables
+-   The rank of X is $k$ where the rank of a matrix is the maximum number of linearly independent columns.
 
-  - No independent variable is constant 
-  - No exactly linear relationships among the independent variables
-  - The rank of X is $k$ where the rank of a matrix is the maximum number of linearly independent columns.
-  
 As discussed in the course notes, a square matrix is only invertible if its columns are linearly independent. In OLS, in order to estimate unique solutions for $\hat \beta$, we need to invert $(X'X)^{-1}$. When we have perfect collinearity, we cannot do this.
-  
-*Note the linear dependence in X*
 
+*Note the linear dependence in X*
 
 ```{r}
 ## Matrix
 X[, 1] - X[, 2] - X[, 3] - X[, 4] - X[,5]
 ```
 
-
-*Try to take $(X'X)^{-1}$*
+*Try to take* $(X'X)^{-1}$
 
 ```{r, eval=F}
 solve(t(X) %*% X)
 ```
 
-
-
 How do we correct this?
 
 To address this, we are going to drop one of the categorical variables when we run the regression. Consequently, our coefficients will now be interpreted as differences between this reference category (the category left out, e.g., white) and the particular group (e.g., white vs. Asian or white vs. Black or white vs. Hispanic).
 
-*Redefine `X` removing the white column, and calculate $(X'X)^{-1}X'Y$*
+*Redefine `X` removing the white column, and calculate* $(X'X)^{-1}X'Y$
 
 ```{r}
 X <- cbind(1, asian, black, hispanic)
@@ -467,8 +451,8 @@ betahat <- solve(t(X) %*% X) %*% t(X) %*% Y
 betahat 
 ```
 
-
 *Check this with the `lm()` function*
+
 ```{r}
 summary(lm(Y ~ asian + black + hispanic))
 ```
@@ -488,18 +472,17 @@ resprace <- factor(resprace, levels = c("white", "asian", "black", "hispanic"))
 summary(lm(Y ~ resprace))
 ```
 
-
 ### Other examples of breaking the no perfect collinearity rule
 
-Recall, for OLS, we must assume no perfect collinearity. 
+Recall, for OLS, we must assume no perfect collinearity.
 
-  - No independent variable is constant 
-  - No exactly linear relationships among the independent variables
-  - The rank of X is $k$ where the rank of a matrix is the maximum number of linearly independent columns.
-  
+-   No independent variable is constant
+-   No exactly linear relationships among the independent variables
+-   The rank of X is $k$ where the rank of a matrix is the maximum number of linearly independent columns.
+
 Let's say we wanted to control for age, but all of our sample was 18 years old. Let's try to add this to the `X` matrix.
 
-*Redefine `X` adding age column, and calculate $(X'X)^{-1}X'Y$*
+*Redefine `X` adding age column, and calculate* $(X'X)^{-1}X'Y$
 
 ```{r, eval=FALSE}
 age <- rep(18, length(resprace))
@@ -523,7 +506,6 @@ X <- cbind(1, florida$Perot96, florida$perotadjusted)
 betahat <- solve(t(X) %*% X) %*% t(X) %*% Y
 betahat 
 ```
-
 
 ## Uncertainty and Regression
 

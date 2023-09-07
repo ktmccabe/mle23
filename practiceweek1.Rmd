@@ -1,0 +1,20 @@
+---
+title: "practice week 1"
+author: "my name"
+date: "2023-09-06"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Practice week 1
+
+### first attempt at code
+
+```{r}
+ourlist <- c(1,2,3,4)
+ourlist
+```
+

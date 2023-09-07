@@ -64,6 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./05-IntrotoMaximumLikelihood.html" rel="next">
 <link href="./03-TheMATH.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -155,6 +156,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./04-ReviewofOLS.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Review of OLS</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-IntrotoMaximumLikelihood.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to MLE</span></span></a>
   </div>
 </li>
     </ul>
@@ -696,7 +703,7 @@ F-statistic: 34.61 on 2 and 64 DF,  p-value: 6.477e-11</code></pre>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><em>Let’s now apply the formula <span class="math inline">\((X'X)^{-1}X'Y\)</span> to estimate our coefficients.</em></p>
+<p><em>Let’s now apply the formula</em> <span class="math inline">\((X'X)^{-1}X'Y\)</span> to estimate our coefficients.</p>
 <p>Assign the output to an object called <code>betahat</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>betahat <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> X) <span class="sc">%*%</span> <span class="fu">t</span>(X) <span class="sc">%*%</span> Y</span>
@@ -723,13 +730,13 @@ F-statistic: 34.61 on 2 and 64 DF,  p-value: 6.477e-11</code></pre>
 <pre><code> [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</code></pre>
 </div>
 </div>
-<p><em>Try to take <span class="math inline">\((X'X)^{-1}\)</span></em></p>
+<p><em>Try to take</em> <span class="math inline">\((X'X)^{-1}\)</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>How do we correct this?</p>
 <p>To address this, we are going to drop one of the categorical variables when we run the regression. Consequently, our coefficients will now be interpreted as differences between this reference category (the category left out, e.g., white) and the particular group (e.g., white vs.&nbsp;Asian or white vs.&nbsp;Black or white vs.&nbsp;Hispanic).</p>
-<p><em>Redefine <code>X</code> removing the white column, and calculate <span class="math inline">\((X'X)^{-1}X'Y\)</span></em></p>
+<p><em>Redefine <code>X</code> removing the white column, and calculate</em> <span class="math inline">\((X'X)^{-1}X'Y\)</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, asian, black, hispanic)</span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>betahat <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> X) <span class="sc">%*%</span> <span class="fu">t</span>(X) <span class="sc">%*%</span> Y</span>
@@ -833,7 +840,7 @@ F-statistic: 0.4967 on 3 and 12 DF,  p-value: 0.6914</code></pre>
 <li>The rank of X is <span class="math inline">\(k\)</span> where the rank of a matrix is the maximum number of linearly independent columns.</li>
 </ul>
 <p>Let’s say we wanted to control for age, but all of our sample was 18 years old. Let’s try to add this to the <code>X</code> matrix.</p>
-<p><em>Redefine <code>X</code> adding age column, and calculate <span class="math inline">\((X'X)^{-1}X'Y\)</span></em></p>
+<p><em>Redefine <code>X</code> adding age column, and calculate</em> <span class="math inline">\((X'X)^{-1}X'Y\)</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">18</span>, <span class="fu">length</span>(resprace))</span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, asian, black, hispanic, age)</span>
@@ -8857,6 +8864,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./05-IntrotoMaximumLikelihood.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to MLE</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

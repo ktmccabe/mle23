@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>MLE 2023 - 5&nbsp; Introduction to MLE</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./04-ReviewofOLS.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-IntrotoMaximumLikelihood.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to MLE</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">MLE 2023</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Maxmimum Likelihood Fall 2023</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-ROverview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R Overview</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-TheMATH.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Math</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-ReviewofOLS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Review of OLS</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-IntrotoMaximumLikelihood.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to MLE</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Section Contents</h2>
+   
+  <ul>
+  <li><a href="#what-is-likelihood" id="toc-what-is-likelihood" class="nav-link active" data-scroll-target="#what-is-likelihood"><span class="header-section-number">5.1</span> What is likelihood?</a>
+  <ul>
+  <li><a href="#summarizing-steps-for-maximum-likelihood" id="toc-summarizing-steps-for-maximum-likelihood" class="nav-link" data-scroll-target="#summarizing-steps-for-maximum-likelihood"><span class="header-section-number">5.1.1</span> Summarizing Steps for Maximum Likelihood</a></li>
+  </ul></li>
+  <li><a href="#generalized-linear-models" id="toc-generalized-linear-models" class="nav-link" data-scroll-target="#generalized-linear-models"><span class="header-section-number">5.2</span> Generalized Linear Models</a>
+  <ul>
+  <li><a href="#glm-model." id="toc-glm-model." class="nav-link" data-scroll-target="#glm-model."><span class="header-section-number">5.2.1</span> GLM Model.</a></li>
+  <li><a href="#linking-likelihood-and-the-glm" id="toc-linking-likelihood-and-the-glm" class="nav-link" data-scroll-target="#linking-likelihood-and-the-glm"><span class="header-section-number">5.2.2</span> Linking likelihood and the GLM</a></li>
+  <li><a href="#glm-in-r" id="toc-glm-in-r" class="nav-link" data-scroll-target="#glm-in-r"><span class="header-section-number">5.2.3</span> GLM in R</a></li>
+  </ul></li>
+  <li><a href="#mle-estimation" id="toc-mle-estimation" class="nav-link" data-scroll-target="#mle-estimation"><span class="header-section-number">5.3</span> MLE Estimation</a>
+  <ul>
+  <li><a href="#deriving-estimators" id="toc-deriving-estimators" class="nav-link" data-scroll-target="#deriving-estimators"><span class="header-section-number">5.3.1</span> Deriving Estimators</a></li>
+  <li><a href="#score-function" id="toc-score-function" class="nav-link" data-scroll-target="#score-function"><span class="header-section-number">5.3.2</span> Score function</a></li>
+  <li><a href="#hessian-and-information-matrix" id="toc-hessian-and-information-matrix" class="nav-link" data-scroll-target="#hessian-and-information-matrix"><span class="header-section-number">5.3.3</span> Hessian and Information Matrix</a></li>
+  <li><a href="#mle-estimation-algorithm" id="toc-mle-estimation-algorithm" class="nav-link" data-scroll-target="#mle-estimation-algorithm"><span class="header-section-number">5.3.4</span> MLE Estimation Algorithm</a></li>
+  </ul></li>
+  <li><a href="#mle-properties" id="toc-mle-properties" class="nav-link" data-scroll-target="#mle-properties"><span class="header-section-number">5.4</span> MLE Properties</a>
+  <ul>
+  <li><a href="#hypothesis-tests" id="toc-hypothesis-tests" class="nav-link" data-scroll-target="#hypothesis-tests"><span class="header-section-number">5.4.1</span> Hypothesis Tests</a></li>
+  <li><a href="#model-output-in-r" id="toc-model-output-in-r" class="nav-link" data-scroll-target="#model-output-in-r"><span class="header-section-number">5.4.2</span> Model Output in R</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="mle" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to MLE</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>This section will provide an overview of MLE. There are a few general connections we can make between the things we know (the linear least squares model) and the concepts introduced here.</p>
+<ul>
+<li>Practical Uses: Going from nice continuous outcome data to outcome data generated differently</li>
+<li>Estimation: Going from minimizing squared error to maximizing likelihood.
+<ul>
+<li>Both involve optimization. In likelihood, we are trying to find the optimal values of parameters for a distribution given observed data.</li>
+</ul></li>
+<li>Formulation: Going from Linear Model to Generalized Linear Model</li>
+<li>Mechanics in R: Going from <code>lm()</code> to <code>glm()</code> and its friends.</li>
+</ul>
+<p>The first sections will focus on drawing out these connections. We will then get into the details on the derivations for common methods.</p>
+<p>I encourage you to watch this video from StatQuest to get an initial understanding of likelihood and what it means to “choose the maximum likelihood” using a visual example.</p>
+<ul>
+<li>StatQuest <a href="https://www.youtube.com/watch?v=XepXtl9YKwc">video</a></li>
+</ul>
+<p>These concepts are also addressed in: King, Gary. 1998. Unifying political methodology: The likelihood theory of statistical inference. University of Michigan Press. Note: Available as an electronic resource through the Rutgers library. Chapters 1, 2, 3, 4.6-4.8. (Available online through Rutgers University)</p>
+<section id="what-is-likelihood" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="what-is-likelihood"><span class="header-section-number">5.1</span> What is likelihood?</h2>
+<p>Just like the derivation of the OLS coefficient estimators <span class="math inline">\(\hat \beta\)</span> for the <span class="math inline">\(\beta\)</span> parameters started with a goal (minimizing least squared errors) in describing the relationship between variables, with likelihood we also start with a goal.</p>
+<p>The “<strong><em>likelihood</em></strong>” is going to ask the question: <strong><em>What values of the unknown parameters make the data we see least surprising?</em></strong></p>
+<p>When we get into likelihood, we will be drawing more directly on concepts within probability. We start by making a choice about what type of data generating process best describes our outcome data. Eventually, our likelihood function represents the “probability density of the data given the parameters and predictors.” (Definition taken from Gelman et al.&nbsp;2020, pg. 105).</p>
+<ul>
+<li>In MLE, we are going to choose parameter estimates <span class="math inline">\(\widehat{\theta}\)</span> for <span class="math inline">\(\theta\)</span> that maximize the likelihood that our data came from the particular distribution.</li>
+</ul>
+<p>Already, we are placing a lot of emphasis on the nature of our outcome data. The nature of our likelihood will change depending on if the data are dichotomous (e.g, similar to a set of coin flips that could be head or tails) or a count (e.g., similar to the number of events expected to occur over a certain interval) or more of a continuous numeric distribution with (e.g., where the probabilities of certain levels can be visualized similar to a bell curve). Each of these sets of data are generated through a different process, which is described by a particular probability function.</p>
+<p><em>Example</em></p>
+<p>This introduction is based on Ben Lambert’s video. I highly recommend watching this 8-9 minute <a href="https://www.youtube.com/watch?v=I_dhPETvll8">video</a>. Below we highlight a few of the key concepts and definitions.</p>
+<p>Take the UK population of 70 million. We have a sample of this, and in our sample some observations are male and some female. How can we use what we have, a sample, to estimate the probability that an individual is male?<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<ul>
+<li><p>First, we can make a judgment about the data generating process. We can suppose there is some probability distribution function that determines the probability is a male or female. A probability density function (PDF for continuous data or PMF for discrete data) tells you the relative probability or likelihood of observing a particular value given the parameters of the distribution.</p>
+<ul>
+<li>Let’s call this <span class="math inline">\(f(y_i | p)\)</span> where <span class="math inline">\(y_i = 1\)</span> if male, 0 if female.</li>
+<li>We will say <span class="math inline">\(p\)</span> is the probability an individual is male. <span class="math inline">\(p^{y_i}(1 - p)^{1-y_i}\)</span></li>
+</ul></li>
+<li><p>We are going to treat this like a toss of a coin, which has a Bernouilli distribution (every probability distribution we are dealing with is going to have an associated formula. You don’t need to memorize these. You can look them up on the internet when needed.) So, <span class="math inline">\(f()\)</span> tells us the probability we would have gotten the value of the observation if we think of our observation as this Bernouilli toss of coin. This is the likelihood for a single observation.</p></li>
+<li><p>For example, we can now plug this into our Bernoulli function for the two possible cases of values for <span class="math inline">\(y_i\)</span>.</p>
+<ul>
+<li><span class="math inline">\(f(1|p) = p^1(1-p)^{1-1} = p\)</span> probability an individual is male</li>
+<li><span class="math inline">\(f(0 |p)= p ^0(1-p)^{1-0} = 1-p\)</span> probability individual is female</li>
+</ul></li>
+<li><p>Now we want an estimate using our entire sample of observations, not just a single <span class="math inline">\(i\)</span>. What if we have <span class="math inline">\(n\)</span> observations? <span class="math inline">\(f(y_1, y_2, ... y_n | p)\)</span>. We can write the joint probability as all individual probabilities multiplied together if we assume our observations are independent. This will now represent the likelihood for all observations.</p>
+<ul>
+<li><span class="math inline">\(L = P(Y_1 = y_1, Y_2=y_2, ..., Y_n = y_n)= \prod_{i=1}^n p^y_i(1 - p)^{1-y_i}\)</span></li>
+<li>This answers what is the probability that <span class="math inline">\(Y_1\)</span> took on the particular value <span class="math inline">\(y_1\)</span></li>
+<li>Ok, now we have the statement <span class="math inline">\(L = P(Y_1 = y_1, Y_2=y_2, ..., Y_n = y_n)\)</span>. This joint probability is the likelihood (Technically it is proportionate to the likelihood, but this detail will not matter for us. What this means is there is a hidden constant <span class="math inline">\(k(y)\)</span> multiplied by the joint probability. Because likelihood is a relative concept, this constant can fall out.)</li>
+</ul></li>
+<li><p>Generally, we don’t know <span class="math inline">\(p\)</span>. We are trying to estimate it. <strong><em>What we want to do is choose the</em></strong> <span class="math inline">\(\hat p\)</span> to maximize the likelihood that we would have gotten this set of observations given that <span class="math inline">\(Y_i\)</span> has a probability distribution as specified.</p>
+<ul>
+<li>We have used a buzz word: “maximize.” Just as in OLS, that should be our signal that a derivative should be taken so that we can find the quantities that represent the maximum.</li>
+<li>We differentiate L with respect to p, set it to 0, to give us <span class="math inline">\(\hat{p}\)</span>.</li>
+</ul></li>
+<li><p>Our issue (or at least one of our issues) is that products are tough to differentiate. A chain rule disaster. Instead, we use a trick of taking the log of the likelihood: log <span class="math inline">\(\prod ()\)</span>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Benefit: it turns it into a sum, much easier. <span class="math inline">\(\log ab = \log a + \log b\)</span>. So we will actually differentiate the <span class="math inline">\(\log\)</span> of the likelihood. Yes, this is why we had logs as part of Section 3.</p></li>
+</ul>
+<section id="summarizing-steps-for-maximum-likelihood" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="summarizing-steps-for-maximum-likelihood"><span class="header-section-number">5.1.1</span> Summarizing Steps for Maximum Likelihood</h3>
+<p>Initial Setup</p>
+<ol type="1">
+<li>What is the data generating process? This means think about the structure of the dependent variable. Is it continuous, is it a count, is it binary, is it ordered? Based on this, describe the probability distribution for <span class="math inline">\(Y_i\)</span>.</li>
+<li>Define the likelihood for a single observation</li>
+<li>Define the likelihood for all observations</li>
+<li>Find the log-likelihood</li>
+</ol>
+<p>Then, the derivation begins! Yes, we’ve only just <a href="https://www.youtube.com/watch?v=uaqoQr-aCtQ">begun</a>, but that first step of deciding the data generating process is huge.</p>
+<p><strong>Example: Count Data</strong></p>
+<p>Let’s say we are trying to understand the relationship between an independent variable and the number of news articles reported on a topic. This is a count of data. It goes from 0 to some positive number, never extending below 0. A distribution that is a good fit for this is the Poisson. We start by specifying this as our data generating process and looking up the Poisson probability density function, which has the parameter <span class="math inline">\(\lambda\)</span>.</p>
+<ol type="1">
+<li>Data Generating Process and probability density function.</li>
+</ol>
+<span class="math display">\[\begin{align*}
+&amp;Y_i \stackrel{\rm i.i.d.}{\sim} Pois(\lambda)\Rightarrow\\
+&amp;\Pr(Y=Y_i|\lambda)=\lambda \frac{exp(-\lambda) \lambda^{Y_i}}{Y_i!}
+\end{align*}\]</span>
+<p>Note: we assume our observations are iid (independently and identically distributed (For <a href="http://www.statisticshowto.com/iid-statistics/%7D">definition</a>.) This assumption can be relaxed.</p>
+<ol start="2" type="1">
+<li>What is the likelihood for a single observation?</li>
+</ol>
+<span class="math display">\[\begin{align*}
+\mathcal L(\lambda|Y_i)=\Pr(Y=Y_i|\lambda)
+\end{align*}\]</span>
+<ol start="3" type="1">
+<li>What is the likelihood for all observations?</li>
+</ol>
+<span class="math display">\[\begin{align*}
+\mathcal L(\lambda|Y)&amp;=\mathcal L(\lambda|Y_1)\times\mathcal  L(\lambda|Y_2)\times \ldots \times \mathcal L(\lambda|Y_{N})\\
+\mathcal L(\lambda|Y)&amp;=\prod_{i=1}^N\mathcal L(\lambda|Y_i)\\
+\end{align*}\]</span>
+<ol start="4" type="1">
+<li>Easier to work with log-likelihood</li>
+</ol>
+<span class="math display">\[\begin{align*}
+\ell(\lambda|Y)&amp;=\sum_{i=1}^N\mathcal \log(\mathcal L(\lambda|Y_i))\\
+\end{align*}\]</span>
+<p>Given observed data <span class="math inline">\(Y\)</span>, what is the likelihood it was generated from <span class="math inline">\(\lambda\)</span>? We will be choosing estimates of the parameters that maximize the likelihood we would have seen these data. Generally, we will also consider parameters like <span class="math inline">\(\lambda\)</span> to be functions of our covariates– the things we think help explain our otucome.</p>
+<p>For additonal practice, try to write down the likelihood of a single observation, the likelihood for all observations, and the log likelihood for an outcome we believe is normally distributed. We have <span class="math inline">\(Y_i \sim N(\mu, \sigma^2)\)</span>. Our PDF is:</p>
+<span class="math display">\[\begin{align*}
+f(Y_i | \theta) &amp;=  \frac{1}{\sigma\sqrt{2\pi}}e^{\frac{-(Y_i-\mu)^2}{2\sigma^2}}
+\end{align*}\]</span>
+<p>You can take it from here.</p>
+<details>
+<summary>
+Try on your own, then expand for the solution.
+</summary>
+<p>We have the PDF.</p>
+<ol start="2" type="1">
+<li>Let’s write the likelihood for a single observation.</li>
+</ol>
+<span class="math display">\[\begin{align*}
+L(\theta | Y_i) = L(\mu, \sigma^2 | Y_i) &amp;= \frac{1}{\sigma\sqrt{2\pi}}e^{\frac{-(Y_i-\mu)^2}{2\sigma^2}}
+\end{align*}\]</span>
+<ol start="3" type="1">
+<li>Let’s write the likelihood for all observations.</li>
+</ol>
+<span class="math display">\[\begin{align*}
+L(\mu, \sigma^2 | Y) &amp;=  \prod_{i=1}^{N} \frac{1}{\sigma\sqrt{2\pi}}e^{\frac{-(Y_i-\mu)^2}{2\sigma^2}}
+\end{align*}\]</span>
+<ol start="4" type="1">
+<li>Let’s write the log likelihood.</li>
+</ol>
+<span class="math display">\[\begin{align*}
+\ell(\mu, \sigma^2 | Y) &amp;= \sum_{i = 1}^N \log \Bigg( \frac{1}{\sigma\sqrt{2\pi}}e^{\frac{-(Y_i-\mu)^2}{2\sigma^2}}\Bigg)\\
+&amp;= \sum_{i = 1}^N \underbrace{\log \Bigg( \frac{1}{\sigma\sqrt{2\pi}}\Bigg) + \log e^{\frac{-(Y_i-\mu)^2}{2\sigma^2}}}_\text{Using the rule $\log ab = \log a + \log b$}\\
+&amp;= \underbrace{\sum_{i = 1}^N \log  \frac{1}{\sigma\sqrt{2\pi}} - \frac{(Y_i-\mu)^2}{2\sigma^2}}_\text{The second term was of the form $\log e ^ a$, we can re-write as $a * \log e$. $\log e$ cancels to 1, leaving us with just $a$.}\\
+&amp;= \sum_{i = 1}^N \log  \frac{1}{\sigma\sqrt{2\pi}} - \frac{(Y_i-\mathbf{x}_i'\beta)^2}{2\sigma^2}
+\end{align*}\]</span>
+<p>Note how we usually will sub in <span class="math inline">\(X\beta\)</span> or <span class="math inline">\(\mathbf{x_i'\beta}\)</span> for the parameter because we think these will vary according to covariates in our data. The <span class="math inline">\(e\)</span> in the Normal PDF is the base of the natural log. It is a mathematical constant. Sometimes you might see this written as <span class="math inline">\(exp\)</span> instead of <span class="math inline">\(e\)</span>. In R, you can use <code>exp()</code> to get this constant. For example, <span class="math inline">\(\log e^2\)</span> in R would be <code>log(exp(2))</code>.</p>
+</details>
+</section>
+</section>
+<section id="generalized-linear-models" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="generalized-linear-models"><span class="header-section-number">5.2</span> Generalized Linear Models</h2>
+<p>Before we get into the details of deriving the estimators, we are going to discuss another connection between linear models and the types of models we will work with when we are using common maximum likelihood estimators.</p>
+<p>Recall our linear model: <span class="math inline">\(y_i = \beta_o + \beta_1x_{i1} + ... \beta_kx_{ik} + \epsilon\)</span></p>
+<ul>
+<li><span class="math inline">\(Y\)</span> is modelled by a linear function of explanatory variables <span class="math inline">\(X\)</span></li>
+<li><span class="math inline">\(\hat \beta\)</span> is our estimate of how much <span class="math inline">\(X\)</span> influences <span class="math inline">\(Y\)</span> (the slope of the line)</li>
+<li>On average, a one-unit change in <span class="math inline">\(X_{ik}\)</span> is associated with a <span class="math inline">\(\hat \beta_{k}\)</span> change in <span class="math inline">\(Y_i\)</span></li>
+<li>Slope/rate of change is linear, does not depend on where you are in <span class="math inline">\(X\)</span>. Every one-unit change has the same expected increase or decrease</li>
+</ul>
+<p>Sometimes we are dealing with outcome data that are restricted or “limited” in some way such that this standard linear predictor will no longer make sense. If we keep changing <span class="math inline">\(X\)</span> we may eventually generate estimates of <span class="math inline">\(\hat y\)</span> that extend above or below the plausible range of values for our actual observed outcomes.</p>
+<p>The generalized linear model framework helps address this problem by adding two components: a nonlinear transformation and a probability model. This allows us to make predictions of our outcomes that retain the desired bounded qualities of our observed data. Generalized linear models include linear regression as a special case (a case where no nonlinear transformation is required), but as its name suggests, is much more general and can be applied to many different outcome structures.</p>
+<section id="glm-model." class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="glm-model."><span class="header-section-number">5.2.1</span> GLM Model.</h3>
+<p>In a GLM, we still have a “linear predictor”: <span class="math inline">\(\eta_i = \beta_o + \beta_1x_{i1} + ... + \beta_kx_{ik}\)</span></p>
+<ul>
+<li>But our <span class="math inline">\(Y_i\)</span> might be restricted in some way (e.g., might be binary).</li>
+<li>So, now we require a “link” function which tells us how <span class="math inline">\(Y\)</span> depends on the linear predictor. This is the key to making sure our linear predictor, when transformed, will map into sensible units of Y.</li>
+</ul>
+<p>Our <span class="math inline">\(Y_i\)</span> will also now be expressed in terms of a probability model, and it is this probability distribution that generates the randomness (the stochastic component of the model). For example, when we have binary outcome data, such as <span class="math inline">\(y_i =\)</span> 1 or 0 for someone turning out to vote or not, we may try to estimate the probability that someone turns out to vote given certain explanatory variables. We can write this as <span class="math inline">\(Pr(Y_i = 1 | x_i\)</span>).</p>
+<p>In a GLM, we need a way to transform our linear predictor such that as we shift in values of <span class="math inline">\(X\hat \beta\)</span>, we stay within plausible probability ranges.</p>
+<ul>
+<li><p>To do so we use a “link” function that is used to model the data.</p>
+<ul>
+<li>For example, in logistic regression, our link function will be the “logit”:</li>
+</ul>
+<span class="math display">\[\begin{align*}
+Pr(Y_i = 1 | x_i) &amp;= \pi_i\\
+\eta_i &amp;= \text{logit}(\pi_i) = \log \frac{\pi_i}{1-\pi_i} &amp;= \beta_o + \beta_1x_{i1} + ... + \beta_kx_{ik}
+\end{align*}\]</span></li>
+<li><p>One practical implication of this is that when we generate our coefficient estimates <span class="math inline">\(\hat \beta\)</span>, these will no longer be in units if <span class="math inline">\(y_i\)</span> or even in units of probability. Instead, they will be in units as specified by the link function. In logistic regression, this means they will be in “logits.”</p>
+<ul>
+<li>For every one-unit change in <span class="math inline">\(x_k\)</span>, we get a <span class="math inline">\(\hat \beta_k\)</span> change in <strong>logits</strong> of <span class="math inline">\(y\)</span></li>
+</ul></li>
+<li><p>However, the nice thing is that because we know the link function, with a little bit of work, we can use the “response” function to transform our estimates back into the units of <span class="math inline">\(y_i\)</span> that we care about.</p></li>
+</ul>
+<span class="math display">\[\begin{align*}
+Pr(Y_i = 1 | x_i) &amp;= \pi_i = g^{-1}(\eta_i) \\
+&amp;= \text{logit}^{-1}(\pi_i) \\
+&amp;= \frac{exp^{x_i'\beta}}{1 + exp^{x_i'\beta}}
+\end{align*}\]</span>
+</section>
+<section id="linking-likelihood-and-the-glm" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="linking-likelihood-and-the-glm"><span class="header-section-number">5.2.2</span> Linking likelihood and the GLM</h3>
+<p>Let’s use <span class="math inline">\(\theta\)</span> to represent the parameters of the pdf/pmf that we have deemed appropriate for our outcome data. As discussed before, we can write the likelihood for an observation as a probability statement.</p>
+<ul>
+<li><span class="math inline">\(\mathcal L (\theta | Y_i) = \Pr(Y=Y_i | \theta)\)</span></li>
+</ul>
+<p>In social science, instead of thinking of these parameters as just constants (e.g., <span class="math inline">\(p\)</span> or <span class="math inline">\(\mu\)</span>), we generally believe that they vary according to our explanatory variables in <span class="math inline">\(X\)</span>. We think <span class="math inline">\(Y_i\)</span> is distributed according to a particular probability function and that the parameters that shape that distribution are a function of the covariates.</p>
+<ul>
+<li><span class="math inline">\(Y_i \sim f(y_i | \theta_i)\)</span> and <span class="math inline">\(\theta_i = g(X_i, \beta)\)</span></li>
+</ul>
+<p>Each type of model we come across–guided by the structure of the dependent variable– is just going to have different formulas for each of these components.</p>
+<p><strong>Examples</strong></p>
+<table class="table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Model</th>
+<th>PDF</th>
+<th><span class="math inline">\(\theta_i\)</span> ; Link<span class="math inline">\(^{-1}\)</span></th>
+<th><span class="math inline">\(\eta_i\)</span></th>
+<th style="text-align: right;"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Linear</td>
+<td><span class="math inline">\(Y_i \sim \mathcal{N}(\mu_i,\sigma^2)\)</span></td>
+<td><span class="math inline">\(\mu_i = X_i^\prime\beta\)</span></td>
+<td><span class="math inline">\(\mu_i\)</span></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Logit</td>
+<td><span class="math inline">\(Y_i \sim \rm{Bernoulli}(\pi_i)\)</span></td>
+<td><span class="math inline">\(\pi_i=\frac{\exp(X_i^\prime\beta)}{(1+\exp(X_i^\prime\beta))}\)</span></td>
+<td>logit<span class="math inline">\((\pi_i)\)</span></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Probit</td>
+<td><span class="math inline">\(Y_i \sim \rm{Bernoulli}(\pi_i)\)</span></td>
+<td><span class="math inline">\(\pi_i = \Phi(X_i^\prime\beta)\)</span></td>
+<td><span class="math inline">\(\Phi^{-1}(\pi_i)\)</span></td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+<p>These generalized linear models are then fit through maximum likelihood estimation, through an approach discussed in the next section where we use algorithms to choose the most likely values of the <span class="math inline">\(\beta\)</span> parameters given the observed data.</p>
+<p>Note: not all ML estimators can be written as generalized linear models, though many we use in political science are indeed GLMs. To be a GLM, the distribution we specify for the data generating process has to be a part of the exponential family of probability distributions (fortunately the gaussian normal, poisson, bernouilli, binomial, gamma, and negative binomial are), and after that, we need the linear predictor and link function.</p>
+</section>
+<section id="glm-in-r" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="glm-in-r"><span class="header-section-number">5.2.3</span> GLM in R</h3>
+<p>The way generalized linear models work in R is very similar to lm.</p>
+<p>Below is a simple example where we will specify a linear model in <code>lm()</code> and <code>glm()</code> to compare.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Load Data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>florida <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/ktmccabe/teachingdata/main/florida.csv"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>fit.lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(Buchanan00 <span class="sc">~</span> Perot96, <span class="at">data=</span>florida)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>fit.glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(Buchanan00 <span class="sc">~</span> Perot96, <span class="at">data=</span>florida, </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">family=</span><span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">"identity"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>For the glm, we just need to tell R the family of distributions we are using and the appropriate link function. In this example, we are going to use the normal gaussian distribution to describe the data generating process for <code>Buchanan00</code>. This is appropriate for nice numeric continuous data, even if it isn’t perfectly normal. The normal model has a link function, but it is the special case where the link function is just the identity. There is no nonlinear transformation that takes place. Therefore, we can still interpret the <span class="math inline">\(\hat \beta\)</span> results in units of <span class="math inline">\(Y\)</span> (votes in this case).</p>
+<p>In this special case, the <span class="math inline">\(\hat \beta\)</span> estimates from <code>lm()</code> and <code>glm()</code> will be the same.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit.lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)     Perot96 
+ 1.34575212  0.03591504 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit.glm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)     Perot96 
+ 1.34575212  0.03591504 </code></pre>
+</div>
+</div>
+<p>There are some differences in the mechanics of how we get to the results in each case, but we will explore those more in the next section. I.e., these coefficients do not come out of thin air. Just like in OLS, we have to work for them.</p>
+</section>
+</section>
+<section id="mle-estimation" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="mle-estimation"><span class="header-section-number">5.3</span> MLE Estimation</h2>
+<p>This section will discuss the general process for deriving maximum likelihood estimators. It’s all very exciting. It builds on the resources from the previous sections. In the next section, we will go through this process for a binary dependent variable. Here, we lay out the overview.</p>
+<section id="deriving-estimators" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="deriving-estimators"><span class="header-section-number">5.3.1</span> Deriving Estimators</h3>
+<p>Recall, we’ve already gone through a few steps of maximum likelihood estimation.</p>
+<p>Initial Setup</p>
+<ol type="1">
+<li>What is the data generating process? This means think about the structure of the dependent variable. Is it continuous, is it a count, is it binary, is it ordered? Based on this, describe the probability distribution for <span class="math inline">\(Y_i\)</span>.</li>
+<li>Define the likelihood for a single observation</li>
+<li>Define the likelihood for all observations</li>
+<li>Find the log-likelihood</li>
+</ol>
+<p>Now we add steps building on the log-likelihood.</p>
+<ol start="5" type="1">
+<li>Maximize the function with respect to (wrt) <span class="math inline">\(\theta\)</span>
+<ul>
+<li>Take the derivative wrt <span class="math inline">\(\theta\)</span>. We call this the “score”</li>
+<li>Set <span class="math inline">\(S(\theta) = 0\)</span> and solve for <span class="math inline">\(\hat \theta\)</span> (if possible)</li>
+<li>If not possible (often the case), we use an optimization algorithm to maximize the log likelihood.</li>
+</ul></li>
+<li>Take the second derivative of the log likelihood to get the “hessian” and help estimate the uncertainty of the estimates.</li>
+</ol>
+</section>
+<section id="score-function" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="score-function"><span class="header-section-number">5.3.2</span> Score function</h3>
+<p>The first derivative of the log-likelihood is called the score function: <span class="math inline">\(\frac{\delta \ell}{\delta \theta} = S(\theta)\)</span>. This will tell us how steep the slope of the log likelihood is given certain values of the parameters. What we are looking for as we sift through possible values of the parameters, is the set of values that will make the slope zero, signalling that the function has reached a peak (maximizing the likelihood.)</p>
+<p>We set the <span class="math inline">\(S(\theta) = 0\)</span> and solve for <span class="math inline">\(\hat \theta\)</span> (if possible).</p>
+<ul>
+<li><span class="math inline">\(\hat \theta\)</span> are the slopes/gradient, which we use as estimates (e.g., <span class="math inline">\(\hat \beta\)</span>).</li>
+<li>We can interpret the sign and significance just as we do in OLS.</li>
+<li>But, unlike OLS, most of the time, these are not linear changes in units of <span class="math inline">\(Y\)</span></li>
+<li>We have to transform them into interpretable quantities</li>
+</ul>
+<p><strong>Example: Normally distributed outcome</strong></p>
+<p>Start with the log-likelihood</p>
+<span class="math display">\[\begin{align*}
+\ell(\theta | Y) &amp;= \sum_{i = 1}^N \log \Bigg( \frac{1}{\sigma\sqrt{2\pi}}e^{\frac{-(Y_i-\mu)^2}{2\sigma^2}}\Bigg)\\
+&amp;= \sum_{i = 1}^N \underbrace{\log \Bigg( \frac{1}{\sigma\sqrt{2\pi}}\Bigg) + \log e^{\frac{-(Y_i-\mu)^2}{2\sigma^2}}}_\text{Using the rule $\log ab = \log a + \log b$}\\
+&amp;= \underbrace{\sum_{i = 1}^N \log  \frac{1}{\sigma\sqrt{2\pi}} - \frac{(Y_i-\mu)^2}{2\sigma^2}}_\text{The second term was of the form $\log e ^ a$, we can re-write as $a * \log e$. $\log e$ cancels to 1, leaving us with just $a$.}\\
+&amp;= \sum_{i = 1}^N \log  \frac{1}{\sigma\sqrt{2\pi}} - \frac{(Y_i-\mathbf{x}_i'\beta)^2}{2\sigma^2}
+\end{align*}\]</span>
+<ul>
+<li>Note: when you see <span class="math inline">\(\mathbf{x}_i'\beta\)</span>, usually that is the representation of the multiplication of <span class="math inline">\(k\)</span> covariates (a <span class="math inline">\(1 \times k\)</span> vector) for a particular observation <span class="math inline">\(i\)</span> by <span class="math inline">\(k \times 1\)</span> coefficient values <span class="math inline">\(\beta\)</span>. You can contrast this with <span class="math inline">\(X\beta\)</span>, which represents <span class="math inline">\(n \times k\)</span> rows of observations with <span class="math inline">\(k\)</span> covariates multiplied by the <span class="math inline">\(k \times 1\)</span> coefficients. You will see both notations depending on if notation is indexed by <span class="math inline">\(i\)</span> or represented fully in matrix form. The <span class="math inline">\(\mathbf{x_i'}\)</span> representation tends to come up more when we are dealing with likelihood equations. Here is a short video relating these notations.</li>
+</ul>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/5QFj6_D-aAw" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>Take the derivative wrt <span class="math inline">\(\theta\)</span>. Note: we have to take two derivatives- one for <span class="math inline">\(\mu\)</span> (<span class="math inline">\(\beta\)</span>) and one for <span class="math inline">\(\sigma^2\)</span>. For this example we will focus only on the derivative wrt to <span class="math inline">\(\beta\)</span>, as that it what gets us the coefficient estimates.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p><em>Note: Below, we can simplify the expression of the log likelihood for taking the derivative with respect to</em> <span class="math inline">\(\beta\)</span> because any term (i.e., the first term in the log likelihood in this case) that does not have a <span class="math inline">\(\beta\)</span> will fall out of the derivative expression. This is because when we take the derivative with respect to <span class="math inline">\(\beta\)</span> we treat all other terms as constants, and the slope of a constant (the rate of change of a constant) is zero. The curly <span class="math inline">\(\delta\)</span> in the expression below means “the derivative of …” with respect to <span class="math inline">\(\beta\)</span>.</p>
+<p><span class="math display">\[\begin{align*}
+\delta_\beta \ell(\theta | Y) &amp;= -\frac{1}{2\sigma^2}\sum_{i = 1}^N \delta_\beta (Y_i-\mathbf{x}_i'\hat \beta)^2
+\end{align*}\]</span> The right term should look familiar! It is the same derivative we take when we are minimizing the least squares. Therefore, we will end up with <span class="math inline">\(S(\hat \theta)_\beta = \frac{1}{\sigma^2}X'(Y - X\hat \beta)\)</span>. We set this equal to 0. <span class="math display">\[\begin{align*}
+\frac{1}{\sigma^2}X'(Y - X\hat \beta) &amp;= 0\\
+\frac{1}{\sigma^2}X'Y &amp;= \frac{1}{\sigma^2}X'X\hat \beta \\
+(X'X)^{-1}X'Y = \hat \beta
+\end{align*}\]</span></p>
+</section>
+<section id="hessian-and-information-matrix" class="level3" data-number="5.3.3">
+<h3 data-number="5.3.3" class="anchored" data-anchor-id="hessian-and-information-matrix"><span class="header-section-number">5.3.3</span> Hessian and Information Matrix</h3>
+<p>The second derivative of the log-likelihood is the Hessian <span class="math inline">\((H(\theta))\)</span>.</p>
+<ul>
+<li>The second derivative is a measure of the curvature of the likelihood function. This will help us confirm that we are at a maximum, and it will also help us calculate the uncertainty.</li>
+<li>The more curved (i.e., the steeper the curve), the more certainty we have.</li>
+<li>The <span class="math inline">\(I\)</span> stands for the information matrix. The <span class="math inline">\(H\)</span> stands for Hessian. <span class="math inline">\(I(\theta) = - \mathbb{E}(H)\)</span>
+<ul>
+<li><span class="math inline">\(var(\theta) = [I(\theta)]^{-1} = ( - \mathbb{E}(H))^{-1}\)</span></li>
+<li>Standard errors are the square roots of the diagonals of this <span class="math inline">\(k \times k\)</span> matrix (like <code>vcov()</code> in OLS)</li>
+</ul></li>
+</ul>
+<p><strong><em>Example: Normal</em></strong></p>
+<p>Start with the log-likelihood</p>
+<span class="math display">\[\begin{align*}
+\ell(\theta | Y) &amp;= \sum_{i = 1}^N \log  \frac{1}{\sigma\sqrt{2\pi}} - \frac{(Y_i-x_i'\beta)^2}{2\sigma^2}
+\end{align*}\]</span>
+<p>Because our <span class="math inline">\(\theta\)</span> has two parameters, the Hessian actually has four components. For this example, we will focus on one: the first and second derivatives wrt <span class="math inline">\(\beta\)</span>.</p>
+<ul>
+<li><p>Recall the first derivative = <span class="math inline">\(\frac{1}{\sigma^2}X'(Y - X\hat \beta)\)</span>.</p></li>
+<li><p>We now take the second derivative with respect to <span class="math inline">\(\hat \beta\)</span></p>
+<span class="math display">\[\begin{align*}
+\frac{\delta^2}{\delta \hat \beta} \frac{1}{\sigma^2}X'(Y - X\hat \beta)&amp;= -\frac{1}{\sigma^2}X'X
+\end{align*}\]</span></li>
+<li><p>To get our variance, we take the inverse of the negative (-) of this:</p>
+<ul>
+<li><span class="math inline">\(\sigma^2(X'X)^{-1}\)</span> Should look familiar!</li>
+</ul></li>
+</ul>
+<p>With this example, we can start to see why <code>lm</code> and <code>glm</code> for a normally distributed outcome generate the same estimates. The maximum likelihood estimator is the same as the least squares estimator.</p>
+</section>
+<section id="mle-estimation-algorithm" class="level3" data-number="5.3.4">
+<h3 data-number="5.3.4" class="anchored" data-anchor-id="mle-estimation-algorithm"><span class="header-section-number">5.3.4</span> MLE Estimation Algorithm</h3>
+<p>Suppose we are interested in finding the true probability <span class="math inline">\(p\)</span> that a comment made on twitter is toxic, and we have a small sample of hand-coded data. Let’s say we have <span class="math inline">\(n=8\)</span> observations where we could observe a <span class="math inline">\(y_i = 1\)</span> or <span class="math inline">\(0\)</span>. For example, let’s say we read an online sample of tweets and we classified tweets as “toxic=1” or “nontoxic=0.” In our sample of <span class="math inline">\(n=8\)</span>, we coded 6 of them as toxic and 2 as nontoxic.</p>
+<p><img src="images/toxictweets.png" class="img-fluid" style="width:40.0%"></p>
+<p>We can write down the likelihood for a single observation using the Bernouilli pmf:</p>
+<p><span class="math inline">\(L(p | y_i) = p^{y_i}*(1-p)^{(1-y_i)}\)</span></p>
+<p>We could then write out the likelihood for all 8 observations as follows:</p>
+<ul>
+<li>Where the equation simplifies to <span class="math inline">\(p\)</span> for observations where <span class="math inline">\(y_i\)</span> = 1 and (1-p) for observations where <span class="math inline">\(y_i\)</span> = 0. For simplicity, let’s say <span class="math inline">\(i=1\)</span> to <span class="math inline">\(6\)</span> were toxic, and <span class="math inline">\(i=7\)</span> to <span class="math inline">\(8\)</span> were nontoxic.</li>
+<li><span class="math inline">\(L(p | \mathbf{y}) = p * p * p * p * p * p * (1-p) * (1-p)\)</span></li>
+</ul>
+<p>Now a naive way to maximize the likelihood would be to just try out different quantities for <span class="math inline">\(p\)</span> and see which give us the maximum.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Let's try this for different p's</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">seq</span>(.<span class="dv">1</span>, .<span class="dv">9</span>, .<span class="dv">05</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>L <span class="ot">&lt;-</span> p <span class="sc">*</span> p <span class="sc">*</span> p <span class="sc">*</span> p <span class="sc">*</span> p <span class="sc">*</span> p <span class="sc">*</span> (<span class="dv">1</span><span class="sc">-</span>p) <span class="sc">*</span> (<span class="dv">1</span><span class="sc">-</span>p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can then visualize the likelihood results and figure out about at which value for <span class="math inline">\(\hat p\)</span> we have maximized the likelihood.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>p, <span class="at">y=</span>L, <span class="at">type=</span><span class="st">"b"</span>,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xaxt=</span><span class="st">"n"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>, p, p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="05-IntrotoMaximumLikelihood_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>When we have more complicated models, we are taking a similar approach–trying out different values and comparing the likelihood (or log likelihood), but we will rely on a specific algorithm(s) that will help us get to the maximum a bit faster than a naive search would allow.</p>
+<p>Don’t worry the built-in functions in R will do this for you (e.g., what happens under the hood of <code>glm()</code>), but if you were to need to develop your own custom likelihood function for some reason, you could directly solve it through an optimization algorithm if no such built-in function is appropriate.</p>
+<p><strong><em>You can skip the details below if you wish and jump to the MLE Properties section. This content will only be involved in problem sets as extra credit, as you may not have to use optim in your own research.</em></strong></p>
+<p>The <code>optim</code> function in R provides one such approach. For this optimization approach, we will need to.</p>
+<ul>
+<li>Derive the likelihood and/or log likelihood function and score</li>
+<li>Create an R <code>function</code> for the quantity to want to optimize (often the log likelihood) where given we provide the function certain values, the function returns the resulting quantity. (Kind of like when we supply the function <code>mean()</code> with a set of values, it returns the average of the values by computing the average under the hood of the function.)</li>
+<li>Use <code>optim()</code> to maximize
+<ul>
+<li><code>optim(par, fn, ..., gr, method, control, hessian,...)</code>, where</li>
+<li><code>par</code>: initial values of the parameters</li>
+<li><code>fn</code>: function to be maximized (minimized)</li>
+<li><code>gr</code>: optional argument, can include the gradient to help with optimization</li>
+<li><code>...</code>: (specify other variables in <code>fn</code>)</li>
+<li><code>method</code>: optimization algorithm</li>
+<li><code>control</code>: parameters to fine-tune optimization</li>
+<li><code>hessian</code>: returns the Hessian matrix if <code>TRUE</code></li>
+</ul></li>
+</ul>
+<p>By default, <code>optim</code> performs minimization. Make sure to set <code>control = list(fnscale=-1)</code> for maximization</p>
+<ul>
+<li>For starting values <code>par</code>, least squares estimates are often used. More sensible starting values help your optimize more quickly. You may need to adjust the <code>maxit</code> control parameter to make sure the optimization converges.</li>
+<li>A commonly used <code>method</code> is <code>BFGS</code> (a variant of Newton-Raphson), similar to what <code>glm()</code> uses, but there are other methods available.</li>
+</ul>
+<p><strong><em>Example 1: estimating p</em></strong></p>
+<p>Let’s take our relatively simple example about toxic tweets above and optimize the likelihood. First, we create a function for the likelihood that will calculate the likelihood for the values supplied. In the future, our models will be complicated enough, we will stick with the log likelihood, which allows us to take a sum instead of a product.</p>
+<p>One benefit of R is that you can write your own functions, just like <code>mean()</code> is a built-in function in R. For more information on writing functions, you can review Imai <a href="https://assets.press.princeton.edu/chapters/s11025.pdf">QSS Chapter 1 pg. 19.</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>lik.p <span class="ot">&lt;-</span> <span class="cf">function</span>(p){</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  lh <span class="ot">&lt;-</span> p <span class="sc">*</span> p <span class="sc">*</span> p <span class="sc">*</span> p <span class="sc">*</span> p <span class="sc">*</span> p <span class="sc">*</span> (<span class="dv">1</span><span class="sc">-</span>p) <span class="sc">*</span> (<span class="dv">1</span><span class="sc">-</span>p)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(lh)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Ok, now that we have our likelihood function, we can optimize. We just have to tell R a starting parameter for <span class="math inline">\(\hat p\)</span>. Let’s give it a (relatively) bad one just to show how it works (i.e., can <code>optim</code> find the sensible .75 value. If you give the function too bad of a value, it might not converge before it maxes out and instead return a local min/max instead of a global one.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>startphat <span class="ot">&lt;-</span> .<span class="dv">25</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>opt.fit <span class="ot">&lt;-</span> <span class="fu">optim</span>(<span class="at">par =</span> startphat, <span class="at">fn=</span>lik.p, <span class="at">method=</span><span class="st">"BFGS"</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">control=</span><span class="fu">list</span>(<span class="at">fnscale=</span><span class="sc">-</span><span class="dv">1</span>))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="do">## This should match our plot</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>opt.fit<span class="sc">$</span>par</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7500035</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="do">## you should check convergence. Want this to be 0 to make sure it converged</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>opt.fit<span class="sc">$</span>convergence</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<p><strong><em>Example 2: Linear Model</em></strong></p>
+<p>We can use <code>optim</code> to find a solution for a linear model by supplying R with our log likelihood function.</p>
+<p>For the MLE of the normal linear model, our log likelihood equation is:</p>
+<span class="math display">\[\begin{align*}
+\ell(\theta | Y) &amp;= \sum_{i = 1}^N \log  \frac{1}{\sigma\sqrt{2\pi}} - \frac{(Y_i-\mathbf{x}_i'\beta)^2}{2\sigma^2}
+\end{align*}\]</span>
+<p>Now that we have our log likelihood, we can write a function that for a given set of <span class="math inline">\(\hat \beta\)</span> and <span class="math inline">\(\hat \sigma^2\)</span> parameter values, <span class="math inline">\(X\)</span>, and <span class="math inline">\(Y\)</span>, it will return the log likelihood.</p>
+<ul>
+<li>Below we indicate we will supply an argument <code>par</code> (an arbitrary name) that will inclue our estimates for the parameters: <span class="math inline">\(k\)</span> values for the set of <span class="math inline">\(\hat \beta\)</span> estimates and a <span class="math inline">\(k + 1\)</span> value for the <span class="math inline">\(\hat \sigma^2\)</span> estimate. Many models with only have one set of parameters. This is actually a slightly more tricky example.</li>
+<li>The <code>lt</code> line is the translation of the equation above into R code</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Log Likelihood function for the normal model</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>l_lm <span class="ot">&lt;-</span> <span class="cf">function</span>(par, Y, X){</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  k <span class="ot">&lt;-</span> <span class="fu">ncol</span>(X)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  beta <span class="ot">&lt;-</span> par[<span class="dv">1</span><span class="sc">:</span>k]</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  sigma2 <span class="ot">&lt;-</span> par[(k<span class="sc">+</span><span class="dv">1</span>)]</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  lt <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">log</span>(<span class="dv">1</span><span class="sc">/</span>(<span class="fu">sqrt</span>(sigma2)<span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">2</span><span class="sc">*</span>pi))) <span class="sc">-</span> ((Y <span class="sc">-</span> X <span class="sc">%*%</span> beta)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>sigma2)))</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(lt)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now that we have our function, we can apply it to a problem.</p>
+<p>Let’s use an example with a sample of Democrats from the 2016 American National Election Study dataset. This example is based on the article “Hostile Sexism, Racial Resentment, and Political Mobilization” by Kevin K. Banda and Erin C. Cassese published in <em>Political Behavior</em> in 2020. We are not replicating their article precisely, but we use similar data and study similar relationships.</p>
+<p>The researchers were interested in how cross-pressures influence the political participation of different partisan groups. In particular, they hypothesized that Democrats in the U.S. who held more sexist views would be demobilized from political participation in 2016, a year in which Hillary Clinton ran for the presidency.</p>
+<p>The data we are using are available <a href="https://github.com/ktmccabe/teachingdata">anesdems.csv</a> and represent a subset of the data for Democrats (including people who lean toward the Democratic party). We have a few variables of interest</p>
+<ul>
+<li><code>participation</code>: a 0 to 8 variable indicating the extent of a respondent’s political participation</li>
+<li><code>female</code>: a 0 or 1 variable indicating if the respondent is female</li>
+<li><code>edu</code>: a numeric variable indicating a respondent’s education level</li>
+<li><code>age</code>: a numeric variable indicating a respondent’s age.</li>
+<li><code>sexism</code>: a numeric variable indicating a respondent’s score on a battery of questions designed to assess hostile sexism, where higher values indicate more hostile sexism.</li>
+</ul>
+<p>Let’s regress participation on these variables and estimate it using OLS, GLM, and <code>optim</code>. Note, OLS and GLM fit through their functions in R will automatically drop any observations that have missing data on these variables. To make it comparable with <code>optim</code>, we will manually eliminate missing data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>anes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/ktmccabe/teachingdata/main/anesdems.csv"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="do">## choose variables we will use</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>anes <span class="ot">&lt;-</span> <span class="fu">subset</span>(anes, <span class="at">select=</span><span class="fu">c</span>(<span class="st">"participation"</span>, <span class="st">"age"</span>, <span class="st">"edu"</span>, <span class="st">"sexism"</span>, <span class="st">"female"</span>))</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="do">## omit observations with missing data on these variables</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>anes <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(anes)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="do">## OLS and GLM regression</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(participation <span class="sc">~</span> female <span class="sc">+</span> edu <span class="sc">+</span> age <span class="sc">+</span> sexism, <span class="at">data=</span>anes)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>fit.glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(participation <span class="sc">~</span> female <span class="sc">+</span> edu <span class="sc">+</span> age <span class="sc">+</span> sexism, <span class="at">data=</span>anes,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">family=</span><span class="fu">gaussian</span>(<span class="at">link=</span><span class="st">"identity"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we will build our data for <code>optim</code>. We need <span class="math inline">\(X\)</span>, <span class="math inline">\(Y\)</span>, and a set of starting <span class="math inline">\(\hat \beta\)</span> and <span class="math inline">\(\hat \sigma^2\)</span> values.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="do">## X and Y data</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>X.anes <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(fit)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>Y.anes <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(anes<span class="sc">$</span>participation)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="do">## make sure dimensions are the same</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(X.anes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1585</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(Y.anes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1585</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Pick starting values for parameters</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>startbetas <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Recall our estimate for sigma-squared based on the residuals</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="fu">ncol</span>(X.anes)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>startsigma <span class="ot">&lt;-</span> <span class="fu">sum</span>(fit<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> (<span class="fu">nrow</span>(X.anes) <span class="sc">-</span> k )</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>startpar <span class="ot">&lt;-</span> <span class="fu">c</span>(startbetas, startsigma)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Fit model</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="do">## But let's make it harder on the optimization by providing arbitrary starting values</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="do">## (normally you wouldn't do this)</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>startpar <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>opt.fit <span class="ot">&lt;-</span> <span class="fu">optim</span>(<span class="at">par =</span> startpar, <span class="at">fn=</span>l_lm, <span class="at">X =</span> X.anes,</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>                 <span class="at">Y=</span>Y.anes, <span class="at">method=</span><span class="st">"BFGS"</span>,</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>                 <span class="at">control=</span><span class="fu">list</span>(<span class="at">fnscale=</span><span class="sc">-</span><span class="dv">1</span>),</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>                   <span class="at">hessian=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can compare this optimization approach to the output in <code>glm()</code>.</p>
+<p>We can first compare the log likelihoods</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">logLik</span>(fit.glm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'log Lik.' -2661.428 (df=6)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>opt.fit<span class="sc">$</span>value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -2661.428</code></pre>
+</div>
+</div>
+<p>We can compare the coefficients.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">coef</span>(fit), <span class="at">digits=</span><span class="dv">4</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">coef</span>(fit.glm), <span class="at">digits=</span><span class="dv">4</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(opt.fit<span class="sc">$</span>par, <span class="at">digits=</span><span class="dv">4</span>)[<span class="dv">1</span><span class="sc">:</span>k]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)      female         edu         age      sexism 
+     0.9293     -0.2175      0.1668      0.0088     -0.9818 
+(Intercept)      female         edu         age      sexism 
+     0.9293     -0.2175      0.1668      0.0088     -0.9818 
+[1]  0.9294 -0.2175  0.1668  0.0088 -0.9819</code></pre>
+</div>
+</div>
+<p>We can add the gradient of the log likelihood to help improve optimization. This requires specifying the first derivative (the score) of the parameters. Unfortunately this means taking the derivative of that ugly normal log likelihood above. Again, with the normal model, we have two scores because of <span class="math inline">\(\hat \beta\)</span> and <span class="math inline">\(\hat \sigma^2\)</span>. For others, we may just have one.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="do">## first derivative function</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>score_lm <span class="ot">&lt;-</span> <span class="cf">function</span>(par, Y, X){</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  k <span class="ot">&lt;-</span> <span class="fu">ncol</span>(X)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  beta <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(par[<span class="dv">1</span><span class="sc">:</span>k])</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  scorebeta <span class="ot">&lt;-</span> (<span class="dv">1</span><span class="sc">/</span>par[k<span class="sc">+</span><span class="dv">1</span>]) <span class="sc">*</span> (<span class="fu">t</span>(X) <span class="sc">%*%</span> (Y <span class="sc">-</span> X <span class="sc">%*%</span> beta))</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  scoresigma <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">nrow</span>(X)<span class="sc">/</span>(par[k<span class="sc">+</span><span class="dv">1</span>]<span class="sc">*</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fu">sum</span>((Y <span class="sc">-</span> X <span class="sc">%*%</span> beta)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(<span class="dv">2</span> <span class="sc">*</span> par[k<span class="sc">+</span><span class="dv">1</span>]<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">c</span>(scorebeta, scoresigma))</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Fit model</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>opt.fit <span class="ot">&lt;-</span> <span class="fu">optim</span>(<span class="at">par =</span> startpar, <span class="at">fn=</span>l_lm, <span class="at">gr=</span>score_lm, <span class="at">X =</span> X.anes,</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>                 <span class="at">Y=</span>Y.anes, <span class="at">method=</span><span class="st">"BFGS"</span>,</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>                 <span class="at">control=</span><span class="fu">list</span>(<span class="at">fnscale=</span><span class="sc">-</span><span class="dv">1</span>),</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>                   <span class="at">hessian=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In addition to using <code>optim</code>, we can program our own Newton-Raphson algorithm, which is a method that continually updates the coefficient estimates <span class="math inline">\(\hat \beta\)</span> until it converges on a set of estimates. We will see this in a future section. The general algorithm involves the components we’ve seen before: values for <span class="math inline">\(\hat \beta\)</span>, the score, and the Hessian.</p>
+<ul>
+<li>Newton-Raphson: <span class="math inline">\(\hat \beta_{new} = \hat \beta_{old} - H(\beta_{old})^{-1}S(\hat \beta_{old})\)</span></li>
+</ul>
+</section>
+</section>
+<section id="mle-properties" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="mle-properties"><span class="header-section-number">5.4</span> MLE Properties</h2>
+<p>Just like OLS had certain properties (BLUE) that made it worthwhile, models using MLE also have desirable features under certain assumptions and regularity conditions.</p>
+<p>Large sample properties</p>
+<ul>
+<li>MLE is consistent: <span class="math inline">\(p\lim \hat \theta^{ML} = \theta\)</span></li>
+<li>It is also asymptotically normal: <span class="math inline">\(\hat \theta^{ML} \sim N(\theta, [I(\theta)]^{-1})\)</span>
+<ul>
+<li>This will allow us to use the normal approximation to calculate z-scores and p-values</li>
+</ul></li>
+<li>And it is asymptotically efficient. “In other words, compared to any other consistent and uniformly asymptotically Normal estimator, the ML estimator has a smaller asymptotic variance” (King 1998, 80).</li>
+</ul>
+<p><strong><em>Note on consistency</em></strong></p>
+<p>What does it mean to say an estimator is consistent? As samples get larger and larger, we converge to the truth.</p>
+<p>Consistency: <span class="math inline">\(p\lim \hat{\theta} =\beta\)</span> As <span class="math inline">\(n \rightarrow \infty P(\hat{\theta} - \theta&gt; e) \rightarrow 0\)</span>.</p>
+<ul>
+<li>Convergence in probability: the probability that the absolute difference between the estimate and parameter being larger than <span class="math inline">\(e\)</span> goes to zero as <span class="math inline">\(n\)</span> gets bigger.</li>
+</ul>
+<p>Note that bias and consistency are different: Consistency means that as the sample size (<span class="math inline">\(n\)</span>) gets large the estimate gets closer to the true value. Unbiasedness is not affected by sample size. An estimate is unbiased if over repeated samples, its expected value (average) is the true parameter.</p>
+<p>It is possible for an estimator to be unbiased and consistent, biased and not consistent, or consistent yet biased.</p>
+<p><img src="images/UnbiasedandConsistent.png" class="img-fluid" style="width:40.0%">; <img src="images/BiasedandInconsistent.png" class="img-fluid" style="width:40.0%"></p>
+<p><img src="images/BiasedbutConsistent.png" class="img-fluid" style="width:40.0%"></p>
+<p>Images taken from <a href="https://eranraviv.com/bias-vs-consistency/">here</a></p>
+<p>What is a practical takeaway from this? The desirable properties of MLE kick in with larger samples. When you have a very small sample, you might use caution with your estimates.</p>
+<p><strong><em>No Free Lunch</em></strong></p>
+<p>We have hinted at some of the assumptions required, but below we can state them more formally.</p>
+<ul>
+<li>First, we assume a particular data generating process: the probability model.</li>
+<li>We are generally assuming that observations are independent and identically distributed (allowing us to write the likelihood as a product)– unless we explicitly write the likelihood in a way that takes this into account.
+<ul>
+<li>When we have complicated structures to our data, this assumption may be violated, such as data that is clustered in particular hierarchical entities.</li>
+</ul></li>
+<li>We assume the model (i.e., the choice of covariates and how they are modeled) is correctly specified. (e.g., no omitted variables.)</li>
+<li>We have to meet certain technical regularity conditions–meaning that our problem is a “regular” one. These, in the words of Gary King are “obviously quite technical” (1998, 75). We will not get into the details, but you can see pg. 75 of <em>Unifying Political Methodology</em> for the formal mathematical statements. In short, our paramaters have to be <a href="https://en.wikipedia.org/wiki/Identifiability">identifiable</a> and within the parameter space of possible values (this identifiability can be violated, for example, when we have too many parameters relative to the number of observations in the sample), we have to be able to differentiate the log-likelihood (in fact, it needs to be twice continuously differentiable) along the support (the range of values) in the data. The information matrix, which we get through the second derivative, must be positive definite and finitely bounded. This helps us know we are at a maximum, and the maximum exists and is finite. You can visualize this as a smooth function, that is not too sharp (which would make it non differentiable), but has a peak (a maximum) that we can identify.</li>
+</ul>
+<section id="hypothesis-tests" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="hypothesis-tests"><span class="header-section-number">5.4.1</span> Hypothesis Tests</h3>
+<p>We can apply the same hypothesis testing framework to our estimates here as we did in linear regression. First, we can standardize our coefficient estimates by dividing them by the standard error. This will generate a “z score.” Just like when we had the t value in OLS, we can use the z score to calculate the p-value and make assessments about the null hypothesis that a given <span class="math inline">\(\hat \beta_k\)</span> = 0.</p>
+<span class="math display">\[\begin{align*}
+z &amp;= \frac{\hat \theta_k}{\sqrt{Var(\hat \theta)_k}} \sim N(0,1)
+\end{align*}\]</span>
+<p>Note: to get p-values, we typically now use, <code>2 * pnorm(abs(z), lower.tail=F)</code> instead of <code>pt()</code> and our critical values are based on <code>qnorm()</code> instead of <code>qt()</code>. R will follow the same in most circumstances. In large samples, these converge to the same quantities.</p>
+</section>
+<section id="model-output-in-r" class="level3" data-number="5.4.2">
+<h3 data-number="5.4.2" class="anchored" data-anchor-id="model-output-in-r"><span class="header-section-number">5.4.2</span> Model Output in R</h3>
+<p>As discussed, we can fit a GLM in R using the <code>glm</code> function:</p>
+<ul>
+<li><code>glm(formula, data, family = XXX(link = "XXX", ...), ...)</code>
+<ul>
+<li><code>formula</code>: The model written in the form similar to <code>lm()</code></li>
+<li><code>data</code>: Data frame</li>
+<li><code>family</code>: Name of PDF for <span class="math inline">\(Y_i\)</span> (e.g.&nbsp;<code>binomial</code>, <code>gaussian</code>)</li>
+<li><code>link</code>: Name of the link function (e.g.&nbsp;<code>logit</code>, `<code>probit</code>, <code>identity</code>, <code>log</code>)</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Load Data</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>fit.glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(participation <span class="sc">~</span> female <span class="sc">+</span> edu <span class="sc">+</span> age <span class="sc">+</span> sexism, <span class="at">data=</span>anes,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">family=</span><span class="fu">gaussian</span>(<span class="at">link=</span><span class="st">"identity"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We’ve already discussed the coefficient output. Like <code>lm()</code>, GLM wiil also display the standard errors, z-scores / t-statistics, and p-values of the model in the model summary.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit.glm)<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                Estimate  Std. Error   t value     Pr(&gt;|t|)
+(Intercept)  0.929302597 0.154033186  6.033132 1.999280e-09
+female      -0.217453631 0.067415200 -3.225588 1.282859e-03
+edu          0.166837062 0.022402469  7.447262 1.559790e-13
+age          0.008795138 0.001874559  4.691843 2.941204e-06
+sexism      -0.981808431 0.154664950 -6.347970 2.844067e-10</code></pre>
+</div>
+</div>
+<p>For this example, R reverts to the t-value instead of the z-score given that we are using the linear model. In other examples, you may see <code>z</code> in place of <code>t</code>. There are only small differences in these approximations because as your sample size gets larger, the degrees of freedom (used in the calculation of p-calues for the t distribution) are big enough that the t distribution converges to the normal distribution.</p>
+<p><strong>Goodness of fit</strong></p>
+<p>The <code>glm()</code> model has a lot of summary output.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit.glm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = participation ~ female + edu + age + sexism, family = gaussian(link = "identity"), 
+    data = anes)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.3001  -0.8343  -0.3013   0.3651   7.2887  
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  0.929303   0.154033   6.033 2.00e-09 ***
+female      -0.217454   0.067415  -3.226  0.00128 ** 
+edu          0.166837   0.022402   7.447 1.56e-13 ***
+age          0.008795   0.001875   4.692 2.94e-06 ***
+sexism      -0.981808   0.154665  -6.348 2.84e-10 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 1.688012)
+
+    Null deviance: 2969.3  on 1584  degrees of freedom
+Residual deviance: 2667.1  on 1580  degrees of freedom
+AIC: 5334.9
+
+Number of Fisher Scoring iterations: 2</code></pre>
+</div>
+</div>
+<p>Some of the output represents measures of the goodness of fit of the model. However, their values are not directly interpretable from a single model.</p>
+<ul>
+<li>Larger (less negative) likelihood, the better the model fits the data. (<code>logLik(mod)</code>). The becomes relevant when comparing two or more models.</li>
+<li>Deviance is calculated from the likelihood. This is a measure of discrepancy between observed and fitted values. (Smaller values, better fit.)
+<ul>
+<li>Null deviance: how well the outcome is predicted by a model that includes only the intercept. (<span class="math inline">\(df = n - 1\)</span>)</li>
+<li>Residual deviance: how well the outcome is predicted by a model with our parameters. (<span class="math inline">\(df = n-k\)</span>)</li>
+</ul></li>
+<li>AIC- used for model comparison. Smaller values indicate a more parsimonious model. Accounts for the number of parameters (<span class="math inline">\(K\)</span>) in the model (like Adjusted R-squared, but without the ease of interpretation). Sometimes used as a criteria in prediction exercises (using a model on training data to predict test data). For more information on how AIC can be used in prediction exercises, see <a href="https://towardsdatascience.com/introduction-to-aic-akaike-information-criterion-9c9ba1c96ced">here</a>.</li>
+</ul>
+<p><strong>Likelihood Ratio Test</strong></p>
+<p>The likelihood ratio test compares the fit of two models, with the null hypothesis being that the full model does not add more explanatory power to the reduced model. Note: You should only compare models if they have the same number of observations.</p>
+<p>This type of test is used in a similar way that people compare R-squared values across models.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>fit.glm2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(participation <span class="sc">~</span> female <span class="sc">+</span> edu <span class="sc">+</span> age <span class="sc">+</span> sexism, <span class="at">data=</span>anes,</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">family=</span><span class="fu">gaussian</span>(<span class="at">link=</span><span class="st">"identity"</span>))</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>fit.glm1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(participation <span class="sc">~</span> female <span class="sc">+</span> edu <span class="sc">+</span> age, <span class="at">data=</span>anes, </span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">family=</span><span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">"identity"</span>))</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>               </span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fit.glm1, fit.glm2, <span class="at">test =</span> <span class="st">"Chisq"</span>) <span class="co">#  reject the null</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+
+Model 1: participation ~ female + edu + age
+Model 2: participation ~ female + edu + age + sexism
+  Resid. Df Resid. Dev Df Deviance  Pr(&gt;Chi)    
+1      1581     2735.1                          
+2      1580     2667.1  1   68.021 2.182e-10 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p><strong>Pseudo-R-squared</strong></p>
+<p>We don’t have an exact equivalent to the R-squared in OLS, but people have developed “pseudo” measures.</p>
+<p>Example: McFadden’s R-squared</p>
+<ul>
+<li><span class="math inline">\(PR^2 = 1 - \frac{\ell(M)}{\ell(N)}\)</span>
+<ul>
+<li>where <span class="math inline">\(\ell(M)\)</span> is the log-likelihood for your fitted model and <span class="math inline">\(\ell(N)\)</span> is the log-likelihood for a model with only the intercept</li>
+</ul></li>
+<li>Recall, greater (less negative) values of the log-likelihood indicate better fit</li>
+<li>McFadden’s values range from 0 to close to 1</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("pscl")</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pscl)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>fit.glm.null <span class="ot">&lt;-</span> <span class="fu">glm</span>(participation <span class="sc">~</span> <span class="dv">1</span>, anes, <span class="at">family =</span> <span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">"identity"</span>))</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>pr <span class="ot">&lt;-</span> <span class="fu">pR2</span>(fit.glm1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>fitting null model for pseudo-r2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>pr[<span class="st">"McFadden"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  McFadden 
+0.02370539 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Or, by hand:</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> (<span class="fu">logLik</span>(fit.glm1)<span class="sc">/</span><span class="fu">logLik</span>(fit.glm.null))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'log Lik.' 0.02370539 (df=5)</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>In the future, we may want to know the probability of turning out to vote, or of going to war, or voting “yes” on a particular policy question, etc.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Why does this work? It has to do with the shape of the log (always increasing). Details are beyond the scope.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Essentially, you need to take derivatives with respect to each of the parameters. Some models we use will have only one parameter, which is easier.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./04-ReviewofOLS.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Review of OLS</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

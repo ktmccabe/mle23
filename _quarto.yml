@@ -10,6 +10,7 @@ book:
     - 02-ROverview.qmd
     - 03-TheMATH.qmd
     - 04-ReviewofOLS.qmd
+    - 05-IntrotoMaximumLikelihood.qmd
   page-navigation: true
   sidebar:
     style: docked
