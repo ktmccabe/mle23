@@ -11,6 +11,7 @@ book:
     - 03-TheMATH.qmd
     - 04-ReviewofOLS.qmd
     - 05-IntrotoMaximumLikelihood.qmd
+    - 06-BinaryOutcomes.qmd
   page-navigation: true
   sidebar:
     style: docked
