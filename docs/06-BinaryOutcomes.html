@@ -64,6 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./07-QuantitiesofInterest.html" rel="next">
 <link href="./05-IntrotoMaximumLikelihood.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -169,6 +170,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Binary Dependent Variables</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-QuantitiesofInterest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Quantities of Interest</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
     <nav id="TOC" role="doc-toc" class="toc-active">
@@ -187,7 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#to-logit-or-to-probit" id="toc-to-logit-or-to-probit" class="nav-link" data-scroll-target="#to-logit-or-to-probit"><span class="header-section-number">6.4</span> To logit or to probit?</a></li>
   <li><a href="#latent-propensity-representation" id="toc-latent-propensity-representation" class="nav-link" data-scroll-target="#latent-propensity-representation"><span class="header-section-number">6.5</span> Latent propensity representation</a></li>
   <li><a href="#linear-probability-models" id="toc-linear-probability-models" class="nav-link" data-scroll-target="#linear-probability-models"><span class="header-section-number">6.6</span> Linear Probability Models</a></li>
-  <li><a href="#week-3-tutorial" id="toc-week-3-tutorial" class="nav-link" data-scroll-target="#week-3-tutorial"><span class="header-section-number">6.7</span> Week 3 Tutorial</a>
+  <li><a href="#binary-models-in-r-tutorial" id="toc-binary-models-in-r-tutorial" class="nav-link" data-scroll-target="#binary-models-in-r-tutorial"><span class="header-section-number">6.7</span> Binary Models in R Tutorial</a>
   <ul>
   <li><a href="#loading-data-and-fitting-glm" id="toc-loading-data-and-fitting-glm" class="nav-link" data-scroll-target="#loading-data-and-fitting-glm"><span class="header-section-number">6.7.1</span> Loading data and fitting glm</a></li>
   <li><a href="#numeric-optimization" id="toc-numeric-optimization" class="nav-link" data-scroll-target="#numeric-optimization"><span class="header-section-number">6.7.2</span> Numeric Optimization</a></li>
@@ -503,8 +510,8 @@ y^*_i \leq \tau \end{cases}
 <p>However, we can address some of these potential issues: 1) we can use robust standard errors to account for non-constant error variance , 2) if you look at the S-curve in the previous section, you will note that a large part of the curve is pretty linear over a wide range of <span class="math inline">\(X\beta\)</span> values. For many applications, the estimates transformed from a logit or probit into probability will look similar to the estimates from a linear probability model (i.e., OLS). 3) Linear probability models are easier to interpret, and there is no need to transform coefficients.</p>
 <p>LPM vs.&nbsp;logit/probit has spurred a lot of debate throughout the years. Reviewers disagree, twitter users disagree, some people just like to stir the pot, etc. This is just something to be aware of as you choose modeling approaches. Particularly when it comes to experiments and other causal inference approaches, there is a non-trivial push among active scholars to stick with linear probability models when your key independent variable is a discrete treatment indicator variable. See this new <a href="https://psyarxiv.com/4gmbv/">article</a> from Robin Gomilla who lays out the considerations for using LPM, particularly in experimental settings, as well as follow up discussion from <a href="https://statmodeling.stat.columbia.edu/2020/01/10/linear-or-logistic-regression-with-binary-outcomes/">Andrew Gelman</a>. That said, even if you run with an LPM and cite the Gomilla article, a reviewer may still ask you to do a logit/probit. And there are certainly circumstances where LPM will fall short. So what’s the upshot? Probably try both, and then choose your own adventure.</p>
 </section>
-<section id="week-3-tutorial" class="level2" data-number="6.7">
-<h2 data-number="6.7" class="anchored" data-anchor-id="week-3-tutorial"><span class="header-section-number">6.7</span> Week 3 Tutorial</h2>
+<section id="binary-models-in-r-tutorial" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="binary-models-in-r-tutorial"><span class="header-section-number">6.7</span> Binary Models in R Tutorial</h2>
 <p>This week’s example, we will replicate a portion of “The Effectiveness of a Racialized Counterstrategy” by Antoine Banks and Heather Hicks, <a href="https://onlinelibrary.wiley.com/doi/epdf/10.1111/ajps.12410">published</a> in the <em>American Journal of Political Science</em> in 2018. The replication data are <a href="https://doi.org/10.7910/DVN/EWRXPU">here</a>.</p>
 <p><em>Abstract: Our article examines whether a politician charging a political candidate’s implicit racial campaign appeal as racist is an effective political strategy. According to the racial priming theory, this racialized counterstrategy should deactivate racism, thereby decreasing racially conservative whites’ support for the candidate engaged in race baiting. We propose an alternative theory in which racial liberals, and not racially conservative whites, are persuaded by this strategy. To test our theory, we focused on the 2016 presidential election. We ran an experiment varying the politician (by party and race) calling an implicit racial appeal by Donald Trump racist. We find that charging Trump’s campaign appeal as racist does not persuade racially conservative whites to decrease support for Trump. Rather, it causes racially liberal whites to evaluate Trump more unfavorably. Our results hold up when attentiveness, old-fashioned racism, and partisanship are taken into account. We also reproduce our findings in two replication studies.</em></p>
 <p>We will replicate the analysis in Table 1 of the paper, based on an experiment the authors conducted through SSI. They exposed white survey respondents to either a news story about a Trump ad that includes an “implicit racial cue” or conditions that add to this with “explicitly racial” responses from different partisan actors calling out the ad as racist. Drawing on racial priming theory, racially prejudiced whites should be less supportive of Trump after the racial cues are made explicit. The authors test this hypothesis against their own hypothesis that this effect should be more pronounced among “racially liberal” whites.</p>
@@ -938,6 +945,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./07-QuantitiesofInterest.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Quantities of Interest</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

@@ -12,6 +12,7 @@ book:
     - 04-ReviewofOLS.qmd
     - 05-IntrotoMaximumLikelihood.qmd
     - 06-BinaryOutcomes.qmd
+    - 07-QuantitiesofInterest.qmd
   page-navigation: true
   sidebar:
     style: docked
