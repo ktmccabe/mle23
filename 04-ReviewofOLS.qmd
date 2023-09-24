@@ -1,6 +1,7 @@
 ---
 title: "Review of OLS"
 ---
+<script src="https://hypothes.is/embed.js" async></script>
 
 ```{=tex}
 \newcommand\bE{\mathbf{E}}

@@ -27,6 +27,7 @@ format:
     toc-location: left
     toc-depth: 4
     linkcolor: red
+    hypothesis: true
 
   
 

@@ -1,5 +1,7 @@
 # Introduction to MLE {#mle}
 
+<script src="https://hypothes.is/embed.js" async></script>
+
 This section will provide an overview of MLE. There are a few general connections we can make between the things we know (the linear least squares model) and the concepts introduced here.
 
 -   Practical Uses: Going from nice continuous outcome data to outcome data generated differently
@@ -302,7 +304,6 @@ Start with the log-likelihood
 \end{align*}
 ```
 -   Note: when you see $\mathbf{x}_i'\beta$, usually that is the representation of the multiplication of $k$ covariates (a $1 \times k$ vector) for a particular observation $i$ by $k \times 1$ coefficient values $\beta$. You can contrast this with $X\beta$, which represents $n \times k$ rows of observations with $k$ covariates multiplied by the $k \times 1$ coefficients. You will see both notations depending on if notation is indexed by $i$ or represented fully in matrix form. The $\mathbf{x_i'}$ representation tends to come up more when we are dealing with likelihood equations. Here is a short video relating these notations.
-
 
 {{< video src="https://www.youtube.com/watch?v=5QFj6_D-aAw" >}}
 

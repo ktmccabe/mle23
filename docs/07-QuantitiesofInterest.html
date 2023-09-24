@@ -716,15 +716,15 @@ Expand below for more details on what the sample function does.
 <div class="cell">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(somedata), <span class="fu">nrow</span>(somedata), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 5 3 4 4 4 2 3</code></pre>
+<pre><code>[1] 6 7 2 4 3 3 7</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(somedata), <span class="fu">nrow</span>(somedata), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4 2 2 5 1 2 3</code></pre>
+<pre><code>[1] 2 3 7 5 2 7 7</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(somedata), <span class="fu">nrow</span>(somedata), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 7 4 3 2 6 6 2</code></pre>
+<pre><code>[1] 3 1 1 6 3 7 5</code></pre>
 </div>
 </div>
 <p>What happened is the function generated a set of row numbers. Note how it is possible for the same row number to be picked multiple times. Each time we run the sample function, we get slightly different row numbers.</p>
@@ -734,21 +734,21 @@ Expand below for more details on what the sample function does.
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>wrows <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(somedata), <span class="fu">nrow</span>(somedata), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>wrows</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1 2 4 6 1 1 1</code></pre>
+<pre><code>[1] 7 5 3 5 7 2 6</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="do">## subset data to include rows sampled</span></span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="do">## note if row indices are in wrows more than once, they will also be in the subset more than once</span></span>
 <span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>subdata <span class="ot">&lt;-</span> somedata[wrows,]</span>
 <span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>subdata</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    colors    shapes
-1      red    circle
-2     blue    square
-4    green rectangle
-6   orange      line
-1.1    red    circle
-1.2    red    circle
-1.3    red    circle</code></pre>
+<pre><code>    colors   shapes
+7    black   sphere
+5   purple  diamond
+3   yellow triangle
+5.1 purple  diamond
+7.1  black   sphere
+2     blue   square
+6   orange     line</code></pre>
 </div>
 </div>
 <p>Given that each time the sample function runs, we get slightly different random samples of the data, that’s how we end up with a distribution of slightly different estimates of our quantities of interest. Each time the regression is run with a slightly different dataset.</p>

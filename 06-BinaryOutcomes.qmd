@@ -1,5 +1,7 @@
 # Binary Dependent Variables {#binary}
 
+<script src="https://hypothes.is/embed.js" async></script>
+
 In this section, we review models specifically designed for estimating the relationships between our independent variables and a dichotomous dependent variable. This is where "logit" and "probit" regression models become relevant.
 
 **Resources**

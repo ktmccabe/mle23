@@ -2,6 +2,9 @@
 title: "Maxmimum Likelihood Fall 2023"
 ---
 
+<script src="https://hypothes.is/embed.js" async></script>
+
+
 This document will include important links and course notes for fall 2023 Maximum Likelihood Estimation in Political Science.
 
 -   This webpage will be updated throughout the semester with new content.
