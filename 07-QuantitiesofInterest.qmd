@@ -161,8 +161,6 @@ Here is a brief video with a second example of the process above, leading into t
 
 {{< video src="https://www.youtube.com/watch?v=vGt-OCJoCJQ">}}
 
-
-
 ### Marginal Effects
 
 Recall, in linear regression a one-unit change in $X_k$ is associated with a $\hat \beta_k$ change in $Y$ no matter where we are in the domain of $X_k$. (The slope of a line is constant!)
@@ -230,11 +228,45 @@ pp1 - pp0
 
 This represents the average difference in predicted probability of having a dispute for Dyads that are Allies vs. not Allies.
 
-### `prediction` and `margins` packages.
+### `marginaleffects`, `prediction` and `margins` packages.
 
-There are functions that can make this easier so long as you understand what they are doing. One package developed by Dr. Thomas Leeper is `prediction`. A second is `margins`. Documentation available [here](https://github.com/leeper/prediction) and [here](https://github.com/leeper/margins). It is always important to understand what's going on in a package because, for one, it's possible that the package will stop being updated, and you will have to find an alternative solution.
+There are functions that can make this easier so long as you understand what they are doing. 
 
-We will focus on the `prediction` package first. The `prediction` function generates specific quantities of interest. An advantage it has over the built-in `predict` function is that it makes it easier to "hold all other variables at observed values." In the `prediction` function, you specify the designated values for particular variables, and then by default, it assumes you want to hold all other variables at observed values. Here is an example of generating predicted probabilities for `Allies = 1` and `Allies = 0`. It will generate the summary means of these two predictions.
+One package developed by Dr. Thomas Leeper is `prediction`. A second is `margins`. Documentation available [here](https://github.com/leeper/prediction) and [here](https://github.com/leeper/margins). More recently, Vincent Arel-Bundock has developed the `marginaleffects` package, which has more expansive functionality [here](https://marginaleffects.com/).
+
+It is always important to understand what's going on in a package because, for one, it's possible that the package will stop being updated, and you will have to find an alternative solution.
+
+
+#### `marginaleffects`
+
+We first look at the `marginaleffects` package. The `predictions` function generates specific quantities of interest. An advantage it has over the built-in `predict` function is that it makes it easier to "hold all other variables at observed values." In the `predictions` function, you specify the designated values for particular variables, and then by default, it assumes you want to hold all other variables at observed values. Here is an example of generating predicted probabilities for `Allies = 1` and `Allies = 0`. It will generate the summary means of these two predictions.
+
+```{r}
+library(marginaleffects)
+preout <- predictions(
+    out.logit,
+    type = "response",
+    by = "Allies",
+    newdata = datagridcf(Allies = 0:1))
+```
+
+The `datagridcf` argument stands for a counterfactual dataset, where we are keeping the data as they are observed, but counterfactually changing `Allies` from 0 to 1. By putting `type="response"`, we make sure our results are in terms of predicted probabilities.
+
+We can then conduct comparisons using the `comparison` or `avg_comparisons` functions, looking at, for example, the average difference in predicted probability, going from Allies being 0 to 1, keeping all covariates at their observed values.
+
+```{r}
+comp <- comparisons(out.logit,
+  variables = list(Allies = c(0, 1)))
+mean(comp$estimate)
+
+comp_avg <- avg_comparisons(out.logit,
+  variables = list(Allies = c(0, 1)))
+comp_avg$estimate
+```
+
+#### `prediction`
+
+Here we will focus on the `prediction` package. The `prediction` function generates specific quantities of interest. An advantage it has over the built-in `predict` function is that it makes it easier to "hold all other variables at observed values." In the `prediction` function, you specify the designated values for particular variables, and then by default, it assumes you want to hold all other variables at observed values. Here is an example of generating predicted probabilities for `Allies = 1` and `Allies = 0`. It will generate the summary means of these two predictions.
 
 ```{r}
 ## install.packages("prediction")
@@ -336,8 +368,6 @@ c(allies1.hand, allies1.hand.lb, allies1.hand.ub)
 Beyond this simple case, there are three general approaches to calculating the uncertainty of the quantities of interest. Here is a video with an overview of these three processes. The course notes contain additional detail below. It continues with the [anes data](https://raw.githubusercontent.com/ktmccabe/teachingdata/main/anesdems.csv) example from Banda and Cassese in section 6, as did the other video in this section.
 
 {{< video src="https://www.youtube.com/watch?v=BYE4TWV6Byc">}}
-
-
 
 -   Delta Method (based on calculus, first order Taylor Expansion approximation)
 -   Bootstrapping (very flexible, common, computationally demanding)
@@ -780,9 +810,36 @@ ggplot(myg, aes(x = 1:nrow(myg), y = pp))+
 
 There are a few R packages that help generate these quantities of interest AND estimate uncertainty. If you understand what is going on underneath the packages, then you should feel free to use them to avoid manually coding up each process.
 
+### marginaleffects
+
+The Marginal Effects Zoo is from Vincent Arel-Bundock. It is a relatively new package `marginaleffects` that computes a variety of quantities of interest. You can install the package below:
+
+```{r, eval=F}
+install.packages("marginaleffects")
+```
+
+As discussed above, we can generate specific estimates from designated values of our covariates of interest, holding all other covariates at their observed values.
+
+```{r, message=F, warning=FALSE}
+library(marginaleffects)
+preout <- predictions(
+    out.logit,
+    type = "response",
+    by = "Allies",
+    newdata = datagridcf(Allies = 0:1))
+```
+
+We can then conduct comparisons using the `avg_comparisons` function, looking at, for example, the average difference in predicted probability, going from Allies being 0 to 1, keeping all covariates at their observed values. Note that the `avg_comparisons` function returns standard errors and p-values. These are calculated through the delta method by default.
+
+```{r}
+comp_avg <- avg_comparisons(out.logit,
+  variables = list(Allies = c(0, 1)))
+comp_avg
+```
+
 ### Prediction
 
-We've already used the prediction package, but now let's add uncertainty calculation to this. This package is useful for generating confidence intervals around single quantities of interest. The package below is better for constructing confidence intervals around the difference between quantities of interest.
+This package is useful for generating confidence intervals around single quantities of interest. The package below (margins) is better for constructing confidence intervals around the difference between quantities of interest.
 
 ```{r}
 library(prediction)
@@ -849,7 +906,6 @@ ame <- mean(plogis(X.marg1 %*% BH) - plogis(X.marg0 %*% BH))
 ame
 summary(marg2)$AME
 ```
-
 
 ### Using `expand.grid`
 
@@ -1028,7 +1084,22 @@ ggplot(ggres, aes(x=partisanship, y=m.results))+
 
 </details>
 
-The `prediction` package in R will give us a shortcut by calculating the confidence intervals for us. We can repeat the previous process inside this function.
+The `marginaleffects` and `prediction` packages in R will give us a shortcut by calculating the confidence intervals for us. We can repeat the previous process inside these functions.
+
+```{r}
+# install.packages("marginaleffects")
+library(marginaleffects)
+
+pred.resultsme <- avg_predictions(fit1,  type = "response",by = "partyid", newdata = datagridcf(partyid = 1:7))
+
+```
+
+```{r, echo=F, results="asis"}
+library(knitr)
+knitr::kable(pred.resultsme)
+
+```
+
 
 ```{r}
 # install.packages("prediction")
@@ -1037,6 +1108,8 @@ library(prediction)
 
 pred.results <- prediction(fit1, at=list(partyid = 1:7), type="response", calculate_se = T)
 ```
+
+
 
 ```{r, eval=F}
 summary(pred.results)
@@ -1099,7 +1172,9 @@ myest <- function(value){
 p.means <- sapply(1:7, myest)
 ```
 
-Or, we can use `prediction` again.
+Or, we can use `marginaleffects` or `prediction` again.
+
+How would you apply `marginaleffects`? Below is the code from the `prediction` package:
 
 ```{r}
 pred.results2 <- prediction(fit2, at=list(partyid = 1:7), type="response")
