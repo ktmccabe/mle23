@@ -230,12 +230,11 @@ This represents the average difference in predicted probability of having a disp
 
 ### `marginaleffects`, `prediction` and `margins` packages.
 
-There are functions that can make this easier so long as you understand what they are doing. 
+There are functions that can make this easier so long as you understand what they are doing.
 
 One package developed by Dr. Thomas Leeper is `prediction`. A second is `margins`. Documentation available [here](https://github.com/leeper/prediction) and [here](https://github.com/leeper/margins). More recently, Vincent Arel-Bundock has developed the `marginaleffects` package, which has more expansive functionality [here](https://marginaleffects.com/).
 
 It is always important to understand what's going on in a package because, for one, it's possible that the package will stop being updated, and you will have to find an alternative solution.
-
 
 #### `marginaleffects`
 
@@ -1100,7 +1099,6 @@ knitr::kable(pred.resultsme)
 
 ```
 
-
 ```{r}
 # install.packages("prediction")
 library(prediction)
@@ -1108,8 +1106,6 @@ library(prediction)
 
 pred.results <- prediction(fit1, at=list(partyid = 1:7), type="response", calculate_se = T)
 ```
-
-
 
 ```{r, eval=F}
 summary(pred.results)
