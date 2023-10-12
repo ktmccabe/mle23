@@ -14,6 +14,7 @@ book:
     - 06-BinaryOutcomes.qmd
     - 07-QuantitiesofInterest.qmd
     - 08-OrdinalandOutcomes.qmd
+    - 09-NominalOutcomes.qmd
   page-navigation: true
   sidebar:
     style: docked

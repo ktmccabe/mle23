@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>MLE 2023 - 9&nbsp; Multinomial Outcomes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./08-OrdinalandOutcomes.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-NominalOutcomes.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Multinomial Outcomes</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">MLE 2023</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Maxmimum Likelihood Fall 2023</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-ROverview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R Overview</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-TheMATH.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Math</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-ReviewofOLS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Review of OLS</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-IntrotoMaximumLikelihood.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to MLE</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-BinaryOutcomes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Binary Dependent Variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-QuantitiesofInterest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Quantities of Interest</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-OrdinalandOutcomes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Ordinal Outcomes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-NominalOutcomes.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Multinomial Outcomes</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Section Contents</h2>
+   
+  <ul>
+  <li><a href="#overview-of-nominal-data" id="toc-overview-of-nominal-data" class="nav-link active" data-scroll-target="#overview-of-nominal-data"><span class="header-section-number">9.1</span> Overview of Nominal Data</a>
+  <ul>
+  <li><a href="#multinomial-likelihood" id="toc-multinomial-likelihood" class="nav-link" data-scroll-target="#multinomial-likelihood"><span class="header-section-number">9.1.1</span> Multinomial Likelihood</a></li>
+  </ul></li>
+  <li><a href="#motivating-example" id="toc-motivating-example" class="nav-link" data-scroll-target="#motivating-example"><span class="header-section-number">9.2</span> Motivating Example</a>
+  <ul>
+  <li><a href="#assumption-and-considerations" id="toc-assumption-and-considerations" class="nav-link" data-scroll-target="#assumption-and-considerations"><span class="header-section-number">9.2.1</span> Assumption and Considerations</a></li>
+  <li><a href="#key-assumption-independence-of-irrelevant-alternatives" id="toc-key-assumption-independence-of-irrelevant-alternatives" class="nav-link" data-scroll-target="#key-assumption-independence-of-irrelevant-alternatives"><span class="header-section-number">9.2.2</span> Key Assumption: Independence of Irrelevant Alternatives</a></li>
+  </ul></li>
+  <li><a href="#running-multinomial-logit-in-r" id="toc-running-multinomial-logit-in-r" class="nav-link" data-scroll-target="#running-multinomial-logit-in-r"><span class="header-section-number">9.3</span> Running multinomial logit in R</a>
+  <ul>
+  <li><a href="#multinomial-quantities-of-interest" id="toc-multinomial-quantities-of-interest" class="nav-link" data-scroll-target="#multinomial-quantities-of-interest"><span class="header-section-number">9.3.1</span> Multinomial Quantities of Interest</a></li>
+  </ul></li>
+  <li><a href="#practice-problems-for-multinomial" id="toc-practice-problems-for-multinomial" class="nav-link" data-scroll-target="#practice-problems-for-multinomial"><span class="header-section-number">9.4</span> Practice Problems for Multinomial</a></li>
+  <li><a href="#week-7-tutorial" id="toc-week-7-tutorial" class="nav-link" data-scroll-target="#week-7-tutorial"><span class="header-section-number">9.5</span> Week 7 Tutorial</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="ml" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Multinomial Outcomes</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>This section will describe cases where we have unordered categorical outcome variables.</p>
+<p>The following supplemental resources may be useful here.</p>
+<ul>
+<li>Rodriguez Chapter 6.1-6.2.4 (see pdf on Canvas)</li>
+<li>Ledolter Chapter 11, pgs. 132-134 (see pdf on Canvas)</li>
+<li>Multinomial R resources via <a href="https://stats.idre.ucla.edu/r/dae/multinomial-logistic-regression/">UCLA</a></li>
+</ul>
+<p><span class="math inline">\(Y_i\)</span> can take any of <span class="math inline">\(J\)</span> categories like ordinal logit. Usually, we use this for more than 2 categories, or else it would collapse to a simple binary outcome. The key here is these are not ordered!</p>
+<ul>
+<li>For example, a nominal set of categories might be vote choice between different candidates,</li>
+<li>Instead, it could be choice of different investment or insurance plans,</li>
+<li>Perhaps it is a choice of locations to target in an attack,</li>
+<li>Or maybe it is a type of campaign strategy– direct mail vs.&nbsp;online ads, etc.</li>
+</ul>
+<section id="overview-of-nominal-data" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="overview-of-nominal-data"><span class="header-section-number">9.1</span> Overview of Nominal Data</h2>
+<p>Our goal in these models is generally to predict the probability of being in a particular category <span class="math inline">\(C_j\)</span>.</p>
+<p>The model we will use to estimate this is the multinomial logit.</p>
+<ul>
+<li>This is a generalization of binary and ordered logit.</li>
+<li>Coefficients defined relative to baseline outcome category <span class="math inline">\(J\)</span>:</li>
+</ul>
+<p><span class="math inline">\(\log \frac{\pi_j}{\pi_J} = \eta_j\)</span> where <span class="math inline">\(\eta_j = \alpha_j + X_1\beta_{1j} + X_2\beta_{2j} + ... X_k\beta_{kj}\)</span></p>
+<ul>
+<li>Note that <span class="math inline">\(\pi_i\)</span> (our probability) is now indexed by <span class="math inline">\(j\)</span> or <span class="math inline">\(J\)</span>
+<ul>
+<li>This means we have more than just one set of estimates for <span class="math inline">\(\hat \beta\)</span>, depending on the category comparison we make</li>
+<li>(Recall that in ordinal logit we had to assume that one set of coefficients was sufficient. Here, we have <span class="math inline">\(J-1\)</span> sets of coefficients.)</li>
+</ul></li>
+<li><span class="math inline">\(\beta_J = 0\)</span> by design for identification (<span class="math inline">\(J\)</span> represents the baseline category);</li>
+<li><span class="math inline">\(\sum_{j=1}^{J} \pi_j = 1\)</span>, The probabilities of being in each category, together, must sum to 1.</li>
+<li><span class="math inline">\(Y_i = C_j\)</span> according to <span class="math inline">\(Y_{ij}^* = max(Y_{i1}^*, Y_{i2}^*, ..., Y_{ij}^*)\)</span>. The outcome belongs to the category that has the highest <span class="math inline">\(Y_i*\)</span>.</li>
+<li>The probability of <span class="math inline">\(Y_i\)</span> being in a particular category is:</li>
+</ul>
+<span class="math display">\[\begin{align*}
+\pi_{ij} = Pr(Y_i = C_j | x_i) &amp;= \frac{\exp(\mathbf x_i^T\beta_j)}{1 + \sum_{j=1}^{J-1} \exp(\mathbf x_i^T\beta_j)}
+\end{align*}\]</span>
+<section id="multinomial-likelihood" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="multinomial-likelihood"><span class="header-section-number">9.1.1</span> Multinomial Likelihood</h3>
+<p>Here, similar to the ordinal log likelihood, we need to sum over all observations and all outcome categories to represent the joint probability:</p>
+<p><span class="math inline">\(\mathcal L(\beta, | Y) = \prod_i^N \prod_{j=1}^{J} \mathbf 1(Y_i=C_j){\pi_{i, j}}\)</span></p>
+<p><span class="math inline">\(\mathcal l(\beta, | Y) = \sum_i^N \sum_{j=1}^{J} \mathbf 1(Y_i=C_j){\log \pi_{i, j}}\)</span></p>
+<p>Like we have done previously in likelihood, where <span class="math inline">\(\pi\)</span> is a function of <span class="math inline">\(X\)</span> and <span class="math inline">\(\beta\)</span>.</p>
+</section>
+</section>
+<section id="motivating-example" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="motivating-example"><span class="header-section-number">9.2</span> Motivating Example</h2>
+<p>To work through the model we will use data from the article “Empowering Women? Gender Quotas and Women’s Political Careers” by Yann Kerevel, in <em>The Journal of Politics</em> <a href="https://www.journals.uchicago.edu/doi/pdf/10.1086/704434">here</a></p>
+<p><em>Women’s representation in executive office continues to lag behind that of their female peers in legislatures, and several studies find women face an executive glass ceiling. One way to shatter this executive glass ceiling is through the adoption of legislative gender quotas. However, scholars know little about how legislative quotas affect women’s access to executive office. Previous research has been unable to determine whether once elected through quotas, women advance to executive office at similar rates to men. Using data on the future career paths of nearly 2,000 Mexican legislators, I find women face a glass ceiling in winning nomination to executive office. Using career data before and after quota implementation, and exploiting lax enforcement in the district component of the mixed electoral system, I find quotas have done little to increase the advancement of women into executive office, although they have increased opportunities for women in other legislative positions.</em></p>
+<p>On pg. 1169, Kerevel writes, “If a glass ceiling exists, women may find it harder to advance to executive office compared to men. Female legislators may still be able to develop successful political careers in similar roles, such as seeking reelection, winning nomination to other legislative offices, or receiving some type of political appointment. However, women may be less likely than men to secure executive nominations to elected positions or appointments to important cabinet posts. The introduction of gender quotas is unlikely to shatter this glass ceiling given the numerous ways women are marginalized once elected and the general lack of executive quotas.”</p>
+<p>The first hypothesis following this claim is:</p>
+<ul>
+<li>H1. Glass ceiling- Women legislators will be nominated to future executive office at lower rates than men.</li>
+</ul>
+<p>We will focus on this first hypothesis, but if you are interested, the author also discusses specific hypotheses related to the potential negative and positive effects of gender quotas in the paper.</p>
+<p><strong>Data</strong></p>
+<p>The data include information on the future career moves of nearly 2000 Mexican federal deputies who served between 1997-2009.</p>
+<ul>
+<li>Outcome: <code>genderimmedambcat3</code>, first future career move
+<ul>
+<li>ballot access for state legislature/city council, for Senate, for mayor/governor; appointment to cabinet or party leadership; bureaucratic appointment; other office</li>
+</ul></li>
+<li>Explanatory variables: <code>female, party_cat, leg_exp_dum, exec_exp_dum, leadership</code></li>
+</ul>
+<p>Let’s load the data and take a look at the outcome variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(foreign)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>ker <span class="ot">&lt;-</span> <span class="fu">read.dta</span>(<span class="st">"https://github.com/ktmccabe/teachingdata/blob/main/kerevel.dta?raw=true"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(ker<span class="sc">$</span>genderimmedambcat3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+                       other deputy/regidor ballot access 
+                         680                          241 
+        senate ballot access      mayor/gov ballot access 
+                         130                          243 
+        cabinet/party leader                     bur appt 
+                         137                          329 </code></pre>
+</div>
+</div>
+<p>The outcome categories focus on <em>nominations</em> to these offices (i.e., ballot access), as the author finds that gender has less to do with electoral success.</p>
+<section id="assumption-and-considerations" class="level3" data-number="9.2.1">
+<h3 data-number="9.2.1" class="anchored" data-anchor-id="assumption-and-considerations"><span class="header-section-number">9.2.1</span> Assumption and Considerations</h3>
+<p>Let’s focus on the author’s research question. How could we evaluate this relationship? The <a href="One problem with this approach is that each analysis is potentially run on a different sample.">UCLA</a> site has a good discussion of these tradeoffs.</p>
+<ul>
+<li>One option would be to collapse this to a more simple problem of multiple separate binary logit models comparing two outcome categories at a time.
+<ul>
+<li>One possible issue is there is no constraint such that multiple pairwise logits won’t generate probabilities that when summed together exceed 1. Another is that each pairwise comparison might involve a slightly different sample. In contrast, the multinomial logit uses information from all <span class="math inline">\(N\)</span> observations when jointly estimating the likelihood.</li>
+</ul></li>
+<li>A second option would be to collapse the outcome categories down to two levels only (E.g., 1=Mayor/governor or Bureaucrat vs.&nbsp;0=Otherwise)
+<ul>
+<li>Just like we said collapsing a scale in ordinal models loses information, the same thing would happen here. This only makes sense to do in a case where a collapseed scale is theoretically interesting.</li>
+</ul></li>
+<li>Assess the scale– maybe the categories actually are ordered!
+<ul>
+<li>Think about whether the categories actually could be considered ordered or even on an interval scale. If that is the case, then you might be able to return to a linear or ordinal model.</li>
+</ul></li>
+</ul>
+<p>Instead, if we want to keep the nominal categories as they are, and we believe they are not ordered, we can move forward with the multinomial model.</p>
+<ul>
+<li>If we do so, we will want to make sure we have enough data in each outcome category to feel comfortable estimating the predicted probability of being in that category. We also want to avoid situations where there is no variation in our independent variables for a given outcome category (e.g., maybe only men were nominated for mayor/governor)
+<ul>
+<li>If we run into those situations, we might need more data or think about alternative modelling strategies.</li>
+</ul></li>
+</ul>
+</section>
+<section id="key-assumption-independence-of-irrelevant-alternatives" class="level3" data-number="9.2.2">
+<h3 data-number="9.2.2" class="anchored" data-anchor-id="key-assumption-independence-of-irrelevant-alternatives"><span class="header-section-number">9.2.2</span> Key Assumption: Independence of Irrelevant Alternatives</h3>
+<p>The IIA assumption requires that our probability of choosing a particular outcome over another (A over B) does not depend on the choice set, in particular, the presence or absence of some choice C.</p>
+<p>Classic case: bus example</p>
+<ul>
+<li>Suppose you have the transportation choice set below, where the numbers are the probabilities of choosing a particular form of transportation.</li>
+<li>Choice set: {train, red bus, blue bus} = {.5, .25, .25}
+<ul>
+<li>Choice set: {train, red bus} = {.5, .5}–Violates IIA</li>
+<li>Choice set: {train, red bus} = {2/3, 1/3}–Does not violate IIA</li>
+</ul></li>
+</ul>
+<p>The is because we assume the independence of the error terms <span class="math inline">\(\epsilon_i\)</span> across choices. In a multinomial probit model, this can be relaxed. However, multinomial probit is very computationally intensive, often not used.</p>
+</section>
+</section>
+<section id="running-multinomial-logit-in-r" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="running-multinomial-logit-in-r"><span class="header-section-number">9.3</span> Running multinomial logit in R</h2>
+<p>The multinomial specification will estimate coefficients that are relative to a baseline level of the outcomes. We should be thoughtful about what we choose as the baseline so that the coefficients are useful to us. Here, the author chooses to use “other” as the baseline.</p>
+<p>In R, we can easily change the baseline level of a factor variable. So first, we should check the class of the outcome variable and convert it into a factor variable if needed.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(ker<span class="sc">$</span>genderimmedambcat3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "factor"</code></pre>
+</div>
+</div>
+<p>We can then adjust the baseline level using the <code>relevel</code> command as has the <code>ref</code> argument for specifying a reference category.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Sets a level as the base category for the factor</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>ker<span class="sc">$</span>genderimmedambcat3 <span class="ot">&lt;-</span> <span class="fu">relevel</span>(ker<span class="sc">$</span>genderimmedambcat3, <span class="at">ref =</span> <span class="st">"other"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s run a simple regression model with just <code>female</code> as a covariate to see how the regression output differs from other models we have used thus far.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="do">## install.packages("nnet")</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nnet)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>fit0 <span class="ot">&lt;-</span> <span class="fu">multinom</span>(genderimmedambcat3 <span class="sc">~</span> <span class="fu">factor</span>(female), <span class="at">data =</span> ker)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># weights:  18 (10 variable)
+initial  value 3153.496666 
+iter  10 value 2849.378831
+final  value 2837.879460 
+converged</code></pre>
+</div>
+</div>
+<p>You can see that there is now a set of coefficients– Intercept and for female, for each outcome category-baseline comparison. We also do not automatically have the p-values for the output.</p>
+<p>We can find the p-values the same way we have done before by calculating z-scores through the division of the coefficients over the standard errors. Once we have the z-scores we can use <code>pnorm</code> the same way we did in the ordinal section.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">summary</span>(fit0)<span class="sc">$</span>coefficients<span class="sc">/</span><span class="fu">summary</span>(fit0)<span class="sc">$</span>standard.errors</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="dv">2</span><span class="sc">*</span>(<span class="fu">pnorm</span>(<span class="fu">abs</span>(z), <span class="at">lower.tail =</span> F)))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                              (Intercept) factor(female)1
+deputy/regidor ballot access 8.040554e-39      0.10711432
+senate ballot access         1.096025e-57      0.03803764
+mayor/gov ballot access      1.119624e-33      0.06783023
+cabinet/party leader         2.110040e-54      0.65008684
+bur appt                     2.383587e-26      0.01908118</code></pre>
+</div>
+</div>
+<p>As you can see, the output here for the coefficients is already messy, and we only have one covariate!! Just imagine how messy it can get with several covariates. Often, because of this, researchers move to present results visually instead. The practice problems will include a chance to replicate one of the author’s visuals from the JOP paper.</p>
+<section id="multinomial-quantities-of-interest" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1" class="anchored" data-anchor-id="multinomial-quantities-of-interest"><span class="header-section-number">9.3.1</span> Multinomial Quantities of Interest</h3>
+<p>Like the previous models, we can calculate predicted probabilities at specific values of our <span class="math inline">\(X\)</span> covariates. What differs here is just the specific form of this function.</p>
+<p>Predicted probabilities of the outcome being in a particular outcome category <span class="math inline">\(C_j\)</span>:</p>
+<ul>
+<li><span class="math inline">\(Pr(Y_i = C_j | X) = \frac{\exp(X\hat \beta_j)}{1 + \sum_{j=1}^{J-1} \exp(X \hat \beta_j)}\)</span>
+<ul>
+<li>The numerator is very similar to the numerator for when we have a binary logistic regression</li>
+<li>The denominator sums up <span class="math inline">\(\exp(X \hat \beta_j)\)</span> where <span class="math inline">\(\hat \beta_j\)</span> represents the set of coefficients for each outcome category except for the baseline (i.e., <span class="math inline">\(J- 1\)</span> means 1 less than the total number of outcome categories).</li>
+<li>Recall that in the baseline category <span class="math inline">\(J\)</span>, <span class="math inline">\(\hat \beta_J\)</span> is forced to 0 to help with the estimation or “identification” of the other coefficients relative to that category. Well why bring that up now? Well, <span class="math inline">\(exp(X \hat \beta_J) = exp(0) = 1\)</span>. When we estimate probabilities in the baseline category, the numerator will just be 1.</li>
+</ul></li>
+</ul>
+<p>Let’s take an example of finding the predicted probability of <span class="math inline">\(C_j\)</span> = Senate ballot access when <span class="math inline">\(x_i\)</span> is set to be female = 1.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Create the model matrix</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>Xfemale <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, <span class="dv">1</span>) <span class="co"># 1 for intercept, 1 for female</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Extract coefficients and give them informative labels</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>Bsenate <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit0)[<span class="dv">2</span>,] <span class="co"># 2nd row of coefficients</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>Bdep <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit0)[<span class="dv">1</span>,]</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>Bmayor <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit0)[<span class="dv">3</span>,]</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>Bcabinet <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit0)[<span class="dv">4</span>,]</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>Bbur <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit0)[<span class="dv">5</span>,]</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Probability of senate ballot access for female</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(Xfemale <span class="sc">%*%</span> Bsenate)<span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(Xfemale <span class="sc">%*%</span> Bsenate) <span class="sc">+</span> <span class="fu">exp</span>(Xfemale <span class="sc">%*%</span> Bdep) <span class="sc">+</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">exp</span>(Xfemale <span class="sc">%*%</span> Bmayor) <span class="sc">+</span> <span class="fu">exp</span>(Xfemale <span class="sc">%*%</span> Bcabinet) <span class="sc">+</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">exp</span>(Xfemale <span class="sc">%*%</span> Bbur))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           [,1]
+[1,] 0.09846309</code></pre>
+</div>
+</div>
+<p>Let’s do the same for female = 0. We just need to change X.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Xnfemale <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(Xnfemale <span class="sc">%*%</span> Bsenate)<span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(Xnfemale <span class="sc">%*%</span> Bsenate) <span class="sc">+</span> <span class="fu">exp</span>(Xnfemale <span class="sc">%*%</span> Bdep) <span class="sc">+</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">exp</span>(Xnfemale <span class="sc">%*%</span> Bmayor) <span class="sc">+</span> <span class="fu">exp</span>(Xnfemale <span class="sc">%*%</span> Bcabinet) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">exp</span>(Xnfemale <span class="sc">%*%</span> Bbur))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           [,1]
+[1,] 0.06829273</code></pre>
+</div>
+</div>
+<p>We might also be interested in the probability of <span class="math inline">\(C_j\)</span> = other. The syntax here will look slightly different because “other” was the baseline category. The denominator stays the same, but the numerator is just 1.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Manual- probability of other for female (the base category)</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(Xfemale <span class="sc">%*%</span> Bsenate) <span class="sc">+</span> <span class="fu">exp</span>(Xfemale <span class="sc">%*%</span> Bdep) <span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">exp</span>(Xfemale <span class="sc">%*%</span> Bmayor) <span class="sc">+</span> <span class="fu">exp</span>(Xfemale <span class="sc">%*%</span> Bcabinet) <span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">exp</span>(Xfemale <span class="sc">%*%</span> Bbur))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          [,1]
+[1,] 0.3538449</code></pre>
+</div>
+</div>
+<p>Just like in the other models, we can rely on outside packages, too. For some models, these packages are not going to have full capabilities– they might not be able to calculate standard errors, for example. These are “living packages” so you can always check the documentation and update the packages to see if new capabilities have been added.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(prediction)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>p.senate <span class="ot">&lt;-</span> <span class="fu">prediction</span>(fit0, <span class="at">at  =</span> <span class="fu">list</span>(<span class="at">female =</span> <span class="dv">1</span>))</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(p.senate<span class="sc">$</span><span class="st">`</span><span class="at">Pr(senate ballot access)</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.09846309</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(p.senate<span class="sc">$</span><span class="st">`</span><span class="at">Pr(other)</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3538449</code></pre>
+</div>
+</div>
+<p>We can use <code>margins</code> to calculate the difference in predicted probabilities, for example, between <code>female=1</code> and <code>female=0</code>. We should specify the category for which we want this comparison. It appears we need to set <code>vce = booststrap</code> for this to work.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(margins)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>m.senate <span class="ot">&lt;-</span> <span class="fu">margins</span>(fit0, <span class="at">variables =</span> <span class="st">"female"</span>, <span class="at">category =</span> <span class="st">"senate ballot access"</span>, </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">vce=</span><span class="st">"bootstrap"</span>, <span class="at">change=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m.senate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Of course, we could also do this manually, have a quantity of interest <a href="https://www.youtube.com/watch?v=M-5zlj49ugk">party</a>, and run the bootstrap ourselves.</p>
+</section>
+</section>
+<section id="practice-problems-for-multinomial" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="practice-problems-for-multinomial"><span class="header-section-number">9.4</span> Practice Problems for Multinomial</h2>
+<p>We will try to replicate a portion of the analysis from the paper. Note that different multinomial functions in R and in Stata (which the author used) might rely on slightly different optimization and estimation algorithms, which in smaller samples, might lead to slightly different results. This is one place where your results might not <strong>exactly</strong> match the authors’, but they should be close.</p>
+<ol type="1">
+<li>Let’s try to replicate Figure 1a in the paper (which corresponds to Table 1a in the appendix), which shows the average marginal effect of being female vs.&nbsp;male on the first future career move, for each outcome category in the data.
+<ul>
+<li>In addition to the <code>female</code> covariate, the author includes covariates for <code>party_cat</code> (party identification), <code>leg_exp_dum</code> and <code>exec_exp_dum</code> (legislative and executive experience), and <code>leadership</code> (chamber leadership experience) which are each treated as factor variables in the regression.</li>
+<li>We should set <code>party_cat</code> to have the baseline of <code>PRI</code> to match the author.</li>
+</ul></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ker<span class="sc">$</span>party_cat <span class="ot">&lt;-</span> <span class="fu">relevel</span>(<span class="fu">as.factor</span>(ker<span class="sc">$</span>party_cat), <span class="at">ref=</span><span class="st">"PRI"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="images/ker1.png" class="img-fluid"> <img src="images/ker2.png" class="img-fluid"></p>
+<p>The author sets covariates to observed levels when estimating the marginal effects.</p>
+<ol start="2" type="1">
+<li>Based on the marginal effects, how would you evaluate the author’s hypothesis on the effect of gender on future career moves to executive office?</li>
+</ol>
+<details>
+<summary>
+Try on your own and then expand for the solution.
+</summary>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">multinom</span>(genderimmedambcat3 <span class="sc">~</span> <span class="fu">factor</span>(female) <span class="sc">+</span> party_cat <span class="sc">+</span> <span class="fu">factor</span>(leg_exp_dum) <span class="sc">+</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">factor</span>(exec_exp_dum) <span class="sc">+</span> <span class="fu">factor</span>(leadership), <span class="at">data=</span>ker)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(margins)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>marg.effect.execnom <span class="ot">&lt;-</span> <span class="fu">margins</span>(fit2, <span class="at">variables=</span><span class="st">"female"</span>, <span class="at">change=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">vce=</span> <span class="st">"bootstrap"</span>, <span class="at">category=</span><span class="st">"mayor/gov ballot access"</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>marg.effect.deputy <span class="ot">&lt;-</span> <span class="fu">margins</span>(fit2, <span class="at">variables=</span><span class="st">"female"</span>, <span class="at">change=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">vce=</span> <span class="st">"bootstrap"</span>, <span class="at">category=</span><span class="st">"deputy/regidor ballot access"</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>marg.effect.senator <span class="ot">&lt;-</span> <span class="fu">margins</span>(fit2, <span class="at">variables=</span><span class="st">"female"</span>, <span class="at">change=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">vce=</span> <span class="st">"bootstrap"</span>, <span class="at">category=</span><span class="st">"senate ballot access"</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>marg.effect.execappt <span class="ot">&lt;-</span> <span class="fu">margins</span>(fit2, <span class="at">variables=</span><span class="st">"female"</span>, <span class="at">change=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">vce=</span> <span class="st">"bootstrap"</span>, <span class="at">category=</span><span class="st">"cabinet/party leader"</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>marg.effect.bureau <span class="ot">&lt;-</span> <span class="fu">margins</span>(fit2, <span class="at">variables=</span><span class="st">"female"</span>, <span class="at">change=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">vce=</span> <span class="st">"bootstrap"</span>, <span class="at">category=</span><span class="st">"bur appt"</span>)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>marg.effect.other <span class="ot">&lt;-</span> <span class="fu">margins</span>(fit2, <span class="at">variables=</span><span class="st">"female"</span>, <span class="at">change=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">vce=</span> <span class="st">"bootstrap"</span>, <span class="at">category=</span><span class="st">"other"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s make a visual close to the authors using <code>ggplot</code>. Recall, <code>ggplot</code> is easiest to work with when the data you want to plot are in a data.frame. So we are going to bind together the summary output and specify which row corresponds to which outcome.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>mcomb <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">rbind</span>(<span class="fu">summary</span>(marg.effect.execnom), </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">summary</span>(marg.effect.deputy), </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">summary</span>(marg.effect.senator), </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">summary</span>(marg.effect.execappt),</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">summary</span>(marg.effect.bureau), </span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">summary</span>(marg.effect.other)))</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>mcomb<span class="sc">$</span>outcome <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"executive nom"</span>, <span class="st">"deputy"</span>, <span class="st">"senator"</span>, <span class="st">"executive appt"</span>, <span class="st">"bureaucracy"</span>, <span class="st">"other"</span>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>mcomb<span class="sc">$</span>outcome <span class="ot">&lt;-</span> <span class="fu">factor</span>(mcomb<span class="sc">$</span>outcome, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"deputy"</span>, <span class="st">"senator"</span>, <span class="st">"executive nom"</span>, <span class="st">"executive appt"</span>, <span class="st">"bureaucracy"</span>, <span class="st">"other"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can now use <code>geom_point</code> and <code>geom_errorbar</code> to plot the AME point estimates and bootstrap confidence intervals.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mcomb, <span class="fu">aes</span>(<span class="at">x=</span>outcome, <span class="at">y=</span>AME))<span class="sc">+</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>lower, <span class="at">ymax=</span>upper), <span class="at">width=</span>.<span class="dv">05</span>)<span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="sc">-</span>.<span class="dv">4</span>, .<span class="dv">4</span>)<span class="sc">+</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">0</span>)<span class="sc">+</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Change in probability"</span>)<span class="sc">+</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>)</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"images/kerplot.png"</span>, <span class="at">device=</span><span class="st">"png"</span>, <span class="at">width=</span><span class="dv">6</span>, <span class="at">height=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="images/kerplot.png" class="img-fluid"></p>
+<p>Based on this analysis, women have a significantly lower probability of being nominated for a future mayoral or gubernatorial position, which aligns with the author’s hypothesis.</p>
+</details>
+</section>
+<section id="week-7-tutorial" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="week-7-tutorial"><span class="header-section-number">9.5</span> Week 7 Tutorial</h2>
+<p>For this exercise, we will use data from Amy Lerman, Meredith Sadin, and Samuel Trachtman’s 2017 article in the <em>American Political Science Review</em>, “<a href="https://www.cambridge.org/core/journals/american-political-science-review/article/abs/policy-uptake-as-political-behavior-evidence-from-the-affordable-care-act/98F8D71C0336627AE97A357D2F145C27">Policy Uptake as Political Behavior: Evidence from the Affordable Care Act</a>.”</p>
+<p><em>Abstract. Partisanship is a primary predictor of attitudes toward public policy. However, we do not yet know whether party similarly plays a role in shaping public policy behavior, such as whether to apply for government benefits or take advantage of public services. While existing research has identified numerous factors that increase policy uptake, the role of politics has been almost entirely overlooked. In this paper, we examine the case of the Affordable Care Act to assess whether policy uptake is not only about information and incentives; but also about politics. Using longitudinal data, we find that Republicans have been less likely than Democrats to enroll in an insurance plan through state or federal exchanges, all else equal. Employing a large-scale field experiment, we then show that de-emphasizing the role of government (and highlighting the market’s role) can close this partisan gap.</em></p>
+<p>In a portion of their analysis, they use survey data to assess the relationship between partisanship and insurance uptake through the ACA marketplaces. The researchers’ hypothesis is:</p>
+<p><em>First, we expect that partisanship will be a strong predictor of policy behavior. In the case of the ACA, we anticipate that Republicans—who on average are much less supportive of the health insurance reform and are generally more resistant to government intervention in the private market—will be less likely than Democrats to take advantage of health insurance options provided by the ACA.</em></p>
+<p>Key variables include</p>
+<ul>
+<li><code>ins</code>: insurance status, 1=“uninsured”, 3= “marketplace”, 4= “private”</li>
+<li><code>republican</code>: 1= Republican, 0= Democrat</li>
+<li><code>age2</code>: numeric variable for age</li>
+<li><code>ed</code>: education level of respondent</li>
+<li><code>racethn</code>: race/ethnicity of respondent</li>
+<li><code>income2</code>: categorical income of respondent</li>
+<li><code>sex</code>: sex of respondent</li>
+<li><code>state</code> : respondent’s state of residence (coded as a FIPs code)</li>
+<li><code>empl2</code>: respondent’s employment status</li>
+<li><code>date</code>: date of the survey poll</li>
+</ul>
+<p>Let’s load the data and look at the outcome <code>ins</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(foreign)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nnet) <span class="co"># install this package</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>lst <span class="ot">&lt;-</span> <span class="fu">read.dta</span>(<span class="st">"https://github.com/ktmccabe/teachingdata/blob/main/lst.dta?raw=true"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(lst<span class="sc">$</span>ins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+   1    3    4 
+2100  724  904 </code></pre>
+</div>
+</div>
+<p>Let’s assess the research question.</p>
+<ol type="1">
+<li>Our goal is to understand the relationship between party identification and uptake of ACA marketplace insurance. What are the possible ways we could model this relationship given our outcome data?</li>
+<li>Let’s suppose we decided to go with the multinomial logistic regression.
+<ul>
+<li>What <code>class()</code> should our outcome variable be?</li>
+<li>What would make sense to use as a baseline category?</li>
+</ul></li>
+</ol>
+<details>
+<summary>
+Go ahead and recode the variable as necessary.
+</summary>
+<p>Even if your variable is a factor, I would recommend giving it informative labels instead of numbers so that it is easier to interpret the regression outcome.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(lst<span class="sc">$</span>ins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>lst<span class="sc">$</span>ins <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(lst<span class="sc">$</span>ins <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"uninsured"</span>,</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">ifelse</span>(lst<span class="sc">$</span>ins <span class="sc">==</span> <span class="dv">3</span>, <span class="st">"marketplace"</span>,</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">ifelse</span>(lst<span class="sc">$</span>ins <span class="sc">==</span> <span class="dv">4</span>, <span class="st">"private"</span>, <span class="cn">NA</span>))))</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>lst<span class="sc">$</span>ins <span class="ot">&lt;-</span> <span class="fu">relevel</span>(lst<span class="sc">$</span>ins, <span class="at">ref =</span> <span class="st">"marketplace"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</details>
+<p>Let’s conduct a multinomial logistic regression of the following form:</p>
+<span class="math display">\[\begin{align*}
+\log \frac{ \pi_{j}}{ \pi_{J}} &amp;= \alpha_{j} + Republican_i\beta_{1j} + \\ &amp;
+age2_i \beta_{2j} + ed_i\boldsymbol{ \beta_{kj}} \\ &amp; + racethn_i \boldsymbol{ \beta_{kj}} + income2_i\boldsymbol{ \beta_{kj}} \\ &amp; + sex_i\boldsymbol{ \beta_{kj}}  + empl2_i\boldsymbol{ \beta_{kj}}
+\end{align*}\]</span>
+<p>where all covariates are treated as factor variables. Note that the <span class="math inline">\(k\)</span>’s are just a placeholder for the coeffcient numbers. For factor variables with several categories, you will end up with several <span class="math inline">\(k\)</span> coefficients for each variable (e.g., one for racethn = Asian, one for racethn = Black, etc.)</p>
+<details>
+<summary>
+Run the model.
+</summary>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">multinom</span>(<span class="fu">as.factor</span>(ins) <span class="sc">~</span> republican <span class="sc">+</span> age2 <span class="sc">+</span> <span class="fu">factor</span>(ed)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>                <span class="sc">+</span> <span class="fu">factor</span>(racethn) <span class="sc">+</span> <span class="fu">factor</span>(income2)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>                <span class="sc">+</span> <span class="fu">as.factor</span>(sex) </span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>                <span class="sc">+</span> <span class="fu">as.factor</span>(empl2), <span class="at">data =</span> lst)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># weights:  60 (38 variable)
+initial  value 4095.626612 
+iter  10 value 3475.264179
+iter  20 value 3122.816006
+iter  30 value 3067.172420
+iter  40 value 3059.543787
+final  value 3059.470322 
+converged</code></pre>
+</div>
+</div>
+</details>
+<p>Let’s consider our assumptions.</p>
+<ol start="3" type="1">
+<li>What is a key assumption of the multinomial logistic regression model?
+<ul>
+<li>How could it potentially be violated in the authors’ case?</li>
+</ul></li>
+</ol>
+<details>
+<summary>
+Expand for one example.
+</summary>
+<p>The key assumption is the IIA assumption. The authors consider potential violations to this assumption in footnote 4. “Consistent estimation using the multinomial logistic model relies on the Independence of Irrelevant Alternatives (IIA) assumption, which requires that the choice of one of the available options does not depend on whether some alternative option is present. While this assumption is hard to test (Allison 2012), there is some evidence that it could be violated in this case, with the presence of the”uninsured” option affecting the distribution of choices across private and marketplace insurance. Thus, as a robustness check, we also estimate a model in which we first analyze the decision to insure (for the study population), and second, conditional on having insurance, analyze the private versus marketplace choice.”</p>
+</details>
+<p>Let’s assume we are okay with our assumptions. Let’s now try to use the model to evaluate the research hypothesis.</p>
+<ol start="4" type="1">
+<li>First, we should get comfortable extracting coefficients from multinomial output.
+<ul>
+<li>Extract the coefficients on the Republican covariate and their standard errors</li>
+<li>Calculate z-scores and p-values</li>
+<li>Assess the statistical significance</li>
+<li>Provide an initial evaluation of the authors’ research hypothesis</li>
+</ul></li>
+</ol>
+<p>Note that <code>coef(fit)</code> is now a matrix of output. We want to extract the <code>republican</code> column.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>repcoef <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit)[, <span class="st">"republican"</span>]</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>repse <span class="ot">&lt;-</span> <span class="fu">summary</span>(fit)<span class="sc">$</span>standard.errors[, <span class="st">"republican"</span>]</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Calculate z-scores</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>rep.zs <span class="ot">&lt;-</span> repcoef<span class="sc">/</span>repse</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>rep.ps <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>(<span class="fu">pnorm</span>(<span class="fu">abs</span>(rep.zs), <span class="at">lower.tail =</span> F))</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cbind</span>(repcoef, rep.zs, rep.ps), <span class="at">digits=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          repcoef rep.zs rep.ps
+private     0.942  8.368      0
+uninsured   0.966  9.044      0</code></pre>
+</div>
+</div>
+<p>Let’s now transform these into quantities of interest that closely evaluate the research question.</p>
+<ol start="5" type="1">
+<li>What quantity of interest should we estimate?
+<ul>
+<li>Compute the quantity of interest</li>
+<li>Compute uncertainty</li>
+<li>Consider ways to visualize the results</li>
+</ul></li>
+</ol>
+<details>
+<summary>
+Quantity of Interest calculation.
+</summary>
+<p>Let’s calculate the average difference in predicted probability of signing up for marketplace insurance for Republicans vs.&nbsp;Democrats, holding covariates at observed values.</p>
+<p>Recall from above that the probability of <span class="math inline">\(Y_i\)</span> being in a particular category is:</p>
+<span class="math display">\[\begin{align*}
+Pr(Y_i = C_j |X) &amp;= \frac{\exp(\mathbf x_i^T\beta_j)}{1 + \sum_{j=1}^{J-1} \exp(\mathbf x_i^T\beta_j)}
+\end{align*}\]</span>
+<p>Recall that marketplace insurance is the baseline category. So this means our formula is</p>
+<span class="math display">\[\begin{align*}
+Pr(Y_i = Marketplace | X) &amp;= \frac{1}{1 + \sum_{j=1}^{J-1} \exp(\mathbf x_i^T\beta_j)}
+\end{align*}\]</span>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Point estimates</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>Xrep <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(fit)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>Xrep[, <span class="st">"republican"</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>Xdem <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(fit)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>Xdem[, <span class="st">"republican"</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Extract all coefficients</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">coef</span>(fit))</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>Bprivate <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit)[<span class="dv">1</span>, ]</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>Buninsured <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit)[<span class="dv">2</span>, ]</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Approach one</span></span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>repmarket.p <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(Xrep <span class="sc">%*%</span> Bprivate) <span class="sc">+</span> <span class="fu">exp</span>(Xrep <span class="sc">%*%</span> Buninsured)))</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>demmarket.p <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(Xdem <span class="sc">%*%</span> Bprivate) <span class="sc">+</span> <span class="fu">exp</span>(Xdem <span class="sc">%*%</span> Buninsured)))</span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>diffmarket.p <span class="ot">&lt;-</span> repmarket.p<span class="sc">-</span> demmarket.p</span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Approach two (easier when you have a lot of outcome categories)</span></span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>repmarket.p <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">rowSums</span>(<span class="fu">exp</span>(Xrep <span class="sc">%*%</span> B))))</span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>demmarket.p <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">rowSums</span>(<span class="fu">exp</span>(Xdem <span class="sc">%*%</span> B))))</span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>diffmarket.p <span class="ot">&lt;-</span> repmarket.p <span class="sc">-</span> demmarket.p</span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>diffmarket.p </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.1313263</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Approach three</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(margins)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>marg.effect.market <span class="ot">&lt;-</span> <span class="fu">margins</span>(fit, <span class="at">variables=</span><span class="st">"republican"</span>, <span class="at">change=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), </span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">vce=</span> <span class="st">"bootstrap"</span>, <span class="at">category=</span><span class="st">"marketplace"</span>)</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(marg.effect.market)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</details>
+<details>
+<summary>
+Uncertainty calculation.
+</summary>
+<p>We can use the simulation or bootstrap approach like before to calculate uncertainty. We will use the bootstrap because the syntax for the simulation approach is more complicated because our coefficients are in a matrix. The package <a href="http://docs.zeligproject.org/articles/zeligchoice_mlogit.html">Zelig</a> has this capability. Simulation can be more faster given the multinomial model takes a moment to run.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Bootstrap</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>myboot <span class="ot">&lt;-</span> <span class="cf">function</span>(df){</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  wrows <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(df), <span class="at">size=</span><span class="fu">nrow</span>(df), <span class="at">replace =</span> T)</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  subdata <span class="ot">&lt;-</span> df[wrows, ]</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  fit.boot <span class="ot">&lt;-</span> <span class="fu">multinom</span>(<span class="fu">as.factor</span>(ins) <span class="sc">~</span> republican <span class="sc">+</span> age2 <span class="sc">+</span> <span class="fu">factor</span>(ed)</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>                <span class="sc">+</span> <span class="fu">factor</span>(racethn) <span class="sc">+</span> <span class="fu">factor</span>(income2)</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>                <span class="sc">+</span> <span class="fu">as.factor</span>(sex) </span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>                <span class="sc">+</span> <span class="fu">as.factor</span>(empl2), <span class="at">data =</span> subdata)</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Point estimates</span></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>  Xrep <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(fit.boot)</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>  Xrep[, <span class="st">"republican"</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>  Xdem <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(fit.boot)</span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>  Xdem[, <span class="st">"republican"</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Extract all coefficients</span></span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>  B <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">coef</span>(fit.boot))</span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>  Bprivate <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit.boot)[<span class="dv">1</span>, ]</span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>  Buninsured <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit.boot)[<span class="dv">2</span>, ]</span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Approach one</span></span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>  repmarket.p <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(Xrep <span class="sc">%*%</span> Bprivate) <span class="sc">+</span> <span class="fu">exp</span>(Xrep <span class="sc">%*%</span> Buninsured)))</span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>  demmarket.p <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(Xdem <span class="sc">%*%</span> Bprivate) <span class="sc">+</span> <span class="fu">exp</span>(Xdem <span class="sc">%*%</span> Buninsured)))</span>
+<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a>  diffmarket.p.boot <span class="ot">&lt;-</span> repmarket.p<span class="sc">-</span> demmarket.p</span>
+<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">cbind</span>(repmarket.p, demmarket.p, diffmarket.p.boot))</span>
+<span id="cb38-30"><a href="#cb38-30" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb38-31"><a href="#cb38-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-32"><a href="#cb38-32" aria-hidden="true" tabindex="-1"></a>myboot.ests <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">"rbind"</span>, <span class="fu">replicate</span>(<span class="dv">1000</span>, <span class="fu">myboot</span>(lst), <span class="at">simplify =</span> F))</span>
+<span id="cb38-33"><a href="#cb38-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-34"><a href="#cb38-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-35"><a href="#cb38-35" aria-hidden="true" tabindex="-1"></a><span class="do">## Confidence intervals around the difference</span></span>
+<span id="cb38-36"><a href="#cb38-36" aria-hidden="true" tabindex="-1"></a>cis.diff <span class="ot">&lt;-</span> <span class="fu">quantile</span>(myboot.ests[, <span class="st">"diffmarket.p.boot"</span>], <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</span>
+<span id="cb38-37"><a href="#cb38-37" aria-hidden="true" tabindex="-1"></a>cis.diff</span>
+<span id="cb38-38"><a href="#cb38-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-39"><a href="#cb38-39" aria-hidden="true" tabindex="-1"></a><span class="do">## Visualize the two distributions</span></span>
+<span id="cb38-40"><a href="#cb38-40" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">"images/boostrappid.png"</span>, <span class="at">res=</span><span class="dv">300</span>, <span class="at">width=</span><span class="dv">5</span>, <span class="at">height=</span><span class="dv">4</span>, <span class="at">units=</span><span class="st">"in"</span>)</span>
+<span id="cb38-41"><a href="#cb38-41" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(myboot.ests[, <span class="st">"repmarket.p"</span>]), <span class="at">col=</span><span class="st">"red"</span>,</span>
+<span id="cb38-42"><a href="#cb38-42" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Bootstrap Distribution for Republican and Democrats </span><span class="sc">\n</span><span class="st"> Marketplace Uptake Probability"</span>,</span>
+<span id="cb38-43"><a href="#cb38-43" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex.main =</span> .<span class="dv">7</span>,</span>
+<span id="cb38-44"><a href="#cb38-44" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, .<span class="dv">3</span>),</span>
+<span id="cb38-45"><a href="#cb38-45" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Estimated Probability of Uptake through Marketplace"</span>)</span>
+<span id="cb38-46"><a href="#cb38-46" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fu">density</span>(myboot.ests[, <span class="st">"demmarket.p"</span>]), <span class="at">col=</span><span class="st">"blue"</span>, <span class="at">type=</span><span class="st">"l"</span>)</span>
+<span id="cb38-47"><a href="#cb38-47" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="images/boostrappid.png" class="img-fluid"></p>
+</details>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./08-OrdinalandOutcomes.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Ordinal Outcomes</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

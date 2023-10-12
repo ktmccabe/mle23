@@ -182,6 +182,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Ordinal Outcomes</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-NominalOutcomes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Multinomial Outcomes</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
     <nav id="TOC" role="doc-toc" class="toc-active">
@@ -761,15 +767,15 @@ Expand below for more details on what the sample function does.
 <div class="cell">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(somedata), <span class="fu">nrow</span>(somedata), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 6 1 3 7 4 5 3</code></pre>
+<pre><code>[1] 3 7 6 5 2 2 4</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(somedata), <span class="fu">nrow</span>(somedata), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 5 6 2 1 4 5 5</code></pre>
+<pre><code>[1] 2 2 4 1 7 6 4</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(somedata), <span class="fu">nrow</span>(somedata), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 7 2 1 6 7 3 1</code></pre>
+<pre><code>[1] 2 2 3 4 2 5 6</code></pre>
 </div>
 </div>
 <p>What happened is the function generated a set of row numbers. Note how it is possible for the same row number to be picked multiple times. Each time we run the sample function, we get slightly different row numbers.</p>
@@ -779,21 +785,21 @@ Expand below for more details on what the sample function does.
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>wrows <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(somedata), <span class="fu">nrow</span>(somedata), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>wrows</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4 5 3 4 5 3 5</code></pre>
+<pre><code>[1] 1 1 5 2 2 2 2</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="do">## subset data to include rows sampled</span></span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="do">## note if row indices are in wrows more than once, they will also be in the subset more than once</span></span>
 <span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>subdata <span class="ot">&lt;-</span> somedata[wrows,]</span>
 <span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>subdata</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    colors    shapes
-4    green rectangle
-5   purple   diamond
-3   yellow  triangle
-4.1  green rectangle
-5.1 purple   diamond
-3.1 yellow  triangle
-5.2 purple   diamond</code></pre>
+<pre><code>    colors  shapes
+1      red  circle
+1.1    red  circle
+5   purple diamond
+2     blue  square
+2.1   blue  square
+2.2   blue  square
+2.3   blue  square</code></pre>
 </div>
 </div>
 <p>Given that each time the sample function runs, we get slightly different random samples of the data, that’s how we end up with a distribution of slightly different estimates of our quantities of interest. Each time the regression is run with a slightly different dataset.</p>
