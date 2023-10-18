@@ -84,12 +84,12 @@ The outcome categories focus on *nominations* to these offices (i.e., ballot acc
 
 ### Assumption and Considerations
 
-Let's focus on the author's research question. How could we evaluate this relationship? The [UCLA](One%20problem%20with%20this%20approach%20is%20that%20each%20analysis%20is%20potentially%20run%20on%20a%20different%20sample.) site has a good discussion of these tradeoffs.
+Let's focus on the author's research question. How could we evaluate this relationship? The UCLA site has a good discussion of these tradeoffs.
 
 -   One option would be to collapse this to a more simple problem of multiple separate binary logit models comparing two outcome categories at a time.
     -   One possible issue is there is no constraint such that multiple pairwise logits won't generate probabilities that when summed together exceed 1. Another is that each pairwise comparison might involve a slightly different sample. In contrast, the multinomial logit uses information from all $N$ observations when jointly estimating the likelihood.
 -   A second option would be to collapse the outcome categories down to two levels only (E.g., 1=Mayor/governor or Bureaucrat vs. 0=Otherwise)
-    -   Just like we said collapsing a scale in ordinal models loses information, the same thing would happen here. This only makes sense to do in a case where a collapseed scale is theoretically interesting.
+    -   Just like we said collapsing a scale in ordinal models loses information, the same thing would happen here. This only makes sense to do in a case where a collapsed scale is theoretically interesting.
 -   Assess the scale-- maybe the categories actually are ordered!
     -   Think about whether the categories actually could be considered ordered or even on an interval scale. If that is the case, then you might be able to return to a linear or ordinal model.
 
@@ -198,9 +198,28 @@ We might also be interested in the probability of $C_j$ = other. The syntax here
 
 Just like in the other models, we can rely on outside packages, too. For some models, these packages are not going to have full capabilities-- they might not be able to calculate standard errors, for example. These are "living packages" so you can always check the documentation and update the packages to see if new capabilities have been added.
 
+```{r}
+library(marginaleffects)
+p.allgroups <- avg_predictions(fit0, 
+                             by="female",
+                             newdata = datagridcf(female = 1))
+p.allgroups
+```
+
+We can also calculate the *difference* in predicted probabilities, for example, between `female=1` and `female=0`.
+
+```{r}
+library(marginaleffects)
+me.allgroups <- avg_comparisons(fit0, variables= list(female = c(0,1)))
+me.allgroups
+```
+
+Below are examples from the `prediction` and `margins` packages from Thomas Leeper.
+
 ```{r, message=F, warning=F}
 library(prediction)
 p.senate <- prediction(fit0, at  = list(female = 1))
+summary(p.senate)
 mean(p.senate$`Pr(senate ballot access)`)
 mean(p.senate$`Pr(other)`)
 ```
@@ -241,6 +260,32 @@ The author sets covariates to observed levels when estimating the marginal effec
 ```{r, message=FALSE, warning=FALSE, eval=F}
 fit2 <- multinom(genderimmedambcat3 ~ factor(female) + party_cat + factor(leg_exp_dum) + 
                    factor(exec_exp_dum) + factor(leadership), data=ker)
+
+library(marginaleffects)
+me.fit2.all <- avg_comparisons(fit2, variables = list(female= c(0, 1)))
+
+```
+
+Let's make a visual close to the authors using `ggplot` We can now use `geom_point` and `geom_errorbar` to plot the AME point estimates and bootstrap confidence intervals.
+
+```{r, message=FALSE, warning=FALSE, eval=F, fig.width=10, fig.height=5}
+library(ggplot2)
+ggplot(me.fit2.all, aes(x=group, y=estimate))+
+  geom_point()+
+  geom_errorbar(aes(ymin=conf.low, ymax=conf.high), width=.05)+
+  theme_bw()+
+  ylim(-.4, .4)+
+  geom_hline(yintercept=0)+
+  ylab("Change in probability when Female vs. Male")+
+  xlab("")
+ggsave("images/kerplot1.png", device="png", width=6, height=4)
+
+```
+
+![](images/kerplot1.png)
+
+
+```{r, eval=FALSE}
 library(margins)
 marg.effect.execnom <- margins(fit2, variables="female", change=c(0, 1), vce= "bootstrap", category="mayor/gov ballot access")
 marg.effect.deputy <- margins(fit2, variables="female", change=c(0, 1), vce= "bootstrap", category="deputy/regidor ballot access")
@@ -454,8 +499,17 @@ diffmarket.p <- repmarket.p - demmarket.p
 diffmarket.p 
 ```
 
+
 ```{r, eval=FALSE}
 ## Approach three
+library(marginaleffects)
+marg.effect.all <- avg_comparisons(fit,
+                                   variables=list(republican = c(0,1)))
+subset(marg.effect.all, group == "marketplace")
+```
+
+```{r, eval=FALSE}
+## Approach four
 library(margins)
 marg.effect.market <- margins(fit, variables="republican", change=c(0, 1), 
                               vce= "bootstrap", category="marketplace")
@@ -468,7 +522,7 @@ summary(marg.effect.market)
 
 <summary>Uncertainty calculation.</summary>
 
-We can use the simulation or bootstrap approach like before to calculate uncertainty. We will use the bootstrap because the syntax for the simulation approach is more complicated because our coefficients are in a matrix. The package [Zelig](http://docs.zeligproject.org/articles/zeligchoice_mlogit.html) has this capability. Simulation can be more faster given the multinomial model takes a moment to run.
+If we wanted to calculate uncertainty on our own, we could use the simulation or bootstrap approach like before to calculate uncertainty. We will use the bootstrap because the syntax for the simulation approach is more complicated because our coefficients are in a matrix. The package [Zelig](http://docs.zeligproject.org/articles/zeligchoice_mlogit.html) has this capability. Simulation can be more faster given the multinomial model takes a moment to run.
 
 ```{r, eval=FALSE}
 ## Bootstrap
