@@ -1,0 +1,1875 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>MLE 2023 - 10&nbsp; Count data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./09-NominalOutcomes.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-CountData.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Count data</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">MLE 2023</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Maxmimum Likelihood Fall 2023</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-ROverview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R Overview</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-TheMATH.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Math</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-ReviewofOLS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Review of OLS</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-IntrotoMaximumLikelihood.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to MLE</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-BinaryOutcomes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Binary Dependent Variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-QuantitiesofInterest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Quantities of Interest</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-OrdinalandOutcomes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Ordinal Outcomes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-NominalOutcomes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Multinomial Outcomes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-CountData.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Count data</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Section Contents</h2>
+   
+  <ul>
+  <li><a href="#overview-of-count-data" id="toc-overview-of-count-data" class="nav-link active" data-scroll-target="#overview-of-count-data"><span class="header-section-number">10.1</span> Overview of Count Data</a></li>
+  <li><a href="#poisson-model" id="toc-poisson-model" class="nav-link" data-scroll-target="#poisson-model"><span class="header-section-number">10.2</span> Poisson Model</a></li>
+  <li><a href="#motivating-example-for-count-data" id="toc-motivating-example-for-count-data" class="nav-link" data-scroll-target="#motivating-example-for-count-data"><span class="header-section-number">10.3</span> Motivating Example for Count Data</a>
+  <ul>
+  <li><a href="#fitting-poisson-in-r" id="toc-fitting-poisson-in-r" class="nav-link" data-scroll-target="#fitting-poisson-in-r"><span class="header-section-number">10.3.1</span> Fitting Poisson in R</a></li>
+  <li><a href="#interpreting-regression-output" id="toc-interpreting-regression-output" class="nav-link" data-scroll-target="#interpreting-regression-output"><span class="header-section-number">10.3.2</span> Interpreting regression output</a></li>
+  </ul></li>
+  <li><a href="#poisson-quantities-of-interest" id="toc-poisson-quantities-of-interest" class="nav-link" data-scroll-target="#poisson-quantities-of-interest"><span class="header-section-number">10.4</span> Poisson Quantities of Interest</a>
+  <ul>
+  <li><a href="#expected-counts" id="toc-expected-counts" class="nav-link" data-scroll-target="#expected-counts"><span class="header-section-number">10.4.1</span> Expected Counts</a></li>
+  <li><a href="#sidenote-multiplicative-coefficient-interpretation" id="toc-sidenote-multiplicative-coefficient-interpretation" class="nav-link" data-scroll-target="#sidenote-multiplicative-coefficient-interpretation"><span class="header-section-number">10.4.2</span> Sidenote: Multiplicative coefficient interpretation</a></li>
+  <li><a href="#incidence-rate-ratios" id="toc-incidence-rate-ratios" class="nav-link" data-scroll-target="#incidence-rate-ratios"><span class="header-section-number">10.4.3</span> Incidence Rate Ratios</a></li>
+  <li><a href="#where-poisson-is-poisonous" id="toc-where-poisson-is-poisonous" class="nav-link" data-scroll-target="#where-poisson-is-poisonous"><span class="header-section-number">10.4.4</span> Where Poisson is poisonous:</a></li>
+  </ul></li>
+  <li><a href="#quasipoisson-and-negative-binomial-models" id="toc-quasipoisson-and-negative-binomial-models" class="nav-link" data-scroll-target="#quasipoisson-and-negative-binomial-models"><span class="header-section-number">10.5</span> Quasipoisson and Negative Binomial Models</a>
+  <ul>
+  <li><a href="#negative-binomial-models" id="toc-negative-binomial-models" class="nav-link" data-scroll-target="#negative-binomial-models"><span class="header-section-number">10.5.1</span> Negative Binomial Models</a></li>
+  </ul></li>
+  <li><a href="#count-data-practice-problems" id="toc-count-data-practice-problems" class="nav-link" data-scroll-target="#count-data-practice-problems"><span class="header-section-number">10.6</span> Count data practice problems</a></li>
+  <li><a href="#count-model-tutorial" id="toc-count-model-tutorial" class="nav-link" data-scroll-target="#count-model-tutorial"><span class="header-section-number">10.7</span> Count Model Tutorial</a></li>
+  <li><a href="#additional-considerations" id="toc-additional-considerations" class="nav-link" data-scroll-target="#additional-considerations"><span class="header-section-number">10.8</span> Additional Considerations</a>
+  <ul>
+  <li><a href="#offset" id="toc-offset" class="nav-link" data-scroll-target="#offset"><span class="header-section-number">10.8.1</span> Offset</a></li>
+  </ul></li>
+  <li><a href="#how-to-think-about-zero-counts" id="toc-how-to-think-about-zero-counts" class="nav-link" data-scroll-target="#how-to-think-about-zero-counts"><span class="header-section-number">10.9</span> How to think about Zero Counts</a>
+  <ul>
+  <li><a href="#hurdle-models" id="toc-hurdle-models" class="nav-link" data-scroll-target="#hurdle-models"><span class="header-section-number">10.9.1</span> Hurdle Models</a></li>
+  <li><a href="#zero-inflated-poissonnegative-binomial" id="toc-zero-inflated-poissonnegative-binomial" class="nav-link" data-scroll-target="#zero-inflated-poissonnegative-binomial"><span class="header-section-number">10.9.2</span> Zero Inflated Poisson/Negative binomial</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="count" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Count data</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>In this section, we will talk about models that are appropriate for estimating outcomes that are structured as “count data”– non-negative integer data.</p>
+<p>The key characteristics of count data are:</p>
+<ul>
+<li><span class="math inline">\(Y\)</span> is not continuous and <span class="math inline">\(Y_i \geq 0\)</span></li>
+<li>Typically the count can be small for many observations (not always)</li>
+<li>Describes number of occurrences in a specified time period (the observation period) or space (e.g., per state) (e.g., vetoes during a term in office)</li>
+</ul>
+<p>The following supplemental resources may be useful:</p>
+<ul>
+<li>King, Gary. 1998. Unifying political methodology: The likelihood theory of statistical inference. University of Michigan Press. Chapters: 5.5-5.10</li>
+<li>Gelman and Hill Chapter 6. (on Canvas)</li>
+<li>Resources for R related to count data
+<ul>
+<li>R help for negative binomial from <a href="https://stats.idre.ucla.edu/r/dae/negative-binomial-regression/">UCLA</a></li>
+<li>R help for <a href="https://stats.idre.ucla.edu/r/dae/poisson-regression/">poisson</a></li>
+</ul></li>
+</ul>
+<section id="overview-of-count-data" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="overview-of-count-data"><span class="header-section-number">10.1</span> Overview of Count Data</h2>
+<p>Many of our dependent variables in social science may be considered counts:</p>
+<ul>
+<li>The number of arrests or traffic stops</li>
+<li>The number of bills passed</li>
+<li>The number of terrorist attacks</li>
+<li>The number of tweets</li>
+<li>The number of judges a president nominates per year</li>
+</ul>
+<p>Each of these variables shares the features that they are discrete and range from 0 to some positive number.</p>
+<p>Example: Your outcome data might look like this, where each <span class="math inline">\(i\)</span> observation represents a count of some kind:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="at">n=</span><span class="dv">30</span>, <span class="at">lambda =</span> <span class="dv">2</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 3 2 5 4 5 2 1 1 2 2 2 3 0 0 4 1 3 4 3 4 0 0 3 4 3 0 4 1 2 0</code></pre>
+</div>
+</div>
+<p>A common way one might approach modeling data of this type is to use OLS to estimate a linear model. After all, the data seem quasi-continuous! Sometimes, this might be just fine, but let’s think about some situations where this could go awry.</p>
+<ul>
+<li>Oftentimes count data are heavily right-skewed and very sparse.
+<ul>
+<li>For example, suppose we were interested in the number of times a social media user makes a comment on a discussion forum. It is very common for a large number of people to make close to zero posts, while a small share of users might make a larger number of posts.</li>
+<li>Particularly in small samples, OLS can struggle with heavily skewed data because the error variance is likely not going to be homogenous, the distribution of errors is not going to be normal<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, and the linearity assumption could very well be suspect (violations of the usual assumptions).</li>
+<li>When continuous data are heavily right-skewed (e.g., sometimes income is), it is often recommended to <span class="math inline">\(\log\)</span> transform the <span class="math inline">\(y\)</span> variable before fitting the regression with a linear model. With count data, we can pursue other options. Moreover, if you have a lot of counts that are 0, this transformation is problematic anyway because <span class="math inline">\(\log(0) = -Inf\)</span>. The transformation won’t really work, as standard statistical software will often treat those values as missing.</li>
+</ul></li>
+</ul>
+<p>Below is an example of this type of skew, sparsity, and clustering toward 0.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="10-CountData_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li>Nonsensical values?
+<ul>
+<li>With OLS, there is also no guarantee that smaller estimated <span class="math inline">\(\hat y\)</span> values from the regression line will stay non-negative even though we know that the actual count outcomes are always going to be non-negative.</li>
+<li>There is also no guarantee that larger <span class="math inline">\(\hat y\)</span> values will stay within the possible upper-range of <span class="math inline">\(y\)</span> values.</li>
+<li>When data are heavily skewed, the regression line, which represents the “conditional mean” <span class="math inline">\(\mathbf E(Y |X=x)\)</span> given some values of <span class="math inline">\(X\)</span> might be a poor estimate given that generally we know that means can be poor estimates of highly skewed data (e.g., picture how estimates of income given a certain level of education would change if Bill Gates and Mark Zuckerberg are in your sample vs.&nbsp;if they are not).</li>
+</ul></li>
+</ul>
+<p>For more information on dealing with skewed data and non-normal errors in linear regression, see Chapter 12.1 posted on Canvas from the Fox textbook.</p>
+</section>
+<section id="poisson-model" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="poisson-model"><span class="header-section-number">10.2</span> Poisson Model</h2>
+<p>So we are left unsatisfied with a linear model for our count data. What do we do? Fortunately, there are multiple probability distributions that may be appropriate for the data generating process that generates counts, which we can use maximum likelihood to estimate. Since we have been in Bernoulli world for a while, let’s refresh on the steps we consider when approaching a potential maximum likelihood problem.</p>
+<ol type="1">
+<li><strong><em>What is the data generating process?</em></strong> Based on this, describe the probability distribution for <span class="math inline">\(Y_i\)</span>.</li>
+<li><strong><em>Define the likelihood for a single observation</em></strong></li>
+<li><strong><em>Define the likelihood for all observations</em></strong></li>
+<li><strong><em>Find the log-likelihood</em></strong></li>
+<li><strong><em>Maximize the function with respect to (wrt)</em></strong> <span class="math inline">\(\theta\)</span></li>
+</ol>
+<p>The first probability distribution we will consider is the Poisson. This is a discrete distribution (so we are in pmf instead of pdf territory). Let’s go step-by-step.</p>
+<ol type="1">
+<li><strong><em>What is the data generating process?</em></strong> Based on this, describe the probability distribution for <span class="math inline">\(Y_i\)</span>.
+<ul>
+<li><span class="math inline">\(Y_i \sim Pois(\lambda)\)</span></li>
+<li><span class="math inline">\(\Pr(Y=Y_i|\lambda)= \frac{exp(-\lambda) \lambda^{Y_i}}{Y_i!}\)</span>, which describes the probability that the outcome takes a particular value, given <span class="math inline">\(\lambda\)</span>.</li>
+</ul></li>
+</ol>
+<p>We assume no two events occur at the same time. We also assume the probability of an event occurring at a particular time is not a function of the previous events. Events happen independently. Sometimes the occurrence of an event makes the occurrence of a subsequent event less or more likely. This would be a violation and suggestive of overdispersion, which we will return to later.</p>
+<ul>
+<li>Gary King uses the example of text messaging. Receiving a text message now probably makes it more likely you will receive additional text messages (i.e., group chats)</li>
+</ul>
+<p>Recall that in a normal distribution, we needed two parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>, to describe the shape of a normally distributed variable– the mean and variance of a normally distributed outcome.</p>
+<p>In the Poisson case, the shape of our distribution is defined by the single parameter <span class="math inline">\(\lambda\)</span>. A special feature of the Poisson probability distribution is that <span class="math inline">\(\lambda\)</span> is both the parameter for the mean <span class="math inline">\(\mathbf E(Y) = \lambda\)</span> and the variance <span class="math inline">\(\mathbf V(Y) = \lambda\)</span>.</p>
+<ul>
+<li>Try to remember this detail, because it will come up later when we assess if a Poisson process is actually a good approximation of the data generating process. It’s often not the case that a mean is the same as the variance. It can actually be a quite bad approximation of the variance.</li>
+</ul>
+<p>Let’s look at an example of Poisson data to prove to ourselves that if data are Poisson the mean and variance are equivalent:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">## We use rpois() to generate some count data according to the Poisson distribution. </span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Let's specify lambda = 4</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">## This means the mean of the distribution will be 4 and the variance will be 4</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">## In any given sample, it might be slightly off from this</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="at">n=</span><span class="dv">100000</span>, <span class="at">lambda =</span> <span class="dv">4</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.00001</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.02695</code></pre>
+</div>
+</div>
+<p>The pmf above describes the probability that <code>Y</code> takes a particular outcome.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">## For example given a Y ~ Pois(lambda = 4), let's look at the probability of getting particular counts using dpois, the pmf function for poisson</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">16</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>probs <span class="ot">&lt;-</span> <span class="fu">dpois</span>(counts, <span class="at">lambda =</span> <span class="dv">4</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(probs) <span class="ot">&lt;-</span> counts</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(probs, <span class="at">digits=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    0     1     2     3     4     5     6     7     8     9    10    11    12 
+0.018 0.073 0.147 0.195 0.195 0.156 0.104 0.060 0.030 0.013 0.005 0.002 0.001 
+   13    14    15    16 
+0.000 0.000 0.000 0.000 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="do">## The probability is higher the closer we are to 4, the mean of the distribution</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Let's check our formula from above for the probability Y = 2</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>yi <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dpois</span>(yi, <span class="at">lambda=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1465251</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="do">## formula from above</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span>lambda)<span class="sc">*</span>lambda<span class="sc">^</span>yi<span class="sc">/</span><span class="fu">factorial</span>(yi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1465251</code></pre>
+</div>
+</div>
+<p>The expected count here is 4, the mean of the distribution. The probability of any given count is specified according to the pmf above.</p>
+<p><strong>Adding covariates</strong></p>
+<p>In regression, we will consider <span class="math inline">\(\lambda\)</span> (the expected count) to be a function of <span class="math inline">\(\mathbf x_i'\beta\)</span>, and we will try to estimate our outcome <span class="math inline">\(\mathbf E(Y_i | \mathbf x_i)\)</span> given values of <span class="math inline">\(\mathbf x_i\)</span>.</p>
+<p>However, just like in the logit/probit case, our parameter <span class="math inline">\(\lambda \neq \mathbf x_i'\beta\)</span>. Instead, it is a nonlinear function of <span class="math inline">\(\mathbf x_i'\beta\)</span>. Here, we just have a different link function. Specifically,</p>
+<ul>
+<li><span class="math inline">\(\lambda_i = exp(\mathbf x_i^T\beta)\)</span></li>
+<li><span class="math inline">\(\log \lambda_i = \eta_i = \mathbf x_i^T\beta\)</span></li>
+<li><span class="math inline">\(\lambda_i = \mathbf E[Y_i | \mathbf x_i] = \exp(\beta_0 + \beta_1x_{i1} + ... + \beta_{k}x_{ik})\)</span> is the expected number of events per a unit of time or space</li>
+</ul>
+<p>Analogy: Recall, in the Bernoulli case, we had just the parameter <span class="math inline">\(\pi\)</span>, which described the expected probability of success given there is just one trial. Recall, in logistic regression <span class="math inline">\(\pi_i = \frac{exp(\mathbf x_i^T\beta)}{1 + exp(\mathbf x_i^T\beta)}\)</span>. Here, the transformation is just a different link function.</p>
+<p><strong><em>OK, if we are using the existing functions in R, we can essentially stop here and proceed to <code>glm</code> (yes, we get to use our <code>glm</code> friend again). But, let’s look at the likelihood to finish out the process.</em></strong></p>
+<ol start="2" type="1">
+<li><strong><em>Define the likelihood for a single observation</em></strong></li>
+</ol>
+<p>This is just that pmf from above. For now, we will just write <span class="math inline">\(\lambda\)</span>, but we know eventually we will need to substitute it with our expression <span class="math inline">\(\lambda_i = exp(\mathbf x_i^T\beta)\)</span>.</p>
+<span class="math display">\[\begin{align*}
+\mathcal L(\beta |Y_i)=\Pr(Y=Y_i|\lambda)
+\end{align*}\]</span>
+<ol start="3" type="1">
+<li><strong><em>Define the likelihood for all observations</em></strong></li>
+</ol>
+<p>Here, we need to multiply across all observations. To do this, we are assuming independence.</p>
+<span class="math display">\[\begin{align*}
+\mathcal L(\beta |Y)&amp;=\mathcal L(\beta|Y_1)\times\mathcal  L(\beta|Y_2)\times \ldots \times \mathcal L(\beta|Y_{n})\\
+\mathcal L(\beta|Y)&amp;=\prod_{i=1}^N\mathcal L(\beta|Y_i)\\
+&amp;= \prod_{i = 1}^{N}\frac{1}{Y_i!}\lambda_i^{Y_i}\exp(-\lambda_i)
+\end{align*}\]</span>
+<ol start="4" type="1">
+<li><strong><em>Find the log-likelihood</em></strong></li>
+</ol>
+<p>We’ve seen this party trick before. Taking the <span class="math inline">\(\log\)</span> gives us the sums:</p>
+<span class="math display">\[\begin{align*}
+\mathcal l(\beta|Y)&amp;=\sum_{i=1}^N\mathcal \log(\mathcal L(\beta|Y_i))\\
+&amp;= \sum_{i = 1}^{n}\log(\frac{1}{Y_i!}\lambda_i^{Y_i}\exp(-\lambda_i))\\
+&amp;= \sum_{i = 1}^{n}\log (\frac{1}{Y_i!})  + Y_i\log(\lambda_i) - \lambda_i\\
+&amp;=  \sum_{i = 1}^{n}Y_i\mathbf x_i^\top\beta - \exp(\mathbf x_i^\top\beta) - \log(Y_i!)
+\end{align*}\]</span>
+<ol start="5" type="1">
+<li><strong><em>Maximize the function with respect to (wrt)</em></strong> <span class="math inline">\(\theta\)</span></li>
+</ol>
+<p>Oof, this is where we take the derivative to find the <span class="math inline">\(S(\theta)\)</span>.</p>
+<ul>
+<li>Fortunately, the last term does not have a <span class="math inline">\(\beta\)</span>, so it falls out</li>
+<li>Recall, the derivative of <span class="math inline">\(e^{z}= e^{z}\)</span></li>
+</ul>
+<span class="math display">\[\begin{align*}
+\frac{\delta}{\delta \beta} \ell(\beta | Y, X) &amp;= \frac{\delta}{\delta \beta} \sum_{i = 1}^{n}Y_i\mathbf x_i^\top\beta - \exp(\mathbf x_i^\top\beta) - \log(Y_i!)\\
+&amp;= \sum_{i = 1}^{n} (Y_i - \exp(\mathbf x_i^\top\beta))\mathbf x_i^\top\\
+&amp;= X^TY - X^T\exp(X\beta) \text{ which is a $k \times 1$}
+\end{align*}\]</span>
+<p>This will not yield a closed form solution for <span class="math inline">\(\hat \beta\)</span> when setting it to zero. Instead, we have to use numerical methods to estimate the parameters (e.g., think <code>optim</code>).</p>
+<p>The good thing is that now that we have taken the first derivative, we can take the second derivative to find the Hessian, which will allow us to estimate uncertainty.</p>
+<span class="math display">\[\begin{align*}
+  &amp;= - \sum_{i = 1}^{n} \mathbf x_i\mathbf x_i'\exp(\mathbf x_i^\top\beta)\\
+  &amp;= - X^TVX \text{ where } V = n \times n \text{ diagonal matrix of }  \exp(X\beta)
+\end{align*}\]</span>
+<p>Note this is the <span class="math inline">\(k \times k\)</span> matrix!</p>
+<ul>
+<li>For the variance estimates of our coefficients, we want the <span class="math inline">\((\mathbf E(-H))^{-1} = (X^TVX)^{-1}\)</span>
+<ul>
+<li>That is our <code>vcov(fit)</code> in the Poisson case</li>
+</ul></li>
+</ul>
+<p>OK, let’s start translating this math into R.</p>
+</section>
+<section id="motivating-example-for-count-data" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="motivating-example-for-count-data"><span class="header-section-number">10.3</span> Motivating Example for Count Data</h2>
+<p>We will use the following article for our motivating example: “Legislative Capacity and Executive Unilateralism” by Alex Bolton and Sharece Thrower, which was published in the <em>American Journal of Political Science</em> in 2015.</p>
+<p>Abstract. <em>This article develops a theory of presidential unilateralism in which both ideological divergence with Congress and legislative capacity influence the president’s use of executive orders. We argue that when Congress is less capable of constraining the executive, the president will issue more executive orders during periods of divided government. Conversely, in periods of high legislative capacity, the president is less likely to issue executive orders when faced with an opposed Congress. Based on an examination of institutional changes, we identify years prior to the mid‐1940s as characterized by low congressional capacity and the subsequent period as characterized by high capacity. Testing the theory between 1905 and 2013, we find strong support for these predictions and demonstrate that legislative capacity conditions the role of ideological disagreement in shaping presidential action. Overall, this article deepens our current understanding of the dynamics of separation‐of‐powers politics and the limits of executive power.</em></p>
+<p>The primary research question: Is the president constrained by an ideologically opposed Congress? The authors explore how the number of executive orders made per year varies acording to whether the government is divided or unified.</p>
+<ul>
+<li>Outcome: <code>allnoncerm_eo</code>, all non-ceremonial executive orders in a year</li>
+<li>Key Explanatory variable: <code>divided</code>, whether or not there was divided government, where the president and the majority party in either the House or Senate are different parties</li>
+<li>Other explanatory variables include dummy variables for the president, an indicator if it is war time, measures related to the economy, and whether it is close to the beginning or end of an administration</li>
+</ul>
+<p>Let’s load the data and look at the outcome variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(foreign)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>bolton <span class="ot">&lt;-</span> <span class="fu">read.dta</span>(<span class="st">"https://github.com/ktmccabe/teachingdata/blob/main/bt.dta?raw=true"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bolton<span class="sc">$</span>allnoncerm_eo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ 20  26  30  31  34  35  37  38  39  40  41  42  43  45  48  49  50  52  53  54 
+  1   2   1   2   2   2   3   1   1   1   3   2   1   4   2   3   1   2   2   2 
+ 55  56  57  61  63  64  65  66  68  69  70  71  72  75  76  78  85  92  96  97 
+  1   1   3   1   1   2   1   2   2   1   2   1   1   1   1   1   1   1   1   1 
+ 98 112 116 117 120 146 164 172 188 200 212 219 225 232 241 247 250 253 265 267 
+  2   1   1   1   1   1   2   1   1   1   1   1   2   1   1   3   1   1   1   1 
+273 286 287 303 305 307 309 315 319 328 338 339 345 358 382 393 438 471 473 501 
+  1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 </code></pre>
+</div>
+</div>
+<p>Often for count variables, it can be useful to visualize them in a histogram. Here is a <code>ggplot</code> version.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(bolton, <span class="fu">aes</span>(allnoncerm_eo))<span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>)<span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="10-CountData_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The authors distinguish time pre- and post-1945 based on different levels of Congressional capacity. We can look at how the outcome changed over time and note how there were far more executive orders in the earlier period.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>bolton<span class="sc">$</span>year, <span class="at">y=</span>bolton<span class="sc">$</span>allnoncerm_eo, <span class="at">pch =</span><span class="dv">20</span>, </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Executive Orders by Year"</span>, </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex.main =</span> .<span class="dv">8</span>, </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">500</span>))</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="dv">1945</span>, <span class="at">lty =</span><span class="dv">2</span>) <span class="co"># vertical line at 1945</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="10-CountData_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<section id="fitting-poisson-in-r" class="level3" data-number="10.3.1">
+<h3 data-number="10.3.1" class="anchored" data-anchor-id="fitting-poisson-in-r"><span class="header-section-number">10.3.1</span> Fitting Poisson in R</h3>
+<p>We will investigate the relationship between divided government and executive orders in the first time period.</p>
+<p>The authors’ hypothesize, “During periods of low legislative capacity (prior to the mid-1940s), the president issues more executive orders under divided government.</p>
+<p>To fit a Poisson model in R, we use the <code>glm</code> function. However, now we have a different <code>family= "poisson"</code> and <code>link = "log"</code>. We don’t actually have to explicitly write the link because R will use this link by default.</p>
+<p>Let’s fit a regression of our outcome on the key explanatory variables, along with other controls the authors use. Note that because I want the early period, I have to subset the data. I can do this outside, prior to the regression. Or, I can subset in the <code>data</code> argument, as is done in the below code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">glm</span>(allnoncerm_eo <span class="sc">~</span> divided <span class="sc">+</span> inflation <span class="sc">+</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>             spending_percent_gdp <span class="sc">+</span> war <span class="sc">+</span> lame_duck <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                 administration_change <span class="sc">+</span> trend <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>           <span class="sc">+</span> tr<span class="sc">+</span> taft <span class="sc">+</span> wilson <span class="sc">+</span> harding </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>           <span class="sc">+</span> coolidge <span class="sc">+</span> hoover, </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">family =</span> <span class="st">"poisson"</span>, </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> <span class="fu">subset</span>(bolton, year <span class="sc">&lt;</span> <span class="dv">1945</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="interpreting-regression-output" class="level3" data-number="10.3.2">
+<h3 data-number="10.3.2" class="anchored" data-anchor-id="interpreting-regression-output"><span class="header-section-number">10.3.2</span> Interpreting regression output</h3>
+<p>The summary output for Poisson is much nicer than the multinomial output we were working with previously. Let’s extract just the <code>divided</code> coefficient output from the summary.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)<span class="sc">$</span>coefficients[<span class="dv">2</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Estimate   Std. Error      z value     Pr(&gt;|z|) 
+4.435893e-01 4.195090e-02 1.057401e+01 3.933025e-26 </code></pre>
+</div>
+</div>
+<p><strong><em>How should we interpret this coefficient?</em></strong></p>
+<ul>
+<li>Recall <span class="math inline">\(\log \hat \lambda = \mathbf x_i'\hat \beta\)</span></li>
+</ul>
+<p>For every one-unit change in <span class="math inline">\(x\)</span>, we estimate an average <span class="math inline">\(\hat \beta\)</span> change in the <span class="math inline">\(\log\)</span> of the expected executive orders, holding the other covariates constant.</p>
+<ul>
+<li>Note that usually counts are measured given a particular time or space interval. For this reason sometimes these are considered “rates” (i.e., the number of executive orders per year).</li>
+</ul>
+</section>
+</section>
+<section id="poisson-quantities-of-interest" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="poisson-quantities-of-interest"><span class="header-section-number">10.4</span> Poisson Quantities of Interest</h2>
+<section id="expected-counts" class="level3" data-number="10.4.1">
+<h3 data-number="10.4.1" class="anchored" data-anchor-id="expected-counts"><span class="header-section-number">10.4.1</span> Expected Counts</h3>
+<p>Our primary quantity of interest is the expected count, in this case the expected number of executive orders, given certain values of the covariates</p>
+<p><span class="math inline">\(\mathbf E(Y | X) = \lambda = exp(\mathbf x_i' \beta)\)</span></p>
+<ul>
+<li>This means to get our quantities of interest, we exponentiate <span class="math inline">\(exp(\mathbf x_i' \hat \beta)\)</span> after setting specific values for <span class="math inline">\(X\)</span>, such as at the means of the covariates or at the observed values.</li>
+</ul>
+<p>Like other <code>glm</code> models, we can also use <code>predict</code> to do this for us by setting <code>type = response</code> or <code>prediction</code>.</p>
+<ul>
+<li>For example, let’s find the averaged executive orders expected for unified vs.&nbsp;divided government, holding other covariates at their observed values. We will do this manually and using <code>avg_predictions</code> or <code>prediction</code>.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(fit)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>X[, <span class="st">"divided"</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>eta <span class="ot">&lt;-</span> X <span class="sc">%*%</span> B</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>expcount <span class="ot">&lt;-</span> <span class="fu">exp</span>(eta)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>avg.exp.count<span class="fl">.0</span> <span class="ot">&lt;-</span> <span class="fu">mean</span>(expcount)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>avg.exp.count<span class="fl">.0</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 265.7753</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(fit)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>X[, <span class="st">"divided"</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>eta <span class="ot">&lt;-</span> X <span class="sc">%*%</span> B</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>expcount <span class="ot">&lt;-</span> <span class="fu">exp</span>(eta)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>avg.exp.count<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">mean</span>(expcount)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>avg.exp.count<span class="fl">.1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 414.1552</code></pre>
+</div>
+</div>
+<p>From <code>marginaleffects</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(marginaleffects)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>avg.exp.counts.me <span class="ot">&lt;-</span> <span class="fu">avg_predictions</span>(fit,<span class="at">by=</span><span class="st">"divided"</span>,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">newdata=</span> <span class="fu">datagridcf</span>(<span class="at">divided=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)))</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>avg.exp.counts.me</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ divided Estimate Pr(&gt;|z|)   S 2.5 % 97.5 %
+       0      253   &lt;0.001 Inf   247    259
+       1      394   &lt;0.001 Inf   367    423
+
+Columns: divided, estimate, p.value, s.value, conf.low, conf.high 
+Type:  invlink(link) </code></pre>
+</div>
+</div>
+<p>From Thomas Leeper</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(prediction)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>avg.exp.counts <span class="ot">&lt;-</span> <span class="fu">prediction</span>(fit, <span class="at">at=</span><span class="fu">list</span>(<span class="at">divided=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)), <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(avg.exp.counts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> at(divided) Prediction     SE     z          p lower upper
+           0      265.8  2.862 92.85  0.000e+00 260.2 271.4
+           1      414.2 15.759 26.28 3.224e-152 383.3 445.0</code></pre>
+</div>
+</div>
+<p>We can also find the differences in expected counts by subtracting the above estimates from each other, or computing this directly through <code>avg_comparisons</code> or <code>margins</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>avg.exp.count<span class="fl">.1</span> <span class="sc">-</span> avg.exp.count<span class="fl">.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 148.3798</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(marginaleffects)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>avg.diff.me <span class="ot">&lt;-</span> <span class="fu">avg_comparisons</span>(fit, <span class="at">variables=</span><span class="fu">list</span>(<span class="at">divided=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)))</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>avg.diff.me</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Term Contrast Estimate Std. Error   z Pr(&gt;|z|)    S 2.5 % 97.5 %
+ divided    1 - 0      148       16.7 8.9   &lt;0.001 60.6   116    181
+
+Columns: term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high 
+Type:  response </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(margins)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>avg.diff <span class="ot">&lt;-</span> <span class="fu">margins</span>(fit, <span class="at">variables=</span><span class="st">"divided"</span>, <span class="at">change =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">vce =</span> <span class="st">"delta"</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(avg.diff)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  factor      AME      SE      z      p    lower    upper
+ divided 148.3798 16.6768 8.8974 0.0000 115.6938 181.0658</code></pre>
+</div>
+</div>
+<p>Just like in logit and probit, we have the same options for calculating uncertainty: Delta Method, Simulation, and Bootstrap.</p>
+</section>
+<section id="sidenote-multiplicative-coefficient-interpretation" class="level3" data-number="10.4.2">
+<h3 data-number="10.4.2" class="anchored" data-anchor-id="sidenote-multiplicative-coefficient-interpretation"><span class="header-section-number">10.4.2</span> Sidenote: Multiplicative coefficient interpretation</h3>
+<p>For Poisson, changes in <span class="math inline">\(x\)</span> will have a multiplicative change in <span class="math inline">\(y\)</span>:</p>
+<p>Recall a math rule for exponents to follow the below: <span class="math inline">\(z^{a+b} = z^a * z^b\)</span></p>
+<span class="math display">\[\begin{align*}
+\mathbf E(Y | X) &amp;= e^{\alpha + x_1 \beta_1 + x_2 \beta_2}\\
+&amp;= e^{\alpha} * e^{x_1 \beta_1} *e^{x_2 \beta_2}
+\end{align*}\]</span>
+<p>For example, compare <span class="math inline">\(x_1\)</span> to <span class="math inline">\(x_1 + 1\)</span></p>
+<span class="math display">\[\begin{align*}
+\mathbf E(Y | X) &amp;= e^{\alpha + (x_1 + 1) \beta_1 + x_2 \beta_2}\\
+&amp;= e^{\alpha} * e^{x_1 \beta_1}* e^{\beta_1} *e^{x_2 \beta_2}
+\end{align*}\]</span>
+<p>We’ve now multiplied the outcome by <span class="math inline">\(e^{\beta_1}\)</span>.</p>
+<p>Here’s an example using a bivariate model</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>fit.biv <span class="ot">&lt;-</span> <span class="fu">glm</span>(allnoncerm_eo <span class="sc">~</span> divided ,</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">family =</span> <span class="st">"poisson"</span>, </span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> <span class="fu">subset</span>(bolton, year <span class="sc">&lt;</span> <span class="dv">1945</span>))</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Let's calculate yhat using predict for divided = 0 or 1</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>yhats <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit.biv, <span class="fu">data.frame</span>(<span class="at">divided =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)), <span class="at">type=</span><span class="st">"response"</span>)</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>yhats</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       1        2 
+280.6471 282.8333 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Manual</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>yhatx0 <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">coef</span>(fit.biv)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(fit.biv)[<span class="dv">2</span>]<span class="sc">*</span><span class="dv">0</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>yhatx1 <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">coef</span>(fit.biv)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(fit.biv)[<span class="dv">2</span>]<span class="sc">*</span><span class="dv">1</span>)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>yhatx1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept) 
+   282.8333 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiplicative interpretation </span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>yhatx0<span class="sc">*</span>(<span class="fu">exp</span>(<span class="fu">coef</span>(fit.biv)[<span class="st">"divided"</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept) 
+   282.8333 </code></pre>
+</div>
+</div>
+</section>
+<section id="incidence-rate-ratios" class="level3" data-number="10.4.3">
+<h3 data-number="10.4.3" class="anchored" data-anchor-id="incidence-rate-ratios"><span class="header-section-number">10.4.3</span> Incidence Rate Ratios</h3>
+<p>Relatedly, similar to logistic regression where we could exponentiate the coefficients to generate estimated odds ratios, in poisson, we can exponentiate the coefficients to get “incidence rate ratios.”</p>
+<p>When we say a one-unit change in the independent variable <span class="math inline">\(x\)</span>, this is like saying</p>
+<ul>
+<li><span class="math inline">\(\hat\beta = \log \hat \lambda_{x + 1} - \log \hat \lambda_{x} = \log \frac{\hat \lambda_{x + 1}}{\hat \lambda_{x}}\)</span></li>
+</ul>
+<p>If we exponentiate, the <span class="math inline">\(\log\)</span> cancels to 1:</p>
+<ul>
+<li><span class="math inline">\(exp(\hat \beta) = exp(\log \frac{\hat \lambda_{x + 1}}{\hat \lambda_{x}})\)</span>
+<ul>
+<li><span class="math inline">\(exp(\hat \beta) = \frac{\hat \lambda_{x + 1}}{\hat \lambda_{x}}\)</span></li>
+<li>This quantity represents a ratio of the expected counts or “rates”</li>
+<li>For a one-unit change in <span class="math inline">\(x\)</span>, the expected count is estimated to change by a factor of <span class="math inline">\(exp(\hat \beta)\)</span>
+<ul>
+<li>This can be converted to a percent change interpretion by taking <span class="math inline">\((IRR - 1) \times 100\)</span></li>
+</ul></li>
+</ul></li>
+</ul>
+<p>For example, the incidence rate ratio for executive orders in a year going from unified to divided government is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(fit)[<span class="st">"divided"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>divided 
+1.55829 </code></pre>
+</div>
+</div>
+<p>We can see how this works out using the quantities calculated above. Multiplying the expected count when <code>divided = 0</code> by this ratio gives us the expected count when <code>divided = 1</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(fit)[<span class="st">"divided"</span>])<span class="sc">*</span>avg.exp.count<span class="fl">.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> divided 
+414.1552 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>avg.exp.count<span class="fl">.1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 414.1552</code></pre>
+</div>
+</div>
+<p>Note how this is a percent change interpretation where</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>((avg.exp.count<span class="fl">.1</span> <span class="sc">-</span> avg.exp.count<span class="fl">.0</span>)<span class="sc">/</span> avg.exp.count<span class="fl">.0</span>)<span class="sc">*</span> <span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 55.82903</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">exp</span>(<span class="fu">coef</span>(fit)[<span class="st">"divided"</span>])<span class="sc">-</span><span class="dv">1</span>)<span class="sc">*</span><span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> divided 
+55.82903 </code></pre>
+</div>
+</div>
+<p>For a one-unit change going from unified to divided government, we see a 55.8% increase in executive orders during this period.</p>
+</section>
+<section id="where-poisson-is-poisonous" class="level3" data-number="10.4.4">
+<h3 data-number="10.4.4" class="anchored" data-anchor-id="where-poisson-is-poisonous"><span class="header-section-number">10.4.4</span> Where Poisson is poisonous:</h3>
+<p>Recall the detail when we specified the pmf, that the mean and variance at the same. When we have covariates <span class="math inline">\(X\)</span>, this means we assume the conditional mean and variance are the same:</p>
+<ul>
+<li><span class="math inline">\(\lambda = \mathbf E[Y_i |x_i] = Var(Y_i | x_i)\)</span>; the mean and variance is <span class="math inline">\(\lambda\)</span> in the distribution.</li>
+<li>Often, our data are “overdispersed” or “underdispersed”, violating this assumption</li>
+</ul>
+<p>We can investigate this in our example. First, let’s look at the raw mean and variance of the outcome.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="do">## whoa! very different, </span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="do">## but the good news is we care about the *conditional* mean and variance</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="do">## not these raw values</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">subset</span>(bolton<span class="sc">$</span>allnoncerm_eo, bolton<span class="sc">$</span>year <span class="sc">&lt;</span> <span class="dv">1945</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 280.975</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(<span class="fu">subset</span>(bolton<span class="sc">$</span>allnoncerm_eo, bolton<span class="sc">$</span>year <span class="sc">&lt;</span> <span class="dv">1945</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9011.256</code></pre>
+</div>
+</div>
+<p>We can conduct a test of overdispersion in our model using <code>dispersiontest</code>. If we have a significant result and a dispersion constant <span class="math inline">\(&gt;\)</span> 0, this would suggest overdispersion.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AER)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: car</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: carData</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: lmtest</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: zoo</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'zoo'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    as.Date, as.Date.numeric</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: sandwich</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: survival</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dispersiontest</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Overdispersion test
+
+data:  fit
+z = 3.6675, p-value = 0.0001225
+alternative hypothesis: true dispersion is greater than 1
+sample estimates:
+dispersion 
+  11.02527 </code></pre>
+</div>
+</div>
+<p>To check for overdisperson, we can also look at the standardized residuals of the model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="do">## By hand</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>prvals <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit, <span class="at">type =</span> <span class="st">"response"</span>) <span class="co"># predicted values</span></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">subset</span>(bolton<span class="sc">$</span>allnoncerm_eo, bolton<span class="sc">$</span>year <span class="sc">&lt;</span> <span class="dv">1945</span>) <span class="sc">-</span> prvals <span class="co"># residual y - predicted values</span></span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>sres <span class="ot">&lt;-</span> res<span class="sc">/</span><span class="fu">sqrt</span>(prvals) <span class="co"># standardized residual</span></span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a><span class="do">## automatic in R</span></span>
+<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>sres <span class="ot">&lt;-</span>  <span class="fu">residuals</span>(fit,<span class="at">type=</span><span class="st">"pearson"</span>) <span class="co"># automatic</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can graphically look at the standardized residuals by levels of the predicted values from our regression. Here, we don’t want residuals that exceed +/- 2.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="do">## don't want values above 2 or below -2</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(prvals, sres,</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"standardized residuals"</span>, <span class="at">xlab =</span> <span class="st">"predicted values"</span>)</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>), <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="10-CountData_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We are in danger!! This model suffers from overdispersion. We have two options</p>
+<ul>
+<li>Check our model. Do we think it is misspecified in terms of the covariates? Is it suffering from omitted variable bias? We can change the specification and re-run the test. Again, the overdispersion is about the conditional mean and variance, so changing the model may change the diagnostics.</li>
+<li>Use a different distribution. Because this assumption is often violated, we tend to use one of the following for count data
+<ul>
+<li>Overdispersed poisson (quasipoisson)</li>
+<li>Negative binomial regression</li>
+</ul></li>
+</ul>
+<p>More on this in the next section</p>
+</section>
+</section>
+<section id="quasipoisson-and-negative-binomial-models" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="quasipoisson-and-negative-binomial-models"><span class="header-section-number">10.5</span> Quasipoisson and Negative Binomial Models</h2>
+<p>The quaipoisson model relaxes the assumption that the mean and variance have to be equivalent. It is the same as the Poisson but multiplies the standard errors by <span class="math inline">\(\sqrt{d}\)</span>, where <span class="math inline">\(d\)</span> is the dispersion parameter.</p>
+<p>These models are fit in R almost exactly the same way as poisson. We just switch <code>family = "quasipoisson"</code></p>
+<ul>
+<li>Note in the <code>summary</code> output, it lists the dispersion parameter.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>fitq <span class="ot">&lt;-</span> <span class="fu">glm</span>(allnoncerm_eo <span class="sc">~</span> divided <span class="sc">+</span> inflation <span class="sc">+</span> spending_percent_gdp </span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>            <span class="sc">+</span> war <span class="sc">+</span> lame_duck <span class="sc">+</span></span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>                 administration_change <span class="sc">+</span> trend <span class="sc">+</span></span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>            <span class="sc">+</span> tr<span class="sc">+</span> taft <span class="sc">+</span> wilson <span class="sc">+</span> harding </span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>           <span class="sc">+</span> coolidge <span class="sc">+</span> hoover, </span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">family =</span> <span class="st">"quasipoisson"</span>, </span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> <span class="fu">subset</span>(bolton, year <span class="sc">&lt;</span> <span class="dv">1945</span>))</span>
+<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fitq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = allnoncerm_eo ~ divided + inflation + spending_percent_gdp + 
+    war + lame_duck + administration_change + trend + +tr + taft + 
+    wilson + harding + coolidge + hoover, family = "quasipoisson", 
+    data = subset(bolton, year &lt; 1945))
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-8.2027  -2.4224  -0.1515   2.1532   8.9032  
+
+Coefficients:
+                        Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)            8.0360573  0.9848054   8.160 1.22e-08 ***
+divided                0.4435893  0.1727719   2.567  0.01634 *  
+inflation              0.0005599  0.0110836   0.051  0.96010    
+spending_percent_gdp  -0.0286140  0.0082874  -3.453  0.00191 ** 
+war                    0.4745189  0.1936737   2.450  0.02133 *  
+lame_duck              0.3692336  0.2769252   1.333  0.19399    
+administration_change -0.0321975  0.1844677  -0.175  0.86279    
+trend                 -0.0619311  0.0316454  -1.957  0.06116 .  
+tr                    -2.5190839  0.9562064  -2.634  0.01401 *  
+taft                  -2.4104113  0.8805222  -2.737  0.01102 *  
+wilson                -1.4750129  0.6866621  -2.148  0.04120 *  
+harding               -1.4205088  0.4700492  -3.022  0.00558 ** 
+coolidge              -1.1070363  0.3792082  -2.919  0.00715 ** 
+hoover                -0.9985352  0.3099077  -3.222  0.00341 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for quasipoisson family taken to be 16.96148)
+
+    Null deviance: 1281.92  on 39  degrees of freedom
+Residual deviance:  439.87  on 26  degrees of freedom
+AIC: NA
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+</div>
+<p>The dispersion parameter is estimated using those standardized residuals from the Poisson model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>sres <span class="ot">&lt;-</span> <span class="fu">residuals</span>(fit, <span class="at">type=</span><span class="st">"pearson"</span>)</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>chisq <span class="ot">&lt;-</span> <span class="fu">sum</span>(sres<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> chisq<span class="sc">/</span>fit<span class="sc">$</span>df.residual</span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16.96146</code></pre>
+</div>
+</div>
+<p>Let’s compare the Poisson and Quasipoisson model coefficients and standard errors.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fit)<span class="sc">$</span>coefficients[<span class="dv">2</span>,], <span class="at">digits=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Estimate Std. Error    z value   Pr(&gt;|z|) 
+    0.4436     0.0420    10.5740     0.0000 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fitq)<span class="sc">$</span>coefficients[<span class="dv">2</span>,], <span class="at">digits=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Estimate Std. Error    t value   Pr(&gt;|t|) 
+    0.4436     0.1728     2.5675     0.0163 </code></pre>
+</div>
+</div>
+<p>We can retrieve the standard error from the quasipoisson by multiplication.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiply the Poisson standard error by sqrt(d)</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fit)<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">2</span>] <span class="sc">*</span> <span class="fu">sqrt</span>(d), <span class="at">digits=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1728</code></pre>
+</div>
+</div>
+<p>Note that the standard error among the Quasipoisson model is much bigger, accounting for the larger variance from overdispersion.</p>
+<section id="negative-binomial-models" class="level3" data-number="10.5.1">
+<h3 data-number="10.5.1" class="anchored" data-anchor-id="negative-binomial-models"><span class="header-section-number">10.5.1</span> Negative Binomial Models</h3>
+<p>Another model commonly used for count data is the negative binomial model. This is the model Bolton and Thrower use. This has a more complicated likelihood function, but, like the quasipoisson, it has a larger (generally, more correct) variance term. Analogous to the normal distribution, the negative binomial has both a mean and variance term parameter.</p>
+<p><span class="math inline">\(\Pr(Y=y) = \frac{\Gamma(r+y)}{\Gamma(r) \Gamma(y+1)} (\frac{r}{r+\lambda})^r (\frac{\lambda}{r+\lambda})^y\)</span></p>
+<ul>
+<li>Models dispersion through term <span class="math inline">\(r\)</span></li>
+<li><span class="math inline">\(\mathbf E(Y_i|X) = \lambda_i = e^{\mathbf x_i^\top \beta}\)</span></li>
+<li><span class="math inline">\(\mathbf Var(Y_i|X) = \lambda_i + \lambda_i^2/r\)</span> (note, this is no longer just <span class="math inline">\(\lambda_i\)</span>)</li>
+</ul>
+<p>Note that while the probability distribution looks much uglier, the mapping of <span class="math inline">\(\mathbf x_i' \beta\)</span> is the same. We will still have a <span class="math inline">\(\log\)</span> link and exponeniate to get our quantities of interest. The mechanics work essentially the same as the poisson.</p>
+<p>In R, we use the <code>glm.nb</code> function from the <code>MASS</code> package to fit negative binomial models. Here, we do not need to specify a <code>family</code>, but we do specify the <code>link = "log"</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>fitn <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(allnoncerm_eo <span class="sc">~</span> divided <span class="sc">+</span> inflation <span class="sc">+</span> </span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>                 spending_percent_gdp <span class="sc">+</span> war <span class="sc">+</span> lame_duck <span class="sc">+</span></span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a>                 administration_change <span class="sc">+</span> trend <span class="sc">+</span></span>
+<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a>            <span class="sc">+</span> tr<span class="sc">+</span> taft <span class="sc">+</span> wilson <span class="sc">+</span> harding </span>
+<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a>           <span class="sc">+</span> coolidge <span class="sc">+</span> hoover, </span>
+<span id="cb77-7"><a href="#cb77-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">link=</span><span class="st">"log"</span>, </span>
+<span id="cb77-8"><a href="#cb77-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> <span class="fu">subset</span>(bolton, year <span class="sc">&lt;</span> <span class="dv">1945</span>))</span>
+<span id="cb77-9"><a href="#cb77-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fitn)<span class="sc">$</span>coefficients[<span class="dv">2</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Estimate  Std. Error     z value    Pr(&gt;|z|) 
+0.442135921 0.141831942 3.117322607 0.001825017 </code></pre>
+</div>
+</div>
+<p>Compare this to column 1 in the model below.</p>
+<p><img src="images/bolton3.png" class="img-fluid" style="width:70.0%"></p>
+<p>We have now replicated the coefficients in column 1 of Table 1 in the authors’ paper. Our standard errors do not match exactly because the authors use clustered standard errors by president. Moreover, given a relatively small sample the two programs R (and Stata, which the authors use) might generate slightly different estimates.</p>
+</section>
+</section>
+<section id="count-data-practice-problems" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="count-data-practice-problems"><span class="header-section-number">10.6</span> Count data practice problems</h2>
+<p>Let’s reproduce column 2 from Table 1 in the article and related estimates.</p>
+<ol type="1">
+<li>Fit the following negative binomial model for year <span class="math inline">\(&gt;\)</span> 1944.
+<ul>
+<li>Note: the numbers won’t exactly match the authors but should be close</li>
+</ul></li>
+</ol>
+<div class="cell">
+<div class="cell-output-display">
+<p><span class="math display">\[
+\begin{aligned}
+\log ({ E( \operatorname{allnoncerm_eo} ) })  &amp;= \alpha + \beta_{1}(\operatorname{divided})\ + \\
+&amp;\quad \beta_{2}(\operatorname{inflation}) + \beta_{3}(\operatorname{spending\_percent\_gdp})\ + \\
+&amp;\quad \beta_{4}(\operatorname{war}) + \beta_{5}(\operatorname{lame\_duck})\ + \\
+&amp;\quad \beta_{6}(\operatorname{administration\_change}) + \beta_{7}(\operatorname{trend})\ + \\
+&amp;\quad \beta_{8}(\operatorname{truman}) + \beta_{9}(\operatorname{ike})\ + \\
+&amp;\quad \beta_{10}(\operatorname{jfk}) + \beta_{11}(\operatorname{lbj})\ + \\
+&amp;\quad \beta_{12}(\operatorname{nixon}) + \beta_{13}(\operatorname{ford})\ + \\
+&amp;\quad \beta_{14}(\operatorname{carter}) + \beta_{15}(\operatorname{reagan})\ + \\
+&amp;\quad \beta_{16}(\operatorname{bush41}) + \beta_{17}(\operatorname{clinton})\ + \\
+&amp;\quad \beta_{18}(\operatorname{bush43})
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+<ol start="2" type="1">
+<li>Conduct a linear model using OLS and a Quasipoisson for comparison
+<ul>
+<li>For each, calculate the average number of executive orders expected for divided government. How do these compare across models?</li>
+</ul></li>
+</ol>
+<details>
+<summary>
+Try on your own, then expand for the solution.
+</summary>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>fit.lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(allnoncerm_eo <span class="sc">~</span> divided <span class="sc">+</span> inflation <span class="sc">+</span> spending_percent_gdp <span class="sc">+</span> </span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>               war <span class="sc">+</span> lame_duck <span class="sc">+</span> administration_change <span class="sc">+</span> trend <span class="sc">+</span> </span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>               truman <span class="sc">+</span> ike <span class="sc">+</span> jfk <span class="sc">+</span> lbj <span class="sc">+</span> </span>
+<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a>               nixon <span class="sc">+</span> ford <span class="sc">+</span></span>
+<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a>               carter <span class="sc">+</span> reagan <span class="sc">+</span> bush41 <span class="sc">+</span> clinton <span class="sc">+</span> bush43,</span>
+<span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> <span class="fu">subset</span>(bolton, year <span class="sc">&gt;</span> <span class="dv">1944</span>))</span>
+<span id="cb79-7"><a href="#cb79-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-8"><a href="#cb79-8" aria-hidden="true" tabindex="-1"></a>fit.nb <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(allnoncerm_eo <span class="sc">~</span> divided <span class="sc">+</span> inflation <span class="sc">+</span> spending_percent_gdp <span class="sc">+</span> </span>
+<span id="cb79-9"><a href="#cb79-9" aria-hidden="true" tabindex="-1"></a>               war <span class="sc">+</span> lame_duck <span class="sc">+</span> administration_change <span class="sc">+</span> trend <span class="sc">+</span> </span>
+<span id="cb79-10"><a href="#cb79-10" aria-hidden="true" tabindex="-1"></a>               truman <span class="sc">+</span> ike <span class="sc">+</span> jfk <span class="sc">+</span> lbj <span class="sc">+</span> </span>
+<span id="cb79-11"><a href="#cb79-11" aria-hidden="true" tabindex="-1"></a>               nixon <span class="sc">+</span> ford <span class="sc">+</span></span>
+<span id="cb79-12"><a href="#cb79-12" aria-hidden="true" tabindex="-1"></a>               carter <span class="sc">+</span> reagan <span class="sc">+</span> bush41 <span class="sc">+</span> clinton <span class="sc">+</span> bush43,</span>
+<span id="cb79-13"><a href="#cb79-13" aria-hidden="true" tabindex="-1"></a>               <span class="at">link=</span><span class="st">"log"</span>,</span>
+<span id="cb79-14"><a href="#cb79-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> <span class="fu">subset</span>(bolton, year <span class="sc">&gt;</span> <span class="dv">1944</span>))</span>
+<span id="cb79-15"><a href="#cb79-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-16"><a href="#cb79-16" aria-hidden="true" tabindex="-1"></a>fit.qp <span class="ot">&lt;-</span> <span class="fu">glm</span>(allnoncerm_eo <span class="sc">~</span> divided <span class="sc">+</span> inflation <span class="sc">+</span> spending_percent_gdp <span class="sc">+</span> </span>
+<span id="cb79-17"><a href="#cb79-17" aria-hidden="true" tabindex="-1"></a>               war <span class="sc">+</span> lame_duck <span class="sc">+</span> administration_change <span class="sc">+</span> trend <span class="sc">+</span> </span>
+<span id="cb79-18"><a href="#cb79-18" aria-hidden="true" tabindex="-1"></a>               truman <span class="sc">+</span> ike <span class="sc">+</span> jfk <span class="sc">+</span> lbj <span class="sc">+</span> </span>
+<span id="cb79-19"><a href="#cb79-19" aria-hidden="true" tabindex="-1"></a>               nixon <span class="sc">+</span> ford <span class="sc">+</span></span>
+<span id="cb79-20"><a href="#cb79-20" aria-hidden="true" tabindex="-1"></a>               carter <span class="sc">+</span> reagan <span class="sc">+</span> bush41 <span class="sc">+</span> clinton <span class="sc">+</span> bush43,</span>
+<span id="cb79-21"><a href="#cb79-21" aria-hidden="true" tabindex="-1"></a>              <span class="at">family=</span><span class="st">"quasipoisson"</span>,</span>
+<span id="cb79-22"><a href="#cb79-22" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> <span class="fu">subset</span>(bolton, year <span class="sc">&gt;</span> <span class="dv">1944</span>))</span>
+<span id="cb79-23"><a href="#cb79-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-24"><a href="#cb79-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Manual</span></span>
+<span id="cb79-25"><a href="#cb79-25" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(fit.lm)</span>
+<span id="cb79-26"><a href="#cb79-26" aria-hidden="true" tabindex="-1"></a>X[, <span class="st">"divided"</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb79-27"><a href="#cb79-27" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit.lm)</span>
+<span id="cb79-28"><a href="#cb79-28" aria-hidden="true" tabindex="-1"></a>exp.eo.lm <span class="ot">&lt;-</span> <span class="fu">mean</span>(X <span class="sc">%*%</span> B)</span>
+<span id="cb79-29"><a href="#cb79-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-30"><a href="#cb79-30" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(fit.nb)</span>
+<span id="cb79-31"><a href="#cb79-31" aria-hidden="true" tabindex="-1"></a>X[, <span class="st">"divided"</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb79-32"><a href="#cb79-32" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit.nb)</span>
+<span id="cb79-33"><a href="#cb79-33" aria-hidden="true" tabindex="-1"></a>exp.eo.nb <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">exp</span>(X <span class="sc">%*%</span> B))</span>
+<span id="cb79-34"><a href="#cb79-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-35"><a href="#cb79-35" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(fit.qp)</span>
+<span id="cb79-36"><a href="#cb79-36" aria-hidden="true" tabindex="-1"></a>X[, <span class="st">"divided"</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb79-37"><a href="#cb79-37" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit.qp)</span>
+<span id="cb79-38"><a href="#cb79-38" aria-hidden="true" tabindex="-1"></a>exp.eo.qp <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">exp</span>(X <span class="sc">%*%</span> B))</span>
+<span id="cb79-39"><a href="#cb79-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-40"><a href="#cb79-40" aria-hidden="true" tabindex="-1"></a>exp.eo.lm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 56.86582</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>exp.eo.nb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 55.52576</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>exp.eo.qp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 55.41505</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="do">## marginal effects predictions</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>exp.eo.lm.me <span class="ot">&lt;-</span> <span class="fu">avg_predictions</span>(fit.lm,<span class="at">by=</span><span class="st">"divided"</span>,</span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">newdata=</span> <span class="fu">datagridcf</span>(<span class="at">divided=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)))</span>
+<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>exp.eo.nb.me <span class="ot">&lt;-</span> <span class="fu">avg_predictions</span>(fit.nb, <span class="at">by=</span><span class="st">"divided"</span>,</span>
+<span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">newdata=</span> <span class="fu">datagridcf</span>(<span class="at">divided=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))) </span>
+<span id="cb85-6"><a href="#cb85-6" aria-hidden="true" tabindex="-1"></a>exp.eo.qp.me <span class="ot">&lt;-</span> <span class="fu">avg_predictions</span>(fit.qp, <span class="at">by=</span><span class="st">"divided"</span>,</span>
+<span id="cb85-7"><a href="#cb85-7" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">newdata=</span> <span class="fu">datagridcf</span>(<span class="at">divided=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)))</span>
+<span id="cb85-8"><a href="#cb85-8" aria-hidden="true" tabindex="-1"></a>exp.eo.lm.me</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ divided Estimate Std. Error    z Pr(&gt;|z|)     S 2.5 % 97.5 %
+       0     61.2       2.56 23.9   &lt;0.001 417.4  56.2   66.2
+       1     56.9       1.94 29.3   &lt;0.001 625.6  53.1   60.7
+
+Columns: divided, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high 
+Type:  response </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>exp.eo.nb.me</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ divided Estimate Pr(&gt;|z|)   S 2.5 % 97.5 %
+       0     58.2   &lt;0.001 Inf  53.9   62.7
+       1     51.9   &lt;0.001 Inf  49.0   55.1
+
+Columns: divided, estimate, p.value, s.value, conf.low, conf.high 
+Type:  invlink(link) </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>exp.eo.qp.me</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ divided Estimate Pr(&gt;|z|)   S 2.5 % 97.5 %
+       0     58.3   &lt;0.001 Inf  53.4   63.7
+       1     51.9   &lt;0.001 Inf  48.4   55.6
+
+Columns: divided, estimate, p.value, s.value, conf.low, conf.high 
+Type:  invlink(link) </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Prediction</span></span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>exp.eo.lm <span class="ot">&lt;-</span> <span class="fu">prediction</span>(fit.lm, <span class="at">at =</span> <span class="fu">list</span>(<span class="at">divided=</span><span class="dv">1</span>))</span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>exp.eo.nb <span class="ot">&lt;-</span> <span class="fu">prediction</span>(fit.nb, <span class="at">at =</span> <span class="fu">list</span>(<span class="at">divided=</span><span class="dv">1</span>), <span class="at">type=</span><span class="st">"response"</span>)</span>
+<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a>exp.eo.qp <span class="ot">&lt;-</span> <span class="fu">prediction</span>(fit.qp, <span class="at">at =</span> <span class="fu">list</span>(<span class="at">divided=</span><span class="dv">1</span>), <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(exp.eo.lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> at(divided) Prediction    SE     z         p lower upper
+           1      56.87 1.939 29.33 4.77e-189 53.07 60.67</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(exp.eo.nb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> at(divided) Prediction    SE     z          p lower upper
+           1      55.53 1.799 30.86 4.027e-209    52 59.05</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(exp.eo.qp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> at(divided) Prediction    SE     z          p lower upper
+           1      55.42 2.117 26.18 4.395e-151 51.27 59.56</code></pre>
+</div>
+</div>
+</details>
+<ol start="3" type="1">
+<li>We are going to build further on this example to try to reproduce Figure 2 in the authors’ paper. This is a plot that shows the percentage change in executive orders from divided to unified government with 95% confidence intervals.
+<ul>
+<li><p>These estimates are generated using the negative binomial regression models presented in Table 1. The good news is if we have followed the course notes and practice problems to this point, we have already fit both of these models.</p></li>
+<li><p>To find the percent change, we calculate the incidence rate ratios, which represent: For a one-unit change in <span class="math inline">\(x\)</span>, the expected count changes by a factor of <span class="math inline">\(exp(\hat \beta_j)\)</span>.</p>
+<ul>
+<li>This can be converted to percent change by <span class="math inline">\((IRR - 1) \times 100\)</span>. For example, if the incidence rate ratio was 1.4, then for a one-unit change in <span class="math inline">\(x\)</span>, we would see a <span class="math inline">\(40\%\)</span> change (increase) in the expected count.</li>
+<li>To find the confidence intervals, we can use <code>confint(fit)</code>, exponentiate these, and then follow the same formula for the lower bound and upper bound. Our confidence intervals will be bigger than the authors because we used a different type of standard error.</li>
+</ul></li>
+</ul></li>
+</ol>
+<p><img src="images/bolton2.png" class="img-fluid" style="width:80.0%"></p>
+<details>
+<summary>
+Try on your own, then expand for the solution.
+</summary>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>fitn <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(allnoncerm_eo <span class="sc">~</span> divided <span class="sc">+</span> inflation <span class="sc">+</span> </span>
+<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>                 spending_percent_gdp <span class="sc">+</span> war <span class="sc">+</span> lame_duck <span class="sc">+</span></span>
+<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a>                 administration_change <span class="sc">+</span> trend <span class="sc">+</span></span>
+<span id="cb97-4"><a href="#cb97-4" aria-hidden="true" tabindex="-1"></a>            <span class="sc">+</span> tr<span class="sc">+</span> taft <span class="sc">+</span> wilson <span class="sc">+</span> harding </span>
+<span id="cb97-5"><a href="#cb97-5" aria-hidden="true" tabindex="-1"></a>           <span class="sc">+</span> coolidge <span class="sc">+</span> hoover, </span>
+<span id="cb97-6"><a href="#cb97-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">link=</span><span class="st">"log"</span>, </span>
+<span id="cb97-7"><a href="#cb97-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> <span class="fu">subset</span>(bolton, year <span class="sc">&lt;</span> <span class="dv">1945</span>))</span>
+<span id="cb97-8"><a href="#cb97-8" aria-hidden="true" tabindex="-1"></a>fit.nb <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(allnoncerm_eo <span class="sc">~</span> divided <span class="sc">+</span> inflation <span class="sc">+</span> spending_percent_gdp <span class="sc">+</span> </span>
+<span id="cb97-9"><a href="#cb97-9" aria-hidden="true" tabindex="-1"></a>               war <span class="sc">+</span> lame_duck <span class="sc">+</span> administration_change <span class="sc">+</span> trend <span class="sc">+</span> </span>
+<span id="cb97-10"><a href="#cb97-10" aria-hidden="true" tabindex="-1"></a>               truman <span class="sc">+</span> ike <span class="sc">+</span> jfk <span class="sc">+</span> lbj <span class="sc">+</span> </span>
+<span id="cb97-11"><a href="#cb97-11" aria-hidden="true" tabindex="-1"></a>               nixon <span class="sc">+</span> ford <span class="sc">+</span></span>
+<span id="cb97-12"><a href="#cb97-12" aria-hidden="true" tabindex="-1"></a>               carter <span class="sc">+</span> reagan <span class="sc">+</span> bush41 <span class="sc">+</span> clinton <span class="sc">+</span> bush43,</span>
+<span id="cb97-13"><a href="#cb97-13" aria-hidden="true" tabindex="-1"></a>               <span class="at">link=</span><span class="st">"log"</span>,</span>
+<span id="cb97-14"><a href="#cb97-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> <span class="fu">subset</span>(bolton, year <span class="sc">&gt;</span> <span class="dv">1944</span>))</span>
+<span id="cb97-15"><a href="#cb97-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-16"><a href="#cb97-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Incidence Rate Ratios amd</span></span>
+<span id="cb97-17"><a href="#cb97-17" aria-hidden="true" tabindex="-1"></a>irr1 <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">coef</span>(fitn)[<span class="st">"divided"</span>])</span>
+<span id="cb97-18"><a href="#cb97-18" aria-hidden="true" tabindex="-1"></a>irr2 <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">coef</span>(fit.nb)[<span class="st">"divided"</span>])</span>
+<span id="cb97-19"><a href="#cb97-19" aria-hidden="true" tabindex="-1"></a>ci.irr1 <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">confint</span>(fitn)[<span class="st">"divided"</span>,])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Waiting for profiling to be done...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>ci.irr2 <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">confint</span>(fit.nb)[<span class="st">"divided"</span>,])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Waiting for profiling to be done...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Percent change</span></span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>pc1 <span class="ot">&lt;-</span> (irr1<span class="dv">-1</span>)<span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a>ci.pc1 <span class="ot">&lt;-</span> (ci.irr1 <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">*</span><span class="dv">100</span></span>
+<span id="cb101-4"><a href="#cb101-4" aria-hidden="true" tabindex="-1"></a>pc2 <span class="ot">&lt;-</span> (irr2<span class="dv">-1</span>)<span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb101-5"><a href="#cb101-5" aria-hidden="true" tabindex="-1"></a>ci.pc2 <span class="ot">&lt;-</span> (ci.irr2 <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">*</span><span class="dv">100</span></span>
+<span id="cb101-6"><a href="#cb101-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-7"><a href="#cb101-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-8"><a href="#cb101-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Prepare data for plotting</span></span>
+<span id="cb101-9"><a href="#cb101-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">pc =</span> <span class="fu">c</span>(pc1, pc2), </span>
+<span id="cb101-10"><a href="#cb101-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">lower=</span><span class="fu">c</span>(ci.pc1[<span class="dv">1</span>], ci.pc2[<span class="dv">1</span>]), </span>
+<span id="cb101-11"><a href="#cb101-11" aria-hidden="true" tabindex="-1"></a>                <span class="at">upper =</span> <span class="fu">c</span>(ci.pc1[<span class="dv">2</span>], ci.pc2[<span class="dv">2</span>]))</span>
+<span id="cb101-12"><a href="#cb101-12" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>period <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Regime 1 </span><span class="sc">\n</span><span class="st"> 1905-1944"</span>, <span class="st">"Regime 2 </span><span class="sc">\n</span><span class="st"> 1945-2013"</span>)</span>
+<span id="cb101-13"><a href="#cb101-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-14"><a href="#cb101-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">y=</span>pc,<span class="at">x=</span>period))<span class="sc">+</span></span>
+<span id="cb101-15"><a href="#cb101-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>)<span class="sc">+</span></span>
+<span id="cb101-16"><a href="#cb101-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>lower, <span class="at">ymax=</span>upper), <span class="at">width=</span>.<span class="dv">05</span>)<span class="sc">+</span></span>
+<span id="cb101-17"><a href="#cb101-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Effect of Divided Government on EO Usage"</span>)<span class="sc">+</span></span>
+<span id="cb101-18"><a href="#cb101-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Percentage Change Divided Relative to Unified"</span>)<span class="sc">+</span></span>
+<span id="cb101-19"><a href="#cb101-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>)<span class="sc">+</span></span>
+<span id="cb101-20"><a href="#cb101-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="10-CountData_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</details>
+</section>
+<section id="count-model-tutorial" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="count-model-tutorial"><span class="header-section-number">10.7</span> Count Model Tutorial</h2>
+<p>For this week’s tutorial, we will use data from the article, “Less than you think: Prevalence and predictors of fake news dissemination on Facebook” published in <em>Science Advances</em> by Andrew Guess, Jonathan Nagler, and Joshua Tucker available <a href="https://advances.sciencemag.org/content/5/1/eaau4586">here</a>.</p>
+<p>Abstract.<em>So-called “fake news” has renewed concerns about the prevalence and effects of misinformation in political campaigns. Given the potential for widespread dissemination of this material, we examine the individual-level characteristics associated with sharing false articles during the 2016 U.S. presidential campaign. To do so, we uniquely link an original survey with respondents’ sharing activity as recorded in Facebook profile data. First and foremost, we find that sharing this content was a relatively rare activity. Conservatives were more likely to share articles from fake news domains, which in 2016 were largely pro-Trump in orientation, than liberals or moderates. We also find a strong age effect, which persists after controlling for partisanship and ideology: On average, users over 65 shared nearly seven times as many articles from fake news domains as the youngest age group.</em></p>
+<p>The authors look at the demographics predictors of disseminating fake news using survey data and behavioral data on respondents’ Facebook sharing history.</p>
+<p>The key outcome variable is <code>num_fake_shares</code>, representing the number of articles an individual shared from a list of fake news domains created by Buzzfeed.</p>
+<ul>
+<li>Key independent variables include <code>party</code>,<code>ideology</code> (factor), <code>age</code> (factor), <code>female</code>, <code>black</code>, <code>educ</code>, <code>faminc</code>, <code>num_posts</code></li>
+</ul>
+<p>Let’s load the data and look at the outcome.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rio)</span>
+<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>fake <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"https://github.com/ktmccabe/teachingdata/blob/main/sciencerep.RData?raw=true"</span>)</span>
+<span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb102-4"><a href="#cb102-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(fake<span class="sc">$</span>num_fake_shares)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+   0    1    2    3    4    5    6    7    8    9   10   12   13   25   50 
+1090   63   12    8    5    1    1    2    1    2    2    1    1    1    1 </code></pre>
+</div>
+</div>
+<p>It looks like our data are a count. Let’s try to visualize this distribution in a histogram. How would you describe this distribution?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fake, <span class="fu">aes</span>(num_fake_shares))<span class="sc">+</span></span>
+<span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">50</span>)<span class="sc">+</span></span>
+<span id="cb104-4"><a href="#cb104-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span> </span>
+<span id="cb104-5"><a href="#cb104-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Distribution of Fake News Shares"</span>) <span class="sc">+</span> </span>
+<span id="cb104-6"><a href="#cb104-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Number of respondents"</span>) <span class="sc">+</span> </span>
+<span id="cb104-7"><a href="#cb104-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Number of fake news stories shared"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="10-CountData_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<details>
+<summary>
+To filter the histogram by party like Fig. 1 in the paper, expand.
+</summary>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a>fakesub <span class="ot">&lt;-</span> <span class="fu">subset</span>(fake, party <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Democrat"</span>, <span class="st">"Republican"</span>, <span class="st">"Independent"</span>))</span>
+<span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fakesub, <span class="fu">aes</span>(num_fake_shares, <span class="at">fill=</span>party))<span class="sc">+</span></span>
+<span id="cb105-4"><a href="#cb105-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">50</span>)<span class="sc">+</span></span>
+<span id="cb105-5"><a href="#cb105-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span> </span>
+<span id="cb105-6"><a href="#cb105-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Distribution of Fake News Shares"</span>) <span class="sc">+</span> </span>
+<span id="cb105-7"><a href="#cb105-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Number of respondents"</span>) <span class="sc">+</span> </span>
+<span id="cb105-8"><a href="#cb105-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="st">""</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>, <span class="st">"darkgray"</span>)) <span class="sc">+</span></span>
+<span id="cb105-9"><a href="#cb105-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Number of fake news stories shared"</span>) <span class="sc">+</span> </span>
+<span id="cb105-10"><a href="#cb105-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>, <span class="at">legend.title =</span> <span class="fu">element_blank</span>()) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 1499 rows containing non-finite values (`stat_bin()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="10-CountData_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</details>
+<p>Let’s say we were interested in exploring the relationship between age and the number of fake news posts. It can always be useful to conduct more descriptive or exploratory analysis before hitting the heavy machinery. For example, the authors look at the average number of fake news posts shared by age group in Figure 2. We can do the same. Ours will look a little different because it’s unweighted:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Base r version</span></span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a>meansbyage <span class="ot">&lt;-</span> <span class="fu">tapply</span>(fake<span class="sc">$</span>num_fake_shares, fake<span class="sc">$</span>age, mean, <span class="at">na.rm=</span>T)</span>
+<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(meansbyage, </span>
+<span id="cb107-4"><a href="#cb107-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Age and Fake News Shares"</span>,</span>
+<span id="cb107-5"><a href="#cb107-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab=</span> <span class="st">"Mean number of fake news stories shared"</span>,</span>
+<span id="cb107-6"><a href="#cb107-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span><span class="st">"Age group"</span>,</span>
+<span id="cb107-7"><a href="#cb107-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,.<span class="dv">6</span>),</span>
+<span id="cb107-8"><a href="#cb107-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">col=</span><span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="10-CountData_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="do">## ggplot version</span></span>
+<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ tibble  3.2.1     ✔ dplyr   1.1.2
+✔ tidyr   1.3.0     ✔ stringr 1.5.0
+✔ readr   2.1.2     ✔ forcats 1.0.0
+✔ purrr   1.0.2     </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+✖ dplyr::recode() masks car::recode()
+✖ dplyr::select() masks MASS::select()
+✖ purrr::some()   masks car::some()</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>fake <span class="sc">%&gt;%</span> </span>
+<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(age)) <span class="sc">%&gt;%</span> </span>
+<span id="cb112-3"><a href="#cb112-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(age) <span class="sc">%&gt;%</span> </span>
+<span id="cb112-4"><a href="#cb112-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_fakes =</span> <span class="fu">mean</span>(num_fake_shares, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb112-5"><a href="#cb112-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>age, <span class="at">y=</span>mean_fakes)) <span class="sc">+</span> </span>
+<span id="cb112-6"><a href="#cb112-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb112-7"><a href="#cb112-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Age and Fake News Shares"</span>) <span class="sc">+</span> </span>
+<span id="cb112-8"><a href="#cb112-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Mean number of fake news stories shared"</span>) <span class="sc">+</span> </span>
+<span id="cb112-9"><a href="#cb112-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Age group"</span>) <span class="sc">+</span> </span>
+<span id="cb112-10"><a href="#cb112-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, .<span class="dv">6</span>)<span class="sc">+</span></span>
+<span id="cb112-11"><a href="#cb112-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="10-CountData_files/figure-html/unnamed-chunk-33-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ol type="1">
+<li>Let’s move to a regression approach to study this relationship. How could we model this relationship? What are the pros and cons of each approach?
+<ul>
+<li>Would OLS work?</li>
+<li>Would a binary logit or probit work?</li>
+<li>What other approaches could work?</li>
+</ul></li>
+<li>Let’s replicate the first column of Table 2 in the authors’ analysis.
+<ul>
+<li>What type of model do the authors use? Why might this be an appropriate model in their case?</li>
+<li>How should the coefficients be interpreted?</li>
+<li>What would be a quantity of interest?</li>
+</ul></li>
+</ol>
+<p><img src="images/science1.png" class="img-fluid" style="width:70.0%"> Recall that for our primary count models, the regression equation is of the form:</p>
+<ul>
+<li><span class="math inline">\(\log \lambda_i = \eta_i = \mathbf x_i^T\beta\)</span></li>
+<li><span class="math inline">\(\lambda_i = exp(\mathbf x_i^T\beta)\)</span></li>
+<li><span class="math inline">\(\lambda_i = \mathbf E[Y_i | \mathbf x_i] = \exp(\beta_0 + \beta_1x_{i1} + ... + \beta_{k}x_{ik})\)</span> is the expected number of events per a unit of time or space</li>
+</ul>
+<ol start="3" type="1">
+<li>Let’s fit the model using <code>glm</code>. Be careful to specify the right <code>family</code>.
+<ul>
+<li>What is the dispersion parameter? What conceptual quantity does this represent?</li>
+</ul></li>
+</ol>
+<details>
+<summary>
+Expand for details.
+</summary>
+<p>We will fit a quasipoisson following the authors. Note: they apply survey weights through the weights function. You could also use the <code>survey</code> package for this. For now, we will follow the approach of the authors.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>model1.qp <span class="ot">&lt;-</span> <span class="fu">glm</span>(num_fake_shares <span class="sc">~</span> ideology <span class="sc">+</span> age <span class="sc">+</span> female <span class="sc">+</span> black <span class="sc">+</span> educ <span class="sc">+</span> faminc, </span>
+<span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">weights =</span> weight_svypop_w3, </span>
+<span id="cb113-3"><a href="#cb113-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> fake, </span>
+<span id="cb113-4"><a href="#cb113-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">family =</span> <span class="st">"quasipoisson"</span>)</span>
+<span id="cb113-5"><a href="#cb113-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-6"><a href="#cb113-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1.qp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = num_fake_shares ~ ideology + age + female + black + 
+    educ + faminc, family = "quasipoisson", data = fake, weights = weight_svypop_w3)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-3.4510  -0.5414  -0.3406  -0.1929  12.8243  
+
+Coefficients:
+                      Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)          -3.416028   1.379091  -2.477  0.01341 * 
+ideologyVery liberal  0.486833   1.238165   0.393  0.69426   
+ideologyLiberal      -1.127456   1.438798  -0.784  0.43345   
+ideologyModerate      0.332692   1.186454   0.280  0.77922   
+ideologyConservative  2.186850   1.154932   1.893  0.05857 . 
+ideologyV. conserv.   2.366213   1.158278   2.043  0.04132 * 
+age30-44              0.771712   0.811327   0.951  0.34174   
+age45-65              1.136384   0.764972   1.486  0.13771   
+ageOver 65            2.052391   0.766352   2.678  0.00752 **
+female               -0.113780   0.216606  -0.525  0.59950   
+black                -0.879538   0.753713  -1.167  0.24351   
+educ                 -0.084881   0.081317  -1.044  0.29681   
+faminc               -0.007145   0.008419  -0.849  0.39627   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for quasipoisson family taken to be 3.304861)
+
+    Null deviance: 1676.7  on 1040  degrees of freedom
+Residual deviance: 1172.0  on 1028  degrees of freedom
+  (2459 observations deleted due to missingness)
+AIC: NA
+
+Number of Fisher Scoring iterations: 7</code></pre>
+</div>
+</div>
+<p>What was the form of the regression model?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(equatiomatic)</span>
+<span id="cb115-2"><a href="#cb115-2" aria-hidden="true" tabindex="-1"></a>equatiomatic<span class="sc">::</span><span class="fu">extract_eq</span>(model1.qp, <span class="at">wrap=</span>T, <span class="at">terms_per_line =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><span class="math display">\[
+\begin{aligned}
+\log ({ E( \operatorname{num_fake_shares} ) })  &amp;= \alpha + \beta_{1}(\operatorname{ideo\logy}_{\operatorname{Very\ liberal}})\ + \\
+&amp;\quad \beta_{2}(\operatorname{ideo\logy}_{\operatorname{Liberal}}) + \beta_{3}(\operatorname{ideo\logy}_{\operatorname{Moderate}})\ + \\
+&amp;\quad \beta_{4}(\operatorname{ideo\logy}_{\operatorname{Conservative}}) + \beta_{5}(\operatorname{ideo\logy}_{\operatorname{V.\ conserv.}})\ + \\
+&amp;\quad \beta_{6}(\operatorname{age}_{\operatorname{30-44}}) + \beta_{7}(\operatorname{age}_{\operatorname{45-65}})\ + \\
+&amp;\quad \beta_{8}(\operatorname{age}_{\operatorname{Over\ 65}}) + \beta_{9}(\operatorname{female})\ + \\
+&amp;\quad \beta_{10}(\operatorname{black}) + \beta_{11}(\operatorname{educ})\ + \\
+&amp;\quad \beta_{12}(\operatorname{faminc})
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+<p>We could have fit a regular poisson model. In that model, the dispersion paramter is taken to be 1, such that the conditional mean and variance are equivalent. In contrast, the quasipoisson accounts for the possibility that the variance is greater.</p>
+<p>Let’s see how much of an issue this is.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>model1.p <span class="ot">&lt;-</span> <span class="fu">glm</span>(num_fake_shares <span class="sc">~</span> ideology <span class="sc">+</span> age <span class="sc">+</span> female <span class="sc">+</span> black <span class="sc">+</span> educ <span class="sc">+</span> faminc, </span>
+<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">weights =</span> weight_svypop_w3, </span>
+<span id="cb116-3"><a href="#cb116-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> fake, </span>
+<span id="cb116-4"><a href="#cb116-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">family =</span> <span class="st">"poisson"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can conduct a test of overdispersion in our model using <code>dispersiontest</code>. If we have a significant result and a dispersion constant <span class="math inline">\(&gt;\)</span> 0, this would suggest overdispersion. What should we conclude? What are the implications?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AER)</span>
+<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dispersiontest</span>(model1.p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Overdispersion test
+
+data:  model1.p
+z = 2.9334, p-value = 0.001676
+alternative hypothesis: true dispersion is greater than 1
+sample estimates:
+dispersion 
+  3.027398 </code></pre>
+</div>
+</div>
+<p>Note: The authors address different modeling choices in the paper. “We aggregated all shares to the individual respondent level so that our dependent variables are counts (i.e., number of fake news stories shared). To account for this feature of the data, as well as the highly skewed distribution of the counts, we primarily used Poisson or quasi-Poisson regressions to model the determinants of Facebook sharing behavior. We conducted dispersion tests on the count data and used quasi-Poisson models if the null hypothesis of no dispersion is rejected. Below, we included negative binomial and Ordinary Least Squares (OLS) regressions to show that our results are generally not sensitive to model choice. All models applied weights from YouGov to adjust for selection into the sample. We specifically used sample-matching weights produced for the third wave of the survey, which was closest to the Facebook encouragement sent to respondents (27). (Results also do not appear to be sensitive to the use of weights.)”</p>
+</details>
+<ol start="4" type="1">
+<li>Let’s generate some quantities of interest.
+<ul>
+<li>What is the incidence rate ratio for sharing fake news of being Age 65+ vs.&nbsp;the reference category 18-29?</li>
+<li>What is the average number of fake news posts expected to be shared by age group?</li>
+</ul></li>
+</ol>
+<details>
+<summary>
+Expand for details.
+</summary>
+<p>Incidence rate ratios</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Incidence rate ratios are exp(Bj)</span></span>
+<span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(model1.qp)[<span class="st">"ageOver 65"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ageOver 65 
+  7.786494 </code></pre>
+</div>
+</div>
+<p>How should we interpret this?</p>
+<p>Average Fake News Posts Shared by Age Group</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(marginaleffects)</span>
+<span id="cb121-2"><a href="#cb121-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Note: levels(fake$age) is a shortcut for putting in the vector of all possible age levels. Only works for factor variables.</span></span>
+<span id="cb121-3"><a href="#cb121-3" aria-hidden="true" tabindex="-1"></a>count.byage.me <span class="ot">&lt;-</span> <span class="fu">avg_predictions</span>(model1.qp, <span class="at">by=</span><span class="st">"age"</span>, <span class="at">newdata=</span><span class="fu">datagridcf</span>(<span class="at">age =</span> <span class="fu">levels</span>(fake<span class="sc">$</span>age)))</span>
+<span id="cb121-4"><a href="#cb121-4" aria-hidden="true" tabindex="-1"></a>count.byage.me</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     age Estimate Pr(&gt;|z|)    S   2.5 % 97.5 %
+ 18-29     0.0320   &lt;0.001 17.2 0.00717  0.143
+ 30-44     0.0693   &lt;0.001 40.7 0.03352  0.143
+ 45-65     0.0998   &lt;0.001 56.4 0.05888  0.169
+ Over 65   0.2493   &lt;0.001 20.9 0.14505  0.429
+
+Columns: age, estimate, p.value, s.value, conf.low, conf.high 
+Type:  invlink(link) </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(prediction)</span>
+<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Note: levels(fake$age) is a shortcut for putting in the vector of all possible age levels. Only works for factor variables.</span></span>
+<span id="cb123-3"><a href="#cb123-3" aria-hidden="true" tabindex="-1"></a>count.byage <span class="ot">&lt;-</span> <span class="fu">prediction</span>(model1.qp, <span class="at">at=</span><span class="fu">list</span>(<span class="at">age =</span> <span class="fu">levels</span>(fake<span class="sc">$</span>age)), <span class="at">type=</span><span class="st">"response"</span>)</span>
+<span id="cb123-4"><a href="#cb123-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(count.byage)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> at(age) Prediction      SE     z         p    lower  upper
+   18-29    0.06575 0.04894 1.344 1.791e-01 -0.03017 0.1617
+   30-44    0.14225 0.04644 3.063 2.193e-03  0.05122 0.2333
+   45-65    0.20484 0.03468 5.907 3.493e-09  0.13687 0.2728
+ Over 65    0.51196 0.08653 5.917 3.285e-09  0.34237 0.6816</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 65+</span></span>
+<span id="cb125-2"><a href="#cb125-2" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(model1.qp)</span>
+<span id="cb125-3"><a href="#cb125-3" aria-hidden="true" tabindex="-1"></a>X[, <span class="st">"age30-44"</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb125-4"><a href="#cb125-4" aria-hidden="true" tabindex="-1"></a>X[, <span class="st">"age45-65"</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb125-5"><a href="#cb125-5" aria-hidden="true" tabindex="-1"></a>X[, <span class="st">"ageOver 65"</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb125-6"><a href="#cb125-6" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">coef</span>(model1.qp)</span>
+<span id="cb125-7"><a href="#cb125-7" aria-hidden="true" tabindex="-1"></a>eta <span class="ot">&lt;-</span> X <span class="sc">%*%</span> B</span>
+<span id="cb125-8"><a href="#cb125-8" aria-hidden="true" tabindex="-1"></a>avg.fake<span class="fl">.65</span> <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">exp</span>(eta))</span>
+<span id="cb125-9"><a href="#cb125-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb125-10"><a href="#cb125-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 45-65</span></span>
+<span id="cb125-11"><a href="#cb125-11" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(model1.qp)</span>
+<span id="cb125-12"><a href="#cb125-12" aria-hidden="true" tabindex="-1"></a>X[, <span class="st">"age30-44"</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb125-13"><a href="#cb125-13" aria-hidden="true" tabindex="-1"></a>X[, <span class="st">"age45-65"</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb125-14"><a href="#cb125-14" aria-hidden="true" tabindex="-1"></a>X[, <span class="st">"ageOver 65"</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb125-15"><a href="#cb125-15" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">coef</span>(model1.qp)</span>
+<span id="cb125-16"><a href="#cb125-16" aria-hidden="true" tabindex="-1"></a>eta <span class="ot">&lt;-</span> X <span class="sc">%*%</span> B</span>
+<span id="cb125-17"><a href="#cb125-17" aria-hidden="true" tabindex="-1"></a>avg.fake<span class="fl">.45</span> <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">exp</span>(eta))</span>
+<span id="cb125-18"><a href="#cb125-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb125-19"><a href="#cb125-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 30-44</span></span>
+<span id="cb125-20"><a href="#cb125-20" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(model1.qp)</span>
+<span id="cb125-21"><a href="#cb125-21" aria-hidden="true" tabindex="-1"></a>X[, <span class="st">"age30-44"</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb125-22"><a href="#cb125-22" aria-hidden="true" tabindex="-1"></a>X[, <span class="st">"age45-65"</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb125-23"><a href="#cb125-23" aria-hidden="true" tabindex="-1"></a>X[, <span class="st">"ageOver 65"</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb125-24"><a href="#cb125-24" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">coef</span>(model1.qp)</span>
+<span id="cb125-25"><a href="#cb125-25" aria-hidden="true" tabindex="-1"></a>eta <span class="ot">&lt;-</span> X <span class="sc">%*%</span> B</span>
+<span id="cb125-26"><a href="#cb125-26" aria-hidden="true" tabindex="-1"></a>avg.fake<span class="fl">.30</span> <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">exp</span>(eta))</span>
+<span id="cb125-27"><a href="#cb125-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb125-28"><a href="#cb125-28" aria-hidden="true" tabindex="-1"></a><span class="do">## 18-29</span></span>
+<span id="cb125-29"><a href="#cb125-29" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(model1.qp)</span>
+<span id="cb125-30"><a href="#cb125-30" aria-hidden="true" tabindex="-1"></a>X[, <span class="st">"age30-44"</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb125-31"><a href="#cb125-31" aria-hidden="true" tabindex="-1"></a>X[, <span class="st">"age45-65"</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb125-32"><a href="#cb125-32" aria-hidden="true" tabindex="-1"></a>X[, <span class="st">"ageOver 65"</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb125-33"><a href="#cb125-33" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">coef</span>(model1.qp)</span>
+<span id="cb125-34"><a href="#cb125-34" aria-hidden="true" tabindex="-1"></a>eta <span class="ot">&lt;-</span> X <span class="sc">%*%</span> B</span>
+<span id="cb125-35"><a href="#cb125-35" aria-hidden="true" tabindex="-1"></a>avg.fake<span class="fl">.18</span> <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">exp</span>(eta))</span>
+<span id="cb125-36"><a href="#cb125-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb125-37"><a href="#cb125-37" aria-hidden="true" tabindex="-1"></a><span class="do">## Gather results</span></span>
+<span id="cb125-38"><a href="#cb125-38" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(avg.fake<span class="fl">.18</span>, avg.fake<span class="fl">.30</span>, avg.fake<span class="fl">.45</span>, avg.fake<span class="fl">.65</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.06574956 0.14224696 0.20484149 0.51195856</code></pre>
+</div>
+</div>
+</details>
+</section>
+<section id="additional-considerations" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="additional-considerations"><span class="header-section-number">10.8</span> Additional Considerations</h2>
+<section id="offset" class="level3" data-number="10.8.1">
+<h3 data-number="10.8.1" class="anchored" data-anchor-id="offset"><span class="header-section-number">10.8.1</span> Offset</h3>
+<p>We said that counts are often considered rates per interval. Sometimes when we have a count, we know the greatest possible value that an observation could take or we think that will be influenced by a particular variable, which varies by observation. This is called the exposure. For example maybe we are looking at the number of traffic accidents per year per population size.</p>
+<p>In contrast, in the example from before, counts of executive orders were just measured as a span of one year.</p>
+<p>We are going to use an example with an exposure from Gelman and Hill and the study of stop-and-frisk as a policy. This is example is based on the tutorial by Clay Ford <a href="http://www.clayford.net/statistics/poisson-regression-ch-6-of-gelman-and-hill/">here</a>.</p>
+<p>The data include an outcome desribing the number of <code>stops</code> in a given area. The regression model looks at the relationship between race/ethnicity <code>factor(eth)</code> and the number of stops made in a precinct.</p>
+<p>Run the few lines below to load and prepare the data according to Gelman and Hill’s instructions:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Stop and frisk. Does race/ethnicity influence number of stops?</span></span>
+<span id="cb127-2"><a href="#cb127-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Prepare noisy data</span></span>
+<span id="cb127-3"><a href="#cb127-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb127-4"><a href="#cb127-4" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.table</span>( <span class="st">"http://www.stat.columbia.edu/~gelman/arm/examples/police/frisk_with_noise.dat"</span>, <span class="at">header=</span><span class="cn">TRUE</span>, <span class="at">skip=</span><span class="dv">6</span>)</span>
+<span id="cb127-5"><a href="#cb127-5" aria-hidden="true" tabindex="-1"></a>stops <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(<span class="fu">cbind</span>(stops, past.arrests) <span class="sc">~</span> eth <span class="sc">+</span> precinct, <span class="at">data=</span>dat, sum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The unit of analysis after we run this is the number of stops in a given precinct for a particular racial/ethnicity group.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(stops)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  eth precinct stops past.arrests
+1   1        1   202          980
+2   2        1   102          295
+3   3        1    81          381
+4   1        2   132          753
+5   2        2   144          557
+6   3        2    71          431</code></pre>
+</div>
+</div>
+<p>It is possible that the count of the number of stops may be influenced by the number of past arrests of a particular unit of analysis. We might want to measure a count per number of past arrests for an ethnicity group in a precinct instead of just a count per ethnicity group in a precinct. This will be our exposure and the <span class="math inline">\(\log\)</span> <code>past.arrests</code> will be our offset.</p>
+<p>When we have an offset, our model changes to:</p>
+<ul>
+<li><span class="math inline">\(\frac{\mathbf E(Y_i | X)}{N_i} = \exp(\mathbf x_i'\beta)\)</span> or alternatively</li>
+<li><span class="math inline">\(\mathbf E(Y_i | X) = \exp(\mathbf x_i'\beta + \log N_i)\)</span>.
+<ul>
+<li>The exposure enters the right side of the equation as what is referred to as an “offset”– the <span class="math inline">\(\log\)</span> of the exposure.</li>
+<li>We will not get a regression coeffcient for the offset because it is fixed to 1. However, we will still need to incorporate the offset when we estimate our outcomes.</li>
+</ul></li>
+</ul>
+<p>Let’s use a quasipoisson model this time. We enter the offset through an explicit argument <code>offset</code>. (Otherwise it will be treated like any regression variable, and its coefficient won’t be fixed to 1.)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="do">## No natural limit for stops BUT might be influenced by past arrests</span></span>
+<span id="cb130-2"><a href="#cb130-2" aria-hidden="true" tabindex="-1"></a>sf<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">glm</span>(stops <span class="sc">~</span> <span class="fu">factor</span>(eth), </span>
+<span id="cb130-3"><a href="#cb130-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> stops, </span>
+<span id="cb130-4"><a href="#cb130-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">family=</span><span class="st">"quasipoisson"</span>, </span>
+<span id="cb130-5"><a href="#cb130-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">offset =</span>  <span class="fu">log</span>(past.arrests))</span>
+<span id="cb130-6"><a href="#cb130-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sf<span class="fl">.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = stops ~ factor(eth), family = "quasipoisson", data = stops, 
+    offset = log(past.arrests))
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-47.327   -7.740   -0.182   10.241   39.140  
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  -0.58809    0.05646 -10.416   &lt;2e-16 ***
+factor(eth)2  0.07021    0.09042   0.777    0.438    
+factor(eth)3 -0.16158    0.12767  -1.266    0.207    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for quasipoisson family taken to be 222.5586)
+
+    Null deviance: 46120  on 224  degrees of freedom
+Residual deviance: 45437  on 222  degrees of freedom
+AIC: NA
+
+Number of Fisher Scoring iterations: 5</code></pre>
+</div>
+</div>
+<p>When we calculate our quantities of interest, <code>predict</code> will automatically incorporate the offset. When we calculate them manually, we need to explicitly enter the offset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Predicted counts with offsets exp(XB + log(N))</span></span>
+<span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a>sf.count <span class="ot">&lt;-</span> <span class="fu">predict</span>(sf<span class="fl">.1</span>, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb132-3"><a href="#cb132-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb132-4"><a href="#cb132-4" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(sf<span class="fl">.1</span>)</span>
+<span id="cb132-5"><a href="#cb132-5" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">coef</span>(sf<span class="fl">.1</span>)</span>
+<span id="cb132-6"><a href="#cb132-6" aria-hidden="true" tabindex="-1"></a>sf.count.man <span class="ot">&lt;-</span> <span class="fu">exp</span>(X <span class="sc">%*%</span> B <span class="sc">+</span> <span class="fu">log</span>(stops<span class="sc">$</span>past.arrests))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Note that <span class="math inline">\(e^{X\hat\beta + \log N} = e^{X\hat\beta} * e^ {\log N} = N*e^{X\hat\beta}\)</span>. This means we could equivalently write:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb133"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a>sf.count.man2 <span class="ot">&lt;-</span> <span class="fu">exp</span>(X <span class="sc">%*%</span> B)<span class="sc">*</span>stops<span class="sc">$</span>past.arrests</span>
+<span id="cb133-2"><a href="#cb133-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(sf.count, sf.count.man, sf.count.man2)[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sf.count                  
+1 544.2816 544.2816 544.2816
+2 175.7562 175.7562 175.7562
+3 180.0316 180.0316 180.0316
+4 418.2082 418.2082 418.2082
+5 331.8515 331.8515 331.8515
+6 203.6578 203.6578 203.6578</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="how-to-think-about-zero-counts" class="level2" data-number="10.9">
+<h2 data-number="10.9" class="anchored" data-anchor-id="how-to-think-about-zero-counts"><span class="header-section-number">10.9</span> How to think about Zero Counts</h2>
+<p>Sometimes our outcome data have an excessive number of zeroes. For example, perhaps there are a lot of people that never post on social media at all, and then there are a smaller number of those that do, and they may post in any positive number of times.</p>
+<p>For these, we might think there are two decisions</p>
+<ul>
+<li>People that post vs.&nbsp;do not post. This sounds like a binary model.</li>
+<li>How many times to post? Ok this sounds more like Poisson or Negative Binomial</li>
+</ul>
+<p>A large number of zeroes is not necessarily something that the Poisson and Negative binomial distributions would predict with high probability. For that reason, we might want to use a modeling strategy that accounts for zero excess. We will discuss two: Hurdle models and Zero-inflated poisson/negative binomial.</p>
+<p>This video provides the overview.</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/sU-_rcLVTMw”" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<section id="hurdle-models" class="level3" data-number="10.9.1">
+<h3 data-number="10.9.1" class="anchored" data-anchor-id="hurdle-models"><span class="header-section-number">10.9.1</span> Hurdle Models</h3>
+<p>Hurdle models may be useful when there are possibly sequential steps in achieving a positive count. The above example could motivate a hurdle model. First, someone decides if they want to post, and then if they want to post, they may post any positive <span class="math inline">\(&gt;0\)</span> number of times.</p>
+<ul>
+<li>There is a probability that governs the likelihood of not posting (<span class="math inline">\(Pr(Y_i = 0) = \pi\)</span>)</li>
+<li>And then there is a count model restricted to <span class="math inline">\(&gt;0\)</span> (“zero truncated”) describing the number of posts.</li>
+</ul>
+<p>This <a href="https://data.library.virginia.edu/getting-started-with-hurdle-models/">post</a> from the University of Virginia explains how to fit hurdle models in R.</p>
+</section>
+<section id="zero-inflated-poissonnegative-binomial" class="level3" data-number="10.9.2">
+<h3 data-number="10.9.2" class="anchored" data-anchor-id="zero-inflated-poissonnegative-binomial"><span class="header-section-number">10.9.2</span> Zero Inflated Poisson/Negative binomial</h3>
+<p>When you have excess zeroes, the intuitively named zero-inflated poisson or negative binomial model may also be appropriate. These are “mixture models” because there is a mixture of two distributions: the Bernoulli and Poisson/Negative Binomial. Here we think that there are two types of zeroes in the data.</p>
+<ul>
+<li>This is only appropriate to the extent that there are some observations that are truly ineligible from having a positive count– that have zero probability of having a count <span class="math inline">\(&gt;\)</span> 0.
+<ul>
+<li>For example, in the UCLA R tutorial linked to below, they study the number of fish a particular camping group caught at the park. Well some people might not have gone fishing! This would be a case where some of the zeroes may reflect a separate process (the decision to fish)</li>
+</ul></li>
+<li>However, even among those that decide to go fishing, some people may still catch zero fish. Just like in a typical Poisson or Negative Binomial process, it is still possible to have a 0 count.
+<ul>
+<li>Here, we just think there may be two processes explaining the zeroes, and only using a standard count model does not help explain that first process.</li>
+</ul></li>
+<li>We fit two models – a logistic regression model and a count model.</li>
+</ul>
+<p>These tutorials from UCLA <a href="https://stats.idre.ucla.edu/r/dae/zip/">here</a> and <a href="https://stats.idre.ucla.edu/r/dae/zinb/">here</a> describe how one would fit these models in R.</p>
+<p>I also recommend reading this blog post from <a href="https://statisticalhorizons.com/zero-inflated-models">Paul Allison</a> in what to consider when choosing between count models. He argues often it may make just as or even more sense to stick with the overdispersed poisson or negative binomial unless you have a good reason to believe that there are people with zero-probability of having a positive count.</p>
+<ul>
+<li>For those in IR, you might also be interested in this <a href="https://www.tandfonline.com/doi/abs/10.1080/13698249.2015.1059564">article</a> about the use of zero-inflated models for forecasting civil conflict.</li>
+<li>This <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3238139/">article</a> also provides an overview of different options for modeling count data.</li>
+</ul>
+
+
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Count data will always prevent the errors from being normality distributed, which can be problematic for estimates in small samples. In large samples, the uncertainty estimates will still approximate the correct values.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./09-NominalOutcomes.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Multinomial Outcomes</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

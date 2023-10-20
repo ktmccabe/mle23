@@ -284,7 +284,6 @@ ggsave("images/kerplot1.png", device="png", width=6, height=4)
 
 ![](images/kerplot1.png)
 
-
 ```{r, eval=FALSE}
 library(margins)
 marg.effect.execnom <- margins(fit2, variables="female", change=c(0, 1), vce= "bootstrap", category="mayor/gov ballot access")
@@ -329,7 +328,7 @@ Based on this analysis, women have a significantly lower probability of being no
 
 </details>
 
-## Week 7 Tutorial
+## Multinomial Model Tutorial
 
 For this exercise, we will use data from Amy Lerman, Meredith Sadin, and Samuel Trachtman's 2017 article in the *American Political Science Review*, "[Policy Uptake as Political Behavior: Evidence from the Affordable Care Act](https://www.cambridge.org/core/journals/american-political-science-review/article/abs/policy-uptake-as-political-behavior-evidence-from-the-affordable-care-act/98F8D71C0336627AE97A357D2F145C27)."
 
@@ -498,7 +497,6 @@ demmarket.p <- mean(1 / (1 + rowSums(exp(Xdem %*% B))))
 diffmarket.p <- repmarket.p - demmarket.p
 diffmarket.p 
 ```
-
 
 ```{r, eval=FALSE}
 ## Approach three

@@ -15,6 +15,7 @@ book:
     - 07-QuantitiesofInterest.qmd
     - 08-OrdinalandOutcomes.qmd
     - 09-NominalOutcomes.qmd
+    - 10-CountData.qmd
   page-navigation: true
   sidebar:
     style: docked
