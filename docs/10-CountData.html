@@ -288,7 +288,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="at">n=</span><span class="dv">30</span>, <span class="at">lambda =</span> <span class="dv">2</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 3 2 5 4 5 2 1 1 2 2 2 3 0 0 4 1 3 4 3 4 0 0 3 4 3 0 4 1 2 0</code></pre>
+<pre><code> [1] 0 3 2 2 1 1 2 3 3 1 5 2 1 4 3 2 4 1 0 2 3 4 1 3 0 2 2 4 2 3</code></pre>
 </div>
 </div>
 <p>A common way one might approach modeling data of this type is to use OLS to estimate a linear model. After all, the data seem quasi-continuous! Sometimes, this might be just fine, but let’s think about some situations where this could go awry.</p>
@@ -352,11 +352,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="at">n=</span><span class="dv">100000</span>, <span class="at">lambda =</span> <span class="dv">4</span>)</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4.00001</code></pre>
+<pre><code>[1] 4.0057</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4.02695</code></pre>
+<pre><code>[1] 4.014508</code></pre>
 </div>
 </div>
 <p>The pmf above describes the probability that <code>Y</code> takes a particular outcome.</p>
@@ -577,16 +577,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(marginaleffects)</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>avg.exp.counts.me <span class="ot">&lt;-</span> <span class="fu">avg_predictions</span>(fit,<span class="at">by=</span><span class="st">"divided"</span>,</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">newdata=</span> <span class="fu">datagridcf</span>(<span class="at">divided=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)))</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">newdata=</span> <span class="fu">datagridcf</span>(<span class="at">divided=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)), <span class="at">type=</span><span class="st">"response"</span>)</span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>avg.exp.counts.me</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
- divided Estimate Pr(&gt;|z|)   S 2.5 % 97.5 %
-       0      253   &lt;0.001 Inf   247    259
-       1      394   &lt;0.001 Inf   367    423
+ divided Estimate Std. Error    z Pr(&gt;|z|)     S 2.5 % 97.5 %
+       0      266       2.86 92.9   &lt;0.001   Inf   260    271
+       1      414      15.76 26.3   &lt;0.001 503.2   383    445
 
-Columns: divided, estimate, p.value, s.value, conf.low, conf.high 
-Type:  invlink(link) </code></pre>
+Columns: divided, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high 
+Type:  response </code></pre>
 </div>
 </div>
 <p>From Thomas Leeper</p>
@@ -607,7 +607,7 @@ Type:  invlink(link) </code></pre>
 <pre><code>[1] 148.3798</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(marginaleffects)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>avg.diff.me <span class="ot">&lt;-</span> <span class="fu">avg_comparisons</span>(fit, <span class="at">variables=</span><span class="fu">list</span>(<span class="at">divided=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)))</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>avg.diff.me <span class="ot">&lt;-</span> <span class="fu">avg_comparisons</span>(fit, <span class="at">variables=</span><span class="fu">list</span>(<span class="at">divided=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)), <span class="at">type=</span><span class="st">"response"</span>)</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>avg.diff.me</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -656,17 +656,19 @@ Type:  response </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Manual</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>yhatx0 <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">coef</span>(fit.biv)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(fit.biv)[<span class="dv">2</span>]<span class="sc">*</span><span class="dv">0</span>)</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>yhatx1 <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">coef</span>(fit.biv)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(fit.biv)[<span class="dv">2</span>]<span class="sc">*</span><span class="dv">1</span>)</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>yhatx1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(yhatx0) <span class="ot">&lt;-</span> <span class="st">"when divided=0"</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>yhatx1 <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">coef</span>(fit.biv)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(fit.biv)[<span class="dv">2</span>]<span class="sc">*</span><span class="dv">1</span>)</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(yhatx1) <span class="ot">&lt;-</span> <span class="st">"when divided=1"</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(yhatx0, yhatx1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>(Intercept) 
-   282.8333 </code></pre>
+<pre><code>when divided=0 when divided=1 
+      280.6471       282.8333 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiplicative interpretation </span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>yhatx0<span class="sc">*</span>(<span class="fu">exp</span>(<span class="fu">coef</span>(fit.biv)[<span class="st">"divided"</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>(Intercept) 
-   282.8333 </code></pre>
+<pre><code>when divided=0 
+      282.8333 </code></pre>
 </div>
 </div>
 </section>
@@ -1029,11 +1031,11 @@ Try on your own, then expand for the solution.
 </div>
 <div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="do">## marginal effects predictions</span></span>
 <span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>exp.eo.lm.me <span class="ot">&lt;-</span> <span class="fu">avg_predictions</span>(fit.lm,<span class="at">by=</span><span class="st">"divided"</span>,</span>
-<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">newdata=</span> <span class="fu">datagridcf</span>(<span class="at">divided=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)))</span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">newdata=</span> <span class="fu">datagridcf</span>(<span class="at">divided=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)), <span class="at">type=</span><span class="st">"response"</span>)</span>
 <span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>exp.eo.nb.me <span class="ot">&lt;-</span> <span class="fu">avg_predictions</span>(fit.nb, <span class="at">by=</span><span class="st">"divided"</span>,</span>
-<span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">newdata=</span> <span class="fu">datagridcf</span>(<span class="at">divided=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))) </span>
+<span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">newdata=</span> <span class="fu">datagridcf</span>(<span class="at">divided=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)), <span class="at">type=</span><span class="st">"response"</span>) </span>
 <span id="cb85-6"><a href="#cb85-6" aria-hidden="true" tabindex="-1"></a>exp.eo.qp.me <span class="ot">&lt;-</span> <span class="fu">avg_predictions</span>(fit.qp, <span class="at">by=</span><span class="st">"divided"</span>,</span>
-<span id="cb85-7"><a href="#cb85-7" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">newdata=</span> <span class="fu">datagridcf</span>(<span class="at">divided=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)))</span>
+<span id="cb85-7"><a href="#cb85-7" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">newdata=</span> <span class="fu">datagridcf</span>(<span class="at">divided=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)), <span class="at">type=</span><span class="st">"response"</span>)</span>
 <span id="cb85-8"><a href="#cb85-8" aria-hidden="true" tabindex="-1"></a>exp.eo.lm.me</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1047,22 +1049,22 @@ Type:  response </code></pre>
 <div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>exp.eo.nb.me</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
- divided Estimate Pr(&gt;|z|)   S 2.5 % 97.5 %
-       0     58.2   &lt;0.001 Inf  53.9   62.7
-       1     51.9   &lt;0.001 Inf  49.0   55.1
+ divided Estimate Std. Error    z Pr(&gt;|z|)     S 2.5 % 97.5 %
+       0     62.2       2.17 28.6   &lt;0.001 594.7  57.9   66.4
+       1     55.5       1.80 30.9   &lt;0.001 692.3  52.0   59.1
 
-Columns: divided, estimate, p.value, s.value, conf.low, conf.high 
-Type:  invlink(link) </code></pre>
+Columns: divided, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high 
+Type:  response </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>exp.eo.qp.me</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
- divided Estimate Pr(&gt;|z|)   S 2.5 % 97.5 %
-       0     58.3   &lt;0.001 Inf  53.4   63.7
-       1     51.9   &lt;0.001 Inf  48.4   55.6
+ divided Estimate Std. Error    z Pr(&gt;|z|)     S 2.5 % 97.5 %
+       0     62.3       2.57 24.3   &lt;0.001 429.7  57.3   67.3
+       1     55.4       2.12 26.2   &lt;0.001 499.5  51.3   59.6
 
-Columns: divided, estimate, p.value, s.value, conf.low, conf.high 
-Type:  invlink(link) </code></pre>
+Columns: divided, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high 
+Type:  response </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Prediction</span></span>
 <span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>exp.eo.lm <span class="ot">&lt;-</span> <span class="fu">prediction</span>(fit.lm, <span class="at">at =</span> <span class="fu">list</span>(<span class="at">divided=</span><span class="dv">1</span>))</span>
@@ -1272,7 +1274,8 @@ To filter the histogram by party like Fig. 1 in the paper, expand.
 <li>What would be a quantity of interest?</li>
 </ul></li>
 </ol>
-<p><img src="images/science1.png" class="img-fluid" style="width:70.0%"> Recall that for our primary count models, the regression equation is of the form:</p>
+<p><img src="images/science1.png" class="img-fluid" style="width:70.0%"></p>
+<p>Recall that for our primary count models, the regression equation is of the form:</p>
 <ul>
 <li><span class="math inline">\(\log \lambda_i = \eta_i = \mathbf x_i^T\beta\)</span></li>
 <li><span class="math inline">\(\lambda_i = exp(\mathbf x_i^T\beta)\)</span></li>
@@ -1621,7 +1624,7 @@ Number of Fisher Scoring iterations: 5</code></pre>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>Count data will always prevent the errors from being normality distributed, which can be problematic for estimates in small samples. In large samples, the uncertainty estimates will still approximate the correct values.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Count data will always prevent the errors from being normally distributed, which can be problematic for estimates in small samples. In large samples, the uncertainty estimates will still approximate the correct values.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

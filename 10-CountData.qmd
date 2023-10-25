@@ -42,7 +42,7 @@ A common way one might approach modeling data of this type is to use OLS to esti
     -   Particularly in small samples, OLS can struggle with heavily skewed data because the error variance is likely not going to be homogenous, the distribution of errors is not going to be normal[^10-countdata-1], and the linearity assumption could very well be suspect (violations of the usual assumptions).
     -   When continuous data are heavily right-skewed (e.g., sometimes income is), it is often recommended to $\log$ transform the $y$ variable before fitting the regression with a linear model. With count data, we can pursue other options. Moreover, if you have a lot of counts that are 0, this transformation is problematic anyway because $\log(0) = -Inf$. The transformation won't really work, as standard statistical software will often treat those values as missing.
 
-[^10-countdata-1]: Count data will always prevent the errors from being normality distributed, which can be problematic for estimates in small samples. In large samples, the uncertainty estimates will still approximate the correct values.
+[^10-countdata-1]: Count data will always prevent the errors from being normally distributed, which can be problematic for estimates in small samples. In large samples, the uncertainty estimates will still approximate the correct values.
 
 Below is an example of this type of skew, sparsity, and clustering toward 0.
 
@@ -307,15 +307,16 @@ avg.exp.count.1
 ```
 
 From `marginaleffects`
+
 ```{r}
 library(marginaleffects)
 avg.exp.counts.me <- avg_predictions(fit,by="divided",
-                                     newdata= datagridcf(divided=c(0,1)))
+                                     newdata= datagridcf(divided=c(0,1)), type="response")
 avg.exp.counts.me
 ```
 
-
 From Thomas Leeper
+
 ```{r}
 library(prediction)
 avg.exp.counts <- prediction(fit, at=list(divided=c(0, 1)), type = "response")
@@ -328,7 +329,7 @@ We can also find the differences in expected counts by subtracting the above est
 avg.exp.count.1 - avg.exp.count.0
 
 library(marginaleffects)
-avg.diff.me <- avg_comparisons(fit, variables=list(divided=c(0,1)))
+avg.diff.me <- avg_comparisons(fit, variables=list(divided=c(0,1)), type="response")
 avg.diff.me
 
 library(margins)
@@ -373,8 +374,11 @@ yhats
 
 ## Manual
 yhatx0 <- exp(coef(fit.biv)[1] + coef(fit.biv)[2]*0)
+names(yhatx0) <- "when divided=0"
 yhatx1 <- exp(coef(fit.biv)[1] + coef(fit.biv)[2]*1)
-yhatx1
+names(yhatx1) <- "when divided=1"
+c(yhatx0, yhatx1)
+
 
 ## Multiplicative interpretation 
 yhatx0*(exp(coef(fit.biv)["divided"]))
@@ -623,11 +627,11 @@ exp.eo.qp
 
 ## marginal effects predictions
 exp.eo.lm.me <- avg_predictions(fit.lm,by="divided",
-                                     newdata= datagridcf(divided=c(0,1)))
+                                     newdata= datagridcf(divided=c(0,1)), type="response")
 exp.eo.nb.me <- avg_predictions(fit.nb, by="divided",
-                                     newdata= datagridcf(divided=c(0,1))) 
+                                     newdata= datagridcf(divided=c(0,1)), type="response") 
 exp.eo.qp.me <- avg_predictions(fit.qp, by="divided",
-                                     newdata= datagridcf(divided=c(0,1)))
+                                     newdata= datagridcf(divided=c(0,1)), type="response")
 exp.eo.lm.me
 exp.eo.nb.me
 exp.eo.qp.me
@@ -796,7 +800,9 @@ fake %>%
     -   How should the coefficients be interpreted?
     -   What would be a quantity of interest?
 
-![](images/science1.png){width="70%"} Recall that for our primary count models, the regression equation is of the form:
+![](images/science1.png){width="70%"} 
+
+Recall that for our primary count models, the regression equation is of the form:
 
 -   $\log \lambda_i = \eta_i = \mathbf x_i^T\beta$
 -   $\lambda_i = exp(\mathbf x_i^T\beta)$
@@ -925,7 +931,6 @@ c(avg.fake.18, avg.fake.30, avg.fake.45, avg.fake.65)
 
 ```
 
-
 </details>
 
 ## Additional Considerations
@@ -1007,8 +1012,7 @@ A large number of zeroes is not necessarily something that the Poisson and Negat
 
 This video provides the overview.
 
-{{< video src="https://www.youtube.com/watch?v=sU-_rcLVTMw" >}}
-
+{{< video src=“https://www.youtube.com/watch?v=sU-_rcLVTMw” >}}
 
 ### Hurdle Models
 
