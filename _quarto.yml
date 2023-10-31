@@ -16,6 +16,7 @@ book:
     - 08-OrdinalandOutcomes.qmd
     - 09-NominalOutcomes.qmd
     - 10-CountData.qmd
+    - 11-SampleSelection.qmd
   page-navigation: true
   sidebar:
     style: docked
