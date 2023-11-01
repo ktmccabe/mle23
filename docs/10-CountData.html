@@ -295,7 +295,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="at">n=</span><span class="dv">30</span>, <span class="at">lambda =</span> <span class="dv">2</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 1 0 6 1 1 4 1 2 6 1 0 2 2 4 2 0 2 1 1 1 0 1 2 0 2 1 3 3 1 5</code></pre>
+<pre><code> [1] 2 1 1 1 3 3 3 1 2 1 1 1 2 1 1 1 2 1 2 3 4 0 6 0 2 1 4 2 2 2</code></pre>
 </div>
 </div>
 <p>A common way one might approach modeling data of this type is to use OLS to estimate a linear model. After all, the data seem quasi-continuous! Sometimes, this might be just fine, but let’s think about some situations where this could go awry.</p>
@@ -359,11 +359,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="at">n=</span><span class="dv">100000</span>, <span class="at">lambda =</span> <span class="dv">4</span>)</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4.01318</code></pre>
+<pre><code>[1] 3.99753</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4.016826</code></pre>
+<pre><code>[1] 3.989924</code></pre>
 </div>
 </div>
 <p>The pmf above describes the probability that <code>Y</code> takes a particular outcome.</p>
@@ -1491,6 +1491,7 @@ Type:  response </code></pre>
 <h3 data-number="10.8.1" class="anchored" data-anchor-id="offset"><span class="header-section-number">10.8.1</span> Offset</h3>
 <p>We said that counts are often considered rates per interval. Sometimes when we have a count, we know the greatest possible value that an observation could take or we think that will be influenced by a particular variable, which varies by observation. This is called the exposure. For example maybe we are looking at the number of traffic accidents per year per population size.</p>
 <p>In contrast, in the example from before, counts of executive orders were just measured as a span of one year.</p>
+<p>This <a href="https://econometricsense.blogspot.com/2017/03/count-models-with-offsets.html">blog</a> post has a set of questions to ask if you should include an offset.”(1) What is the relevant interval in time or space upon which our counts are based? (2) Is this interval different across our observations of counts?”</p>
 <p>We are going to use an example with an exposure from Gelman and Hill and the study of stop-and-frisk as a policy. This is example is based on the tutorial by Clay Ford <a href="http://www.clayford.net/statistics/poisson-regression-ch-6-of-gelman-and-hill/">here</a>.</p>
 <p>The data include an outcome desribing the number of <code>stops</code> in a given area. The regression model looks at the relationship between race/ethnicity <code>factor(eth)</code> and the number of stops made in a precinct.</p>
 <p>Run the few lines below to load and prepare the data according to Gelman and Hill’s instructions:</p>

@@ -941,6 +941,8 @@ We said that counts are often considered rates per interval. Sometimes when we h
 
 In contrast, in the example from before, counts of executive orders were just measured as a span of one year.
 
+This [blog](https://econometricsense.blogspot.com/2017/03/count-models-with-offsets.html) post has a set of questions to ask if you should include an offset."(1) What is the relevant interval in time or space upon which our counts are based? (2) Is this interval different across our observations of counts?"
+
 We are going to use an example with an exposure from Gelman and Hill and the study of stop-and-frisk as a policy. This is example is based on the tutorial by Clay Ford [here](http://www.clayford.net/statistics/poisson-regression-ch-6-of-gelman-and-hill/).
 
 The data include an outcome desribing the number of `stops` in a given area. The regression model looks at the relationship between race/ethnicity `factor(eth)` and the number of stops made in a precinct.
