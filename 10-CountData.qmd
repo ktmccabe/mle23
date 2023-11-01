@@ -800,7 +800,7 @@ fake %>%
     -   How should the coefficients be interpreted?
     -   What would be a quantity of interest?
 
-![](images/science1.png){width="70%"} 
+![](images/science1.png){width="70%"}
 
 Recall that for our primary count models, the regression equation is of the form:
 
@@ -877,7 +877,7 @@ Average Fake News Posts Shared by Age Group
 ```{r}
 library(marginaleffects)
 ## Note: levels(fake$age) is a shortcut for putting in the vector of all possible age levels. Only works for factor variables.
-count.byage.me <- avg_predictions(model1.qp, by="age", newdata=datagridcf(age = levels(fake$age)))
+count.byage.me <- avg_predictions(model1.qp, by="age", newdata=datagridcf(age = levels(fake$age)), type="response")
 count.byage.me
 
 ```
