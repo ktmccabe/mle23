@@ -6,11 +6,8 @@ Here is a brief video overview.
 
 {{< video src="https://www.youtube.com/watch?v=sY6H9LuamGI" >}}
 
-
-
-
 | Sample          | Y                                                                                           | X                                                                                                               |                                                                                                           Example |
-|:-----------------|------------------|--------------------|-----------------:|
+|:-----------------|------------------|-------------------|-----------------:|
 | Censored        | y is known exactly only if some criterion defined in terms of y is met.                     | x variables are observed for the entire sample, regardless of whether y is observed exactly                     | If income is measured exactly only if above the poverty line. All other incomes are reported at the poverty line. |
 | Sample Selected | y is observed only if a criteria defined in terms of some other random variable (Z) is met. | the determinants of whether Z =1 are observed for the entire sample, regardless of whether y is observed or not |                                                                        Survey data with item or unit non-response |
 | Truncated       | y is known only if some criterion defined in terms of y is met                              | x variables are observed only if y is observed                                                                  |                                                                                  Donations to political campaigns |
@@ -46,8 +43,6 @@ Here are a few thought exercises to underscore the potential issues with common 
 The technical details, followed by implementation.
 
 {{< video src="https://www.youtube.com/watch?v=NRTELwU4EEc" >}}
-
-
 
 Selection equation- into grad school sample?
 

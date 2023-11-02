@@ -1,0 +1,2462 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>MLE 2023 - 12&nbsp; Panel and Hierarchical Data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./11-SampleSelection.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<link href="site_libs/vembedr-0.1.5/css/vembedr.css" rel="stylesheet">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./12-PanelData.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Panel and Hierarchical Data</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">MLE 2023</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Maxmimum Likelihood Fall 2023</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-ROverview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R Overview</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-TheMATH.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Math</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-ReviewofOLS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Review of OLS</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-IntrotoMaximumLikelihood.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to MLE</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-BinaryOutcomes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Binary Dependent Variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-QuantitiesofInterest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Quantities of Interest</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-OrdinalandOutcomes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Ordinal Outcomes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-NominalOutcomes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Multinomial Outcomes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-CountData.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Count data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-SampleSelection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Sample Selection Models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-PanelData.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Panel and Hierarchical Data</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Section Contents</h2>
+   
+  <ul>
+  <li><a href="#motivating-data-groupiness" id="toc-motivating-data-groupiness" class="nav-link active" data-scroll-target="#motivating-data-groupiness"><span class="header-section-number">12.1</span> Motivating Data Groupiness</a></li>
+  <li><a href="#panel-and-hierarchical-data" id="toc-panel-and-hierarchical-data" class="nav-link" data-scroll-target="#panel-and-hierarchical-data"><span class="header-section-number">12.2</span> Panel and Hierarchical Data</a></li>
+  <li><a href="#fixed-effects" id="toc-fixed-effects" class="nav-link" data-scroll-target="#fixed-effects"><span class="header-section-number">12.3</span> Fixed Effects</a>
+  <ul>
+  <li><a href="#within-estimator" id="toc-within-estimator" class="nav-link" data-scroll-target="#within-estimator"><span class="header-section-number">12.3.1</span> Within-Estimator</a></li>
+  <li><a href="#least-squares-dummy-variable-regression" id="toc-least-squares-dummy-variable-regression" class="nav-link" data-scroll-target="#least-squares-dummy-variable-regression"><span class="header-section-number">12.3.2</span> Least Squares Dummy Variable Regression</a></li>
+  <li><a href="#fixed-effects-implementation-in-r" id="toc-fixed-effects-implementation-in-r" class="nav-link" data-scroll-target="#fixed-effects-implementation-in-r"><span class="header-section-number">12.3.3</span> Fixed Effects Implementation in R</a></li>
+  <li><a href="#standard-errors-with-fixed-effects" id="toc-standard-errors-with-fixed-effects" class="nav-link" data-scroll-target="#standard-errors-with-fixed-effects"><span class="header-section-number">12.3.4</span> Standard errors with fixed effects</a></li>
+  </ul></li>
+  <li><a href="#additional-considerations-for-fixed-effects" id="toc-additional-considerations-for-fixed-effects" class="nav-link" data-scroll-target="#additional-considerations-for-fixed-effects"><span class="header-section-number">12.4</span> Additional considerations for fixed effects</a>
+  <ul>
+  <li><a href="#binary-dependent-variables" id="toc-binary-dependent-variables" class="nav-link" data-scroll-target="#binary-dependent-variables"><span class="header-section-number">12.4.1</span> Binary dependent variables</a></li>
+  <li><a href="#two-way-fixed-effects" id="toc-two-way-fixed-effects" class="nav-link" data-scroll-target="#two-way-fixed-effects"><span class="header-section-number">12.4.2</span> Two-way fixed effects</a></li>
+  <li><a href="#first-differences" id="toc-first-differences" class="nav-link" data-scroll-target="#first-differences"><span class="header-section-number">12.4.3</span> First Differences</a></li>
+  <li><a href="#additional-models-in-r" id="toc-additional-models-in-r" class="nav-link" data-scroll-target="#additional-models-in-r"><span class="header-section-number">12.4.4</span> Additional Models in R</a></li>
+  </ul></li>
+  <li><a href="#random-effects" id="toc-random-effects" class="nav-link" data-scroll-target="#random-effects"><span class="header-section-number">12.5</span> Random Effects</a>
+  <ul>
+  <li><a href="#random-effects-models" id="toc-random-effects-models" class="nav-link" data-scroll-target="#random-effects-models"><span class="header-section-number">12.5.1</span> Random effects models</a></li>
+  <li><a href="#random-effects-implementation-in-r" id="toc-random-effects-implementation-in-r" class="nav-link" data-scroll-target="#random-effects-implementation-in-r"><span class="header-section-number">12.5.2</span> Random Effects Implementation in R</a></li>
+  <li><a href="#using-lme4-for-random-effects" id="toc-using-lme4-for-random-effects" class="nav-link" data-scroll-target="#using-lme4-for-random-effects"><span class="header-section-number">12.5.3</span> Using lme4 for random effects</a></li>
+  <li><a href="#random-effects-extensions" id="toc-random-effects-extensions" class="nav-link" data-scroll-target="#random-effects-extensions"><span class="header-section-number">12.5.4</span> Random Effects Extensions</a></li>
+  <li><a href="#extracting-lmer-output" id="toc-extracting-lmer-output" class="nav-link" data-scroll-target="#extracting-lmer-output"><span class="header-section-number">12.5.5</span> Extracting lmer output</a></li>
+  <li><a href="#generating-predicted-values-for-each-unit" id="toc-generating-predicted-values-for-each-unit" class="nav-link" data-scroll-target="#generating-predicted-values-for-each-unit"><span class="header-section-number">12.5.6</span> Generating predicted values for each unit</a></li>
+  <li><a href="#visualizing-random-effects" id="toc-visualizing-random-effects" class="nav-link" data-scroll-target="#visualizing-random-effects"><span class="header-section-number">12.5.7</span> Visualizing Random Effects</a></li>
+  <li><a href="#generalized-lmer" id="toc-generalized-lmer" class="nav-link" data-scroll-target="#generalized-lmer"><span class="header-section-number">12.5.8</span> Generalized LMER</a></li>
+  </ul></li>
+  <li><a href="#summing-up" id="toc-summing-up" class="nav-link" data-scroll-target="#summing-up"><span class="header-section-number">12.6</span> Summing Up</a></li>
+  <li><a href="#the-final-problem-set" id="toc-the-final-problem-set" class="nav-link" data-scroll-target="#the-final-problem-set"><span class="header-section-number">12.7</span> The Final Problem Set</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="hier" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Panel and Hierarchical Data</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>This section will provide an overview of considerations and basic modeling strategies for data that include repeated observations across units or over time. This may relate to panel data, time series cross-sectional data, and hierarchical data.</p>
+<p>To motivate why we might use different models in these cases, please watch this video from Ben Lambert (like and/or subscribe to support him).</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/aYx88zmTM0U" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>These are some supplemental resources</p>
+<ul>
+<li>Vignettes describing use of <code>plm</code> package <a href="https://mran.microsoft.com/snapshot/2018-07-03/web/packages/plm/vignettes/plm.pdf">here</a></li>
+<li>Oscar Torres-Reyna’s <a href="https://www.princeton.edu/~otorres/Panel101R.pdf">introduction</a> to fixed/random effects</li>
+<li>Gelman and Hill, Data Analysis Using Regression and Multilevel/Hierarchical Models, Part 2A, Cambridge University Press.</li>
+<li>Jeffrey M. Wooldridge. 2010. Econometric Analysis of Cross-Sectional and Panel Data. MIT Press. Chapter 10.</li>
+<li>Related papers:
+<ul>
+<li>Nathaniel Beck. “TIME-SERIES–CROSS-SECTION DATA: What Have We Learned in the Past Few Years?” <a href="https://www.annualreviews.org/doi/abs/10.1146/annurev.polisci.4.1.271">Annual Review of Political Science. 2001.</a></li>
+<li>Donald P. Green, Soo Yeon Kim, and David H. Yoon. “Dirty Pool.” International Organization 55, 2, Spring 2001, 441-468.</li>
+<li>Nathaniel Beck and Jonathan Katz. “Throwing Out the Baby with the Bath Water: A comment on Green, Kim, and Yoon.” International Organization 55, 2, Spring, 2001, pp.&nbsp;487-495.</li>
+</ul></li>
+</ul>
+<section id="motivating-data-groupiness" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="motivating-data-groupiness"><span class="header-section-number">12.1</span> Motivating Data Groupiness</h2>
+<p>In this section, we are going to use data from the CDC on national and state-level COVID hospitalizations and positive case increases between July 2020- end September 2020.</p>
+<p>Let’s load the national and state data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rio)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>national <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"https://github.com/ktmccabe/teachingdata/blob/main/national.RData?raw=true"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>states <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"https://github.com/ktmccabe/teachingdata/blob/main/states.RData?raw=true"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(national)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          date hospitalizedCurrently positiveIncrease
+159 2020-09-30                 31021            44909
+160 2020-09-29                 30601            36766
+161 2020-09-28                 29696            35376
+162 2020-09-27                 29579            34990
+163 2020-09-26                 29670            47268
+164 2020-09-25                 29888            55237</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(states)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           date hospitalizedCurrently positiveIncrease state
+8849 2020-09-30                    53              104    AK
+8850 2020-09-30                   776             1147    AL
+8851 2020-09-30                   484              942    AR
+8853 2020-09-30                   560              323    AZ
+8854 2020-09-30                  3267             3200    CA
+8855 2020-09-30                   264              511    CO</code></pre>
+</div>
+</div>
+<p>During this time period, the national level of hospitalizations was declining.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(national, <span class="fu">aes</span>(<span class="at">x=</span>date, <span class="at">y=</span>hospitalizedCurrently))<span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="12-PanelData_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>However, the national data represents aggregated state-level data. It is possible that these trends might look different if we looked within each state.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(states, <span class="fu">aes</span>(<span class="at">x=</span>date, <span class="at">y=</span>hospitalizedCurrently))<span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>state, <span class="at">scales =</span> <span class="st">"free"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="12-PanelData_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="1440"></p>
+</div>
+</div>
+<p>When we have data that are grouped in some way, it is important to consider how group-specific factors may influence the results.</p>
+<p>Let’s look at the relationship between positive increases in cases and hospitalizations using the state-level data. Note, we are not epidemiologists here, so this is in no way exactly how you would want to model this in practice. We will leave that to the experts. Nonetheless, it will give us some visualizations. The regression line below is from the following regression, which pools across states and dates:</p>
+<p><span class="math inline">\(hospitalizedCurrently_{it} = \alpha + positiveIncrease_{it} + \epsilon_{it}\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(states, <span class="fu">aes</span>(<span class="at">x=</span>positiveIncrease, <span class="at">y=</span>hospitalizedCurrently, <span class="at">color=</span>state))<span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">y=</span>hospitalizedCurrently),<span class="at">method=</span><span class="st">"lm"</span>, <span class="at">se=</span>F, <span class="at">color=</span><span class="st">"black"</span>)<span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">15000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="12-PanelData_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>What issues do you have with that type of analysis?</p>
+<ul>
+<li>How could we improve it?</li>
+</ul>
+<p>Let’s look at the variation by state.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(states, <span class="fu">aes</span>(<span class="at">x=</span>positiveIncrease, <span class="at">y=</span>hospitalizedCurrently, <span class="at">color=</span>state))<span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>, <span class="at">se=</span>F)<span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>state, <span class="at">scales =</span> <span class="st">"free"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="12-PanelData_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="1440"></p>
+</div>
+</div>
+<p>One thing we could do to account for the variation in cases, is to add controls for state. This is called adding “fixed effects.” It allows the intercept for each state to be different in regression, but the slopes are considered the same.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(hospitalizedCurrently <span class="sc">~</span> positiveIncrease <span class="sc">+</span> <span class="fu">as.factor</span>(state), <span class="at">data=</span>states)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fit.pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(states, <span class="fu">aes</span>(<span class="at">x=</span>positiveIncrease, <span class="at">y=</span>hospitalizedCurrently, <span class="at">color=</span>state))<span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">y=</span>hospitalizedCurrently),<span class="at">method=</span><span class="st">"lm"</span>, <span class="at">se=</span>F, <span class="at">color=</span><span class="st">"black"</span>)<span class="sc">+</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span>fit.pred))<span class="sc">+</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">15000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="12-PanelData_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="1440"></p>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(states, <span class="fu">aes</span>(<span class="at">x=</span>positiveIncrease, <span class="at">y=</span>hospitalizedCurrently, <span class="at">color=</span>state))<span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span>fit.pred))<span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>state, <span class="at">scales =</span> <span class="st">"free"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="12-PanelData_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid" width="1440"></p>
+</div>
+</div>
+<p>We could also add interactions with state, which will allow the slopes to vary.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(hospitalizedCurrently <span class="sc">~</span> positiveIncrease<span class="sc">*</span><span class="fu">as.factor</span>(state), <span class="at">data=</span>states)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>fit.pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(states, <span class="fu">aes</span>(<span class="at">x=</span>positiveIncrease, <span class="at">y=</span>hospitalizedCurrently, <span class="at">color=</span>state))<span class="sc">+</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span>fit.pred))<span class="sc">+</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>state, <span class="at">scales =</span> <span class="st">"free"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="12-PanelData_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="1440"></p>
+</div>
+</div>
+<p>Any downsides to adding interactions?</p>
+</section>
+<section id="panel-and-hierarchical-data" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="panel-and-hierarchical-data"><span class="header-section-number">12.2</span> Panel and Hierarchical Data</h2>
+<p><span class="math inline">\(Y_i, X_i\)</span> now become <span class="math inline">\(Y_{it}, X_{it}\)</span> where <span class="math inline">\(i\)</span> is a unique indicator for the unit and <span class="math inline">\(t\)</span> is a unique indicator for time (or question, task, etc., other repeated measurement)</p>
+<ul>
+<li>For example, perhaps we observe a set of <span class="math inline">\(N\)</span> European countries, each indexed by <span class="math inline">\(i\)</span> over <span class="math inline">\(10=T\)</span> years, each indexed by <span class="math inline">\(t\)</span>.</li>
+<li>The dataset can be represented in “wide” or “long/stacked” format (see section 2 of the course notes)</li>
+<li>Can get more complicated. Perhaps we have a Member of Parliament in a year in a country: <span class="math inline">\(Y_{itj}, X_{itj}\)</span>. Now we have three indices for our variables.</li>
+<li>We also might not have variation over time, but instead, multiple levels of units– perhaps students (<span class="math inline">\(i\)</span>) nested in schools (<span class="math inline">\(j\)</span>).</li>
+</ul>
+<p><strong><em>Why do we like this type of data in social science?</em></strong></p>
+<ul>
+<li>We think some <span class="math inline">\(Z\)</span> variable is related to some <span class="math inline">\(Y\)</span> outcome.</li>
+<li>So we test this with data by comparing data that vary on <span class="math inline">\(Z\)</span> to see if they vary systematically on <span class="math inline">\(Y\)</span>.</li>
+<li>Our goal is to isolate <span class="math inline">\(Z\)</span>. We want to “control” on everything that differs between our units that could affect <span class="math inline">\(Y\)</span> except for <span class="math inline">\(Z\)</span>, which varies.</li>
+<li>Problem: this can feel almost impossible in cross-sectional data
+<ul>
+<li>Example: Bob and Suzy probably differ in a million ways, but we can only measure and account for so many covariates</li>
+<li>Example: France and Germany probably differ in a million ways, but we can only measure and account for so many covariates</li>
+<li>This makes comparing Bob vs.&nbsp;Suzy and France vs.&nbsp;Germany for our variation is a somewhat suspect way to show how <span class="math inline">\(Z\)</span> relates to <span class="math inline">\(Y\)</span> if we cannot control on all possible relevant factors.</li>
+</ul></li>
+</ul>
+<p>Possible solution: enter repeated observations</p>
+<ul>
+<li>Idea: Bob in wave 1 is probably pretty similar to Bob at wave 2. This might be a more sensible comparison than Bob vs.&nbsp;Suzy.</li>
+<li>Idea: France in 1968 vs.&nbsp;France 1970 is probably a more sensible comparison than France vs.&nbsp;Germany
+<ul>
+<li>So, perhaps we incorporate Bob vs.&nbsp;Bob and Suzy vs.&nbsp;Suzy; France vs.&nbsp;France and Germany vs.&nbsp;Germany comparisons instead of just making between-unit comparisons.</li>
+</ul></li>
+<li>Issue: need to learn new methods to account for our grouped/repeated data structure.</li>
+</ul>
+<p>Why?</p>
+<p><strong><em>Recall OLS</em></strong></p>
+<span class="math display">\[\begin{align*}
+Y_i =  \beta_0 + \beta_1 x_i + \epsilon_i
+\end{align*}\]</span>
+<p>Assumptions:</p>
+<ul>
+<li><span class="math inline">\(\mathbf E(\epsilon_i) = 0\)</span>;</li>
+<li>Errors independent of regressors: Cov<span class="math inline">\((\epsilon_i, X_i) = 0\)</span>;</li>
+<li>Errors of different observations not correlated: Cov<span class="math inline">\((\epsilon_i, \epsilon_j) = 0\)</span></li>
+<li>Constant error variance <span class="math inline">\(V(\epsilon_i | X) = \sigma^2\)</span>.</li>
+</ul>
+<p>When we have grouped/longitudinal data, many of these assumptions are likely violated. For elaboration, see the video on the previous page that discusses how unobserved factors related to particular geographical areas might influence the explanatory variable crime rate <a href="https://www.youtube.com/watch?v=aYx88zmTM0U">video</a>.</p>
+<p>Let’s take a look at why.</p>
+<p>What if we have <span class="math display">\[\begin{align*}
+Y_{it} =  \beta_0 + \beta_1 x_{it} + \epsilon_{it}
+\end{align*}\]</span></p>
+<p>We could still treat this as OLS if we believe the assumptions hold. But often, we are concerned that our model actually looks like this:</p>
+<span class="math display">\[\begin{align*}
+Y_{it} =  \beta_0 + \beta_1x_{it}+ (c_i + \epsilon_{it}).
+\end{align*}\]</span>
+<p>We think there may be <span class="math inline">\(c_i\)</span> unobserved characteristics about our units <span class="math inline">\(i\)</span> that are related to our explanators. If unaccounted for and left as part of the error term, this would cause bias in our coefficients.</p>
+<ul>
+<li>Note: in OLS, we assume Cov<span class="math inline">\((c_i + \epsilon_{it}, x_{it}) = 0\)</span>. Here, we believe there may be unmeasured factors that induce covariance between <span class="math inline">\(c_i\)</span> and <span class="math inline">\(x_{it}\)</span>.</li>
+</ul>
+<p>One Solution: fixed effects: removes time-constant unobserved characteristics about our units.</p>
+</section>
+<section id="fixed-effects" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="fixed-effects"><span class="header-section-number">12.3</span> Fixed Effects</h2>
+<p>In fixed effects, we allow the intercept to be different across our <span class="math inline">\(N\)</span> groups (e.g., countries), where these terms are going to account for time-invariant (time constant) characteristics of these areas.</p>
+<span class="math display">\[\begin{align*}
+Y_{it} &amp;=  \alpha_i + \beta_1x_{it} + \epsilon_{it}
+\end{align*}\]</span>
+<p>where <span class="math inline">\(\alpha_{i}\)</span> absorbs all unobserved time-invariant characteristics for unit <span class="math inline">\(i\)</span> (e.g., features of geography, culture, etc.)</p>
+<ul>
+<li>This is huge! It’s going to help us get around the assumption we just talked about. The idea is that when we are comparing observations within a particular unit (e.g., within France), all of those time-invariant characteristics specific to France are held constant.</li>
+</ul>
+<p>Below we discuss how to estimate fixed effects models. It is not the solution to everything. Keep these in mind.</p>
+<ul>
+<li>Still assume homoskedastic errors <span class="math inline">\(\rightarrow\)</span> may want to adjust the SE’s.</li>
+<li>Cannot model “level-2” factors. Problematic if that’s what you’re interested in! (E.g., if you have time-invariant country-level covariates). Can only do this through interactions.
+<ul>
+<li>For example, suppose we have a measure of a country’s culture (<span class="math inline">\(culture_{i}\)</span>), that does not vary over time. We could not include that in our regression model because the model removes all time-invariant characteristics. In contrast, if something like country GDP changes a lot over time (<span class="math inline">\(GDP_{it}\)</span>), it could still and should be accounted for.</li>
+</ul></li>
+<li>Only works if you have a decent number of observations</li>
+<li>Leverages within-group variation on your outcomes. Need to have this variation for it to make sense!</li>
+</ul>
+<p>There are two general approaches for fitting fixed effects estimators: the within-estimator and LSDV.</p>
+<section id="within-estimator" class="level3" data-number="12.3.1">
+<h3 data-number="12.3.1" class="anchored" data-anchor-id="within-estimator"><span class="header-section-number">12.3.1</span> Within-Estimator</h3>
+<p>Time Demeaning. First calculate averages of the <span class="math inline">\(it\)</span> terms.</p>
+<ul>
+<li>Note, the mean of <span class="math inline">\(\alpha_i\)</span> is just <span class="math inline">\(\alpha_i\)</span> because it does not vary over time. <span class="math inline">\(\alpha_i\)</span> because: <span class="math inline">\(\frac{1}{T} \sum_{t=1}^T \alpha_i = \frac{1}{T}*T*\alpha_i = \alpha_i\)</span>.</li>
+</ul>
+<span class="math display">\[\begin{align*}
+\bar y_i &amp;= \alpha_i +  \beta\bar x_i  + \bar \epsilon_i\\
+\end{align*}\]</span>
+<p>Subtracting we get: <span class="math display">\[\begin{align*}
+Y_{it} - \bar y_i &amp;= (\alpha_i -\alpha_i) +  \beta(x_{it}- \bar x_i) + (\epsilon_{it}- \bar \epsilon_i)\\
+\widetilde{Y_{it}} &amp;= \beta\widetilde{x_{it}} + \widetilde{\epsilon_{it}}
+\end{align*}\]</span> <span class="math inline">\(\beta\)</span> is estimated just from deviations of the units from their means. Removes anything that is time-constant.</p>
+<p>This <a href="https://www.youtube.com/watch?v=sFvV9b1cGFc&amp;ab_channel=BenLambert">video</a> from Ben Lambert goes through the demeaning process.</p>
+</section>
+<section id="least-squares-dummy-variable-regression" class="level3" data-number="12.3.2">
+<h3 data-number="12.3.2" class="anchored" data-anchor-id="least-squares-dummy-variable-regression"><span class="header-section-number">12.3.2</span> Least Squares Dummy Variable Regression</h3>
+<p>We can estimate the equivalent model by including dummy variables in our regression. This is sometimes why you have seen authors add dummies for region and call them “fixed effects.”</p>
+<p>OLS with dummy variables for each unit (e.g., countries). Start with “stacked” data where: <span class="math inline">\(Y = X\beta + U\delta + \epsilon\)</span>.</p>
+<ul>
+<li><span class="math inline">\(Y\)</span> is <span class="math inline">\(NT \times 1\)</span> outcome vector where <span class="math inline">\(N\)</span> is number of <span class="math inline">\(i\)</span> units and <span class="math inline">\(T\)</span> is number of time points <span class="math inline">\(t\)</span>.</li>
+<li><span class="math inline">\(X\)</span> is <span class="math inline">\(NT \times k\)</span> matrix where <span class="math inline">\(k\)</span> is the number of covariates plus general intercept</li>
+<li><span class="math inline">\(U\)</span> is a set of <span class="math inline">\(m\)</span> dummy variables (e.g., country dummies), leaving one as reference</li>
+</ul>
+<p>By accounting for these groups in our regression, we are now estimating how the covariates in <span class="math inline">\(\mathbf x\)</span> affect our outcomes, holding constant the group– leveraging within-group variation.</p>
+</section>
+<section id="fixed-effects-implementation-in-r" class="level3" data-number="12.3.3">
+<h3 data-number="12.3.3" class="anchored" data-anchor-id="fixed-effects-implementation-in-r"><span class="header-section-number">12.3.3</span> Fixed Effects Implementation in R</h3>
+<p>The <code>plm</code> package allows us to indicate that our data are panel in nature and fit the within-estimator.</p>
+<p>Run <code>install.packages("plm")</code> and load Grunfeld. 200 observations at the firm-year level. Here, we can think of firms as indexed by <span class="math inline">\(i\)</span> and years indexed by <span class="math inline">\(t\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plm)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Grunfeld)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Grunfeld)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  firm year   inv  value capital
+1    1 1935 317.6 3078.5     2.8
+2    1 1936 391.8 4661.7    52.6
+3    1 1937 410.6 5387.1   156.9
+4    1 1938 257.7 2792.2   209.2
+5    1 1939 330.8 4313.2   203.4
+6    1 1940 461.2 4643.9   207.2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Unique N- firms</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(Grunfeld<span class="sc">$</span>firm))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Unique T- years</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(Grunfeld<span class="sc">$</span>year))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20</code></pre>
+</div>
+</div>
+<p>For more detail on<code>plm</code>, see <a href="https://cran.r-project.org/web/packages/plm/vignettes/plm.pdf">documentation</a></p>
+<p>These data are used to study the effects of <code>capital</code> (stock of plant and equipment) on gross investment <code>inv</code>.</p>
+<p>Let’s first run a standard OLS model, which we will call the “pooled” model because it pools observations across firms and years without explicitly accounting for them in the model. We can use the standard <code>lm</code> model to do this or the <code>plm</code> function from the <code>plm</code> package by indicating <code>model="pooling"</code>. Both give equivalent results.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Pooled model</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>fit.pool <span class="ot">&lt;-</span> <span class="fu">plm</span>(inv<span class="sc">~</span> capital, <span class="at">data =</span> Grunfeld, <span class="at">model =</span> <span class="st">"pooling"</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit.pool)[<span class="st">"capital"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  capital 
+0.4772241 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Equivalent</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>fit.ols  <span class="ot">&lt;-</span> <span class="fu">lm</span>(inv<span class="sc">~</span> capital, <span class="at">data =</span> Grunfeld)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit.ols)[<span class="st">"capital"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  capital 
+0.4772241 </code></pre>
+</div>
+</div>
+<p>We could visualize this model as follows by plotting the regression line. This provides a good benchmark against which we can see how fixed effects change the results. Note that the line ignores which firm that the data are coming from, using between-firm variation to help fit the regression slope.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Grunfeld, <span class="fu">aes</span>(<span class="at">x=</span>capital, <span class="at">y=</span>inv, <span class="at">color=</span><span class="fu">as.factor</span>(firm)))<span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">y=</span>inv), <span class="at">se=</span>F, <span class="at">method=</span><span class="st">"lm"</span>, <span class="at">color=</span><span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="12-PanelData_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Let’s now fit our fixed effects model. Here, we have to add an argument that specifies which variables are indexed by <span class="math inline">\(i\)</span> and <span class="math inline">\(t\)</span> so that <code>plm</code> knows how to incorporate the individual firm units. We will first fit the <code>within</code> model using the <code>plm</code> package. We can then use <code>lm</code> by explicitly adding dummy variables. You will note that the individual dummy variable coefficients are only included in the output of <code>lm</code> and not <code>plm</code>. When you have a large number of units, it might be more computationally efficient and cleaner to use <code>plm.</code> However, both give us equivalent results for our coefficients of interest.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Within model with firm fixed effects</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>fit.within <span class="ot">&lt;-</span> <span class="fu">plm</span>(inv<span class="sc">~</span>capital, </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> Grunfeld, </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">model =</span> <span class="st">"within"</span>, </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">index =</span> <span class="fu">c</span>(<span class="st">"firm"</span>, <span class="st">"year"</span>))</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit.within)[<span class="st">"capital"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  capital 
+0.3707496 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="do">## numerical equivalent</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>fit.lsdv  <span class="ot">&lt;-</span> <span class="fu">lm</span>(inv<span class="sc">~</span>  capital <span class="sc">+</span> <span class="fu">as.factor</span>(firm), </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> Grunfeld)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit.lsdv)[<span class="st">"capital"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  capital 
+0.3707496 </code></pre>
+</div>
+</div>
+<p>Recall, what fixed effects does is create a different intercept by firm. We can visualize this by generating predicted gross investments for each observation in our data.</p>
+<p>Fixed effects leverages within-firm variation to fit the regression model. That is, holding constant the firm, how does capital influence investment, on average?</p>
+<p>Here, we see that when the variation is coming from within-firm, the estimated slope for the <code>capital</code> variable is slightly more shallow than when the pooled model used data across different firms to estimate the slope. Sometimes, the difference between the pooled OLS and fixed effects estimation can be so severe as to reverse the sign of the slopes. This is the idea of Simpson’s paradox discussed <a href="https://medium.com/pew-research-center-decoded/how-to-break-regression-f48230f0ca68">here</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>fit.lsdvpred <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit.lsdv)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Grunfeld, <span class="fu">aes</span>(<span class="at">x=</span>capital, <span class="at">y=</span>inv, <span class="at">color=</span><span class="fu">factor</span>(firm)))<span class="sc">+</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">y=</span>inv), <span class="at">se=</span>F, <span class="at">method=</span><span class="st">"lm"</span>, <span class="at">color=</span><span class="st">"black"</span>)<span class="sc">+</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span>fit.lsdvpred))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="12-PanelData_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><a href="https://www.cambridge.org/core/journals/international-organization/article/abs/dirty-pool/F58CBC01FE96E2BADFDB9EFE2A943C73">Green et al.&nbsp;(2003)</a> also discuss the dangers of pooling data in certain cases in the article ``Dirty Pool.” Below are three examples. In the first two, pooling vs.&nbsp;fixed effects will not make much of a difference, but it will in the third.</p>
+<p>As the authors describe, “The plot in Figure 1 depicts a positive relationship between X and Y where N = 2 and T = 50. Because both dyads share a common intercept, pooling creates no estimation problems. One obtains similar regression estimates regardless of whether one controls for fixed effects by introducing a dummy variable for each dyad. A pooled regression is preferable in this instance because it saves a degree of freedom. In Figure 2 we encounter another instance in which dyads have different intercepts, but there is no correlation between the intercepts and X. The average value of the independent variable is the same in each dyad. Again, pooled regression and regression with fixed effects give estimates with the same expected value. Figure 3 illustrates a situation in which pooled regression goes awry. Here, the causal relationship between X and Y is negative; in each dyad higher values of X coincide with lower values of Y. Yet when the dyads are pooled together, we obtain a spurious positive relationship. Because the dyad with higher values of X also has a higher intercept, ignoring fixed effects biases the regression line in the positive direction. Controlling for fixed effects, we correctly ascertain the true negative relationship between X and Y” (443-445).</p>
+<p><img src="images/dirtypool1.png" class="img-fluid" style="width:40.0%"> <img src="images/dirtypool2.png" class="img-fluid" style="width:40.0%"></p>
+</section>
+<section id="standard-errors-with-fixed-effects" class="level3" data-number="12.3.4">
+<h3 data-number="12.3.4" class="anchored" data-anchor-id="standard-errors-with-fixed-effects"><span class="header-section-number">12.3.4</span> Standard errors with fixed effects</h3>
+<p>Even if we use fixed effects, we may want to adjust standard errors. Fixed effects assumes homoskedasticity (constant error variance). We might instead think that the random error disturbances are correlated in some way or vary across time or units. For example, we might fear we have serial correlation (autocorrelation), where errors are correlated over time. Below are a few options.</p>
+<p><em>Clustered standard errors</em>. We came across this before in our section on ordinal probit models and the Paluck and Green paper. This blog post discusses why you may still want to cluster standard errors even if you have added <a href="https://stats.stackexchange.com/questions/185378/when-to-use-fixed-effects-vs-using-cluster-ses">fixed effects</a>.</p>
+<p><em>Note: the functions below are designed to work with the <code>plm</code> package and models. For models fit through other functions, you may need to use different functions to make adjustments. See section 8.5.1. For linear models <code>lm_robust</code> from the <code>estimatr</code> package works well. For other models, see the alternative applications in that section.</em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Cluster robust standard errors to match stata (c only matters if G is small). Can omit if do not want to adjust for degrees of freedom.</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Generally want G to be 30 or 40</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>G <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(Grunfeld<span class="sc">$</span>firm))</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> G<span class="sc">/</span>(G <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">diag</span>(c<span class="sc">*</span><span class="fu">vcovHC</span>(fit.within,<span class="at">type =</span> <span class="st">"HC1"</span>, <span class="at">cluster =</span> <span class="st">"group"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   capital 
+0.06510863 </code></pre>
+</div>
+</div>
+<p><em>Panel corrected SE</em>: Beck and Katz have also developed standard errors for panel data. Explained in the documentation, observations may be clustered either by “group” to account for timewise heteroskedasticity and serial correlation or by “time” to account for cross-sectional heteroskedasticity and correlation. This is sensitive to <span class="math inline">\(N\)</span> and <span class="math inline">\(T\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Alternative: Beck and Katz panel corrected standard errors</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">diag</span>(<span class="fu">vcovBK</span>(fit.within, <span class="at">cluster =</span> <span class="st">"group"</span>))) <span class="co"># also can change type</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   capital 
+0.04260805 </code></pre>
+</div>
+</div>
+<p>Alternative: Adjusted for heteroskedasticity and/or serial correlation.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">diag</span>(<span class="fu">vcovHC</span>(fit.within, <span class="at">type =</span> <span class="st">"HC1"</span>, <span class="at">method =</span> <span class="st">"arellano"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   capital 
+0.06176747 </code></pre>
+</div>
+</div>
+<p>For more information, see pg. 24 of this <a href="https://www.princeton.edu/~otorres/Panel101R.pdf">resource</a></p>
+</section>
+</section>
+<section id="additional-considerations-for-fixed-effects" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="additional-considerations-for-fixed-effects"><span class="header-section-number">12.4</span> Additional considerations for fixed effects</h2>
+<section id="binary-dependent-variables" class="level3" data-number="12.4.1">
+<h3 data-number="12.4.1" class="anchored" data-anchor-id="binary-dependent-variables"><span class="header-section-number">12.4.1</span> Binary dependent variables</h3>
+<p>You should use caution when adding fixed effects to binary models, such as the logit. They can suffer from the “incidental parameters” <a href="https://stats.stackexchange.com/questions/185998/incidental-parameter-problem">problem</a>. Instead of using the logit, with a large number of fixed effects (some would even say not that large), you can use a linear probability model or the <em>conditional</em> logit mode.</p>
+<p>For a resource on fitting the conditional logit in R, see <a href="https://data.princeton.edu/wws509/r/fixedRandom3">here</a>.</p>
+<ul>
+<li>The <code>xtlogit</code> fe command in Stata fits this type of model</li>
+<li>Note that computing marginal effects and predictions from this model can be more difficult</li>
+</ul>
+</section>
+<section id="two-way-fixed-effects" class="level3" data-number="12.4.2">
+<h3 data-number="12.4.2" class="anchored" data-anchor-id="two-way-fixed-effects"><span class="header-section-number">12.4.2</span> Two-way fixed effects</h3>
+<p>We might be concerned not just about unobserved unit effects but also unobserved time effects <span class="math display">\[\begin{align*}
+Y_{it} =  \beta_0 + \beta_1x_{it}+ (c_i + v_t + \epsilon_{it}).
+\end{align*}\]</span></p>
+<p>Here, we may include fixed effects for both units and time. Warning: can be difficult to interpret.</p>
+<p>Alternative, sometimes instead of including dummies for each <span class="math inline">\(t\)</span> period, people will include a “time trend.” This could be a linear time trend, for example, a year variable treated as numeric.</p>
+<span class="math display">\[\begin{align*}
+Y_{it} =  \alpha_i + \beta_1  x_{it}+ \beta_2 year_{t} + \epsilon_{it}.
+\end{align*}\]</span>
+<p>Or this could be a polynomial, such as a cubic time trend</p>
+<span class="math display">\[\begin{align*}
+Y_{it} =  \alpha_i + \beta_1 x_{it}+ \beta_2 year_{t} + \beta_3 year_{t}^2 + \beta_4year_{t}^3 + \epsilon_{it}.
+\end{align*}\]</span>
+</section>
+<section id="first-differences" class="level3" data-number="12.4.3">
+<h3 data-number="12.4.3" class="anchored" data-anchor-id="first-differences"><span class="header-section-number">12.4.3</span> First Differences</h3>
+<p>The within- and LSDV estimators are not the only way to incorporate fixed effects into our models. Another type of estimation is first differences.</p>
+<p><span class="math inline">\(\Delta Y_{it} = \beta \Delta x_{it} + \Delta \epsilon_{it}\)</span> where, for example, <span class="math inline">\(\Delta Y_{it} = Y_{it} - Y_{it- 1}\)</span>. Instead of demeaning over all time. We subtract the previous instance.</p>
+<ul>
+<li>Both remove unobserved heterogeneity (i.e., <span class="math inline">\(\alpha_i - \alpha_i\)</span>)</li>
+<li>Requires variation in time. <span class="math inline">\(t\)</span> vs.&nbsp;<span class="math inline">\(t-1\)</span> or else <span class="math inline">\(x_{it} - x_{it-1} = 0\)</span> and falls out</li>
+<li>When <span class="math inline">\(T = 2\)</span>, fixed effects = first differences</li>
+<li>When <span class="math inline">\(T &gt; 2\)</span>, fixed effects <span class="math inline">\(\neq\)</span> first differences</li>
+<li>Under assumptions, both unbiased and consistent</li>
+<li>When no serial correlation, then <span class="math inline">\(SE(\hat \beta_{FD}) &gt; SE(\hat \beta_{FE})\)</span></li>
+<li>If <span class="math inline">\(\Delta \epsilon_{it}\)</span> are uncorrelated, FD preferred.</li>
+<li>In general, hopefully both produce very similar results</li>
+</ul>
+<p>I recommend watching this <a href="https://www.youtube.com/watch?v=1SchyQ77VFg&amp;ab_channel=BenLambert">video</a> by Ben Lambert who provides a summary overview of the differences between fixed effects, first differences, and pooled OLS.</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/1SchyQ77VFg" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section>
+<section id="additional-models-in-r" class="level3" data-number="12.4.4">
+<h3 data-number="12.4.4" class="anchored" data-anchor-id="additional-models-in-r"><span class="header-section-number">12.4.4</span> Additional Models in R</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="do">## first differences</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>fit.fd <span class="ot">&lt;-</span> <span class="fu">plm</span>(inv<span class="sc">~</span>value<span class="sc">+</span>capital, <span class="at">data =</span> Grunfeld, <span class="at">model =</span> <span class="st">"fd"</span>, </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">index =</span> <span class="fu">c</span>(<span class="st">"firm"</span>, <span class="st">"year"</span>),</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">effect =</span> <span class="st">"individual"</span>)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit.fd)[<span class="st">"capital"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  capital 
+0.2917667 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="do">## firm and year effects</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>fit.twoway <span class="ot">&lt;-</span> <span class="fu">plm</span>(inv<span class="sc">~</span>value<span class="sc">+</span>capital, <span class="at">data =</span> Grunfeld, <span class="at">model =</span> <span class="st">"within"</span>,</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">index =</span> <span class="fu">c</span>(<span class="st">"firm"</span>, <span class="st">"year"</span>),</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">effect =</span> <span class="st">"twoways"</span>)</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>                  </span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit.twoway)[<span class="st">"capital"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  capital 
+0.3579163 </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="random-effects" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="random-effects"><span class="header-section-number">12.5</span> Random Effects</h2>
+<p>We have now discussed pooled OLS and fixed effects estimation (often called no-pooling). We will now shift to estimation strategies that involve partial-pooling.</p>
+<p>Tradeoff between complete pooling and no-pooling (i.e., fixed effects).</p>
+<ul>
+<li>Complete pooling ignores variation between groups BUT</li>
+<li>No-pooling may overfit the data within group and prevents estimation of “level-2” effects.</li>
+</ul>
+<p>To motivate partial-pooling, we can take a look at an example.</p>
+<p>Example: What will Mookie Betts’s batting average be in 2018?</p>
+<p><img src="images/mookie.png" class="img-fluid" style="width:70.0%"></p>
+<ul>
+<li>In March 2018, Mookie went 2 for 11. If we fit his average just based on his data <span class="math inline">\(n_{mookie}=11\)</span>, we get an average of .182.</li>
+<li>Over the entire season, Mookie ended up with an average of .346. Is there any way we could have adjusted our initial estimate to end up with a more accurate estimate of what his average would be?</li>
+<li>Possible solution: fit the average based on a combination of Mookie’s data (<span class="math inline">\(\bar y_{mookie}\)</span>) and data from all players (<span class="math inline">\(\bar y_{all}\)</span>). It will move Mookie’s estimate closer to the “grand” average across all players by partially pooling his data with the others.</li>
+</ul>
+<section id="random-effects-models" class="level3" data-number="12.5.1">
+<h3 data-number="12.5.1" class="anchored" data-anchor-id="random-effects-models"><span class="header-section-number">12.5.1</span> Random effects models</h3>
+<p>In random effects estimation, for the <span class="math inline">\(ith\)</span> observation, we allow the intercept <span class="math inline">\(\alpha\)</span> to vary by some unit <span class="math inline">\(j\)</span>. Where <span class="math inline">\(j[i]\)</span> refers to the group-level coding for the <span class="math inline">\(ith\)</span> observation. Perhaps <span class="math inline">\(j=3\)</span> for <span class="math inline">\(j[4]\)</span>, the 4th observation.</p>
+<span class="math display">\[\begin{align*}
+Y_{ij} &amp;=  \alpha_{j[i]} + \beta x_{ij} + \epsilon_{ij}
+\end{align*}\]</span>
+<p>The group index is a factor with <span class="math inline">\(J\)</span> levels.</p>
+<p>Approximation of multilevel estimates of the group average in case of no predictors:</p>
+<p><span class="math inline">\(\hat \alpha_j = \frac{\frac{n_j}{\sigma^2_y}\bar y_j + \frac{1}{\sigma^2_\alpha}\bar y_{all}}{\frac{n_j}{\sigma^2_y} + \frac{1}{\sigma^2_\alpha}}\)</span></p>
+<ul>
+<li>Assume we have a random sample of <span class="math inline">\(n\)</span> units within each <span class="math inline">\(j\)</span>, <span class="math inline">\(n_j\)</span></li>
+<li>Then, our estimate for a given group <span class="math inline">\(j\)</span> is a weighted average of observations within <span class="math inline">\(j\)</span> (<span class="math inline">\(\bar y_j\)</span>) and the mean overall <span class="math inline">\(j\)</span>’s (<span class="math inline">\(\bar y_{all}\)</span>).</li>
+<li>These are weighted according to the variance in <span class="math inline">\(y\)</span> within <span class="math inline">\(j\)</span> (<span class="math inline">\(\sigma^2_y\)</span>) and variance among the averages of <span class="math inline">\(y\)</span> across <span class="math inline">\(j\)</span> (<span class="math inline">\(\sigma^2_\alpha\)</span>)</li>
+</ul>
+<p>This <a href="https://www.youtube.com/watch?v=EbdBHJYbOrg&amp;ab_channel=BenLambert">video</a> by Ben Lambert shows how this idea of a “weighted average” extends to regression with covariates. Random effects provides a balance between fixed effects and OLS, no-pooling and pooling, which is why it is considered partial pooling.</p>
+<ul>
+<li>When <span class="math inline">\(\sigma^2_\alpha\)</span> is very small, random effects will be close to OLS.</li>
+<li>If <span class="math inline">\(\sigma^2_\alpha\)</span> is very big, then the weighted balance will be closer to fixed effects.</li>
+</ul>
+<p><strong><em>Differences with pooling and no pooling</em></strong></p>
+<ul>
+<li>Pooling- intercepts all fixed to <span class="math inline">\(\alpha\)</span> (<span class="math inline">\(\sigma^2_{\alpha} = 0\)</span>)</li>
+<li>No pooling- <span class="math inline">\(\alpha_j\)</span>’s correspond to models fit within each <span class="math inline">\(j\)</span>. Do not come from a common distribution.
+<ul>
+<li>A downside: cannot include time-invariant group characteristics.</li>
+</ul></li>
+<li>Partial pooling (shrinkage)- <span class="math inline">\(\alpha_j\)</span>’s have a probabilitiy distribution <span class="math inline">\(\alpha_j \sim N(u_{\alpha}, \sigma^2_{\alpha})\)</span>. Has the effect of pulling estimates of <span class="math inline">\(\alpha_j\)</span> toward the mean of all groups.
+<ul>
+<li><span class="math inline">\(\alpha_j = u_{\alpha} + \eta_j\)</span> where <span class="math inline">\(\eta_j\)</span> is a group-level error term (model without group-level predictors)</li>
+<li><strong><em>Must assume</em></strong> <span class="math inline">\(\mathbf E(x_{ij}\alpha_{j[i]}) = 0\)</span>. Unmodeled, unmeasured characteristics about your group-level effects (e.g., countries) that affect the outcome are not correlated with the regressors in your model. </li>
+<li>Good news: Can include group-level predictors: Now <span class="math inline">\(\alpha_j\)</span> coeffcients have a distribution <span class="math inline">\(\alpha_j \sim N(U_j\gamma, \sigma^2_\alpha)\)</span></li>
+</ul></li>
+</ul>
+<p>Scholars can have strong feelings about these choices, which often vary by subfield conventions along with the specifics of any research question. For example, the Green et al.&nbsp;piece advocating the use of fixed effects called pooling a ``Dirty Pool.” In response, <a href="https://www.jstor.org/stable/3078640">Beck and Katz</a> made the analogy that “Green, Kim, and Yoon’s fixed-effects”cure” for column 3 is akin to curing a cold with chemotherapy” (492).</p>
+</section>
+<section id="random-effects-implementation-in-r" class="level3" data-number="12.5.2">
+<h3 data-number="12.5.2" class="anchored" data-anchor-id="random-effects-implementation-in-r"><span class="header-section-number">12.5.2</span> Random Effects Implementation in R</h3>
+<p>If comparing with fixed effects, can use<code>plm</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Firm random effects</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"Grunfeld"</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>fit.re <span class="ot">&lt;-</span> <span class="fu">plm</span>(inv<span class="sc">~</span>value<span class="sc">+</span>capital, </span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> Grunfeld, </span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">model =</span> <span class="st">"random"</span>, </span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">index =</span> <span class="fu">c</span>(<span class="st">"firm"</span>), </span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">effect =</span> <span class="st">"individual"</span>)</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit.re)[<span class="st">"capital"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> capital 
+0.308113 </code></pre>
+</div>
+</div>
+<p>One approach to deciding whether to use fixed vs.&nbsp;random effects is the Hausman test, which assesses the correlation assumption.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Compares beta hats for FE and RE and covariance</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Under null hypothesis of no correlation estimates should be similar</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Under null, RE preferred due to efficiency gains</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>fit.within <span class="ot">&lt;-</span> <span class="fu">plm</span>(inv<span class="sc">~</span>capital<span class="sc">+</span>value, </span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> Grunfeld, </span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">model =</span> <span class="st">"within"</span>, </span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">index =</span> <span class="fu">c</span>(<span class="st">"firm"</span>, <span class="st">"year"</span>))</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="fu">phtest</span>(fit.within, fit.re) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Hausman Test
+
+data:  inv ~ capital + value
+chisq = 2.3304, df = 2, p-value = 0.3119
+alternative hypothesis: one model is inconsistent</code></pre>
+</div>
+</div>
+<p>With a small p-value, we reject the null, suggesting fixed effects is preferred for this model. With a large p-value, we fail to reject the null, suggesting random effects is preferred. Note: while the test provides one way to adjudicate between fixed and random effects, it cannot tell you if the model you have specified is “correct.”</p>
+</section>
+<section id="using-lme4-for-random-effects" class="level3" data-number="12.5.3">
+<h3 data-number="12.5.3" class="anchored" data-anchor-id="using-lme4-for-random-effects"><span class="header-section-number">12.5.3</span> Using lme4 for random effects</h3>
+<p>More flexible package for random effects: <code>lme4</code>. Uses “REML” by default- a variation on MLE. Ben Bolker provides a great overview of the package <a href="https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html">here</a>. Here is a video walking through the syntax and output.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/Myk4bV-LrN0" width="533" height="300" frameborder="0" allowfullscreen="" data-external="1"></iframe>
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>fit.re2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(inv<span class="sc">~</span> value <span class="sc">+</span> capital <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> firm), <span class="at">data =</span> Grunfeld)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="do">## extract model coefficients</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(fit.re2)[<span class="st">"capital"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  capital 
+0.3081881 </code></pre>
+</div>
+</div>
+<p>WHERE ARE MY P VALUES?!?!?!?!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit.re2)<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               Estimate  Std. Error   t value
+(Intercept) -57.8644245 29.37775852 -1.969668
+value         0.1097897  0.01052676 10.429581
+capital       0.3081881  0.01717127 17.947893</code></pre>
+</div>
+</div>
+<p>Not without controversy. Several ways to compute p-values in these models. This post describes three and provides the <a href="https://www.r-bloggers.com/three-ways-to-get-parameter-specific-p-values-from-lmer/">code</a>.</p>
+<p>For example, if you load the package <code>lmerTest</code> prior to running the model, it will include these results using the Satterthwaite method by default. Clicking on the pdf through this <a href="https://www.jstatsoft.org/article/view/v082i13">link</a> will give you information on what this package does.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>fit.re2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(inv<span class="sc">~</span> value <span class="sc">+</span> capital <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> firm), <span class="at">data =</span> Grunfeld)</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit.re2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: inv ~ value + capital + (1 | firm)
+   Data: Grunfeld
+
+REML criterion at convergence: 2195.9
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.4319 -0.3498  0.0210  0.3592  4.8145 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ firm     (Intercept) 7367     85.83   
+ Residual             2781     52.74   
+Number of obs: 200, groups:  firm, 10
+
+Fixed effects:
+             Estimate Std. Error        df t value Pr(&gt;|t|)    
+(Intercept) -57.86442   29.37776  11.10912   -1.97   0.0743 .  
+value         0.10979    0.01053 120.76227   10.43   &lt;2e-16 ***
+capital       0.30819    0.01717 193.71234   17.95   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+        (Intr) value 
+value   -0.328       
+capital -0.019 -0.368
+fit warnings:
+Some predictor variables are on very different scales: consider rescaling</code></pre>
+</div>
+</div>
+<p>Can use output to interpret the nature of the variance. Note that the summary output includes a table for the Random Effects, the variance, and Std. Dev. of each. We can interpret the intercept row as the variability of the intercept across firms (firm-to-firm) variability. The residual is the left-over or within-firm variability. One use of this is to compute the intraclass correlation coefficient (ICC).</p>
+<p>The ICC is the proportion of the variance explained by the grouping structure in the population. The Adjusted ICC indexes how strongly measurements in the same group resemble each other. This index goes from 0, if the grouping conveys no information, to 1, if all observations in a group are identical (Gelman &amp; Hill, 2007, p.&nbsp;258). If the value were really small, you might not need to include random effects for the grouping factor.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("performance")</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="dv">7367</span><span class="sc">/</span>(<span class="dv">7367</span><span class="sc">+</span><span class="dv">2781</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7259559</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(fit.re2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Intraclass Correlation Coefficient
+
+    Adjusted ICC: 0.726
+  Unadjusted ICC: 0.140</code></pre>
+</div>
+</div>
+</section>
+<section id="random-effects-extensions" class="level3" data-number="12.5.4">
+<h3 data-number="12.5.4" class="anchored" data-anchor-id="random-effects-extensions"><span class="header-section-number">12.5.4</span> Random Effects Extensions</h3>
+<p>Can have multiple levels. E.g., students (<span class="math inline">\(i\)</span>) nested in classrooms (<span class="math inline">\(j\)</span>) nested in schools (<span class="math inline">\(s\)</span>). Each level may or may not have group-level predictors. Example:</p>
+<ul>
+<li><span class="math inline">\(Performance_{ijs} = \beta_{0js[i]} + \beta_1 Income_{ijs} + \beta_2 Gender_{ijs} + \epsilon_{ijs}\)</span> where</li>
+<li><span class="math inline">\(\beta_{0js} = \gamma_{0s} + \gamma_{3}Teacher_{js} + r_{js}\)</span> and</li>
+<li><span class="math inline">\(\gamma_{0s} = z + v_{s}\)</span></li>
+<li>Combined: <span class="math inline">\(Performance_{ijs} = m + m_{1}Teacher_{js} + m_2 Income_{ijs} + m_3 Gender_{ijs} + v_{s} + r_{js} + \epsilon_{ijs}\)</span></li>
+</ul>
+<p>Levels can be nested or non-nested. Students are nested in schools, but for a different example, survey questions may not be nested in a single poll. Perhaps some items are repeated <em>across</em> different polls.</p>
+<p>Can allow slopes (regression coefficients to vary). Perhaps the effect of gender on student success varies by classroom. Then <span class="math inline">\(\beta_{2}\)</span> becomes <span class="math inline">\(\beta_{j, 2} = \gamma_{1s} + r_{1js}\)</span>.</p>
+<p>Let’s return to the <code>Grunfeld</code> data and fit the following model:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="do">## firm and year random intercepts</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>fit.retwoways <span class="ot">&lt;-</span> <span class="fu">lmer</span>(inv<span class="sc">~</span> value <span class="sc">+</span> capital <span class="sc">+</span> </span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>                        (<span class="dv">1</span> <span class="sc">|</span> firm) <span class="sc">+</span> </span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>                        (<span class="dv">1</span> <span class="sc">|</span> year), </span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data =</span> Grunfeld)</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(fit.retwoways)[<span class="st">"capital"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  capital 
+0.3106319 </code></pre>
+</div>
+</div>
+<p><strong><em>Sleep deprivation study</em></strong>: how is a subject’s reaction time associated with sleep deprivation?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(sleepstudy)</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Random intercepts for subjects</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>fit.re3 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Reaction <span class="sc">~</span> Days <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Subject), <span class="at">data =</span> sleepstudy)</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(fit.re3)[<span class="st">"Days"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Days 
+10.46729 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Random intercepts for subject, varying slope for days</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>fit.re4 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Reaction <span class="sc">~</span> Days <span class="sc">+</span> (Days <span class="sc">|</span> Subject), <span class="at">data =</span> sleepstudy)</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(fit.re4)[<span class="st">"Days"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Days 
+10.46729 </code></pre>
+</div>
+</div>
+<p>Recall, the big assumption when adding random effects is that the unobserved group-level random disturbances caught through the intercept terms are not correlated with the regressors.</p>
+<p>One suggestion is if concerned about correlation between predictors <span class="math inline">\(x_i\)</span> and group effects <span class="math inline">\(\alpha_j\)</span>, add group means of regressors as predictors in the model.</p>
+<ul>
+<li>See <a href="http://www.stat.columbia.edu/~gelman/research/unpublished/Bafumi_Gelman_Midwest06.pdf">here</a> and <a href="https://www.r-bloggers.com/why-i-use-panelmultilevel-methods/">here</a>.</li>
+<li>Disentangles individual vs.&nbsp;contextual effect of regressors on outcome. First proposed by Mundlak (1978).</li>
+</ul>
+</section>
+<section id="extracting-lmer-output" class="level3" data-number="12.5.5">
+<h3 data-number="12.5.5" class="anchored" data-anchor-id="extracting-lmer-output"><span class="header-section-number">12.5.5</span> Extracting lmer output</h3>
+<p>Caution: <code>coef()</code>, <code>ranef()</code>, and <code>fixef()</code> all different.</p>
+<ul>
+<li><code>coef()</code> produces the set of regression coefficients associated with each group</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Example from random intercepts model</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">coef</span>(fit.re3))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$Subject
+    (Intercept)     Days
+308    292.1888 10.46729
+309    173.5556 10.46729
+310    188.2965 10.46729
+330    255.8115 10.46729
+331    261.6213 10.46729
+332    259.6263 10.46729
+333    267.9056 10.46729
+334    248.4081 10.46729
+335    206.1230 10.46729
+337    323.5878 10.46729
+349    230.2089 10.46729
+350    265.5165 10.46729
+351    243.5429 10.46729
+352    287.7835 10.46729
+369    258.4415 10.46729
+370    245.0424 10.46729
+371    248.1108 10.46729
+372    269.5209 10.46729</code></pre>
+</div>
+</div>
+<ul>
+<li><code>fixef()</code> produces the set of fixed effects regression coefficients– similar to OLS– with global intercept.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Example from random intercepts model</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(fit.re3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)        Days 
+  251.40510    10.46729 </code></pre>
+</div>
+</div>
+<ul>
+<li><code>ranef()</code> produces the set of random effects as deviations from the global estimates</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Example from random intercepts model</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">ranef</span>(fit.re3)<span class="sc">$</span>Subject)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    (Intercept)
+308   40.783710
+309  -77.849554
+310  -63.108567
+330    4.406442
+331   10.216189
+332    8.221238</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Note the relationship between the three for the first [1] subject</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(fit.re3)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">ranef</span>(fit.re3)<span class="sc">$</span>Subject[<span class="dv">1</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept) 
+   292.1888 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit.re3)<span class="sc">$</span>Subject[<span class="dv">1</span>,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 292.1888</code></pre>
+</div>
+</div>
+</section>
+<section id="generating-predicted-values-for-each-unit" class="level3" data-number="12.5.6">
+<h3 data-number="12.5.6" class="anchored" data-anchor-id="generating-predicted-values-for-each-unit"><span class="header-section-number">12.5.6</span> Generating predicted values for each unit</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Manual</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>allsubjects <span class="ot">&lt;-</span> <span class="fu">unique</span>(sleepstudy<span class="sc">$</span>Subject)</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(sleepstudy)){</span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">as.character</span>(sleepstudy<span class="sc">$</span>Subject[i])</span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>  sleepstudy<span class="sc">$</span>subjectRE[i] <span class="ot">&lt;-</span> <span class="fu">ranef</span>(fit.re3)<span class="sc">$</span>Subject[n, <span class="dv">1</span>]</span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a><span class="do">## XB like usual, but need to add random effects</span></span>
+<span id="cb69-9"><a href="#cb69-9" aria-hidden="true" tabindex="-1"></a>yhat <span class="ot">&lt;-</span>  <span class="fu">model.matrix</span>(fit.re3)<span class="sc">%*%</span><span class="fu">fixef</span>(fit.re3) <span class="sc">+</span> sleepstudy<span class="sc">$</span>subjectRE</span>
+<span id="cb69-10"><a href="#cb69-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-11"><a href="#cb69-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Compare to Automatic</span></span>
+<span id="cb69-12"><a href="#cb69-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(yhat, <span class="fu">fitted</span>(fit.re3), <span class="fu">predict</span>(fit.re3, <span class="at">type =</span> <span class="st">"response"</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      [,1]     [,2]     [,3]
+1 292.1888 292.1888 292.1888
+2 302.6561 302.6561 302.6561
+3 313.1234 313.1234 313.1234
+4 323.5907 323.5907 323.5907
+5 334.0580 334.0580 334.0580</code></pre>
+</div>
+</div>
+<p>Predicting out of sample. Can “ignore” random effects if desired.</p>
+<ul>
+<li>This is often how people make predictions for hypothetical values of the main covariates– without specifying specific groups.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fit.re3, <span class="at">newdata=</span> <span class="fu">data.frame</span>(<span class="at">Days =</span> <span class="dv">4</span>), <span class="at">type =</span> <span class="st">"response"</span>, <span class="at">re.form =</span> <span class="cn">NA</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       1 
+293.2742 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(fit.re3)[<span class="dv">1</span>] <span class="sc">+</span> <span class="dv">4</span><span class="sc">*</span><span class="fu">fixef</span>(fit.re3)[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept) 
+   293.2742 </code></pre>
+</div>
+</div>
+<p>Compare predictions if we ignored the random effects:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(yhat, </span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">predict</span>(fit.re3, <span class="at">type =</span> <span class="st">"response"</span>),</span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">predict</span>(fit.re3, <span class="at">type =</span> <span class="st">"response"</span>, <span class="at">re.form=</span><span class="cn">NA</span>),</span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">model.matrix</span>(fit.re3)<span class="sc">%*%</span><span class="fu">fixef</span>(fit.re3))[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      [,1]     [,2]     [,3]     [,4]
+1 292.1888 292.1888 251.4051 251.4051
+2 302.6561 302.6561 261.8724 261.8724
+3 313.1234 313.1234 272.3397 272.3397
+4 323.5907 323.5907 282.8070 282.8070
+5 334.0580 334.0580 293.2742 293.2742</code></pre>
+</div>
+</div>
+</section>
+<section id="visualizing-random-effects" class="level3" data-number="12.5.7">
+<h3 data-number="12.5.7" class="anchored" data-anchor-id="visualizing-random-effects"><span class="header-section-number">12.5.7</span> Visualizing Random Effects</h3>
+<p>In this section, we are going to again use data from the CDC on national and state-level COVID hospitalizations and positive case increases between July 2020- end September 2020 to give some examples of how to visualize random effects.</p>
+<p>Let’s load the state data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rio)</span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>states <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"https://github.com/ktmccabe/teachingdata/blob/main/states.RData?raw=true"</span>)</span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(states)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           date hospitalizedCurrently positiveIncrease state
+8849 2020-09-30                    53              104    AK
+8850 2020-09-30                   776             1147    AL
+8851 2020-09-30                   484              942    AR
+8853 2020-09-30                   560              323    AZ
+8854 2020-09-30                  3267             3200    CA
+8855 2020-09-30                   264              511    CO</code></pre>
+</div>
+</div>
+<p>Let’s fit a random effects model with random intercepts for states.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Random Effects</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
+<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a>fit.re <span class="ot">&lt;-</span> <span class="fu">lmer</span>(hospitalizedCurrently <span class="sc">~</span> positiveIncrease </span>
+<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a>               <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> state), <span class="at">data=</span>states)</span>
+<span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit.re)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: hospitalizedCurrently ~ positiveIncrease + (1 | state)
+   Data: states
+
+REML criterion at convergence: 72042.8
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-21.4649  -0.1578   0.0012   0.1414  12.3407 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ state    (Intercept) 439843   663.2   
+ Residual             194044   440.5   
+Number of obs: 4780, groups:  state, 53
+
+Fixed effects:
+                  Estimate Std. Error        df t value Pr(&gt;|t|)    
+(Intercept)      3.273e+02  9.160e+01 5.131e+01   3.573 0.000779 ***
+positiveIncrease 5.317e-01  7.745e-03 4.774e+03  68.644  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr)
+positvIncrs -0.078
+fit warnings:
+Some predictor variables are on very different scales: consider rescaling</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(fit.re)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Intraclass Correlation Coefficient
+
+    Adjusted ICC: 0.694
+  Unadjusted ICC: 0.325</code></pre>
+</div>
+</div>
+<p>The function <code>dotplot</code> from the <code>lattice</code> package provides a fast way to visualize the random effects of the model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lattice)</span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dotplot</span>(<span class="fu">ranef</span>(fit.re), <span class="at">condVar=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$state</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="12-PanelData_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="1440"></p>
+</div>
+</div>
+<p>The <code>merTools</code> package also has many useful functions. For example, the <code>plotREsim</code> function acts similar to the <code>dotplot</code> function and will plot the random effects for each group.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="do">## install.packages("merTools")</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(merTools)</span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plotREsim</span>(<span class="fu">REsim</span>(fit.re), <span class="at">labs=</span><span class="cn">TRUE</span>)<span class="sc">+</span></span>
+<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="12-PanelData_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="1440"></p>
+</div>
+</div>
+<p>The package also has a tool for plotting the coefficient results with confidence intervals constructed through simulation. If you had several variables, the plot would display all coefficients.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>feEx <span class="ot">&lt;-</span> <span class="fu">FEsim</span>(fit.re, <span class="dv">1000</span>)</span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(feEx)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              term       mean      median           sd
+1      (Intercept) 331.062135 333.4822473 90.161910656
+2 positiveIncrease   0.531919   0.5318746  0.007601964</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotFEsim</span>(feEx) <span class="sc">+</span></span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Coefficient Plot"</span>,</span>
+<span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Median Effect Estimate"</span>, </span>
+<span id="cb88-5"><a href="#cb88-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Hospitalizations"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="12-PanelData_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>For more on this tool’s capabilities, particularly as it relates to generating predicted values, see <a href="https://cran.r-project.org/web/packages/merTools/vignettes/merToolsIntro.html">here</a>.</p>
+<p>Finally, let’s try another model using the <code>sleepstudy</code> data to show how the plots can also incorporate varying slopes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"sleepstudy"</span>)</span>
+<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Random intercepts for subject, varying slope for days</span></span>
+<span id="cb89-4"><a href="#cb89-4" aria-hidden="true" tabindex="-1"></a>fit.re4 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Reaction <span class="sc">~</span> Days <span class="sc">+</span> (Days <span class="sc">|</span> Subject), <span class="at">data =</span> sleepstudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(merTools)</span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotREsim</span>(<span class="fu">REsim</span>(fit.re4), <span class="at">labs=</span><span class="cn">TRUE</span>)<span class="sc">+</span></span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="12-PanelData_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="1440"></p>
+</div>
+</div>
+</section>
+<section id="generalized-lmer" class="level3" data-number="12.5.8">
+<h3 data-number="12.5.8" class="anchored" data-anchor-id="generalized-lmer"><span class="header-section-number">12.5.8</span> Generalized LMER</h3>
+<p>Generalized Linear Mixed Effects Regression: <code>glmer()</code> is to <code>lmer()</code> as <code>glm()</code> is to <code>lm()</code>. Example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="do">## What if reaction time was dichotomous? </span></span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>sleepstudy<span class="sc">$</span>rdi <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(sleepstudy<span class="sc">$</span>Reaction <span class="sc">&gt;</span></span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">mean</span>(sleepstudy<span class="sc">$</span>Reaction), <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a><span class="do">## GLMER with logit</span></span>
+<span id="cb91-6"><a href="#cb91-6" aria-hidden="true" tabindex="-1"></a>fit.glmer <span class="ot">&lt;-</span> <span class="fu">glmer</span>(rdi <span class="sc">~</span> Days <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Subject), </span>
+<span id="cb91-7"><a href="#cb91-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">data =</span> sleepstudy, </span>
+<span id="cb91-8"><a href="#cb91-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Generating predicted probabilities for each unit</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Manual</span></span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>allsubjects <span class="ot">&lt;-</span> <span class="fu">unique</span>(sleepstudy<span class="sc">$</span>Subject)</span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(sleepstudy)){</span>
+<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">as.character</span>(sleepstudy<span class="sc">$</span>Subject[i])</span>
+<span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a>  sleepstudy<span class="sc">$</span>subjectRE[i] <span class="ot">&lt;-</span> <span class="fu">ranef</span>(fit.glmer)<span class="sc">$</span>Subject[n, <span class="dv">1</span>]</span>
+<span id="cb92-6"><a href="#cb92-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb92-7"><a href="#cb92-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-8"><a href="#cb92-8" aria-hidden="true" tabindex="-1"></a><span class="do">## XB like usual, but need to add random effects</span></span>
+<span id="cb92-9"><a href="#cb92-9" aria-hidden="true" tabindex="-1"></a>py <span class="ot">&lt;-</span>  <span class="fu">plogis</span>(<span class="fu">model.matrix</span>(fit.glmer)<span class="sc">%*%</span><span class="fu">fixef</span>(fit.glmer) <span class="sc">+</span> sleepstudy<span class="sc">$</span>subjectRE)</span>
+<span id="cb92-10"><a href="#cb92-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-11"><a href="#cb92-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Compare to Automatic</span></span>
+<span id="cb92-12"><a href="#cb92-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(py, <span class="fu">fitted</span>(fit.glmer), <span class="fu">predict</span>(fit.glmer, <span class="at">type =</span> <span class="st">"response"</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       [,1]      [,2]      [,3]
+1 0.1047843 0.1047843 0.1047843
+2 0.1721090 0.1721090 0.1721090
+3 0.2696603 0.2696603 0.2696603
+4 0.3960526 0.3960526 0.3960526
+5 0.5380430 0.5380430 0.5380430</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="summing-up" class="level2" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="summing-up"><span class="header-section-number">12.6</span> Summing Up</h2>
+<p>In your own research you might ask the following questions:</p>
+<ul>
+<li>Are my observations independent? Do I have constant error variance?
+<ul>
+<li>If independent, you might be fine with a standard model</li>
+<li>If worried about the error variance, you could be fine with implementing some type of robust standard errors. See Gary King’s <a href="https://www.youtube.com/watch?v=j3Sxbkd9iIs&amp;ab_channel=GaryKing">video</a> for guidance and section 8.5.1 of the course notes.</li>
+</ul></li>
+<li>Alternatively, is there some grouping structure to my data?
+<ul>
+<li>What are the different levels?</li>
+</ul></li>
+<li>Are observations repeated over time?
+<ul>
+<li>Large N, few T, generally considered panel data</li>
+<li>Large T, fewer N, generally considered time series cross-sectional</li>
+</ul></li>
+</ul>
+<p>Then, you might consider the following choices if you have a grouping structure:</p>
+<ul>
+<li>Consider clustering standard errors by group in a standard model
+<ul>
+<li>See guidance <a href="https://economics.mit.edu/files/13927">here</a>, <a href="https://blogs.worldbank.org/impactevaluations/when-should-you-cluster-standard-errors-new-wisdom-econometrics-oracle">here</a>, and <a href="https://stats.stackexchange.com/questions/185378/when-to-use-fixed-effects-vs-using-cluster-ses#:~:text=Clustered%20standard%20errors%20are%20for,panel%20of%20firms%20across%20time.">here</a>. For R code, see section <a href="https://ktmccabe.github.io/mlebook/ordinal-practice-problems.html#a-note-on-robust-standard-errors">8.5.1.</a></li>
+</ul></li>
+<li>Or, incorporating the grouping structure into a multilevel random effects model
+<ul>
+<li>Do you meet the random effects assumptions?</li>
+<li>Do you need random effects? Perhaps use the ICC to help with this.</li>
+<li>Should you add varying slopes?</li>
+</ul></li>
+<li>Or, incorporating fixed effects for the groups and/or time
+<ul>
+<li>How much data do you have within groups?</li>
+<li>Do you need to model “level-2” factors?</li>
+</ul></li>
+</ul>
+<p>What we have not yet discussed are the following issues. See links for further study.</p>
+<ul>
+<li>Using fixed effects models for causal inference, specifically
+<ul>
+<li>See <a href="https://imai.fas.harvard.edu/research/files/FEmatch.pdf">Imai and Kim (2019)</a>, <a href="https://www.cambridge.org/core/journals/political-analysis/article/on-the-use-of-twoway-fixed-effects-regression-models-for-causal-inference-with-panel-data/F10006D0210407C5F9C7CAC1EEE3EF0D">Imai and Kim (2020)</a></li>
+<li>And R packages <a href="https://github.com/insongkim/PanelMatch">PanelMatch</a> and <a href="https://cran.r-project.org/web/packages/wfe/wfe.pdf">wfe</a></li>
+</ul></li>
+<li>Incorporating dynamics into longitudinal data: <span class="math inline">\(Y_{it} = \alpha_i + \rho Y_{i t-1} + \beta x_{it} + \epsilon_{it}\)</span>
+<ul>
+<li>Outcome of today is a function of the past outcome modified by new information. Consider including if you think past outcomes influence future outcomes.</li>
+<li><span class="math inline">\(\rho\)</span> is an “autocorrelation” term such that <span class="math inline">\(|\rho| &lt; 1\)</span>.</li>
+<li>Problem: Unless <span class="math inline">\(\rho = 0\)</span>, correlation created between regressors and error term <span class="math inline">\(\rightarrow\)</span> strict exogeneity violated <span class="math inline">\(\rightarrow\)</span> Nickell Bias. In random effects models, <span class="math inline">\(y_{it-1}\)</span> also correlated with any group-level effects <span class="math inline">\(\alpha_i\)</span>.</li>
+<li>Video <a href="https://www.youtube.com/watch?reload=9&amp;v=wL8NgC0Fm0Y">explanation</a>.</li>
+<li>Concern greatest in samples with small <span class="math inline">\(T\)</span>.</li>
+<li>A lot of debates on the inclusion of an LDV and “dynamic” models in general. See <a href="https://www.univ-orleans.fr/deg/masters/ESA/CH/Geneve_Chapitre2.pdf">here</a>
+<ul>
+<li>Achen C. H. (2001) Why lagged dependent variables can suppress the explanatory power of other independent variables</li>
+<li>Keele, L. and Kelly N. J. (2005) Dynamic models for dynamic theories: the ins and outs of lagged dependent variables</li>
+<li>Arjun Wilkins. (2017). To Lag or Not to Lag?: Re-Evaluating the Use of Lagged Dependent Variables in Regression Analysis</li>
+<li>Arellano-Bond and Anderson-Hsiao estimators</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="the-final-problem-set" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="the-final-problem-set"><span class="header-section-number">12.7</span> The Final Problem Set</h2>
+<p>Please load <code>donation.dta</code>. This is a data set that includes an original survey of 2815 past campaign donors in the United States.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(foreign)</span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>don <span class="ot">&lt;-</span> <span class="fu">read.dta</span>(<span class="st">"https://github.com/ktmccabe/teachingdata/blob/main/donation.dta?raw=true"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The researchers randomly sampled survey respondents based on a list from the FEC, which contained the names of anyone who gave $200 or more to a candidate in the two years prior to 2012. The sampling process was designed to focus on donation behavior to the 22 senators who sought reelection in 2013–selecting people who might donate or might be pursued for a donation by one of these senators. The idea was that this sample would represent the senators’ potential “donorate”. Each observation is a senator-donor dyad: with 22 incumbent senators running for reelection and 2815 respondents, there are approximately 61,930 dyads (observations). For each observation, the data contain variables that indicate whether or not a respondent donated to the senator and how much that donation was, as well as the respondent’s total donations. Senators are required to record donations above $200, but some senators voluntarily report donations below this amount. Therefore, the data may include some donation totals between 0 and $200.</p>
+<p>Key Variables include:</p>
+<ul>
+<li><code>donation</code>: 1=made donation to senator, 0=no donation made</li>
+<li><code>total_donation</code>: Dollar amount of donation made by donor to Senator.</li>
+<li><code>total_donation_all</code>: Dollar amount of all FEC recorded donations made by this donor.</li>
+<li><code>maxdon</code>: Dollar amount of the donor’s largest donation.</li>
+<li><code>numsens</code>: Number of unique senators a donor gave to.</li>
+<li><code>numdonation</code>: Number of unique donations a donor gave.</li>
+<li><code>peragsen</code>: policy agreement, percent issue agreement between donor and senator</li>
+<li><code>per2agchal</code>: percent issue agreement between donor and the senator’s challenger</li>
+<li><code>cook</code>: Cook competitiveness score for the senator’s race. 1 = Solid Dem or Solid Rep; 2 = Likely Dem or Likely Rep; 3 = Leans Dem or Leans Rep; 4 = Toss Up</li>
+<li><code>same_state</code>: 1=donor is from senator’s state, 0=otherwise</li>
+<li><code>sameparty</code>: 1=self-identifies as being in the candidate’s party; 0 otherwise</li>
+<li><code>matchcommf</code>: 1=Senator committee matches donor’s profession as reported in FEC file; 0=otherwise</li>
+<li><code>NetWorth</code>: Donor’s self-estimated net worth. 1=less than 250k, 2=250-500k; 3=500k-1m; 4=1-2.5m; 5=2.5-5m; 6=5-10m; 7=more than 10m</li>
+<li><code>IncomeLastYear</code>: Donor’s household annual income in 2013. 1=less than 50k; 2=50-100k; 3=100-125k; 4=125-150k; 5=150-250k; 6=250-300k; 7=300-350k; 8=350-400k; 9=400-500k; 10=more than 500k</li>
+<li><code>idfold2</code>: Donor’s self-described political ideology. 0 = moderate; 1=somewhat conservative or somewhat liberal; 2=conservative or liberal; 3=very liberal or very conservative</li>
+<li><code>notwhite</code>: Donor’s self-described ethnicity. 1=not white; 0=white</li>
+<li><code>malerespondent</code>: Donor’s self-described gender. 1=male; 0=female</li>
+<li><code>terms</code>: The number of terms a legislator has been in office</li>
+<li><code>YearBorn</code>: Donor’s year of birth.</li>
+<li><code>Edsum</code>: Donor’s self-described educational attainment. 1=less than high school; 2=high school; 3=some college; 4=2-year college degree; 5=4-year college degree; 6=graduate degree</li>
+<li><code>ideologue2</code>: 1=respondent suggested the candidate’s ideological position was “extremely important” or if the respondent attached more importance to this factor than to both whether the “candidate could affect my industry or work” and “I know the candidate personally”, 0=otherwise</li>
+<li><code>IK2</code>: 1=respondent suggested “I know the candidate personally” was “extremely important” or if the respondent attached more importance to this factor than to both whether the “candidate’s position on the issues is similar to mine” and “the candidate could affect my industry or work”, 0=otherwise</li>
+<li><code>donor_id</code>: donor respondent unique id (each respondent is in the data 22 times)</li>
+<li>The data also include dummy variables for each senator (e.g., <code>sendum1</code>, <code>sendum2</code>)</li>
+</ul>
+<p><strong><em>Research Question</em></strong>: Does policy agreement motivate people to give to campaigns?</p>
+<ul>
+<li>Conduct and present an analysis that can help answer the question.</li>
+</ul>
+<details>
+<summary>
+Try on your own, then expand to see the authors’ approach.
+</summary>
+<p>This dataset comes from <a href="https://onlinelibrary.wiley.com/doi/epdf/10.1111/ajps.12275">“Ideologically Sophisticated Donors: WhichCandidates Do Individual Contributors Finance?”</a> by Michael J. Barber, Brandice Canes-Wrone, and Sharece Thrower. It was published in the <em>American Journal of Political Science</em> in 2017.</p>
+<p>The authors use a “rare events logit” with clustered standard errors by donor “in order to account for the fact that the decision to give to a candidate may be correlated with decisions regarding other campaigns.” They also use a standard logistic regression as a robustness check in the appendix. They conduct an analysis among the full data, as well as theoretically interesting senator-respondent combinations.</p>
+<p><img src="images/barber1.png" class="img-fluid" style="width:80.0%"></p>
+<p>For information on rare events logits, as a special form of the logit model, see <a href="https://gking.harvard.edu/files/0s.pdf">here</a>, a response <a href="https://statisticalhorizons.com/logistic-regression-for-rare-events">here</a>, and R code <a href="http://docs.zeligproject.org/articles/zelig_relogit.html">here</a>.</p>
+<p>They also analyze the amount given by transforming the variable into an incremental count outcome. “Because donations tend to be given in $50 increments, we use a rank-ordered variable that equals 0 for $0, 1 for $1–$49, 2 for $50–$99, and so on. Supplemental Table A9 shows that the results are robust to using the exact dollar amount, a rank based on $100 increments, and one based on $500 increments. Because donations are capped at $5,000, all of these dependent variables reflect this maximum. Moreover, as with the probability of donating, there is an overdispersion of zeros representing cases where a donor did not give to a senator. We accordingly use a zero-inflated negative binomial regression model for analyses of the amount donated. Additionally, for purposes of comparison, we show results for Tobit specifications.”</p>
+<ul>
+<li>We discussed zero-inflated models in section <a href="https://ktmccabe.github.io/mlebook/how-to-think-about-zero-counts.html">10.9.2</a></li>
+<li>We discussed Tobit models in <a href="https://ktmccabe.github.io/mlebook/truncated-models.html">11.4</a></li>
+</ul>
+<p>In our live discussion, we came up with several different possibles approaches, frequently using binary logistic regression with <code>donation</code> as the outcome or a linear model with <code>total_donation</code> as the outcome. Some suggested specifications also included fixed effects for the donors using the <code>plm</code> package and fitting a <code>within</code> model. Finally, we explored using random effects in <code>plm</code> or <code>lme4</code>, though the <code>lme4</code> approach appeared very stressful for our computers!</p>
+<p>Overall, we came up with consistent support for the positive relationship between policy agreement and giving to campaigns. Here are a few approaches developed:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">glm</span>(donation <span class="sc">~</span> peragsen <span class="sc">+</span> </span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>             terms <span class="sc">+</span> same_state <span class="sc">+</span> </span>
+<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a>             idfold2, <span class="at">data=</span>don, </span>
+<span id="cb95-4"><a href="#cb95-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>))</span>
+<span id="cb95-5"><a href="#cb95-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-6"><a href="#cb95-6" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(donation <span class="sc">~</span> peragsen <span class="sc">+</span> cook <span class="sc">+</span></span>
+<span id="cb95-7"><a href="#cb95-7" aria-hidden="true" tabindex="-1"></a>              NetWorth <span class="sc">+</span> idfold2 <span class="sc">+</span> notwhite <span class="sc">+</span> malerespondent <span class="sc">+</span> terms,</span>
+<span id="cb95-8"><a href="#cb95-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">data=</span>don, </span>
+<span id="cb95-9"><a href="#cb95-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>))</span>
+<span id="cb95-10"><a href="#cb95-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-11"><a href="#cb95-11" aria-hidden="true" tabindex="-1"></a>fit3 <span class="ot">&lt;-</span> <span class="fu">glm</span>(donation <span class="sc">~</span> peragsen <span class="sc">+</span> cook <span class="sc">+</span></span>
+<span id="cb95-12"><a href="#cb95-12" aria-hidden="true" tabindex="-1"></a>              NetWorth <span class="sc">+</span> idfold2 <span class="sc">+</span> notwhite <span class="sc">+</span> malerespondent <span class="sc">+</span> terms <span class="sc">+</span> sameparty,</span>
+<span id="cb95-13"><a href="#cb95-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">data=</span>don, </span>
+<span id="cb95-14"><a href="#cb95-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>))</span>
+<span id="cb95-15"><a href="#cb95-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-16"><a href="#cb95-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plm)</span>
+<span id="cb95-17"><a href="#cb95-17" aria-hidden="true" tabindex="-1"></a><span class="do">## remove missing data from the fixed effect to get plm to work</span></span>
+<span id="cb95-18"><a href="#cb95-18" aria-hidden="true" tabindex="-1"></a>don2 <span class="ot">&lt;-</span> <span class="fu">subset</span>(don, <span class="fu">is.na</span>(donor_id) <span class="sc">==</span>F)</span>
+<span id="cb95-19"><a href="#cb95-19" aria-hidden="true" tabindex="-1"></a>fit5 <span class="ot">&lt;-</span> <span class="fu">plm</span>(total_donation <span class="sc">~</span> peragsen, <span class="at">data =</span> don2,</span>
+<span id="cb95-20"><a href="#cb95-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">model =</span> <span class="st">"within"</span>,</span>
+<span id="cb95-21"><a href="#cb95-21" aria-hidden="true" tabindex="-1"></a>            <span class="at">index =</span> <span class="fu">c</span>(<span class="st">"donor_id"</span>))</span>
+<span id="cb95-22"><a href="#cb95-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-23"><a href="#cb95-23" aria-hidden="true" tabindex="-1"></a><span class="do">## random effects</span></span>
+<span id="cb95-24"><a href="#cb95-24" aria-hidden="true" tabindex="-1"></a>fit6 <span class="ot">&lt;-</span> <span class="fu">plm</span>(total_donation <span class="sc">~</span> peragsen, <span class="at">data =</span> don2,</span>
+<span id="cb95-25"><a href="#cb95-25" aria-hidden="true" tabindex="-1"></a>            <span class="at">model =</span> <span class="st">"random"</span>,</span>
+<span id="cb95-26"><a href="#cb95-26" aria-hidden="true" tabindex="-1"></a>            <span class="at">index =</span> <span class="fu">c</span>(<span class="st">"donor_id"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(texreg)</span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="fu">htmlreg</span>(<span class="fu">list</span>(fit, fit2, fit3, fit5, fit6),</span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">custom.model.names =</span> <span class="fu">c</span>(<span class="st">"Logit"</span>, <span class="st">"logit"</span>, <span class="st">"logit"</span>, <span class="st">"Lin. FE"</span>, <span class="st">"Lin. RE"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<table class="texreg" style="margin: 10px auto;border-collapse: collapse;border-spacing: 0px;caption-side: bottom;color: #000000;border-top: 2px solid #000000;">
+<caption>
+Statistical models
+</caption>
+<thead>
+<tr>
+<th style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</th>
+<th style="padding-left: 5px;padding-right: 5px;">
+Logit
+</th>
+<th style="padding-left: 5px;padding-right: 5px;">
+logit
+</th>
+<th style="padding-left: 5px;padding-right: 5px;">
+logit
+</th>
+<th style="padding-left: 5px;padding-right: 5px;">
+Lin. FE
+</th>
+<th style="padding-left: 5px;padding-right: 5px;">
+Lin. RE
+</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-top: 1px solid #000000;">
+<td style="padding-left: 5px;padding-right: 5px;">
+(Intercept)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-4.38<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-6.38<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-6.20<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-4.40
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.08)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.14)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.14)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(3.39)
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+peragsen
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+2.02<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+2.64<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+1.62<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+97.09<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+90.87<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.11)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.11)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.14)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(5.19)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(4.99)
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+terms
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-0.13<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-0.07<sup>*</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-0.05
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.03)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.03)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.03)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+same_state
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+2.65<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.05)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+idfold2
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-0.19<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-0.17<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-0.23<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.02)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.02)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.02)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+cook
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.28<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.29<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.02)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.02)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+NetWorth
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.22<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.21<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.01)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.01)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+notwhite
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-0.37<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-0.38<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.11)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.11)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+malerespondent
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.30<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.32<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.05)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.06)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+sameparty
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.85<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.07)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+</tr>
+<tr style="border-top: 1px solid #000000;">
+<td style="padding-left: 5px;padding-right: 5px;">
+AIC
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+16167.66
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+15151.83
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+14935.63
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+BIC
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+16212.69
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+15222.81
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+15015.45
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+Log Likelihood
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-8078.83
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-7567.92
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-7458.81
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+Deviance
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+16157.66
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+15135.83
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+14917.63
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+Num. obs.
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+60280
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+52734
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+52536
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+62544
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+62544
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+R<sup>2</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.01
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.01
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+Adj. R<sup>2</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-0.04
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.01
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+s_idios
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+316.11
+</td>
+</tr>
+<tr style="border-bottom: 2px solid #000000;">
+<td style="padding-left: 5px;padding-right: 5px;">
+s_id
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+83.38
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="font-size: 0.8em;" colspan="6">
+<sup>***</sup>p &lt; 0.001; <sup>**</sup>p &lt; 0.01; <sup>*</sup>p &lt; 0.05
+</td>
+</tr>
+</tfoot>
+
+</table>
+<p>We also discussed that one could use clustered standard errors like the authors after fitting a logistic regression model. Here is an example using <code>fit3</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>fit3 <span class="ot">&lt;-</span> <span class="fu">glm</span>(donation <span class="sc">~</span> peragsen <span class="sc">+</span> cook <span class="sc">+</span></span>
+<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>              NetWorth <span class="sc">+</span> idfold2 <span class="sc">+</span> notwhite <span class="sc">+</span> malerespondent <span class="sc">+</span> terms <span class="sc">+</span> sameparty,</span>
+<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">data=</span>don, </span>
+<span id="cb97-4"><a href="#cb97-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>))</span>
+<span id="cb97-5"><a href="#cb97-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-6"><a href="#cb97-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sandwich)</span>
+<span id="cb97-7"><a href="#cb97-7" aria-hidden="true" tabindex="-1"></a>clval <span class="ot">&lt;-</span> <span class="fu">vcovCL</span>(fit3, <span class="at">type=</span><span class="st">"HC0"</span>, <span class="at">cluster =</span> don<span class="sc">$</span>donor_id)</span>
+<span id="cb97-8"><a href="#cb97-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmtest)</span>
+<span id="cb97-9"><a href="#cb97-9" aria-hidden="true" tabindex="-1"></a>newfit3sum <span class="ot">&lt;-</span> <span class="fu">coeftest</span>(fit3, <span class="at">vcov=</span>clval)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can override the inputs in the <code>texreg</code> functions to incorporate these adjustments. For example:</p>
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">htmlreg</span>(<span class="fu">list</span>(fit3),</span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">override.se =</span> newfit3sum[, <span class="dv">2</span>],</span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">override.pvalues =</span> newfit3sum[, <span class="dv">4</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<table class="texreg" style="margin: 10px auto;border-collapse: collapse;border-spacing: 0px;caption-side: bottom;color: #000000;border-top: 2px solid #000000;">
+<caption>
+Statistical models
+</caption>
+<thead>
+<tr>
+<th style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</th>
+<th style="padding-left: 5px;padding-right: 5px;">
+Model 1
+</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-top: 1px solid #000000;">
+<td style="padding-left: 5px;padding-right: 5px;">
+(Intercept)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-6.20<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.17)
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+peragsen
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+1.62<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.16)
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+cook
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.29<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.02)
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+NetWorth
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.21<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.02)
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+idfold2
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-0.23<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.03)
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+notwhite
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-0.38<sup>**</sup>
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.15)
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+malerespondent
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.32<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.08)
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+terms
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-0.05
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.03)
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+sameparty
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.85<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.10)
+</td>
+</tr>
+<tr style="border-top: 1px solid #000000;">
+<td style="padding-left: 5px;padding-right: 5px;">
+AIC
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+14935.63
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+BIC
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+15015.45
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+Log Likelihood
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-7458.81
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+Deviance
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+14917.63
+</td>
+</tr>
+<tr style="border-bottom: 2px solid #000000;">
+<td style="padding-left: 5px;padding-right: 5px;">
+Num. obs.
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+52536
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="font-size: 0.8em;" colspan="2">
+<sup>***</sup>p &lt; 0.001; <sup>**</sup>p &lt; 0.01; <sup>*</sup>p &lt; 0.05
+</td>
+</tr>
+</tfoot>
+
+</table>
+</details>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./11-SampleSelection.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Sample Selection Models</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

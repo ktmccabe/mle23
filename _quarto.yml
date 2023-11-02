@@ -17,6 +17,7 @@ book:
     - 09-NominalOutcomes.qmd
     - 10-CountData.qmd
     - 11-SampleSelection.qmd
+    - 12-PanelData.qmd
   page-navigation: true
   sidebar:
     style: docked
