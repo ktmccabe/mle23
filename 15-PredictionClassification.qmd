@@ -92,6 +92,9 @@ Divide your data into folds (how many $k$ depends on how much data you have)
 -   See how well your model predicts the data in the $k$th fold.
 -   Can repeat, leaving out a different fold each time
 
+![](images/cv.png){width="60%"}
+
+
 ### Leave-one-out cross-validation
 
 Best for smaller data
@@ -321,7 +324,7 @@ df_wfrf <- workflow() %>%
 
 Thus far, we have just broken up our data into two portions, one for training and one for testing. Many times, we might want to perform more rigorous testing of our data. One approach for doing so is called $k$-fold cross-validation.
 
-For this example, we are going to keep our `df_test` data separate as a "holdout" sample that is never used to train the classifier. However, we are going to further break up our training data `df_train` into five separate portions (5-fold cross-validation is also common).
+For this example, we are going to keep our `df_test` data separate as a "holdout" sample that is never used to train the classifier. However, we are going to further break up our training data `df_train` into five separate portions (10-fold cross-validation is also common).
 
 ![](images/cv.png){width="60%"}
 

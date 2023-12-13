@@ -388,6 +388,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>See how well your model predicts the data in the <span class="math inline">\(k\)</span>th fold.</li>
 <li>Can repeat, leaving out a different fold each time</li>
 </ul>
+<p><img src="images/cv.png" class="img-fluid" style="width:60.0%"></p>
 </section>
 <section id="leave-one-out-cross-validation" class="level3" data-number="15.3.2">
 <h3 data-number="15.3.2" class="anchored" data-anchor-id="leave-one-out-cross-validation"><span class="header-section-number">15.3.2</span> Leave-one-out cross-validation</h3>
@@ -627,7 +628,7 @@ actual     0     1
 <section id="cross-validation-1" class="level3" data-number="15.6.5">
 <h3 data-number="15.6.5" class="anchored" data-anchor-id="cross-validation-1"><span class="header-section-number">15.6.5</span> Cross-validation</h3>
 <p>Thus far, we have just broken up our data into two portions, one for training and one for testing. Many times, we might want to perform more rigorous testing of our data. One approach for doing so is called <span class="math inline">\(k\)</span>-fold cross-validation.</p>
-<p>For this example, we are going to keep our <code>df_test</code> data separate as a “holdout” sample that is never used to train the classifier. However, we are going to further break up our training data <code>df_train</code> into five separate portions (5-fold cross-validation is also common).</p>
+<p>For this example, we are going to keep our <code>df_test</code> data separate as a “holdout” sample that is never used to train the classifier. However, we are going to further break up our training data <code>df_train</code> into five separate portions (10-fold cross-validation is also common).</p>
 <p><img src="images/cv.png" class="img-fluid" style="width:60.0%"></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="do">## cross-validation</span></span>
