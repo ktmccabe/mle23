@@ -228,7 +228,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-ModelTypesSummary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Linear Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Choosing Model Types</span></span></a>
   </div>
 </li>
     </ul>
@@ -1174,9 +1174,9 @@ Some predictor variables are on very different scales: consider rescaling</code>
 <div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>feEx <span class="ot">&lt;-</span> <span class="fu">FEsim</span>(fit.re, <span class="dv">1000</span>)</span>
 <span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(feEx)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>              term        mean     median           sd
-1      (Intercept) 329.8490921 328.947370 94.191266324
-2 positiveIncrease   0.5318654   0.532214  0.007752293</code></pre>
+<pre><code>              term        mean      median           sd
+1      (Intercept) 326.9363694 325.5137486 92.118396290
+2 positiveIncrease   0.5314356   0.5314092  0.007638408</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotFEsim</span>(feEx) <span class="sc">+</span></span>
 <span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
