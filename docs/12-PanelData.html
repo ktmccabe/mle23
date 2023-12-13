@@ -1175,8 +1175,8 @@ Some predictor variables are on very different scales: consider rescaling</code>
 <span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(feEx)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>              term        mean      median           sd
-1      (Intercept) 326.9363694 325.5137486 92.118396290
-2 positiveIncrease   0.5314356   0.5314092  0.007638408</code></pre>
+1      (Intercept) 320.9172921 323.2872460 92.223569908
+2 positiveIncrease   0.5319686   0.5317333  0.007830214</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotFEsim</span>(feEx) <span class="sc">+</span></span>
 <span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
@@ -1352,11 +1352,11 @@ Try on your own, then expand to see the authors’ approach.
 <p>For information on rare events logits, as a special form of the logit model, see <a href="https://gking.harvard.edu/files/0s.pdf">here</a>, a response <a href="https://statisticalhorizons.com/logistic-regression-for-rare-events">here</a>, and R code <a href="http://docs.zeligproject.org/articles/zelig_relogit.html">here</a>.</p>
 <p>They also analyze the amount given by transforming the variable into an incremental count outcome. “Because donations tend to be given in $50 increments, we use a rank-ordered variable that equals 0 for $0, 1 for $1–$49, 2 for $50–$99, and so on. Supplemental Table A9 shows that the results are robust to using the exact dollar amount, a rank based on $100 increments, and one based on $500 increments. Because donations are capped at $5,000, all of these dependent variables reflect this maximum. Moreover, as with the probability of donating, there is an overdispersion of zeros representing cases where a donor did not give to a senator. We accordingly use a zero-inflated negative binomial regression model for analyses of the amount donated. Additionally, for purposes of comparison, we show results for Tobit specifications.”</p>
 <ul>
-<li>We discussed zero-inflated models in section <a href="https://ktmccabe.github.io/mlebook/how-to-think-about-zero-counts.html">10.9.2</a></li>
-<li>We discussed Tobit models in <a href="https://ktmccabe.github.io/mlebook/truncated-models.html">11.4</a></li>
+<li>We discussed zero-inflated models in section <a href="https://ktmccabe.github.io/mle23/how-to-think-about-zero-counts.html">Section 10</a></li>
+<li>We discussed Tobit models in <a href="https://ktmccabe.github.io/mle23/truncated-models.html">Section 11</a></li>
 </ul>
-<p>In our live discussion, we came up with several different possibles approaches, frequently using binary logistic regression with <code>donation</code> as the outcome or a linear model with <code>total_donation</code> as the outcome. Some suggested specifications also included fixed effects for the donors using the <code>plm</code> package and fitting a <code>within</code> model. Finally, we explored using random effects in <code>plm</code> or <code>lme4</code>, though the <code>lme4</code> approach appeared very stressful for our computers!</p>
-<p>Overall, we came up with consistent support for the positive relationship between policy agreement and giving to campaigns. Here are a few approaches developed:</p>
+<p>We can come up with several different possibles approaches, frequently using binary logistic regression with <code>donation</code> as the outcome or a linear model with <code>total_donation</code> as the outcome. Some may suggest specifications also included fixed effects for the donors using the <code>plm</code> package and fitting a <code>within</code> model. Finally, we explored using random effects in <code>plm</code> or <code>lme4</code>, though the <code>lme4</code> approach appeared very stressful for our computers!</p>
+<p>Here are a few approaches developed:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">glm</span>(donation <span class="sc">~</span> peragsen <span class="sc">+</span> </span>
 <span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>             terms <span class="sc">+</span> same_state <span class="sc">+</span> </span>
