@@ -1,7 +1,8 @@
 # Introduction to MLE {#mle}
 
+```{=html}
 <script src="https://hypothes.is/embed.js" async></script>
-
+```
 This section will provide an overview of MLE. There are a few general connections we can make between the things we know (the linear least squares model) and the concepts introduced here.
 
 -   Practical Uses: Going from nice continuous outcome data to outcome data generated differently

@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2023-09-01">
 
-<title>MLE 2023</title>
+<title>MLE 2023 - 16&nbsp; Linear Models</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./02-ROverview.html" rel="next">
+<link href="./15-PredictionClassification.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -61,6 +60,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -73,7 +74,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Maxmimum Likelihood Fall 2023</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./16-ModelTypesSummary.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Linear Models</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -100,7 +101,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Maxmimum Likelihood Fall 2023</span></span></a>
   </div>
 </li>
@@ -190,13 +191,28 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./16-ModelTypesSummary.html" class="sidebar-item-text sidebar-link">
+  <a href="./16-ModelTypesSummary.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Linear Models</span></span></a>
   </div>
 </li>
     </ul>
     </div>
-    
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Section Contents</h2>
+   
+  <ul>
+  <li><a href="#logit" id="toc-logit" class="nav-link active" data-scroll-target="#logit"><span class="header-section-number">16.1</span> Logit</a>
+  <ul>
+  <li><a href="#ordinal-logit" id="toc-ordinal-logit" class="nav-link" data-scroll-target="#ordinal-logit"><span class="header-section-number">16.1.1</span> Ordinal Logit</a></li>
+  <li><a href="#multinomial-logit" id="toc-multinomial-logit" class="nav-link" data-scroll-target="#multinomial-logit"><span class="header-section-number">16.1.2</span> Multinomial Logit</a></li>
+  </ul></li>
+  <li><a href="#probit" id="toc-probit" class="nav-link" data-scroll-target="#probit"><span class="header-section-number">16.2</span> Probit</a>
+  <ul>
+  <li><a href="#ordered-probit" id="toc-ordered-probit" class="nav-link" data-scroll-target="#ordered-probit"><span class="header-section-number">16.2.1</span> Ordered probit</a></li>
+  </ul></li>
+  <li><a href="#poisson-quasipoisson-and-negative-binomial" id="toc-poisson-quasipoisson-and-negative-binomial" class="nav-link" data-scroll-target="#poisson-quasipoisson-and-negative-binomial"><span class="header-section-number">16.3</span> Poisson, Quasipoisson, and Negative Binomial</a></li>
+  </ul>
+</nav>
 </nav>
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
@@ -207,7 +223,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">MLE 2023</h1>
+<h1 class="title"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Linear Models</span></h1>
 </div>
 
 
@@ -215,12 +231,6 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-title-meta">
 
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">September 1, 2023</p>
-    </div>
-  </div>
   
     
   </div>
@@ -228,15 +238,138 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<script src="https://hypothes.is/embed.js" async=""></script>
-<p>This document will include important links and course notes for fall 2023 Maximum Likelihood Estimation in Political Science.</p>
+<p>This section provides a “cheat sheet” summary of some of the model types we have discussed.</p>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 9%">
+<col style="width: 15%">
+<col style="width: 30%">
+<col style="width: 18%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Model</th>
+<th>PDF</th>
+<th><span class="math inline">\(\theta_i\)</span> ; Link<span class="math inline">\(^{-1}\)</span></th>
+<th>linear predictor: <span class="math inline">\(\eta_i=X_i^\prime\beta\)</span></th>
+<th>Type of Outcome</th>
+<th style="text-align: right;">R function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Linear</td>
+<td><span class="math inline">\(Y_i \sim \mathcal{N}(\mu_i,\sigma^2)\)</span></td>
+<td><span class="math inline">\(\mu_i = X_i^\prime\beta\)</span></td>
+<td><span class="math inline">\(\mu_i\)</span></td>
+<td>Numeric continuous</td>
+<td style="text-align: right;"><code>lm()</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Logit</td>
+<td><span class="math inline">\(Y_i \sim \rm{Bernoulli}(\pi_i)\)</span></td>
+<td><span class="math inline">\(\pi_i=\frac{\exp(X_i^\prime\beta)}{(1+\exp(X_i^\prime\beta))}\)</span></td>
+<td>logit<span class="math inline">\((\pi_i)\)</span> = <span class="math inline">\(\log \frac{\pi_i}{1 - \pi_i}\)</span></td>
+<td>Categorical</td>
+<td style="text-align: right;"><code>glm()</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Probit</td>
+<td><span class="math inline">\(Y_i \sim \rm{Bernoulli}(\pi_i)\)</span></td>
+<td><span class="math inline">\(\pi_i = \Phi(X_i^\prime\beta)\)</span></td>
+<td>probit<span class="math inline">\((\pi_i)=\Phi^{-1}(\pi_i)\)</span></td>
+<td>Categorical</td>
+<td style="text-align: right;"><code>glm()</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Poisson</td>
+<td><span class="math inline">\(Y_i \sim \rm{Poisson}(\lambda_i)\)</span></td>
+<td><span class="math inline">\(\lambda_i = \exp(X_i^\prime\beta)\)</span></td>
+<td><span class="math inline">\(\log(\lambda_i)\)</span></td>
+<td>Count</td>
+<td style="text-align: right;"><code>glm()</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Negative Binomial</td>
+<td><span class="math inline">\(Y_i \sim \rm{NB}(\lambda, r)\)</span></td>
+<td><span class="math inline">\(\lambda_i = \exp(X_i^\prime\beta)\)</span></td>
+<td><span class="math inline">\(\log(\lambda_i)\)</span></td>
+<td>Count</td>
+<td style="text-align: right;"><code>glm.nb()</code></td>
+</tr>
+</tbody>
+</table>
+<p>Note that for ordered models, we use <code>polr</code> from <code>library(MASS)</code> and for multinomial logits, we use <code>multinom</code> from <code>library(nnet)</code>.</p>
+<p>In linear models, when we get our coefficients <span class="math inline">\(\hat \beta\)</span>, we interpret them as, for a one-unit increase in <span class="math inline">\(x\)</span>, we see a <span class="math inline">\(\hat \beta\)</span> increase in the units of <span class="math inline">\(Y\)</span>, holding all other variables constant.</p>
 <ul>
-<li>This webpage will be updated throughout the semester with new content.</li>
-<li>Sprinkled throughout the website are links to additional resources that might provide more in-depth explanations of a given topic. In particular, several of the sections have benefited from previous materials developed by Kosuke Imai and the book <a href="https://qss.princeton.press/">Quantitative Social Science</a>, Chris Bail and <a href="https://sicss.io/">SICSS</a>, Marc Ratkovic, In Song Kim, Will Lowe, and others.</li>
-<li>This is a living web resource. If you spot errors or have questions or suggestions, please email me at k.mccabe@rutgers.edu.</li>
+<li>For example, if we were looking at the effect of age (measured in years) on income, measured in dollars, we would say, for every year increase in someone’s age, we estimate an average increase to their income of <span class="math inline">\(\hat \beta\)</span> dolllars. (Or decrease if <span class="math inline">\(\hat \beta\)</span> is negative)</li>
 </ul>
+<p>A special case for linear models is when we apply them in cases where the outcome variable only takes two values– 0 or 1. Here, we call our linear model a “linear probability model.” Now R won’t know our outcome is supposed to be between 0 and 1, but so long as we are not at extremes of our predictions, we can often stay within these bounds. In this special case, usually our interpretation is in probability units:</p>
+<ul>
+<li>For example, if we were looking at the effect of age (measured in years) on voter turnout (0 if not turned out, 1 if turned out), we would say, for every year increase in someone’s age, we estimate an average of <span class="math inline">\(\hat \beta \times 100\)</span> (to turn into a percent) percentage point increase in the probability they turn out to vote, holding all other variables constant.</li>
+</ul>
+<p>Another special case is if we apply a linear model to an ordered categorical outcome (e.g., a survey likert scale, going from 1 to 5, say strongly opposing to strongly supporting Ron DeSantis). Here, we would be estimating changes on this scale.</p>
+<ul>
+<li>For example, if we were looking at the effect of age (measured in years) on support for Ron DeSantis, for every year increase in someone’s age, we estimate an average of <span class="math inline">\(\hat \beta\)</span> increase on the 1 to 5 scale of support. (E.g., perhaps an increase of .2 scale points).
+<ul>
+<li>Often, people might change their scale to go from 0 to 1 (0, .25, .5, .75, 1), so that the interpretation can be percentage points of the scale. For every year increase in someone’s age, we estimate an average of <span class="math inline">\(\hat \beta \time 100\)</span> percentage point increase on the scale of support.</li>
+</ul></li>
+</ul>
+<p>The nice thing about these linear models is 1) there is no need to transform our coefficients (<span class="math inline">\(\mu_i = X_i^\prime\beta = \eta_i = Y_i\)</span>. The values are already in units of <span class="math inline">\(Y\)</span> (or, in other words, <span class="math inline">\(\mu\)</span>, the expected value of <span class="math inline">\(Y_i\)</span>). This makes interpretations easier. 2) The marginal effect of a variable is constant across values of <span class="math inline">\(x\)</span>. In contrast, because the other models are trying to constrain the estimated outcomes to fit particular limits, the marginal effects change slightly depending on where in the domain of <span class="math inline">\(x\)</span> we are estimating them.</p>
+<section id="logit" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="logit"><span class="header-section-number">16.1</span> Logit</h2>
+<p>In binary logistic regression models, our goal is to estimate the probability that our outcome <span class="math inline">\(Y_i\)</span> takes the value 1 (given our covariates). (E.g., The probability someone turns out to vote).</p>
+<p>Because we want to keep our estimates between 0 and 1 to reflect a probability, we need to apply a transformation. When we use a “logit” link function, our coefficients are now in the units of “logits” or “log odds”– the log of the odds- the probability of an event happening over the probability of the event not happening.</p>
+<ul>
+<li>For example, if we were looking at the effect of age (measured in years) on voter turnout (0 if not turned out, 1 if turned out), we would say, for every year increase in someone’s age, we estimate an average of <span class="math inline">\(\hat \beta\)</span> “logits increase” or “increase in the log-odds” they turn out to vote, holding all other variables constant.</li>
+</ul>
+<section id="ordinal-logit" class="level3" data-number="16.1.1">
+<h3 data-number="16.1.1" class="anchored" data-anchor-id="ordinal-logit"><span class="header-section-number">16.1.1</span> Ordinal Logit</h3>
+<p>We discussed two variations on the logit model in this course– ordinal and multinomial. In an ordinal model, we have a categorical outcome that is ordered in nature (e.g., a likert survey scale). We are now ultimately estimating the probability that <span class="math inline">\(Y_i\)</span> belongs to a particular category. However, it takes some work to get there.</p>
+<p>Our coefficient values are now in the ordered log-odds scale. We are estimating the log of the odds that <span class="math inline">\(Y_i\)</span> takes a value less than or equal to a certain category <span class="math inline">\(j\)</span>.</p>
+<ul>
+<li>For example, if we were looking at the effect of age (measured in years) on support for Ron DeSantis, we would say, for every year increase in someone’s age, we estimate an average of <span class="math inline">\(\hat \beta\)</span> increase in the ordered log-odds of supporting DeSantis, holding all other variables constant. If positive, generally, older people are going to be associated with higher probabilities of categories with greater support (e.g., “strongly support”) and lower probabilities of categories with lower support (e.g., “strongly oppose”). To really know the nature of the movement, you woud need to calculate quantities of interest.</li>
+</ul>
+</section>
+<section id="multinomial-logit" class="level3" data-number="16.1.2">
+<h3 data-number="16.1.2" class="anchored" data-anchor-id="multinomial-logit"><span class="header-section-number">16.1.2</span> Multinomial Logit</h3>
+<p>In a multinomial model, we have a categorical outcome that is unordered in nature (e.g., religious groups). We are still ultimately going to try to estimate the probability that <span class="math inline">\(Y_i\)</span> belongs to a particular category. However, our coefficients are going to represent contrasts between two specific outcome categories. This is the model where we get multiple sets of coefficients– one for each pairwise comparison between a particular <span class="math inline">\(j\)</span> category of the outcome and a category <span class="math inline">\(J\)</span> that we choose as the baseline.</p>
+<ul>
+<li>For example, if we were looking at the effect of age (measured in years) on belonging to Catholic, Jewish, or Atheist groups, where Atheist was set to be a reference outcome, we would say, for every year increase in someone’s age, we estimate an average of <span class="math inline">\(\hat \beta_{catholic}\)</span> increase in the log-odds of being Catholic vs.&nbsp;Atheist, holding all other variables constant and <span class="math inline">\(\hat \beta_{jewish}\)</span> increase in the log-odds of being Jewish vs.&nbsp;Atheist, holding all other variables constant.</li>
+</ul>
+</section>
+</section>
+<section id="probit" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="probit"><span class="header-section-number">16.2</span> Probit</h2>
+<p>Recall, in binary logistic regression models, our goal is to estimate the probability that our outcome <span class="math inline">\(Y_i\)</span> takes the value 1 (given our covariates). (E.g., The probability someone turns out to vote).</p>
+<p>Because we want to keep our estimates between 0 and 1 to reflect a probability, we need to apply a transformation. When we use a “probit” link function, our coefficients are now in the units of “probits” or z-scores of the probability.</p>
+<ul>
+<li>For example, if we were looking at the effect of age (measured in years) on voter turnout (0 if not turned out, 1 if turned out), we would say, for every year increase in someone’s age, we estimate an average of <span class="math inline">\(\hat \beta\)</span> “probits increase” that they turn out to vote.</li>
+</ul>
+<section id="ordered-probit" class="level3" data-number="16.2.1">
+<h3 data-number="16.2.1" class="anchored" data-anchor-id="ordered-probit"><span class="header-section-number">16.2.1</span> Ordered probit</h3>
+<p>We also ran an ordered probit model. Similar to ordered logit, we have a categorical outcome that is ordered in nature (e.g., a likert survey scale). We are now ultimately estimating the probability that <span class="math inline">\(Y_i\)</span> belongs to a particular category.</p>
+<ul>
+<li>As with the binary case, our coefficient values will be in terms of probits.For example, if we were looking at the effect of age (measured in years) on support for Ron DeSantis, we would say, for every year increase in someone’s age, we estimate an average of <span class="math inline">\(\hat \beta\)</span> increase in the ordered probits of supporting DeSantis, holding all other variables constant. Generally, if positive, this would mean greater probability in being in the higher categories of support and lower probability of being in the lower categories of support, but you need to calculate quantities of interest to know where the movement is happening.</li>
+</ul>
+</section>
+</section>
+<section id="poisson-quasipoisson-and-negative-binomial" class="level2" data-number="16.3">
+<h2 data-number="16.3" class="anchored" data-anchor-id="poisson-quasipoisson-and-negative-binomial"><span class="header-section-number">16.3</span> Poisson, Quasipoisson, and Negative Binomial</h2>
+<p>We use poisson models when our outcome is a count variable– a variable that is an integer from 0 to some positive number. Because we do not want to estimate negative counts, we still need to apply a transformation.</p>
+<p>The poisson model uses a log link function. This means that our coefficients will be in log units.</p>
+<ul>
+<li>For example, if we were looking at the effect of age (measured in years) on the number of social media posts a person makes per year, we would say, for every year increase in someone’s age, we estimate an average of <span class="math inline">\(\hat \beta\)</span> increase in the log number of social media posts.
+<ul>
+<li>Often, we will exponentiate these coefficient values (<span class="math inline">\(\hat \beta\)</span>) to get them back into the units we care about: Increasing age by one year multiplies the rate of social media posts per year by <span class="math inline">\(e^{\hat \beta}\)</span>.</li>
+</ul></li>
+</ul>
+<p>The quasipoisson and negative binomial are also models used for count data. Both are better able at addressing issues of overdisperson in the conditional variance of our outcome. Fortunately, the coefficient interpretations of these models are similar to the poisson because they rely on the log link.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -474,11 +607,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./15-PredictionClassification.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Prediction and Classification</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./02-ROverview.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R Overview</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

@@ -1,109 +1,104 @@
 # Prediction and Classification {#predict}
 
-This section will provide a brief introduction to tools related to the goals of prediction and classification. 
+This section will provide a brief introduction to tools related to the goals of prediction and classification.
 
 In the social sciences, we often have one of a few goals in mind:
 
-  - Describe
-  - Explain, evaluate, and recommend $\rightarrow$ Causality
-  - Discover and Predict
-  
+-   Describe
+-   Explain, evaluate, and recommend $\rightarrow$ Causality
+-   Discover and Predict
+
 Most of the tools we have been working on thus far have focused on first describing our data and then conducting hypothesis tests through different types of regression, in order to assess a deductive hypothesis, *explaining* the relationship between two variables.
 
 Here, we are going to turn to the third goal above.
 
 Some supplemental resources for this section include the following R packages:
 
-  - I highly recommend this [online interactive course](https://supervised-ml-course.netlify.app/) (free- amazing!) from Jilia Silge which walks through a newer package, `tidymodels` similar to caret, that can apply several different types of machine learning models. It draws on the fundamentals covered in this section but adds more advanced techniques. Here is an additional detailed tutorial on this package [here](https://hansjoerg.me/2020/02/09/tidymodels-for-machine-learning/) and [here](https://www.r-bloggers.com/2020/03/machine-learning-with-tidymodels-2/).
-  - `caret` [package](http://topepo.github.io/caret/index.html) and [presentation](https://www.r-project.org/conferences/useR-2013/Tutorials/kuhn/user_caret_2up.pdf}{presentation)
-  - `RTextTools` (may or may not be updated) [here](https://cran.r-project.org/web/packages/RTextTools/index.html) and [here](https://journal.r-project.org/archive/2013-1/collingwood-jurka-boydstun-etal.pdf}{summary)
+-   I highly recommend this [online interactive course](https://supervised-ml-course.netlify.app/) (free- amazing!) from Jilia Silge which walks through a newer package, `tidymodels` similar to caret, that can apply several different types of machine learning models. It draws on the fundamentals covered in this section but adds more advanced techniques. Here is an additional detailed tutorial on this package [here](https://hansjoerg.me/2020/02/09/tidymodels-for-machine-learning/) and [here](https://www.r-bloggers.com/2020/03/machine-learning-with-tidymodels-2/).
+-   `caret` [package](http://topepo.github.io/caret/index.html) and [presentation](https://www.r-project.org/conferences/useR-2013/Tutorials/kuhn/user_caret_2up.pdf%7D%7Bpresentation)
+-   `RTextTools` (may or may not be updated) [here](https://cran.r-project.org/web/packages/RTextTools/index.html) and [here](https://journal.r-project.org/archive/2013-1/collingwood-jurka-boydstun-etal.pdf%7D%7Bsummary)
 
 ## Overview of Prediction and Classification
 
 When we predict something, we are estimating some unknown using information we do know and trying to do so as accurately and precisely as possible.
 
-  - Often prediction involves classification--  predicting a categorical outcome (e.g., prediction of who wins vs. who loses)
+-   Often prediction involves classification-- predicting a categorical outcome (e.g., prediction of who wins vs. who loses)
 
 Some social science examples of this might include
 
 ![](images/instagramhate.png)
 
-  - Trying to detect hate speech online
-  - Trying to flag "fake news" and other misinformation
-  - Trying to forecast the results of an election
-  - Trying to classify a large amount of text into subject or topic categories for analysis
-  
+-   Trying to detect hate speech online
+-   Trying to flag "fake news" and other misinformation
+-   Trying to forecast the results of an election
+-   Trying to classify a large amount of text into subject or topic categories for analysis
 
 ### How to predict or classify
 
 Goal: Estimate/guess some unknown using information we have -- and do so as accurately and precisely as possible.
 
-  1. Choose an approach
-      - Using an observed (known) measure as a direct proxy to predict an outcome (e.g., a dictionary)
-      - Using one or more observed (known) measures in a (often, regression) model to predict an outcome
-      - Using a model to automatically select the measures to use for predicting an outcome
-  2. Assess accuracy and precision in-sample and out-of-sample using some sample "training" data where you do know the right answer ("ground truth").
-      - Prediction error: $Truth - Prediction$ 
-      - Bias: Average prediction error: $\text{mean}(Truth - Prediction)$
-          + A prediction is `unbiased' if the bias is zero (if the prediction is on average true)
-      - In regression: R-squared or Root-mean squared error 
-          + RMSE is like `absolute' error-- the average magnitude of the prediction error 
-      - For classification: Confusion Matrix 
-          + A cross-tab of predictions you got correct vs. predictions you got wrong (misclassified)
-          + Gives you true positives and true negatives vs. false positives and false negatives
-  3. Repeat steps 1 and 2 until you are confident in your method for predicting or classifying.
-  4. Apply to completely unknown data. 
-  
+1.  Choose an approach
+    -   Using an observed (known) measure as a direct proxy to predict an outcome (e.g., a dictionary)
+    -   Using one or more observed (known) measures in a (often, regression) model to predict an outcome
+    -   Using a model to automatically select the measures to use for predicting an outcome
+2.  Assess accuracy and precision in-sample and out-of-sample using some sample "training" data where you do know the right answer ("ground truth").
+    -   Prediction error: $Truth - Prediction$
+    -   Bias: Average prediction error: $\text{mean}(Truth - Prediction)$
+        -   A prediction is \`unbiased' if the bias is zero (if the prediction is on average true)
+    -   In regression: R-squared or Root-mean squared error
+        -   RMSE is like \`absolute' error-- the average magnitude of the prediction error
+    -   For classification: Confusion Matrix
+        -   A cross-tab of predictions you got correct vs. predictions you got wrong (misclassified)
+        -   Gives you true positives and true negatives vs. false positives and false negatives
+3.  Repeat steps 1 and 2 until you are confident in your method for predicting or classifying.
+4.  Apply to completely unknown data.
 
 ## In-sample vs. Out-of-Sample
 
 Problem: Models that fit our existing ("in-sample") data might not be the best for predicting out-of-sample data. Issues with variability and overfitting.
 
-  - There may be idiosyncratic features of the data for which we do know the ground truth (e.g., outliers, different levels of variability) that could lead to poor predictions. This can lead to overfitting-- predicting your particular dataset reaaaaaallly well, but any other data, more poorly.
-  - Our training data could be unrepresentative of the population in some way
-  
+-   There may be idiosyncratic features of the data for which we do know the ground truth (e.g., outliers, different levels of variability) that could lead to poor predictions. This can lead to overfitting-- predicting your particular dataset reaaaaaallly well, but any other data, more poorly.
+-   Our training data could be unrepresentative of the population in some way
+
 For example, many AI tools suffer from gender and/or racial biases due to unrepresentative training data. If most of the data used to train a speech detection or facial recognition tool was trained on white faces/ white voices, it may have poor accuracy for other groups.
 
 ![](images/speecherrors.png)
 
 Solutions:
 
-  - Choose your training data wisely!
-  - Search for systematic biases along key variables (instead of aggregate accuracy, also look for accuracy measures by subgroups)
-  - Use out-of-sample predictions/classification tests to help avoid overfitting
-      + Split data into train vs. test and/or do this repeatedly with
-      + Cross-validation
-
+-   Choose your training data wisely!
+-   Search for systematic biases along key variables (instead of aggregate accuracy, also look for accuracy measures by subgroups)
+-   Use out-of-sample predictions/classification tests to help avoid overfitting
+    -   Split data into train vs. test and/or do this repeatedly with
+    -   Cross-validation
 
 ## Cross-Validation
 
 Cross-Validation is an approach to address overfitting issues
 
-  - Take data for which you know the answer -- we call this "training data"
-  - Randomly subset out a portion of the training data. This will become our "test" data.
-  - Develop a model based on  the training data. 
-  - Test the accuracy of the model on the test data (out-of-sample data that was not used to train the model).
-  - Repeat process for different portions of the data.
+-   Take data for which you know the answer -- we call this "training data"
+-   Randomly subset out a portion of the training data. This will become our "test" data.
+-   Develop a model based on the training data.
+-   Test the accuracy of the model on the test data (out-of-sample data that was not used to train the model).
+-   Repeat process for different portions of the data.
 
 Goal: See how well our model will generalize to new data (data the model hasn't seen).
-
 
 ### k-fold cross-validation
 
 Divide your data into folds (how many $k$ depends on how much data you have)
 
-  - Fit your model to $k-1$ folds
-  - See how well your model predicts the data in the $k$th fold.
-  - Can repeat, leaving out a different fold each time
+-   Fit your model to $k-1$ folds
+-   See how well your model predicts the data in the $k$th fold.
+-   Can repeat, leaving out a different fold each time
 
 ### Leave-one-out cross-validation
 
 Best for smaller data
 
-  - Fit your model to all but one observation in your data
-  - See how well your model predicts the left-out observation
-  - Can repeat, continuing to leave out one observation each time
-
+-   Fit your model to all but one observation in your data
+-   See how well your model predicts the left-out observation
+-   Can repeat, continuing to leave out one observation each time
 
 ## Examples of Prediction and Classification
 
@@ -120,19 +115,20 @@ Recall that a key outcome variable here was `donation` indicating if a particula
 
 ```{r}
 table(don$donation)
+don$donation <- as.factor(don$donation)
 ```
 
 Can we predict whether someone will donate to a Senator?
 
 Outcome: `donation` (1 or 0), binary variable = binary classifier
 
-  1. Choose an approach: Build a model (e.g., logistic regression)
-  2. Train the model
-  3. Assess accuracy 
-      - Within sample and test model using cross-validation out-of-sample
-  4. If we were very satisfied with our model, we could apply the model to data for which we do not know the answer in the future. 
-      - If you were a campaign, could you predict who will donate?
-  
+1.  Choose an approach: Build a model (e.g., logistic regression)
+2.  Train the model
+3.  Assess accuracy
+    -   Within sample and test model using cross-validation out-of-sample
+4.  If we were very satisfied with our model, we could apply the model to data for which we do not know the answer in the future.
+    -   If you were a campaign, could you predict who will donate?
+
 Let's go!
 
 ```{r}
@@ -147,12 +143,13 @@ fit <- glm(donation ~ NetWorth + Edsum,
 ```
 
 In-Sample Accuracy Assessments
+
 ```{r}
 ## generate probability of donation for each observation
 donsub$prob <- predict(fit, type = "response")
 
 ## set a prediction threshold
-donsub$pred <- ifelse(donsub$prob > mean(donsub$donation), 1, 0)
+donsub$pred <- ifelse(donsub$prob > 0.05, 1, 0)
 
 ## accuracy- proportion where prediction matches reality
 mean(donsub$pred == donsub$donation)
@@ -160,7 +157,7 @@ mean(donsub$pred == donsub$donation)
 ## confusion matrix
 table(truth = donsub$donation, predicted = donsub$pred)
 ```
-      
+
 There are different measures for accuracy that focus on particular types of errors:
 
 ```{r}
@@ -186,12 +183,13 @@ recall <- truepos/(truepos + falseneg)
 ## f-score, combination of precision/recall
 F1 <- (2 * precision * recall) / (precision + recall)
 ```
-See [this post](https://towardsdatascience.com/accuracy-recall-precision-f-score-specificity-which-to-optimize-on-867d3f11124) for more details and guidance on which one to choose.
 
+See [this post](https://towardsdatascience.com/accuracy-recall-precision-f-score-specificity-which-to-optimize-on-867d3f11124) for more details and guidance on which one to choose.
 
 Another common way to assess accuracy is through an ROC curve
 
 ROC curves plot the true positive rate/precision (y) vs. 1 - false positive (x) rates. Want the curve to be away from the diagonal, increasing the area under the curive (AUC).
+
 ```{r, message=F, warning =F}
 # install.packages("pROC")
 library(pROC)
@@ -200,75 +198,15 @@ ROC <- roc(response = donsub$donation,
 plot(ROC, print.thres = "best")
 auc(ROC)
 ```
+
 For more information, see [here](http://fouryears.eu/2011/10/12/roc-area-under-the-curve-explained/).
 
-
-Out-of-Sample Tests: Cross-Validation
-
-```{r, message=F, warning=F}
-## split data into k folds
-library(cvTools)
-set.seed(1234)
-folds <- cvFolds(nrow(donsub), K = 10)
-```
-
-Let's run through the process for one fold
-```{r}
-## leave one fold out != i
-fit <- glm(donation ~ NetWorth + Edsum, family = binomial(link = "logit"), 
-           data = donsub[folds$subsets[folds$which != 1],])
-
-## out of sample prediction on left out fold == i
-testdata <- donsub[folds$subsets[folds$which == 1],]
-testdata$prob <- predict(fit, newdata = testdata, 
-                       type = "response")
-
-## choose some criteria to assess accuracy
-## we will just assess basic matches, but you may want a different one
-## set a prediction threshold
-testdata$pred <- ifelse(testdata$prob > .5, 1, 0)
-acc <- mean(testdata$pred == testdata$donation)
-acc
-```
-
-Let's make a loop to repeat this process for each fold.
-
-```{r}
-## container vector for assessment criteria
-accs <- rep(NA, 10)
-
-## set to length of container
-for(i in 1:10){
-  
-  ## leave one fold out != i
-  fit <- glm(donation ~ NetWorth + Edsum, family = binomial(link = "logit"), 
-           data = donsub[folds$subsets[folds$which != i],])
-  
-  ## out of sample prediction on left out fold == i
-  testdata <- donsub[folds$subsets[folds$which == i],]
-  testdata$prob <- predict(fit, newdata = testdata, 
-                       type = "response")
-
-  ## choose some criteria to assess accuracy
-  ## set a prediction threshold
-  testdata$pred <- ifelse(testdata$prob > .5, 1, 0)
-  accs[i] <- mean(testdata$pred == testdata$donation)
-}
-accs
-
-mean(accs)
-```
-
-We've done it! If we are satisfied with this level of accuracy, we could stop here and apply our model with any new data. If we are not satisfied, we would start by building a new model and repeat the process.
-
-  - Note: this is actually probably a bad measure of accuracy for our case given the skew in our data. We are only accurate because the model is predicting no one will donate! Bad news for campaigns. How do we know this? By inspecting the confusion matrix. Our threshold of .5 was probably too high.
-
-
-***Continuous Outcome***
+## Continuous Example
 
 Let's now try an example with a continuous outcome: How much will someone donate to a Senator? One way to judge accuracy of a linear model is the root mean squared error
 
 One basic approach would be to use a linear regression model. Other than that, it's the same process as before, but we will use a different assessment for accuracy.
+
 ```{r}
 fit <- lm(total_donation ~ NetWorth + Edsum, data = don)
 
@@ -277,40 +215,314 @@ rmse <- sqrt(sum(residuals(fit)^2)/fit$df.residual)
 rmse
 ```
 
+## Tidymodels and Cross-validation
+
+We are going to use a package called `tidymodels` to implement this process.
+
+-   This package allows users to employ a variety of different machine learning models with only minor adjustments to the coding syntax.
+-   It also integrates additional pre-processing and post-fit model validation tools to make training and testing models easier.
+    -   We will explore tools for cross-validation and downsampling.
+-   Similar packages exist, such as the [`caret` R package](https://topepo.github.io/caret/index.html). Many machine learning models also have their own standalone R packages you can explore.
+
+### Split data into train vs. test
+
+```{r}
+library(tidyverse)
+library(tidymodels)
+library(textrecipes)
+library(themis)
+library(yardstick)
+library(glmnet)
+library(ranger)
+
+## Split into train vs. test
+set.seed(123)
+df_split <- donsub %>% initial_split(prop = 0.8)
+df_train <- training(df_split)
+df_test <- testing(df_split)
+```
+
+### Construct features and create model recipe
+
+We now need to construct the features of our tweets that we will use to predict whether or not a tweet is uncivil. Because we have text as our data, our approach will be to use the presence and absence of certain words and characters (and their frequency) as the predictions.
+
+-   In `tidymodels`, we can specify these steps as part of a `recipe`. In a `recipe`, you write a formula that is similar to the syntax of standard regression models in R, where you have your outcome `y ~ features, data`.
+-   Following the initial recipe line, we can then add steps to pre-process and mutate the variables that will be include in the model.
+    -   The steps we include below are at our discretion. You may iterate the process changing the pre-processing steps to try to improve your model performance.
+-   There are many additional pre-processing arguments you can add to a [recipe](https://www.tidymodels.org/find/recipes/).
+
+```{r}
+## recipe for pre-processing variables and text
+
+df_rec <-   recipe(donation ~ NetWorth + Edsum, data = df_train) %>%
+  
+  
+  ## Downsample based on outcome
+  themis::step_downsample(donation) 
+```
+
+In the last line, we implement "downsampling" from the `themis` package. You will not always want to include this line. What downsampling does is adjust the balance of the outcome categories we have in the data by randomly removing rows from training data, so that there is a roughly even balance between tweets that are vs. are not "uncivil." Without this type of adjustment, a model may be prone to simply guess whichever class is disproportionately represented if there is an extreme lack of balance between categories.
+
+### Choose type of model to run
+
+At this point, we can specify different types of models we may want to try out as part of the classification process. This represents an advantage of the `tidymodels` package, as the syntax is roughly the same across model types. In tidymodels, you specify models using three concepts.
+
+-   `type` of models such as logistic regression, decision tree models,random forests, and so forth.
+-   `mode` includes options regression and classification; some model types support either of these while some only have one mode. With a dichotomous outcome, we are in classification world.
+-   `engine` is the computational tool to fit the model. You will notice `glmnet` below
+
+Some models require you to install additional R packages for their implementation. This is why we installed `glmnet` for the logistic regressions.
+
+```{r}
+## Specify model: Three examples
+
+## A penalized logistic regression model
+logit_mod <- logistic_reg() %>%
+  set_mode("classification") %>%
+  set_engine("glm")
+
+## A penalized logistic model with penalty tuning
+logit_tune <- logistic_reg(penalty=tune(), mixture = 1) %>%
+  set_mode("classification") %>%
+  set_engine("glmnet")
+lambda_grid <- grid_regular(penalty(), levels = 30)
+
+## Random Forest
+rf_spec <- 
+  rand_forest() %>% 
+  set_engine("ranger") %>% 
+  set_mode("classification")
+```
+
+Note that we could include arguments `penalty` and `mixture` in the `logistic_reg` function. These are specific to this type of model. In this type of penalized logistic regression, we have a penalty that serves to penalize features used for prediction that do not have much predictive power.
+
+-   How harsh should this penalty be? Well, this is where the `tune()` argument comes in during the second approach. We can choose the value of the penalty based on model performance. The `grid_regular` function tells R that we want to test out 30 different values of this penalty.
+
+### Create a workflow that combines the model and recipe
+
+Now that we have prepared our data and model formula, we are ready to put things together using a `workflow`. At this point, we still haven't actually fit a model.
+
+```{r}
+## workflow penalized logit
+df_wf <- workflow() %>%
+  add_recipe(df_rec) %>%
+  add_model(logit_mod)
+
+## workflow for the tuning specification
+df_wft <- workflow() %>%
+  add_recipe(df_rec) %>%
+  add_model(logit_tune)
+
+## workflow for random forest
+df_wfrf <- workflow() %>%
+  add_recipe(df_rec) %>%
+  add_model(rf_spec)
+```
+
+### Cross-validation
+
+Thus far, we have just broken up our data into two portions, one for training and one for testing. Many times, we might want to perform more rigorous testing of our data. One approach for doing so is called $k$-fold cross-validation.
+
+For this example, we are going to keep our `df_test` data separate as a "holdout" sample that is never used to train the classifier. However, we are going to further break up our training data `df_train` into five separate portions (5-fold cross-validation is also common).
+
+![](images/cv.png){width="60%"}
+
+```{r}
+## cross-validation
+set.seed(123)
+df_folds <- vfold_cv(df_train, v=5)
+```
+
+-   Each time we run the classifier, we will use all but one fold (four folds) of data and then test the results on the "left out" fold of data.
+-   We repeat the process for a total of five times, leaving a different fold out for testing each time.
+    -   Note: It is also possible to further repeat this entire process, by repeatedly resampling the data so that observations are shuffled into different folds.
+-   Our performance metrics are then a summary of five tests instead of just one test.
+
+### Fitting the model
+
+Here are examples of fitting different models. For now, do not run all of them, as they each take a decent amount of computational time.
+
+```{r, warning=FALSE, message=FALSE}
+## Fitting model on training data
+
+## Basic model fit to training data as one sample, no cross-validation
+df_basic <- df_wf %>%
+  fit(data = df_train)
+
+## Cross-validation on penalized logistic model
+my_metrics <- yardstick::metric_set(accuracy, ppv, npv)
+
+df_cv <- fit_resamples(
+  df_wf,
+  df_folds,
+  control = control_resamples(save_pred = TRUE),
+  metrics = my_metrics
+)
+
+## Tuning the penalized logistic model
+df_rs <- tune_grid(
+  df_wft,
+  df_folds,
+  grid=lambda_grid, # note the use of the grid here
+  control = control_resamples(save_pred = TRUE),
+  metrics = my_metrics
+)
+
+## Random forest with cross-validation
+df_rf <- fit_resamples(
+  df_wfrf,
+  df_folds,
+  control = control_resamples(save_pred = TRUE),
+  metrics = my_metrics
+)
+```
+
+### Evaluating model performance
+
+Did we get things right?
+
+-   There are many ways to answer this question.
+    -   Accuracy-- how many did we get right out of the total cases?
+    -   Confusion Matrix-- where did we go right vs. wrong?
+        -   False Positive, True Positive, False Negative, True Negatives
+    -   Additional metrics that focus on particular types of error rates
+    
+Your choice of metric depends on what you see as best for your use case.
+
+***Evaluating on training data***
+
+For the models without cross-validation, we can use the `predict()` function to classify our training data into uncivil or not uncivil tweets.
+
+```{r, warning=FALSE, message=FALSE}
+# Add prediction columns to training data
+results <- df_train  %>% select(donation) %>% 
+  bind_cols(df_basic %>% 
+              predict(new_data = df_train))
+```
+
+We can then evaluate these predictions against the ground truth from the `uncvil` column in our original training data. Below is a confusion matrix that shows where we were right vs. wrong.
+
+```{r, warning=FALSE, message=FALSE}
+results %>% 
+  conf_mat(truth = donation, estimate = .pred_class)
+```
+
+We can then quantify different types of performance using our metrics.
+
+```{r}
+eval_metrics <- metric_set(accuracy, ppv, npv)
+eval_metrics(data = results, 
+             truth = donation, 
+             estimate = .pred_class)
+```
+
+***Evaluating with cross-validation***
+
+When we have used cross-validation and/or tuning, we can apply the `collect_metrics` function to our models to evaluate performance across the folds of our data. Here, the results represent performance averaged across the five tests of our data, instead of just a single test.
+
+```{r}
+## cross-validated logistic
+resultscv <- collect_metrics(df_cv)
+resultscv
+```
+
+```{r}
+## cross-validated random forest
+resultsrf <- collect_metrics(df_rf)
+resultsrf
+```
+
+When you have tuned a model, you can then decide on the value of the "hyperparameter" based on a chosen metric, such as accuracy.
+
+```{r}
+resultstuning <- collect_metrics(df_rs)
+
+chosen_acc <- df_rs %>% select_best("accuracy")
+chosen_acc
+```
+
+### Finalize workflow
+
+Once we have settled on a model and workflow, we want to finalize it by fitting it to the entire training data.
+
+Below are two examples:
+
+When you do not have tuning, you can fit the model to the entire training data.
+
+```{r}
+## Saving the random forest model
+final_wfrf <- fit(df_wfrf, df_train)
+```
+
+When you have tuning, you want to use `finalize_workflow` to make sure you save the tuned parameters.
+
+```{r}
+## Saving the tuned workflow-- note we include are chosen lambda
+final_wft <- finalize_workflow(df_wft, chosen_acc)  %>%
+  fit(data=df_train)
+```
+
+We could save this workflow as an R object, which would allow us to store it as a classifier for future use.
+
+```{r}
+## saving decision tree
+saveRDS(final_wfrf, file = "donationclassifierRF.RDS")
+
+## saving tuned workflow
+saveRDS(final_wft, file = "donationclassifierT.RDS")
+```
+
+### Applying model to test data
+
+At this point, our model still has not seen our test data. This makes it an especially difficult test for the model. Here is an example using our tuned penalized logistic regression model:
+
+```{r, warning=F, message=F}
+testres <- df_test %>% select(donation) %>%
+  bind_cols(predict(final_wft, new_data=df_test))
+
+testres_cf <- testres %>% 
+  conf_mat(truth = donation, estimate = .pred_class)
+
+test_metrics <- metric_set(accuracy, ppv, npv)
+test_metrics(data = testres, truth = donation, estimate = .pred_class)
+```
+
+### Trying out classifier on completely new data
+
+For the classifier to work, the new data must contain the same primary feature columns as the data used to build the model.
+
+Below we construct a dataframe with the variable `text` as a column. These examples are taken from Pablo Barbera's GitHub [demonstration](https://github.com/pablobarbera/incivility-sage-open) of the authors' original classifier.
+
+```{r}
+newdf <-  data.frame(NetWorth = c(1, 3,3),
+                     Edsum = c(2, 5, 6))
+```
+
+Does our classifier identify these phrases as uncivil?
+
+We load our saved classifier and predict incivility using our new data.
+
+```{r, warning=F, message=F}
+## cross-validated tree model
+donationclassRF <- readRDS("donationclassifierRF.RDS")
+predict(donationclassRF, newdf, type = "class")
+```
+
+```{r}
+## Tune penalized logistic
+donationclassT <- readRDS("donationclassifierT.RDS")
+predict(donationclassT, newdf, type = "class")
+```
+
 ## Extending Machine Learning
 
 How do I know which variables matter? Examples of more complex machine learning methods.
 
-  - Random forests
-  - Gradient boosting 
-  - LASSO
-  - SVM
+-   Random forests
+-   Gradient boosting
+-   LASSO
+-   SVM
 
 Tradeoffs: Machine Learning as "black box"- see [here](https://towardsdatascience.com/the-black-box-metaphor-in-machine-learning-4e57a3a1d2b0)
 
-
-Here is a rough example using `caret` with one of these methods along with cross-validation. Be sure to look at the [documentation](https://cran.r-project.org/web/packages/caret/vignettes/caret.html) before using this in your own work. The performance metrics are described [here](https://topepo.github.io/caret/measuring-performance.html).
-```{r, message=F, warning = F}
-library(caret)
-
-## Establish type of training
-fitControl <- trainControl(## 5-fold CV
-                           method = "cv",
-                           number = 5)
-
-## Train model. Note the . means include all variables. Let's subset first
-library(tidyverse)
-don2 <- don %>% dplyr::select(donation, Edsum, same_state, sameparty, NetWorth, peragsen)
-don2$donation <-as.factor(ifelse(don2$donation == 1, "Donated", "Not Donated"))
-don2 <- na.omit(don2)
-mod_fit <- train(donation ~ ., data = don2, 
-                 method = 'gbm',
-                 verbose=F,
-                 trControl = fitControl)
-mod_fit
-```
-
-
 There are nearly countless ways to use machine learning. See [here](http://topepo.github.io/caret/train-models-by-tag.html).
-
-

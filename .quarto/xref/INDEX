@@ -34,5 +34,17 @@
   },
   "12-PanelData.qmd": {
     "12-PanelData.html": "998c273d"
+  },
+  "13-SurveyData.qmd": {
+    "13-SurveyData.html": "c6d4528a"
+  },
+  "14-SurvivalData.qmd": {
+    "14-SurvivalData.html": "6450f7e7"
+  },
+  "15-PredictionClassification.qmd": {
+    "15-PredictionClassification.html": "3b2cf7ee"
+  },
+  "16-ModelTypesSummary.qmd": {
+    "16-ModelTypesSummary.html": "d442ac95"
   }
 }

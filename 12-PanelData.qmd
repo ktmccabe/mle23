@@ -17,7 +17,7 @@ These are some supplemental resources
     -   Donald P. Green, Soo Yeon Kim, and David H. Yoon. "Dirty Pool." International Organization 55, 2, Spring 2001, 441-468.
     -   Nathaniel Beck and Jonathan Katz. "Throwing Out the Baby with the Bath Water: A comment on Green, Kim, and Yoon." International Organization 55, 2, Spring, 2001, pp. 487-495.
 
-## Motivating Data Groupiness 
+## Motivating Data Groupiness
 
 In this section, we are going to use data from the CDC on national and state-level COVID hospitalizations and positive case increases between July 2020- end September 2020.
 
@@ -386,7 +386,6 @@ $\Delta Y_{it} = \beta \Delta x_{it} + \Delta \epsilon_{it}$ where, for example,
 I recommend watching this [video](https://www.youtube.com/watch?v=1SchyQ77VFg&ab_channel=BenLambert) by Ben Lambert who provides a summary overview of the differences between fixed effects, first differences, and pooled OLS.
 
 {{< video src="https://www.youtube.com/watch?v=1SchyQ77VFg" >}}
-
 
 ### Additional Models in R
 

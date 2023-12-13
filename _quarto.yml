@@ -18,6 +18,10 @@ book:
     - 10-CountData.qmd
     - 11-SampleSelection.qmd
     - 12-PanelData.qmd
+    - 13-SurveyData.qmd
+    - 14-SurvivalData.qmd
+    - 15-PredictionClassification.qmd
+    - 16-ModelTypesSummary.qmd
   page-navigation: true
   sidebar:
     style: docked
