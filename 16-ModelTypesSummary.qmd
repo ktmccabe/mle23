@@ -1,14 +1,14 @@
-This section provides a "cheat sheet" summary of some of the model types we have discussed. 
+# Choosing Model Types
 
+This section provides a "cheat sheet" summary of some of the model types we have discussed.
 
-
-| Model  | PDF                                    | $\theta_i$ ; Link$^{-1}$                                        | linear predictor: $\eta_i=X_i^\prime\beta$           | Type of Outcome    | R function |
-|:--------------|-------------|---------------------|------------------------------------------|--------------------------|-------------------:|
-| Linear | $Y_i \sim \mathcal{N}(\mu_i,\sigma^2)$ | $\mu_i = X_i^\prime\beta$                                       | $\mu_i$            | Numeric continuous    | `lm()`
-| Logit  | $Y_i \sim \rm{Bernoulli}(\pi_i)$       | $\pi_i=\frac{\exp(X_i^\prime\beta)}{(1+\exp(X_i^\prime\beta))}$ | logit$(\pi_i)$ = $\log \frac{\pi_i}{1 - \pi_i}$     |  Categorical   | `glm()`
-| Probit | $Y_i \sim \rm{Bernoulli}(\pi_i)$       | $\pi_i = \Phi(X_i^\prime\beta)$                                 | probit$(\pi_i)=\Phi^{-1}(\pi_i)$ |  Categorical   |  `glm()`
-| Poisson | $Y_i \sim \rm{Poisson}(\lambda_i)$       | $\lambda_i = \exp(X_i^\prime\beta)$                                 | $\log(\lambda_i)$ | Count    |  `glm()`
-| Negative Binomial | $Y_i \sim \rm{NB}(\lambda, r)$       | $\lambda_i = \exp(X_i^\prime\beta)$                                 | $\log(\lambda_i)$ |  Count   |  `glm.nb()`
+| Model             | PDF                                    | $\theta_i$ ; Link$^{-1}$                                        | linear predictor: $\eta_i=X_i^\prime\beta$      | Type of Outcome    | R function |
+|:-----------|------------|------------|---------------|------------|-----------:|
+| Linear            | $Y_i \sim \mathcal{N}(\mu_i,\sigma^2)$ | $\mu_i = X_i^\prime\beta$                                       | $\mu_i$                                         | Numeric continuous |     `lm()` |
+| Logit             | $Y_i \sim \rm{Bernoulli}(\pi_i)$       | $\pi_i=\frac{\exp(X_i^\prime\beta)}{(1+\exp(X_i^\prime\beta))}$ | logit$(\pi_i)$ = $\log \frac{\pi_i}{1 - \pi_i}$ | Categorical        |    `glm()` |
+| Probit            | $Y_i \sim \rm{Bernoulli}(\pi_i)$       | $\pi_i = \Phi(X_i^\prime\beta)$                                 | probit$(\pi_i)=\Phi^{-1}(\pi_i)$                | Categorical        |    `glm()` |
+| Poisson           | $Y_i \sim \rm{Poisson}(\lambda_i)$     | $\lambda_i = \exp(X_i^\prime\beta)$                             | $\log(\lambda_i)$                               | Count              |    `glm()` |
+| Negative Binomial | $Y_i \sim \rm{NB}(\lambda, r)$         | $\lambda_i = \exp(X_i^\prime\beta)$                             | $\log(\lambda_i)$                               | Count              | `glm.nb()` |
 
 Note that for ordered models, we use `polr` from `library(MASS)` and for multinomial logits, we use `multinom` from `library(nnet)`.
 
@@ -16,16 +16,16 @@ Note that for ordered models, we use `polr` from `library(MASS)` and for multino
 
 In linear models, when we get our coefficients $\hat \beta$, we interpret them as, for a one-unit increase in $x$, we see a $\hat \beta$ increase in the units of $Y$, holding all other variables constant.
 
-- For example, if we were looking at the effect of age (measured in years) on income, measured in dollars, we would say, for every year increase in someone's age, we estimate an average increase to their income of $\hat \beta$ dolllars. (Or decrease if $\hat \beta$ is negative)
+-   For example, if we were looking at the effect of age (measured in years) on income, measured in dollars, we would say, for every year increase in someone's age, we estimate an average increase to their income of $\hat \beta$ dolllars. (Or decrease if $\hat \beta$ is negative)
 
 A special case for linear models is when we apply them in cases where the outcome variable only takes two values-- 0 or 1. Here, we call our linear model a "linear probability model." Now R won't know our outcome is supposed to be between 0 and 1, but so long as we are not at extremes of our predictions, we can often stay within these bounds. In this special case, usually our interpretation is in probability units:
 
-- For example, if we were looking at the effect of age (measured in years) on voter turnout (0 if not turned out, 1 if turned out), we would say, for every year increase in someone's age, we estimate an average of $\hat \beta \times 100$ (to turn into a percent) percentage point increase in the probability they turn out to vote, holding all other variables constant.
+-   For example, if we were looking at the effect of age (measured in years) on voter turnout (0 if not turned out, 1 if turned out), we would say, for every year increase in someone's age, we estimate an average of $\hat \beta \times 100$ (to turn into a percent) percentage point increase in the probability they turn out to vote, holding all other variables constant.
 
-Another special case is if we apply a linear model to an ordered categorical outcome (e.g., a survey likert scale, going from 1 to 5, say strongly opposing to strongly supporting Ron DeSantis). Here, we would be estimating changes on this scale. 
+Another special case is if we apply a linear model to an ordered categorical outcome (e.g., a survey likert scale, going from 1 to 5, say strongly opposing to strongly supporting Ron DeSantis). Here, we would be estimating changes on this scale.
 
-- For example, if we were looking at the effect of age (measured in years) on support for Ron DeSantis, for every year increase in someone's age, we estimate an average of $\hat \beta$ increase on the 1 to 5 scale of support. (E.g., perhaps an increase of .2 scale points). 
-  + Often, people might change their scale to go from 0 to 1 (0, .25, .5, .75, 1), so that the interpretation can be percentage points of the scale. For every year increase in someone's age, we estimate an average of $\hat \beta \time 100$ percentage point increase on the scale of support.
+-   For example, if we were looking at the effect of age (measured in years) on support for Ron DeSantis, for every year increase in someone's age, we estimate an average of $\hat \beta$ increase on the 1 to 5 scale of support. (E.g., perhaps an increase of .2 scale points).
+    -   Often, people might change their scale to go from 0 to 1 (0, .25, .5, .75, 1), so that the interpretation can be percentage points of the scale. For every year increase in someone's age, we estimate an average of $\hat \beta \time 100$ percentage point increase on the scale of support.
 
 The nice thing about these linear models is 1) there is no need to transform our coefficients ($\mu_i = X_i^\prime\beta = \eta_i = Y_i$. The values are already in units of $Y$ (or, in other words, $\mu$, the expected value of $Y_i$). This makes interpretations easier. 2) The marginal effect of a variable is constant across values of $x$. In contrast, because the other models are trying to constrain the estimated outcomes to fit particular limits, the marginal effects change slightly depending on where in the domain of $x$ we are estimating them.
 
@@ -35,35 +35,35 @@ In binary logistic regression models, our goal is to estimate the probability th
 
 Because we want to keep our estimates between 0 and 1 to reflect a probability, we need to apply a transformation. When we use a "logit" link function, our coefficients are now in the units of "logits" or "log odds"-- the log of the odds- the probability of an event happening over the probability of the event not happening.
 
-- For example, if we were looking at the effect of age (measured in years) on voter turnout (0 if not turned out, 1 if turned out), we would say, for every year increase in someone's age, we estimate an average of $\hat \beta$ "logits increase" or "increase in the log-odds" they turn out to vote, holding all other variables constant.
+-   For example, if we were looking at the effect of age (measured in years) on voter turnout (0 if not turned out, 1 if turned out), we would say, for every year increase in someone's age, we estimate an average of $\hat \beta$ "logits increase" or "increase in the log-odds" they turn out to vote, holding all other variables constant.
 
 ### Ordinal Logit
 
 We discussed two variations on the logit model in this course-- ordinal and multinomial. In an ordinal model, we have a categorical outcome that is ordered in nature (e.g., a likert survey scale). We are now ultimately estimating the probability that $Y_i$ belongs to a particular category. However, it takes some work to get there.
 
-Our coefficient values are now in the ordered log-odds scale. We are estimating the log of the odds that $Y_i$ takes a value less than or equal to a certain category $j$. 
+Our coefficient values are now in the ordered log-odds scale. We are estimating the log of the odds that $Y_i$ takes a value less than or equal to a certain category $j$.
 
-- For example, if we were looking at the effect of age (measured in years) on support for Ron DeSantis, we would say, for every year increase in someone's age, we estimate an average of $\hat \beta$ increase in the ordered log-odds of supporting DeSantis, holding all other variables constant. If positive, generally, older people are going to be associated with higher probabilities of categories with greater support (e.g., "strongly support") and lower probabilities of categories with lower support (e.g., "strongly oppose"). To really know the nature of the movement, you woud need to calculate quantities of interest.
+-   For example, if we were looking at the effect of age (measured in years) on support for Ron DeSantis, we would say, for every year increase in someone's age, we estimate an average of $\hat \beta$ increase in the ordered log-odds of supporting DeSantis, holding all other variables constant. If positive, generally, older people are going to be associated with higher probabilities of categories with greater support (e.g., "strongly support") and lower probabilities of categories with lower support (e.g., "strongly oppose"). To really know the nature of the movement, you woud need to calculate quantities of interest.
 
 ### Multinomial Logit
 
 In a multinomial model, we have a categorical outcome that is unordered in nature (e.g., religious groups). We are still ultimately going to try to estimate the probability that $Y_i$ belongs to a particular category. However, our coefficients are going to represent contrasts between two specific outcome categories. This is the model where we get multiple sets of coefficients-- one for each pairwise comparison between a particular $j$ category of the outcome and a category $J$ that we choose as the baseline.
 
-- For example, if we were looking at the effect of age (measured in years) on belonging to Catholic, Jewish, or Atheist groups, where Atheist was set to be a reference outcome, we would say, for every year increase in someone's age, we estimate an average of $\hat \beta_{catholic}$ increase in the log-odds of being Catholic vs. Atheist, holding all other variables constant and $\hat \beta_{jewish}$ increase in the log-odds of being Jewish vs. Atheist, holding all other variables constant.
+-   For example, if we were looking at the effect of age (measured in years) on belonging to Catholic, Jewish, or Atheist groups, where Atheist was set to be a reference outcome, we would say, for every year increase in someone's age, we estimate an average of $\hat \beta_{catholic}$ increase in the log-odds of being Catholic vs. Atheist, holding all other variables constant and $\hat \beta_{jewish}$ increase in the log-odds of being Jewish vs. Atheist, holding all other variables constant.
 
 ## Probit
 
 Recall, in binary logistic regression models, our goal is to estimate the probability that our outcome $Y_i$ takes the value 1 (given our covariates). (E.g., The probability someone turns out to vote).
 
-Because we want to keep our estimates between 0 and 1 to reflect a probability, we need to apply a transformation. When we use a "probit" link function, our coefficients are now in the units of "probits" or z-scores of the probability. 
+Because we want to keep our estimates between 0 and 1 to reflect a probability, we need to apply a transformation. When we use a "probit" link function, our coefficients are now in the units of "probits" or z-scores of the probability.
 
-- For example, if we were looking at the effect of age (measured in years) on voter turnout (0 if not turned out, 1 if turned out), we would say, for every year increase in someone's age, we estimate an average of $\hat \beta$ "probits increase" that they turn out to vote.
+-   For example, if we were looking at the effect of age (measured in years) on voter turnout (0 if not turned out, 1 if turned out), we would say, for every year increase in someone's age, we estimate an average of $\hat \beta$ "probits increase" that they turn out to vote.
 
 ### Ordered probit
 
 We also ran an ordered probit model. Similar to ordered logit, we have a categorical outcome that is ordered in nature (e.g., a likert survey scale). We are now ultimately estimating the probability that $Y_i$ belongs to a particular category.
 
-- As with the binary case, our coefficient values will be in terms of probits.For example, if we were looking at the effect of age (measured in years) on support for Ron DeSantis, we would say, for every year increase in someone's age, we estimate an average of $\hat \beta$ increase in the ordered probits of supporting DeSantis, holding all other variables constant. Generally, if positive, this would mean greater probability in being in the higher categories of support and lower probability of being in the lower categories of support, but you need to calculate quantities of interest to know where the movement is happening.
+-   As with the binary case, our coefficient values will be in terms of probits.For example, if we were looking at the effect of age (measured in years) on support for Ron DeSantis, we would say, for every year increase in someone's age, we estimate an average of $\hat \beta$ increase in the ordered probits of supporting DeSantis, holding all other variables constant. Generally, if positive, this would mean greater probability in being in the higher categories of support and lower probability of being in the lower categories of support, but you need to calculate quantities of interest to know where the movement is happening.
 
 ## Poisson, Quasipoisson, and Negative Binomial
 
@@ -71,15 +71,7 @@ We use poisson models when our outcome is a count variable-- a variable that is 
 
 The poisson model uses a log link function. This means that our coefficients will be in log units.
 
-- For example, if we were looking at the effect of age (measured in years) on the number of social media posts a person makes per year, we would say, for every year increase in someone's age, we estimate an average of $\hat \beta$ increase in the log number of social media posts. 
-    + Often, we will exponentiate these coefficient values ($\hat \beta$) to get them back into the units we care about: Increasing age by one year multiplies the rate of social media posts per year by $e^{\hat \beta}$.
+-   For example, if we were looking at the effect of age (measured in years) on the number of social media posts a person makes per year, we would say, for every year increase in someone's age, we estimate an average of $\hat \beta$ increase in the log number of social media posts.
+    -   Often, we will exponentiate these coefficient values ($\hat \beta$) to get them back into the units we care about: Increasing age by one year multiplies the rate of social media posts per year by $e^{\hat \beta}$.
 
 The quasipoisson and negative binomial are also models used for count data. Both are better able at addressing issues of overdisperson in the conditional variance of our outcome. Fortunately, the coefficient interpretations of these models are similar to the poisson because they rely on the log link.
-
-
-
-
-
-
-
-
